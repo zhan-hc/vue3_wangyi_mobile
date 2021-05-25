@@ -16,20 +16,26 @@
       <input type="tel" maxLength='1' @keyup="handleInput"/>
     </div>
   </div>
+  <Toast :msg='msg' v-show="status"/>
 </template>
 
 <script>
-import WYHeader from '../../components/WYHeader'
+import WYHeader from 'components/WYHeader'
+import Toast from 'components/Toast'
 import {useRouter} from 'vue-router'
-import {computed, reactive, onMounted, getCurrentInstance} from 'vue'
+import { login_cellphone, login_verifycode } from "@/api/login/index";
+import {ref, computed, reactive, onMounted, getCurrentInstance} from 'vue'
 export default {
   name: 'CodeLogin',
   components: {
+    Toast,
     WYHeader
   },
   setup () {
     const route = useRouter()
     const {ctx} = getCurrentInstance()
+    const status = ref(false)
+    const msg = ref('验证码错误')
     const tel = route.currentRoute.value.params.tel
     const state = reactive({
       timer: 59,
@@ -39,7 +45,16 @@ export default {
     const formatTel = computed(() => {
       return tel.substr(0,3)+'****'+tel.substr(7)
     })
+    const code = computed(() => {
+      let codesum = ''
+      const node = ctx.$refs.codeInput
+      for (var i = 0; i < node.childNodes.length; i++) {
+        codesum += node.childNodes[i].value.toString()
+      }
+      return  codesum
+    })
     const handleSendCode = () => { // 获取验证码倒计时
+      // sendCode()
       if (state.timer === 0) {
         state.timer = 59
       }
@@ -50,33 +65,58 @@ export default {
         }
       },1000)
     }
+    const sendCode = () => {
+      const params = {
+        phone: tel
+      }
+      login_cellphone(params).then(res => {
+        console.log(res, 11)
+      })
+    }
     const handleBindIndex = () => {
       const node = ctx.$refs.codeInput
       for (var i = 0; i < node.childNodes.length; i++) {
-      node.childNodes[i].index = i;
-    }
+        node.childNodes[i].index = i
+      }
     }
     const handleInput = (e) => {
-    const {value,index} = e.target
-    const node = ctx.$refs.codeInput.childNodes
-    if(e.keyCode === 8 && index > 0) { // 监听退格事件
-      node[index - 1].focus()
+      const {value,index} = e.target
+      const node = ctx.$refs.codeInput.childNodes
+      if(e.keyCode === 8 && index > 0) { // 监听退格事件
+        node[index - 1].focus()
+      }
+      if (index < 3 && value) {// 自动跳到下一个input
+        node[index + 1].focus()
+      }
+      if (index === 3 && value) {// 焦点到最后一个输入框监听事件
+        const params = {
+          phone: tel,
+          captcha: code.value
+        }
+        login_verifycode(params).then((res => {
+          if (res.code === 200) {
+            
+          }
+        })).catch((err) => {
+          msg.value = err.message
+          status.value = true
+          setTimeout(() => {
+            status.value = false
+          }, 3000);
+        })
+      }
     }
-    if (index < 3 && value) {// 自动跳到下一个input
-      node[index + 1].focus()
-    }
-    if (index === 3 && value) {// 焦点到最后一个输入框监听事件
-      // this.handleCheckCode()
-    }
-  }
     onMounted(() => {
       handleSendCode()
       handleBindIndex()
     })
     return {
       tel,
+      msg,
       state,
+      status,
       formatTel,
+      sendCode,
       handleSendCode,
       handleInput
     }

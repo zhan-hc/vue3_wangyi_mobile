@@ -28,6 +28,7 @@ export default {
   background-color: #DC2C1F;
   height: 1334px;
   width: 750px;
+  font-size: 24px;
   button{
     display: block;
     width: 500px;

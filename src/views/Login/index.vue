@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import WYHeader from '../../components/WYHeader'
-import Toast from '../../components/Toast'
+import WYHeader from 'components/WYHeader'
+import Toast from 'components/Toast'
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 export default {
