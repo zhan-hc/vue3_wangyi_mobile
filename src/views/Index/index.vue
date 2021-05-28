@@ -1,15 +1,17 @@
 <template>
   <div class="Index-wrapper">
     <IndexHeader/>
-    首页
+    <Carousel />
   </div>
 </template>
 
 <script>
 import IndexHeader from './components/IndexHeader'
+import Carousel from "./components/Carousel/index";
 export default {
   name: 'Index',
   components: {
+    Carousel,
     IndexHeader
   }
 }

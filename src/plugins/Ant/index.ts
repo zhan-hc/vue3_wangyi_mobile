@@ -3,9 +3,10 @@ import {
   CloseOutlined,
   MenuOutlined,
   SearchOutlined,
-  AudioFilled
+  AudioFilled,
  } from '@ant-design/icons-vue'
 
+ import { Carousel } from 'ant-design-vue'
 const ant = {
   install(Vue: any) {
     Vue.component(SearchOutlined.name, SearchOutlined)
@@ -13,8 +14,7 @@ const ant = {
     Vue.component(MenuOutlined.name, MenuOutlined)
     Vue.component(LeftOutlined.name,LeftOutlined)
     Vue.component(CloseOutlined.name,CloseOutlined)
-    // Vue.component(Checkbox.name, Checkbox)
-    // Vue.component(Switch.name, Switch)
+    Vue.component(Carousel.name,Carousel)
   }
 }
 export default ant

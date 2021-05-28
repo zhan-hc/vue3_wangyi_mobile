@@ -32,12 +32,14 @@ export default {
   }
   .header-content{
     flex: 1;
+    height: 80px;
     margin-right: 10px;
     padding: 0 20px;
     background-color: #fff;
     border-radius: 40px;
     .anticon-search{
       color: #bababa;
+      font-size: 42px;
     }
   }
 }
