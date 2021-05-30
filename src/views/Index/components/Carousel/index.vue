@@ -1,43 +1,50 @@
 <template>
   <a-carousel autoplay>
-    <div class="slide-item">
-      <img src="@/assets/logo.png" alt="">
-      <span class="tag"></span>
+    <div class="slide-item" v-for="(item, i) in bannerList" :key="i">
+      <img :src="item.imageUrl" alt="">
+      <span class="tag" :style="{'background-color': item.titleColor}">{{item.typeTitle}}</span>
     </div>
-    <div><h3>2</h3></div>
-    <div><h3>3</h3></div>
-    <div><h3>4</h3></div>
   </a-carousel>
 </template>
 
 <script>
-// import { Carousel } from 'ant-design-vue'
+import { reactive } from "vue";
 export default {
   name: 'Carousel',
-  setup (props) {
-
+  props: {
+    bannerList: {
+      type: Array
+    }
   },
-  components: {
+  setup (props) {
+    const bannerList = reactive(props.bannerList)
+    return {
+      bannerList
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
-// .ant-carousel >>> .slick-slide {
-//   text-align: center;
-//   height: 150px;
-//   line-height: 150px;
-//   background: #364d79;
-//   overflow: hidden;
-// }
-.ant-carousel{ 
-  height: 250px;
-  line-height: 250px;
-  img {
-    height: 150px;
+.ant-carousel{
+  font-size: 24px;
+  .slide-item{
+    position: relative;
+    padding: 20px 30px;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+    }
+    .tag{
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+      color: #fff;
+      padding: 5px 15px;
+      border-bottom-right-radius: 20px;
+      border-top-left-radius: 20px;
+    }
   }
 }
-// .ant-carousel >>> .slick-slide h3 {
-//   color: #fff;
-// }
 </style>

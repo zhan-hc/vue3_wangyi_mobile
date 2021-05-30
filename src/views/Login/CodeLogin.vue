@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <WYHeader/>
+    <WYHeader :status='1' :tel='tel'/>
     <p class="desc">请输入验证码</p>
     <div class="text">
       <span>已发送至+86 {{formatTel}}</span>
@@ -53,8 +53,15 @@ export default {
       }
       return  codesum
     })
+    const showToast =  (val) => {
+      msg.value = val
+      status.value = true
+      setTimeout(() => {
+        status.value = false
+      }, 3000);
+    }
     const handleSendCode = () => { // 获取验证码倒计时
-      // sendCode()
+      sendCode()
       if (state.timer === 0) {
         state.timer = 59
       }
@@ -70,7 +77,10 @@ export default {
         phone: tel
       }
       login_cellphone(params).then(res => {
-        console.log(res, 11)
+        console.log(res,'发送验证码')
+      }).catch((err) => {
+        console.log(err,'err')
+        showToast(err.message)
       })
     }
     const handleBindIndex = () => {
@@ -94,15 +104,12 @@ export default {
           captcha: code.value
         }
         login_verifycode(params).then((res => {
-          if (res.code === 200) {
-            
+          console.log('校验验证码', res)
+          if (res.data.code === 200) {
+             route.push('/')
           }
         })).catch((err) => {
-          msg.value = err.message
-          status.value = true
-          setTimeout(() => {
-            status.value = false
-          }, 3000);
+          showToast(err.message)
         })
       }
     }
@@ -118,7 +125,8 @@ export default {
       formatTel,
       sendCode,
       handleSendCode,
-      handleInput
+      handleInput,
+      showToast
     }
   }
 }

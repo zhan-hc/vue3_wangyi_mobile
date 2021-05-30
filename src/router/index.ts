@@ -20,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/CodeLogin/:tel',
     name: 'CodeLogin',
     component: () => import('views/Login/CodeLogin.vue')
+  },
+  {
+    path: '/pswLogin/:tel',
+    name: 'pswLogin',
+    component: () => import('views/Login/pswLogin.vue')
   }
 ]
 

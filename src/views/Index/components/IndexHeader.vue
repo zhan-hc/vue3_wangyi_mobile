@@ -23,6 +23,8 @@ export default {
   align-items: center;
   background-color: #f5f5f5;
   box-sizing: border-box;
+  padding: 20px 30px;
+  margin-bottom: 10px;
   .anticon-menu{
     font-size: 48px;
     margin-right: 20px;
