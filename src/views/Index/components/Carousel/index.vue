@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.ant-carousel /deep/ .slick-dots-bottom {
+  bottom: 40px;
+}
 .ant-carousel{
   font-size: 24px;
   .slide-item{
