@@ -5,10 +5,18 @@ function addParamsTime (params: Object) {
     timestamp: +new Date()
   }
 }
-// 发送验证码
+// 首页banner
 export function home_banner (parameter: any)  {
     return Request.axiosInstance({
         url: '/banner',
+        method: 'post',
+        data: addParamsTime(parameter)
+    })
+}
+// 首页banner
+export function home_icon (parameter: any)  {
+    return Request.axiosInstance({
+        url: '/homepage/dragon/ball',
         method: 'post',
         data: addParamsTime(parameter)
     })
