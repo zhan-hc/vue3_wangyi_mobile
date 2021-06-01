@@ -18,6 +18,10 @@ export default {
 
 <style scoped lang="scss">
 .header-wrapper{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -25,6 +29,7 @@ export default {
   box-sizing: border-box;
   padding: 20px 30px;
   margin-bottom: 10px;
+  z-index: 2;
   .anticon-menu{
     font-size: 48px;
     margin-right: 20px;

@@ -5,6 +5,7 @@
     <IndexIcon v-if="status" :iconList='iconList'/>
     <Recommend v-if="status" :recommendInfo='recommendInfo'/>
     <IndexSong v-if="status" :songInfo='songInfo'/>
+    <IndexVideo  v-if="status" :videoInfo='videoInfo'/>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import Carousel from "./components/Carousel"
 import IndexIcon from "./components/IndexIcon"
 import Recommend from "./components/Recommend"
 import IndexSong from "./components/IndexSong"
+import IndexVideo from "./components/IndexVideo"
 import { home_icon, home_page } from "@/api/home/index";
 import { onMounted,ref } from "vue";
 export default {
@@ -23,13 +25,15 @@ export default {
     IndexIcon,
     Recommend,
     IndexSong,
-    IndexHeader
+    IndexHeader,
+    IndexVideo
   },
   setup () {
     const bannerList = ref([])
     const iconList = ref([])
-    const recommendInfo = ref([])
-    const songInfo = ref([])
+    const recommendInfo = ref({})
+    const songInfo = ref({})
+    const videoInfo = ref({})
     const status = ref(false)
     onMounted(async () => {
       try {
@@ -39,6 +43,7 @@ export default {
         iconList.value = iconResult.data.data
         recommendInfo.value = result.data.data.blocks[1]
         songInfo.value = result.data.data.blocks[2]
+        videoInfo.value = result.data.data.blocks[3]
         status.value = true
       } catch(err) {
         console.log('err:',err)
@@ -48,6 +53,7 @@ export default {
       status,
       iconList,
       songInfo,
+      videoInfo,
       bannerList,
       recommendInfo
     }

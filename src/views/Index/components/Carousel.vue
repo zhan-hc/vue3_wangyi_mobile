@@ -32,6 +32,7 @@ export default {
 .ant-carousel{
   font-size: 24px;
   background: #fff;
+  margin-top: 120px;
   .slide-item{
     position: relative;
     padding: 20px 30px;

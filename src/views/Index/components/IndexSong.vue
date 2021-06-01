@@ -2,7 +2,7 @@
   <div class="song-container">
     <div class="song-header">
       <span class="title">{{songheader.subTitle.title}}</span>
-      <span class="more">{{songheader.button.text}}></span>
+      <span class="more"><CaretRightOutlined/>{{songheader.button.text}}</span>
     </div>
     <div class="song-wrapper" ref="wrapper">
       <div class="song-content" ref="content">
@@ -31,7 +31,7 @@ import { ref, reactive, onMounted } from "vue";
 import BScroll from "better-scroll";
 import { getAuthor } from "@/assets/js/common";
 export default {
-  name: 'Recommend',
+  name: 'IndexSong',
   props: {
     songInfo: {
       type: Object
@@ -71,6 +71,7 @@ export default {
   background: #fff;
   border-radius: 20px;
   padding: 20px 0 30px;
+  margin-bottom: 20px;
   .song-header{
     position: relative;
     margin: 20px 30px;
