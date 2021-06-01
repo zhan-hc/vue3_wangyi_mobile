@@ -1,7 +1,7 @@
 <template>
   <a-carousel autoplay>
     <div class="slide-item" v-for="(item, i) in bannerList" :key="i">
-      <img :src="item.imageUrl" alt="">
+      <img :src="item.pic" alt="">
       <span class="tag" :style="{'background-color': item.titleColor}">{{item.typeTitle}}</span>
     </div>
   </a-carousel>
@@ -31,6 +31,7 @@ export default {
 }
 .ant-carousel{
   font-size: 24px;
+  background: #fff;
   .slide-item{
     position: relative;
     padding: 20px 30px;

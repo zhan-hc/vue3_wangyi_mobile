@@ -1,20 +1,20 @@
 <template>
-  <div class="reconmmend-container">
-    <div class="reconmmend-header">
-      <span class="title">推荐歌单</span>
-      <span class="more">更多></span>
+  <div class="recommend-container">
+    <div class="recommend-header">
+      <span class="title">{{recommendheader.subTitle.title}}</span>
+      <span class="more">{{recommendheader.button.text}}></span>
     </div>
-    <div class="reconmmend-wrapper" ref="wrapper">
-      <div class="reconmmend-content" ref="content">
-        <div class="recommend-item" v-for="item in recommendList" :key="item.id">
+    <div class="recommend-wrapper" ref="wrapper">
+      <div class="recommend-content" ref="content">
+        <div class="recommend-item" v-for="item in recommendList" :key="item.creativeId">
           <div class="recommend-img">
-            <img :src="item.picUrl" alt="推荐歌单">
+            <img :src="item.uiElement.image.imageUrl" alt="推荐歌单">
           </div>
           <div class="recommend-playCount">
             <CaretRightOutlined/>
-            {{formatCount(item.playCount)}}
+            {{formatCount(item.resources[0].resourceExtInfo.playCount)}}
           </div>
-          <div class="recommend-name">{{item.name}}</div>
+          <div class="recommend-name">{{item.resources[0].uiElement.mainTitle.title}}</div>
         </div>
       </div>
     </div>
@@ -28,12 +28,13 @@ import { formatCount } from "@/assets/js/common";
 export default {
   name: 'Recommend',
   props: {
-    recommendList: {
-      type: Array
+    recommendInfo: {
+      type: Object
     }
   },
   setup (props) {
-    const recommendList = reactive(props.recommendList)
+    const recommendList = reactive(props.recommendInfo.creatives)
+    const recommendheader = reactive(props.recommendInfo.uiElement)
     const wrapper = ref(null)
     const content = ref(null)
     onMounted(() => {
@@ -52,16 +53,20 @@ export default {
       content,
       wrapper,
       recommendList,
-      formatCount
+      formatCount,
+      recommendheader
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.reconmmend-container{
+.recommend-container{
   font-size: 24px;
-  .reconmmend-header{
+  background: #fff;
+  padding: 20px 0;
+  margin-bottom: 20px;
+  .recommend-header{
     position: relative;
     margin: 20px 30px;
     .title {
@@ -79,13 +84,13 @@ export default {
       transform: translateY(-50%);     
     }
   }
-  .reconmmend-wrapper{
+  .recommend-wrapper{
     width: 720px;
     box-sizing: border-box;
     margin: 0 30px;
     padding-bottom: 20px;
     overflow: hidden;
-    .reconmmend-content{
+    .recommend-content{
       touch-action: none;
       .recommend-item{
         position: relative;

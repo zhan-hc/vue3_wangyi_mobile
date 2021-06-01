@@ -49,11 +49,11 @@ export default {
 <style scoped lang="scss">
 .wrapper{
   font-size: 24px;
-  width: 690px;
+  width: 750px;
   box-sizing: border-box;
-  margin: 0 30px;
-  padding-bottom: 20px;
-  // height: 200px;
+  padding: 20px 30px;
+  border-bottom: 1px solid #ccc;
+  background: #fff;
   overflow: hidden;
   .content{
     touch-action: none;
