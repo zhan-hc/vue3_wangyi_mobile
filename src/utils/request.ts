@@ -14,7 +14,8 @@ export class Request {
         // 创建axios实例
         this.axiosInstance = axios.create({
             baseURL: '/api',
-            timeout: 6000
+            timeout: 6000,
+            withCredentials: true
         });
         // 初始化拦截器
         this.initInterceptors();
