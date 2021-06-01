@@ -10,6 +10,11 @@
 import { useRouter } from 'vue-router'
 import { reactive } from "vue";
 export default {
+  props: {
+    status: {
+      type: Number
+    }
+  },
   setup (props) {
     const status =reactive(props.status)
     const route = useRouter()

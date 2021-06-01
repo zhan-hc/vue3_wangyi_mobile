@@ -37,7 +37,6 @@ export default {
         password: password.value
       }
       login_phonePsw(params).then((res) => {
-        console.log(res)
         if (res.data.code) {
           route.push('/')
         }

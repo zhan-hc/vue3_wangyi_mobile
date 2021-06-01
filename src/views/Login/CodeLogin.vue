@@ -77,7 +77,7 @@ export default {
         phone: tel
       }
       login_cellphone(params).then(res => {
-        console.log(res,'发送验证码')
+        console.log('发送验证码')
       }).catch((err) => {
         console.log(err,'err')
         showToast(err.message)
@@ -104,7 +104,6 @@ export default {
           captcha: code.value
         }
         login_verifycode(params).then((res => {
-          console.log('校验验证码', res)
           if (res.data.code === 200) {
              route.push('/')
           }
