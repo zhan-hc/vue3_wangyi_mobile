@@ -31,11 +31,18 @@ export class Request {
         this.axiosInstance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
         /**
          * 请求拦截器
+         * 如果是post请求默认添加时间戳
          * 每次请求前，如果存在token则在请求头中携带token
          */
         this.axiosInstance.interceptors.request.use(
             (config: AxiosRequestConfig) => {
- 
+
+              if (config.method == 'post') {
+                config.data = {
+                  ...config.data,
+                  timestamp: +new Date()
+                }
+              }
                 // const token = Vue.ls.get(ACCESS_TOKEN)
                 // if (token) {
                 //     config.headers['Authorization'] = 'Bearer ' + token

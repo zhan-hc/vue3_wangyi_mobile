@@ -27,8 +27,6 @@ export default {
       try {
         const bannerResult = await home_banner()
         const iconResult =  await home_icon()
-        console.log(bannerResult,'banner')
-        console.log(iconResult,'icon')
         bannerList.value = bannerResult.data.banners
         iconList.value = iconResult.data.data
         status.value = true
