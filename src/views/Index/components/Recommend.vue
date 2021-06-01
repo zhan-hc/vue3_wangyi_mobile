@@ -10,6 +10,10 @@
           <div class="recommend-img">
             <img :src="item.picUrl" alt="推荐歌单">
           </div>
+          <div class="recommend-playCount">
+            <CaretRightOutlined/>
+            {{formatCount(item.playCount)}}
+          </div>
           <div class="recommend-name">{{item.name}}</div>
         </div>
       </div>
@@ -20,6 +24,7 @@
 <script>
 import { ref, reactive, onMounted } from "vue";
 import BScroll from "better-scroll";
+import { formatCount } from "@/assets/js/common";
 export default {
   name: 'Recommend',
   props: {
@@ -46,7 +51,8 @@ export default {
     return {
       content,
       wrapper,
-      recommendList
+      recommendList,
+      formatCount
     }
   }
 }
@@ -82,6 +88,7 @@ export default {
     .reconmmend-content{
       touch-action: none;
       .recommend-item{
+        position: relative;
         display: inline-block;
         margin-right: 30px;
         width: 200px;
@@ -96,6 +103,18 @@ export default {
             border-radius: 10px;
             width: 100%;
             height: 100%;
+          }
+        }
+        .recommend-playCount{
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          color: #fff;
+          padding: 5px 15px;
+          background: rgba($color: #000, $alpha: 0.3);
+          border-radius: 30px;
+          .anticon-caret-right{
+            font-size: 24px;
           }
         }
         .recommend-name{

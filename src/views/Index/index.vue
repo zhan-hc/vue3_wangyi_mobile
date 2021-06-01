@@ -34,7 +34,7 @@ export default {
         const recommendResult = await home_recommend()
         bannerList.value = bannerResult.data.banners
         iconList.value = iconResult.data.data
-        recommendList.value = recommendResult.data.recommend
+        recommendList.value = recommendResult.data.result
         status.value = true
       } catch(err) {
         console.log('err:',err)
