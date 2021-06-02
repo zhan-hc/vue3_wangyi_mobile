@@ -1,0 +1,44 @@
+{
+  "id": "2586060",
+  "name": "vue3_wangyi",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "19989539",
+      "name": "music",
+      "font_class": "music3",
+      "unicode": "ea40",
+      "unicode_decimal": 59968
+    },
+    {
+      "icon_id": "316363",
+      "name": "wangyi_yunyinyue_music_1193417_easyicon.net",
+      "font_class": "wangyiyunyinyuemusic1193417easyiconnet",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "11759981",
+      "name": "信号",
+      "font_class": "xinhao",
+      "unicode": "e7c4",
+      "unicode_decimal": 59332
+    },
+    {
+      "icon_id": "20406477",
+      "name": "话筒",
+      "font_class": "huatong",
+      "unicode": "e78a",
+      "unicode_decimal": 59274
+    },
+    {
+      "icon_id": "21189973",
+      "name": "user-more",
+      "font_class": "user-more",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    }
+  ]
+}

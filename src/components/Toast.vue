@@ -1,5 +1,5 @@
 <template>
-  <div class="Toast">
+  <div class="toast-wrap">
     {{msg}}
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.Toast{
+.toast-wrap{
   position: fixed;
   display: inline-block;
   bottom: 20%;

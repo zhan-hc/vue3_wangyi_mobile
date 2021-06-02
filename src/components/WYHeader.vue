@@ -1,5 +1,5 @@
 <template>
-  <div className='header'>
+  <div className='header-wrap'>
     <LeftOutlined class='header-icon' @click="goback"/>
     <span class='header-tellogin'>手机号登录</span>
     <span v-if="status===1" className='header-pswlogin' @click='pswLogin'>密码登录</span>
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.header{
+.header-wrap{
   position: relative;
   box-sizing: border-box;
   height: 75px;

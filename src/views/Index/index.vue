@@ -1,69 +1,61 @@
 <template>
-  <div class="Index-wrapper">
-    <IndexHeader/>
-    <Carousel v-if="status" :bannerList='bannerList'/>
-    <IndexIcon v-if="status" :iconList='iconList'/>
-    <Recommend v-if="status" :recommendInfo='recommendInfo'/>
-    <IndexSong v-if="status" :songInfo='songInfo'/>
-    <IndexVideo  v-if="status" :videoInfo='videoInfo'/>
+  <div class="index-wrapper">
+      <a-drawer
+        placement="left"
+        :closable="false"
+        :visible="visible"
+        @close="onClose"
+      >
+      <DrawerInfo />
+      </a-drawer>
+      <keep-alive>
+        <component :is='navList[activeTab]'/>
+      </keep-alive>
+      <BottomNav/>
   </div>
 </template>
 
 <script>
-import IndexHeader from './components/IndexHeader'
-import Carousel from "./components/Carousel"
-import IndexIcon from "./components/IndexIcon"
-import Recommend from "./components/Recommend"
-import IndexSong from "./components/IndexSong"
-import IndexVideo from "./components/IndexVideo"
-import { home_icon, home_page } from "@/api/home/index";
-import { onMounted,ref } from "vue";
+import DrawerInfo from "@/components/DrawerInfo";
+import BottomNav from "@/components/BottomNav";
+import find from "@/views/find/index";
+import podcast from "@/views/podcast/index";
+import my from "@/views/my/index";
+import sing from "@/views/sing/index";
+import village from "@/views/village/index";
+import { ref, provide } from "vue";
 export default {
   name: 'Index',
   components: {
-    Carousel,
-    IndexIcon,
-    Recommend,
-    IndexSong,
-    IndexHeader,
-    IndexVideo
+    my,
+    find,
+    sing,
+    podcast,
+    village,
+    BottomNav,
+    DrawerInfo
   },
   setup () {
-    const bannerList = ref([])
-    const iconList = ref([])
-    const recommendInfo = ref({})
-    const songInfo = ref({})
-    const videoInfo = ref({})
-    const status = ref(false)
-    onMounted(async () => {
-      try {
-        const result =  await home_page()
-        const iconResult = await home_icon()
-        bannerList.value = result.data.data.blocks[0].extInfo.banners
-        iconList.value = iconResult.data.data
-        recommendInfo.value = result.data.data.blocks[1]
-        songInfo.value = result.data.data.blocks[2]
-        videoInfo.value = result.data.data.blocks[3]
-        status.value = true
-      } catch(err) {
-        console.log('err:',err)
-      }
-    })
+    const visible = ref(false)
+    const navList = ref(['find','podcast','my','sing','village',])
+    const activeTab = ref(0)
+    provide('visible', visible)
+    provide('activeTab', activeTab)
+    const onClose = () => {
+      visible.value = false
+    }
     return {
-      status,
-      iconList,
-      songInfo,
-      videoInfo,
-      bannerList,
-      recommendInfo
+      visible,
+      onClose,
+      navList,
+      activeTab
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.Index-wrapper{
-  background-color: #f5f5f5;
-  box-sizing: border-box;
+.index-wrapper{
+  // margin-bottom: 150px;
 }
 </style>

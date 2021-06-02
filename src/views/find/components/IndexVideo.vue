@@ -67,7 +67,7 @@ export default {
   background: #fff;
   padding: 20px 0;
   border-radius: 20px;
-  margin-bottom: 20px;
+  // margin-bottom: 150px;
   .video-header{
     position: relative;
     margin: 20px 30px;

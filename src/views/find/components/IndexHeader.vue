@@ -1,6 +1,6 @@
 <template>
   <div class="header-wrapper">
-    <MenuOutlined />
+    <MenuOutlined @click="onOpen"/>
     <div class="header-content">
       <SearchOutlined />
     </div>
@@ -9,9 +9,18 @@
 </template>
 
 <script>
+import { inject } from "vue";
 export default {
   name: 'IndexHeader',
-  components: {
+  setup () {
+    const visible = inject('visible')
+    const onOpen = () => {
+      visible.value = true
+    }
+    return {
+      visible,
+      onOpen
+    }
   }
 }
 </script>
