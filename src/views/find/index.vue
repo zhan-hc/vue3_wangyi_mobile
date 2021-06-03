@@ -64,5 +64,6 @@ export default {
 <style scoped lang="scss">
 .find-wrapper{
   background-color: #f5f5f5;
+  padding-bottom: 150px;
 }
 </style>

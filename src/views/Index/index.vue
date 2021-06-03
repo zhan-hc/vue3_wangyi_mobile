@@ -55,7 +55,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.index-wrapper{
-  // margin-bottom: 150px;
-}
 </style>
