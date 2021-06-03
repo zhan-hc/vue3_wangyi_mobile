@@ -3,6 +3,7 @@ import {
   CloseOutlined,
   MenuOutlined,
   SearchOutlined,
+  RightOutlined,
   AudioFilled,
   CaretRightOutlined
  } from '@ant-design/icons-vue'
@@ -14,6 +15,7 @@ const ant = {
     Vue.component(AudioFilled.name, AudioFilled)
     Vue.component(MenuOutlined.name, MenuOutlined)
     Vue.component(LeftOutlined.name,LeftOutlined)
+    Vue.component(RightOutlined.name,RightOutlined)
     Vue.component(CloseOutlined.name,CloseOutlined)
     Vue.component(CaretRightOutlined.name,CaretRightOutlined)
     Vue.component(Carousel.name,Carousel)
