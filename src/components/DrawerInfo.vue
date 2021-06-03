@@ -29,7 +29,7 @@
 
 <script>
 import { reactive, ref, getCurrentInstance } from "vue";
-import { list } from "@/assets/js/drawerData";
+import { list } from "@/assets/ts/drawerData";
 export default {
   name: 'DrawerInfo',
   setup () {

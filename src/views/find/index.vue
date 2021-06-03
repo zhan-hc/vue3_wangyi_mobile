@@ -1,6 +1,5 @@
 <template>
   <div class="find-wrapper">
-    <!-- <IndexHeader/> -->
     <Carousel v-if="status" :bannerList='bannerList'/>
     <IndexIcon v-if="status" :iconList='iconList'/>
     <Recommend v-if="status" :recommendInfo='recommendInfo'/>
@@ -10,7 +9,6 @@
 </template>
 
 <script>
-// import IndexHeader from './components/IndexHeader'
 import Carousel from "./components/Carousel"
 import IndexIcon from "./components/IndexIcon"
 import Recommend from "./components/Recommend"
@@ -25,7 +23,6 @@ export default {
     IndexIcon,
     Recommend,
     IndexSong,
-    // IndexHeader,
     IndexVideo
   },
   setup () {

@@ -1,5 +1,16 @@
+import { SetupContext } from "@vue/runtime-core";
+
 /* 网易云音乐设置弹出框的list列表信息 */
-export const list = [
+interface setlist {
+  title?: String,
+  data: Array<listdata>
+}
+interface listdata {
+  id: String,
+  icon: String,
+  text: String 
+}
+export const list: Array<setlist> = [
   {
     data: [
       {

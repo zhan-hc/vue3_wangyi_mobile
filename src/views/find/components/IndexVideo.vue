@@ -25,7 +25,7 @@
 <script>
 import { ref, reactive, onMounted } from "vue";
 import BScroll from "better-scroll";
-import { formatCount } from "@/assets/js/common";
+import { formatCount } from "@/assets/ts/common";
 export default {
   name: 'IndexVideo',
   props: {
