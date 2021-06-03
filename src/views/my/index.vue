@@ -5,13 +5,14 @@
 </template>
 
 <script>
-import { ref, reactive } from "vue"
+import { ref, reactive,} from "vue"
 export default {
-  name: '',
+  name: 'my',
   components: {
   },
   setup (props, context) {
     return {
+      
     }
   }
 }

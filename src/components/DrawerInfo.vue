@@ -1,8 +1,8 @@
 <template>
   <div class="info-wrap">
     <div class="person-info">
-      <a-avatar size="large" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-      <span>测试名称 ></span>
+      <a-avatar size="large" :src="userinfo.avatarUrl" />
+      <span>{{userinfo.nickname}} ></span>
       <i class="iconfont icon-saoma"></i>
     </div>
     <div class="info-vip">
@@ -28,16 +28,19 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, ref, getCurrentInstance } from "vue";
 import { list } from "@/assets/js/drawerData";
 export default {
   name: 'DrawerInfo',
   setup () {
+    const vm = getCurrentInstance()
     const info = reactive({
       list: list
     })
+    const userinfo = ref(vm.ctx.$store.state.userinfo)
     return {
-      info
+      info,
+      userinfo
     }
   }
 }
@@ -51,9 +54,8 @@ export default {
     font-size: 28px;
     margin-bottom: 20px;
     .ant-avatar{
-      width: 50px;
-      height: 50px;
-      border: 1px solid #000;
+      width: 75px;
+      height: 75px;
       margin-right: 30px;
     }
     span{

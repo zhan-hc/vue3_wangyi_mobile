@@ -24,10 +24,10 @@ export function login_verifycode (parameter: any)  {
       data: parameter
   })
 }
-// 检查登陆状态
+// 获取账号信息
 export function login_status ()  {
   return Request.axiosInstance({
-      url: '/login/status',
+      url: '/user/account',
       method: 'post'
   })
 }
