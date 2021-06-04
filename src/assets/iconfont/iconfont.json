@@ -6,6 +6,62 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9514336",
+      "name": "收 藏 ",
+      "font_class": "shoucang",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "12226381",
+      "name": "云盘",
+      "font_class": "yunpan",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "9835901",
+      "name": "信号",
+      "font_class": "xinhao1",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "11267233",
+      "name": "好友",
+      "font_class": "haoyou",
+      "unicode": "e6a1",
+      "unicode_decimal": 59041
+    },
+    {
+      "icon_id": "9463101",
+      "name": "多媒体_音乐05_文件_",
+      "font_class": "duomeiti_yinle_wenjian_",
+      "unicode": "e824",
+      "unicode_decimal": 59428
+    },
+    {
+      "icon_id": "17759297",
+      "name": "已购",
+      "font_class": "yigou",
+      "unicode": "e6ab",
+      "unicode_decimal": 59051
+    },
+    {
+      "icon_id": "20645289",
+      "name": "播放",
+      "font_class": "bofang",
+      "unicode": "e715",
+      "unicode_decimal": 59157
+    },
+    {
+      "icon_id": "21100500",
+      "name": "vip",
+      "font_class": "vip",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
       "icon_id": "5121959",
       "name": "我的-客服",
       "font_class": "wode-kefu",

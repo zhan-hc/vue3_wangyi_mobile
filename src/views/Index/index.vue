@@ -26,7 +26,7 @@ import my from "@/views/my/index";
 import sing from "@/views/sing/index";
 import village from "@/views/village/index";
 import { ref, provide, getCurrentInstance, onMounted } from "vue";
-import { user_account } from '@/api/user/index'
+import { user_account, user_level } from '@/api/user/index'
 export default {
   name: 'Index',
   components: {
@@ -56,6 +56,15 @@ export default {
       }).catch((err) => {
         console.log(err, 'err')
       })
+      user_level().then((res) => {
+        console.log(res)
+        if (res.data.code === 200) {
+          localStorage.setItem('level',res.data.data.level)
+          vm.ctx.$store.state.level = res.data.level
+        }
+      }).catch((err) => {
+        console.log(err, 'err')
+      })
     })
     
     const onClose = () => {
@@ -78,4 +87,9 @@ export default {
   }
 </style>
 <style scoped lang="scss">
+.index-wrapper {
+  background-color: #f5f5f5;
+  padding: 120px 0 150px;
+  box-sizing: border-box;
+}
 </style>

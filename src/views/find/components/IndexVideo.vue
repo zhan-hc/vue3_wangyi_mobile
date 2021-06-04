@@ -8,7 +8,7 @@
       <div class="video-content" ref="content">
         <div class="video-item" v-for="item in videoList" :key="item.creativeId">
           <div class="video-img">
-            <img :src="item.resource.mlogExtVO.song.coverUrl" alt="">
+            <img :src="item.resource.mlogBaseData.coverUrl" alt="">
             <CaretRightOutlined/>
           </div>
           <div class="video-playCount">
@@ -67,7 +67,6 @@ export default {
   background: #fff;
   padding: 20px 0;
   border-radius: 20px;
-  // margin-bottom: 150px;
   .video-header{
     position: relative;
     margin: 20px 30px;
