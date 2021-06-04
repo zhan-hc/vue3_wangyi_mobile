@@ -26,7 +26,7 @@ import my from "@/views/my/index";
 import sing from "@/views/sing/index";
 import village from "@/views/village/index";
 import { ref, provide, getCurrentInstance, onMounted } from "vue";
-import { login_status } from '@/api/login/index'
+import { user_account } from '@/api/user/index'
 export default {
   name: 'Index',
   components: {
@@ -46,9 +46,8 @@ export default {
     const vm = getCurrentInstance()
     provide('visible', visible)
     provide('activeTab', activeTab)
-    // console.log(vm.ctx.$store.state.uid, 333)
     onMounted(() => {
-      login_status().then((res) => {
+      user_account().then((res) => {
         if (res.data.code === 200) {
           console.log(res)
           localStorage.setItem('uid',res.data.profile.userId)
