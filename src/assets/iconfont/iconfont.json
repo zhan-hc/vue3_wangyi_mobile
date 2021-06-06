@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "10128701",
+      "name": "三点",
+      "font_class": "sandian",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "12777012",
+      "name": "plus",
+      "font_class": "plus",
+      "unicode": "e6c9",
+      "unicode_decimal": 59081
+    },
+    {
+      "icon_id": "7964130",
+      "name": "导入",
+      "font_class": "daoru",
+      "unicode": "eab3",
+      "unicode_decimal": 60083
+    },
+    {
       "icon_id": "10810705",
       "name": "心动",
       "font_class": "xindong",

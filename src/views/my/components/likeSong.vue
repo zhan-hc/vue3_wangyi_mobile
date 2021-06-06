@@ -35,6 +35,7 @@ export default {
   border-radius: 20px;
   padding: 30px;
   font-size: 24px;
+  margin-bottom: 30px;
   .song-img{
     position: relative;
     width: 90px;
@@ -76,7 +77,7 @@ export default {
     border: 1px solid #ccc;
     padding: 3px 10px;
     border-radius: 20px;
-    margin-top: 20px;
+    margin-top: 22px;
   }
 }
 </style>
