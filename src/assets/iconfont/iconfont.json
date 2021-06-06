@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "10810705",
+      "name": "心动",
+      "font_class": "xindong",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "17969396",
+      "name": "心动",
+      "font_class": "ziyuan1",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
       "icon_id": "9514336",
       "name": "收 藏 ",
       "font_class": "shoucang",

@@ -34,6 +34,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   border-radius: 20px;
+  margin-bottom: 20px;
   .iconList-item{
     width: 162px;
     text-align: center;
