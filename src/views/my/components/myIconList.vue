@@ -33,11 +33,9 @@ export default {
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  // align-content: stretch;
   border-radius: 20px;
   .iconList-item{
-    width: 150px;
+    width: 162px;
     text-align: center;
     color: #666;
     padding: 20px 0;
