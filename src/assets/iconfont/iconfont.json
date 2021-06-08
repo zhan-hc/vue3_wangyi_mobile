@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "20498148",
+      "name": "播放",
+      "font_class": "bofang1",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
+      "icon_id": "20641804",
+      "name": "播放",
+      "font_class": "bofang2",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "2790597",
+      "name": "详情",
+      "font_class": "xiangqing",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
       "icon_id": "10128701",
       "name": "三点",
       "font_class": "sandian",

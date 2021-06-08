@@ -12,6 +12,7 @@
       <keep-alive>
         <component :is='navList[activeTab]'/>
       </keep-alive>
+      <BottomPlayer />
       <BottomNav/>
   </div>
 </template>
@@ -20,6 +21,7 @@
 import IndexHeader from "@/components/IndexHeader";
 import DrawerInfo from "@/components/DrawerInfo";
 import BottomNav from "@/components/BottomNav";
+import BottomPlayer from "@/components/BottomPlayer";
 import find from "@/views/find/index";
 import podcast from "@/views/podcast/index";
 import my from "@/views/my/index";
@@ -37,7 +39,8 @@ export default {
     village,
     BottomNav,
     DrawerInfo,
-    IndexHeader
+    IndexHeader,
+    BottomPlayer
   },
   setup () {
     const visible = ref(false)
