@@ -1,6 +1,6 @@
 <template>
   <div class="index-wrapper">
-      <IndexHeader />
+      <index-header />
       <a-drawer
         placement="left"
         :closable="false"
@@ -12,16 +12,18 @@
       <keep-alive>
         <component :is='navList[activeTab]'/>
       </keep-alive>
-      <BottomPlayer />
-      <BottomNav/>
+      <player-detail />
+      <bottom-player />
+      <bottom-nav/>
   </div>
 </template>
 
 <script>
-import IndexHeader from "@/components/IndexHeader";
-import DrawerInfo from "@/components/DrawerInfo";
-import BottomNav from "@/components/BottomNav";
-import BottomPlayer from "@/components/BottomPlayer";
+import IndexHeader from "./components/IndexHeader";
+import DrawerInfo from "./components/DrawerInfo";
+import BottomNav from "./components/BottomNav";
+import PlayerDetail from "./components/PlayerDetail";
+import BottomPlayer from "./components/BottomPlayer";
 import find from "@/views/find/index";
 import podcast from "@/views/podcast/index";
 import my from "@/views/my/index";
@@ -40,7 +42,8 @@ export default {
     BottomNav,
     DrawerInfo,
     IndexHeader,
-    BottomPlayer
+    BottomPlayer,
+    PlayerDetail
   },
   setup () {
     const visible = ref(false)
