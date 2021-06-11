@@ -3,8 +3,12 @@
 </template>
 
 <script>
+import { provideToast } from '@/components/IndexToast';
 export default {
   name: 'App',
+  setup() {
+    provideToast({})
+  }
 }
 </script>
 

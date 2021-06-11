@@ -7,26 +7,21 @@
     </div>
     <button @click="handleLogin">登录</button>
   </div>
-  <Toast :msg='msg' v-show="status"/>
 </template>
 
 <script>
 import {ref} from 'vue'
-import Toast from 'components/Toast'
 import WYHeader from 'components/WYHeader'
 import { useRouter } from "vue-router";
 import { login_phonePsw } from "@/api/login/index";
 export default {
   name: 'pswLogin',
   components: {
-    Toast,
     WYHeader
   },
   setup () {
     const route = useRouter()
-    const status = ref(false)
     const password = ref('')
-    const msg = ref('请输入11位数字的手机号')
     const tel = route.currentRoute.value.params.tel
     const handleDelete = () => {
       password.value = ''
@@ -46,8 +41,6 @@ export default {
     }
     return {
       tel,
-      msg,
-      status,
       password,
       handleDelete,
       handleLogin

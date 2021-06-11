@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Antd from './plugins/Ant/index'
+import Toast from '@/components/Toast.vue'
 import { Request } from "@/utils/request";
 import VueAxios from 'vue-axios'
 import 'amfe-flexible'

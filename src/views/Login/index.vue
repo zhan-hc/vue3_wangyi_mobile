@@ -9,31 +9,25 @@
     </div>
     <button @click="handleCheckTel">下一步</button>
   </div>
-  <Toast :msg='msg' v-show="status"/>
 </template>
 
 <script>
 import WYHeader from 'components/WYHeader'
-import Toast from 'components/Toast'
+import {useToast} from 'components/IndexToast'
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 export default {
   name: 'Login',
   components: {
-    WYHeader,
-    Toast
+    WYHeader
   },
   setup () {
     const route = useRouter()
-    const status = ref(false)
     const tel = ref('')
-    const msg = ref('请输入11位数字的手机号')
+    const Toast = useToast()
     const handleCheckTel = () => {
       if (tel.value.length < 11) {
-        status.value = true
-        setTimeout(() => {
-          status.value = false
-        }, 3000);
+        Toast('请输入11位数字的手机号')
       } else {
         route.push(`/CodeLogin/${tel.value}`)
       }
@@ -43,8 +37,6 @@ export default {
     }
     return {
       tel,
-      msg,
-      status,
       handleDelete,
       handleCheckTel
     }

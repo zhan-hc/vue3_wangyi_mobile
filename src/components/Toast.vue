@@ -1,20 +1,29 @@
 <template>
-  <div class="toast-wrap">
-    {{msg}}
+  <div class="toast-wrap" v-show="state.show">
+    {{state.msg}}
   </div>
 </template>
 
 <script>
+import { reactive} from "vue";
 export default {
   name: 'Toast',
   props: {
     msg: {
-      type: String,
-      default: () => {return ''}
+      type: Object
+    },
+    isShow: {
+      type: Object
     }
   },
-  setup () {
-
+  setup (props) {
+    const state = reactive({
+      show: props.isShow,
+      msg: props.msg
+    })
+    return {
+      state
+    }
   }
 }
 </script>
@@ -31,6 +40,6 @@ export default {
   padding: 15px 30px;
   border-radius: 30px;
   background-color: #F5F5F5;
-  z-index: 2;
+  z-index: 9;
 }
 </style>

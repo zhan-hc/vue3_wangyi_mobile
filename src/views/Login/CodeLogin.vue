@@ -16,26 +16,23 @@
       <input type="tel" maxLength='1' @keyup="handleInput"/>
     </div>
   </div>
-  <Toast :msg='msg' v-show="status"/>
 </template>
 
 <script>
 import WYHeader from 'components/WYHeader'
-import Toast from 'components/Toast'
+import {useToast} from 'components/IndexToast'
 import {useRouter} from 'vue-router'
 import { login_cellphone, login_verifycode } from "@/api/login/index";
 import {ref, computed, reactive, onMounted, getCurrentInstance} from 'vue'
 export default {
   name: 'CodeLogin',
   components: {
-    Toast,
     WYHeader
   },
   setup () {
     const route = useRouter()
     const {ctx} = getCurrentInstance()
-    const status = ref(false)
-    const msg = ref('验证码错误')
+    const Toast = useToast()
     const tel = route.currentRoute.value.params.tel
     const state = reactive({
       timer: 59,
@@ -53,13 +50,6 @@ export default {
       }
       return  codesum
     })
-    const showToast =  (val) => {
-      msg.value = val
-      status.value = true
-      setTimeout(() => {
-        status.value = false
-      }, 3000);
-    }
     const handleSendCode = () => { // 获取验证码倒计时
       sendCode()
       if (state.timer === 0) {
@@ -80,7 +70,7 @@ export default {
         console.log('发送验证码')
       }).catch((err) => {
         console.log(err,'err')
-        showToast(err.message)
+        Toast(err.message)
       })
     }
     const handleBindIndex = () => {
@@ -108,7 +98,7 @@ export default {
              route.push('/')
           }
         })).catch((err) => {
-          showToast(err.message)
+          Toast(err.message)
         })
       }
     }
@@ -118,14 +108,11 @@ export default {
     })
     return {
       tel,
-      msg,
       state,
-      status,
       formatTel,
       sendCode,
       handleSendCode,
-      handleInput,
-      showToast
+      handleInput
     }
   }
 }
