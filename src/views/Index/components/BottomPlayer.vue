@@ -1,5 +1,5 @@
 <template>
-  <div class="player-wrap">
+  <div class="player-wrap" @click="handleOpenPlayer">
     <div class="player-img">
       <img src="https://p2.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg" alt="">
     </div>
@@ -13,19 +13,27 @@
 </template>
 
 <script>
-import { ref, reactive } from "vue"
+import { ref, reactive, inject } from "vue"
 export default {
   name: 'BottomPlayer',
   components: {
   },
   setup (props, context) {
+    const isShowPlayer = inject('isShowPlayer')
+    const handleOpenPlayer = () => {
+      console.log('111')
+      isShowPlayer.value = true
+    }
     return {
+      isShowPlayer,
+      handleOpenPlayer
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/mixin.scss';
 .player-wrap{
   position: fixed;
   bottom: 140px;
@@ -61,9 +69,7 @@ export default {
   .song-info{
     flex: 1;
     margin-right: 70px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    @include ellipsis;
     span {
       font-size: 36px;
       &:last-child {

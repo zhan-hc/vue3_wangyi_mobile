@@ -65,6 +65,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/mixin.scss';
 .song-container{
   font-size: 24px;
   background: #fff;
@@ -141,9 +142,7 @@ export default {
             .info-base {
               font-size: 24px;
               color: #9A9A9A;
-              overflow: hidden;
-              white-space: nowrap;
-              text-overflow: ellipsis;
+              @include ellipsis;
               span{
                 display: inline-block;
               }

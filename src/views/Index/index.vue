@@ -12,8 +12,8 @@
       <keep-alive>
         <component :is='navList[activeTab]'/>
       </keep-alive>
-      <player-detail />
-      <bottom-player />
+      <player-detail v-show="isShowPlayer"/>
+      <bottom-player/>
       <bottom-nav/>
   </div>
 </template>
@@ -48,10 +48,12 @@ export default {
   setup () {
     const visible = ref(false)
     const navList = ref(['find','podcast','my','sing','village'])
+    const isShowPlayer = ref(false)
     const activeTab = ref(0)
     const vm = getCurrentInstance()
     provide('visible', visible)
     provide('activeTab', activeTab)
+    provide('isShowPlayer', isShowPlayer)
     onMounted(() => {
       user_account().then((res) => {
         if (res.data.code === 200) {
@@ -81,7 +83,8 @@ export default {
       visible,
       onClose,
       navList,
-      activeTab
+      activeTab,
+      isShowPlayer
     }
   }
 }
