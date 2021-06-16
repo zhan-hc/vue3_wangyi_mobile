@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2586060 */
-  src: url('iconfont.woff2?t=1623338784672') format('woff2'),
-       url('iconfont.woff?t=1623338784672') format('woff'),
-       url('iconfont.ttf?t=1623338784672') format('truetype');
+  src: url('iconfont.woff2?t=1623855448458') format('woff2'),
+       url('iconfont.woff?t=1623855448458') format('woff'),
+       url('iconfont.ttf?t=1623855448458') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,70 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mv:before {
+  content: "\e60e";
+}
+
+.icon-duoxuanpt:before {
+  content: "\e661";
+}
+
+.icon-VIP:before {
+  content: "\e670";
+}
+
+.icon-dujia:before {
+  content: "\e672";
+}
+
+.icon-shiting:before {
+  content: "\e673";
+}
+
+.icon-shuzizhuanji:before {
+  content: "\e674";
+}
+
+.icon-yigou1:before {
+  content: "\e676";
+}
+
+.icon-yushou:before {
+  content: "\e677";
+}
+
+.icon-VIPxiazai:before {
+  content: "\e678";
+}
+
+.icon-HQ:before {
+  content: "\e679";
+}
+
+.icon-MV:before {
+  content: "\e67a";
+}
+
+.icon-bofang5:before {
+  content: "\e60d";
+}
+
+.icon-plus1:before {
+  content: "\e60b";
+}
+
+.icon-bofang4:before {
+  content: "\e6eb";
+}
+
+.icon-search:before {
+  content: "\e6d0";
+}
+
+.icon-leftarrow:before {
+  content: "\e608";
 }
 
 .icon-xiazaipt:before {

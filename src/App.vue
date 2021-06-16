@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { provideToast } from '@/components/IndexToast';
+import { provideToast } from '@/components/toast/IndexToast';
 export default {
   name: 'App',
   setup() {

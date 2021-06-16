@@ -15,7 +15,7 @@
             <div class="song-info">
               <div class="info-base" :class="{'nodesc': !item.uiElement.subTitle}">
                 <span class="info-name">{{item.uiElement.mainTitle.title}}</span>
-                {{getAuthor(item.resourceExtInfo.artists)}}
+                 - {{getAuthor(item.resourceExtInfo.artists)}}
               </div>
               <div class="info-desc" v-if="item.uiElement.subTitle">{{item.uiElement.subTitle.title}}</div>
             </div>

@@ -13,7 +13,7 @@
 
 <script>
 import WYHeader from 'components/WYHeader'
-import {useToast} from 'components/IndexToast'
+import {useToast} from 'components/toast/IndexToast'
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 export default {

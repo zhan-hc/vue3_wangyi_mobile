@@ -1,5 +1,5 @@
 const formatCount = (num : Number): String => {
-  let str = num.toString()
+  let str = String(num)
   const length = str.length
   if (length > 5 && length < 9) {
     str = str.substring(0,length - 4) + '万'
@@ -18,7 +18,7 @@ const getAuthor = (obj: Array<artists>): String => {
   for (let i = 0; i < obj.length; i++) {
     authors +=  '-' + obj[i].name
   }
-  return authors
+  return authors.slice(1)
 } 
 
 export {

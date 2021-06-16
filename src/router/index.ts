@@ -25,6 +25,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/pswLogin/:tel',
     name: 'pswLogin',
     component: () => import('views/Login/pswLogin.vue')
+  },
+  {
+    path: '/songListDetail/:id',
+    name: 'songListDetail',
+    component: () => import('views/find/songListDetail.vue')
   }
 ]
 

@@ -6,6 +6,118 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1535103",
+      "name": "mv",
+      "font_class": "mv",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "8180990",
+      "name": "多选(4pt) - 网易icon",
+      "font_class": "duoxuanpt",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "10097551",
+      "name": "VIP - 网易icon",
+      "font_class": "VIP",
+      "unicode": "e670",
+      "unicode_decimal": 58992
+    },
+    {
+      "icon_id": "10097552",
+      "name": "独家 - 网易icon",
+      "font_class": "dujia",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "10097553",
+      "name": "试听 - 网易icon",
+      "font_class": "shiting",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
+      "icon_id": "10097554",
+      "name": "数字专辑 - 网易icon",
+      "font_class": "shuzizhuanji",
+      "unicode": "e674",
+      "unicode_decimal": 58996
+    },
+    {
+      "icon_id": "10097555",
+      "name": "已购 - 网易icon",
+      "font_class": "yigou1",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "10097556",
+      "name": "预售 - 网易icon",
+      "font_class": "yushou",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    },
+    {
+      "icon_id": "10097557",
+      "name": "VIP下载 - 网易icon",
+      "font_class": "VIPxiazai",
+      "unicode": "e678",
+      "unicode_decimal": 59000
+    },
+    {
+      "icon_id": "10097558",
+      "name": "HQ - 网易icon",
+      "font_class": "HQ",
+      "unicode": "e679",
+      "unicode_decimal": 59001
+    },
+    {
+      "icon_id": "10097587",
+      "name": "MV - 网易icon",
+      "font_class": "MV",
+      "unicode": "e67a",
+      "unicode_decimal": 59002
+    },
+    {
+      "icon_id": "4359262",
+      "name": "播放",
+      "font_class": "bofang5",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "20568183",
+      "name": "plus",
+      "font_class": "plus1",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "8294730",
+      "name": "播放",
+      "font_class": "bofang4",
+      "unicode": "e6eb",
+      "unicode_decimal": 59115
+    },
+    {
+      "icon_id": "11556348",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e6d0",
+      "unicode_decimal": 59088
+    },
+    {
+      "icon_id": "12257170",
+      "name": "left arrow",
+      "font_class": "leftarrow",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
       "icon_id": "8180991",
       "name": "下载(4pt) - 网易icon",
       "font_class": "xiazaipt",

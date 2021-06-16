@@ -20,7 +20,7 @@
 
 <script>
 import WYHeader from 'components/WYHeader'
-import {useToast} from 'components/IndexToast'
+import {useToast} from 'components/toast/IndexToast'
 import {useRouter} from 'vue-router'
 import { login_cellphone, login_verifycode } from "@/api/login/index";
 import {ref, computed, reactive, onMounted, getCurrentInstance} from 'vue'
