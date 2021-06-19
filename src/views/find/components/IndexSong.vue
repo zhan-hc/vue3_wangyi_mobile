@@ -33,13 +33,13 @@ import { getAuthor } from "@/assets/ts/common";
 export default {
   name: 'IndexSong',
   props: {
-    songInfo: {
+    data: {
       type: Object
     }
   },
   setup (props) {
-    const songList = reactive(props.songInfo.creatives)
-    const songheader = reactive(props.songInfo.uiElement)
+    const songList = reactive(props.data.creatives)
+    const songheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
     const content = ref(null)
     onMounted(() => {

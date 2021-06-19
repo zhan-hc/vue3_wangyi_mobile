@@ -1,12 +1,12 @@
 <template>
   <div class="detail-wrap">
-    <div class="detail-header">
+    <div class="detail-header" ref="detailHeader">
       <i class="iconfont icon-leftarrow" @click="handleBack"></i>
       <span>歌单</span>
       <i class="iconfont icon-search"></i>
       <i class="iconfont icon-sandian"></i>
     </div>
-    <div class="detail-info">
+    <div v-if="songList.tracks" class="detail-info" :style="{'background-image': `url(${songList.tracks[0].al.picUrl})`}">
       <div class="songList-img">
         <img :src="songList.coverImgUrl" alt="推荐歌单">
         <div class="songList-playCount">
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="detail-songList">
-      <div class="songList-count">
+      <div class="songList-count" ref="headerCount">
         <div class="count-item">
           <i class="iconfont icon-plus1"></i>
           <span>{{formatCount(songList.subscribedCount)}}</span>
@@ -39,7 +39,7 @@
           <span>{{formatCount(songList.shareCount)}}</span>
         </div>
       </div>
-      <div class="songList-header">
+      <div ref="songListHeader" :class="fixedStatus ? 'songList-header' : 'fixed-header'">
         <i class="iconfont icon-bofang5"></i>
         <div class="all">播放全部<span>(94)</span></div>
         <i class="iconfont icon-xiazaipt"></i>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted } from "vue"
+import { ref, reactive, onMounted, getCurrentInstance } from "vue"
 import { useRouter } from "vue-router";
 import { formatCount, getAuthor } from "@/assets/ts/common";
 import { songList_detail } from "@/api/home/songList";
@@ -69,16 +69,18 @@ export default {
   },
   setup (props, context) {
     const route = useRouter()
+    const { ctx } = getCurrentInstance()
     const id = route.currentRoute.value.params.id
+    const fixedStatus = ref(true)
     const songList = ref({})
     onMounted(() => {
+      window.addEventListener("scroll",handleScroll)
       songList_detail({
         id: id
       }).then((res) => {
         console.log(res)
         if (res.data.code === 200) {
           songList.value = res.data.playlist
-          console.log(songList)
         }
       }).catch((err) => {
         console.log('err',err)
@@ -87,11 +89,28 @@ export default {
     const handleBack = () => {
       route.go(-1)
     }
+    const handleScroll = () => {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      if (scrollTop >= 200) {
+        // ctx.$refs.headerCount.style.opacity = '0'
+        fixedStatus.value = false
+        // 待优化
+        ctx.$refs.detailHeader.style.backgroundImage = `url('${songList.value.tracks[0].al.picUrl}')`
+        ctx.$refs.detailHeader.style.backgroundPosition = 'bottom'
+        ctx.$refs.detailHeader.style.backgroundSize = 'cover'
+      } else {
+        // ctx.$refs.headerCount.style.opacity = '1'
+        fixedStatus.value = true
+        ctx.$refs.detailHeader.style.backgroundImage = 'none'
+      }
+    }
     return {
       id,
       songList,
+      fixedStatus,
       handleBack,
       getAuthor,
+      handleScroll,
       formatCount
     }
   }
@@ -100,6 +119,22 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/scss/mixin.scss';
+@keyframes hideCount {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+@keyframes showCount {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
 .detail-wrap{
   font-size: 24px;
   background: #fff;
@@ -136,12 +171,12 @@ export default {
     display: flex;
     padding: 120px 30px 100px;
     border-radius: 0 0 80% 80% / 0 0 10% 10%;
-    background: #000;
+    background-size: cover;
     .songList-img{
       position: relative;
       border-radius: 10px;
-      width: 200px;
-      height: 200px;
+      width: 220px;
+      height: 220px;
       margin-bottom: 10px;
       margin-right: 30px;
       img{
@@ -230,9 +265,11 @@ export default {
         }
       }
     }
-    .songList-header{
+    .songList-header,
+    .fixed-header{
       display: flex;
       align-items: center;
+      background: #fff;
       .all{
         flex: 1;
         font-size: 32px;
@@ -255,6 +292,12 @@ export default {
         font-size: 52px;
         margin-right: 40px;
       }
+    }
+    .fixed-header {
+      position: fixed;
+      top: 100px;
+      left: 30px;
+      right: 30px;
     }
     .songList-item{
       display: flex;

@@ -1,10 +1,20 @@
 <template>
-  <div class="find-wrapper">
+  <div class="find-wrap">
     <Carousel v-if="status" :bannerList='bannerList'/>
     <IndexIcon v-if="status" :iconList='iconList'/>
-    <Recommend v-if="status" :recommendInfo='recommendInfo'/>
-    <IndexSong v-if="status" :songInfo='songInfo'/>
-    <IndexVideo  v-if="status" :videoInfo='videoInfo'/>
+    <div v-if="status">
+      <component
+        :key='i'
+        :data='item'
+        :is='blockCode[item.blockCode]'
+        v-for="(item, i) in result.data.data.blocks.slice(1,result.data.data.blocks.length)"
+      />
+      <div class="find-end">{{result.data.data.pageConfig.nodataToast}}</div>
+    </div>
+    <!-- <Recommend v-if="status" :data='recommendInfo'/>
+    <IndexSong v-if="status" :data='songInfo'/> -->
+    <!-- <IndexVideo  v-if="status" :videoInfo='videoInfo'/> -->
+    <!-- <IndexLive  v-if="status" :data='liveInfo'/> -->
   </div>
 </template>
 
@@ -14,8 +24,9 @@ import IndexIcon from "./components/IndexIcon"
 import Recommend from "./components/Recommend"
 import IndexSong from "./components/IndexSong"
 import IndexVideo from "./components/IndexVideo"
+import IndexLive from "./components/IndexLive"
 import { home_icon, home_page } from "@/api/home/index";
-import { onMounted,ref } from "vue";
+import { onMounted, ref, reactive } from "vue";
 export default {
   name: 'Find',
   components: {
@@ -23,7 +34,8 @@ export default {
     IndexIcon,
     Recommend,
     IndexSong,
-    IndexVideo
+    IndexVideo,
+    IndexLive
   },
   setup () {
     const bannerList = ref([])
@@ -31,16 +43,21 @@ export default {
     const recommendInfo = ref({})
     const songInfo = ref({})
     const videoInfo = ref({})
+    const liveInfo = ref({})
+    let result = ref({})
+    const blockCode = reactive({
+      // 'HOMEPAGE_BANNER' : '',
+      'HOMEPAGE_BLOCK_PLAYLIST_RCMD': 'Recommend',
+      'HOMEPAGE_BLOCK_LISTEN_LIVE': 'IndexLive',
+      'HOMEPAGE_BLOCK_STYLE_RCMD': 'IndexSong'
+    })
     const status = ref(false)
     onMounted(async () => {
       try {
-        const result =  await home_page()
+        result.value =  await home_page()
         const iconResult = await home_icon()
-        bannerList.value = result.data.data.blocks[0].extInfo.banners
+        bannerList.value = result.value.data.data.blocks[0].extInfo.banners
         iconList.value = iconResult.data.data
-        recommendInfo.value = result.data.data.blocks[1]
-        songInfo.value = result.data.data.blocks[2]
-        videoInfo.value = result.data.data.blocks[3]
         status.value = true
       } catch(err) {
         console.log('err:',err)
@@ -51,6 +68,9 @@ export default {
       iconList,
       songInfo,
       videoInfo,
+      liveInfo,
+      result,
+      blockCode,
       bannerList,
       recommendInfo
     }
@@ -59,7 +79,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.find-wrapper{
-  // background-color: #f5f5f5;
+.find-wrap{
+  .find-end{
+    font-size: 32px;
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+  }
 }
 </style>

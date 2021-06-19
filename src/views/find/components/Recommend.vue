@@ -32,13 +32,13 @@ import { formatCount } from "@/assets/ts/common";
 export default {
   name: 'Recommend',
   props: {
-    recommendInfo: {
+    data: {
       type: Object
     }
   },
   setup (props) {
-    const recommendList = reactive(props.recommendInfo.creatives)
-    const recommendheader = reactive(props.recommendInfo.uiElement)
+    const recommendList = reactive(props.data.creatives)
+    const recommendheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
     const content = ref(null)
     const route = useRouter()

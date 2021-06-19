@@ -1,21 +1,20 @@
 <template>
-  <div class="video-container">
-    <div class="video-header">
-      <span class="title">{{videoheader.subTitle.title}}</span>
-      <span class="more">{{videoheader.button.text}}></span>
+  <div class="live-container">
+    <div class="live-header">
+      <span class="title">{{liveheader.subTitle.title}}</span>
+      <span class="more">{{liveheader.button.text}}></span>
     </div>
-    <div class="video-wrapper" ref="wrapper">
-      <div class="video-content" ref="content">
-        <div class="video-item" v-for="item in videoList" :key="item.creativeId">
-          <div class="video-img">
-            <img :src="item.resource.mlogBaseData.coverUrl" alt="">
-            <CaretRightOutlined/>
+    <div class="live-wrapper" ref="wrapper">
+      <div class="live-content" ref="content">
+        <div class="live-item" v-for="item in liveList" :key="item.anchorId">
+          <div class="live-img">
+            <img :src="item.cover" alt="">
           </div>
-          <div class="video-playCount">
-            <CaretRightOutlined/>
-            {{formatCount(item.resource.mlogExtVO.playCount)}}
+          <div class="live-playCount">
+            <i class="iconfont icon-fire"></i>
+            {{formatCount(item.popularity)}}·{{item.coverTag}}
           </div>
-          <div class="video-name">{{item.resource.mlogBaseData.text}}</div>
+          <div class="live-name">{{item.title}}</div>
         </div>
       </div>
     </div>
@@ -27,21 +26,21 @@ import { ref, reactive, onMounted } from "vue";
 import BScroll from "better-scroll";
 import { formatCount } from "@/assets/ts/common";
 export default {
-  name: 'IndexVideo',
+  name: 'IndexLive',
   props: {
     data: {
       type: Object
     }
   },
   setup (props) {
-    const videoList = reactive(props.data.extInfo)
-    const videoheader = reactive(props.data.uiElement)
+    const liveList = reactive(props.data.extInfo)
+    const liveheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
     const content = ref(null)
     onMounted(() => {
-      let recWidth = 170 // icon宽度
+      let recWidth = 200 // icon宽度
       let margin = 30 // margin-right
-      let width = ((recWidth + margin) * videoList.length)/2
+      let width = ((recWidth + margin) * liveList.length)/2
       content.value.style.width = width + 'px' // 给container设置了宽度
       new BScroll(wrapper.value, {
         click: true,
@@ -53,22 +52,23 @@ export default {
     return {
       content,
       wrapper,
-      videoList,
+      liveList,
       formatCount,
-      videoheader
+      liveheader
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.video-container{
+@import '@/assets/scss/mixin.scss';
+.live-container{
   font-size: 24px;
   background: #fff;
   padding: 20px 0;
   border-radius: 20px;
   margin-bottom: 20px;
-  .video-header{
+  .live-header{
     position: relative;
     margin: 20px 30px;
     .title {
@@ -86,35 +86,26 @@ export default {
       transform: translateY(-50%);     
     }
   }
-  .video-wrapper{
+  .live-wrapper{
     width: 720px;
     box-sizing: border-box;
     margin: 0 30px;
     padding-bottom: 20px;
     overflow: hidden;
-    .video-content{
+    .live-content{
       touch-action: none;
-      .video-item{
+      .live-item{
         position: relative;
         display: inline-block;
         margin-right: 30px;
-        width: 170px;
+        width: 200px;
         vertical-align: top;
-        .video-img{
+        .live-img{
           position: relative;
           border-radius: 10px;
-          width: 170px;
+          width: 200px;
           height: 200px;
           margin-bottom: 10px;
-          .anticon-caret-right{
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            padding: 10px;
-            border-radius: 50%;
-            background: rgba($color: #fff, $alpha: 0.3);
-            color: #fff;
-          }
           img{
             vertical-align: middle;
             border-radius: 10px;
@@ -122,17 +113,22 @@ export default {
             height: 100%;
           }
         }
-        .video-playCount{
+        .live-playCount{
           position: absolute;
           top: 5px;
           right: 5px;
+          max-width: 190px;
           color: #fff;
           padding: 5px 10px;
           background: rgba($color: #000, $alpha: 0.3);
           border-radius: 30px;
           transform: scale(0.9);
+          @include ellipsis;
+          .icon-fire{
+            color: red;
+          }
         }
-        .video-name{
+        .live-name{
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
