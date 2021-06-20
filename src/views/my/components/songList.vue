@@ -50,7 +50,8 @@
 </template>
 
 <script>
-import { ref, computed, getCurrentInstance } from "vue"
+import {useStore} from 'vuex';
+import { ref } from "vue"
 export default {
   name: '',
   components: {
@@ -71,10 +72,8 @@ export default {
       }
     ])
     const activeIndex = ref(0)
-    const vm = getCurrentInstance()
-    const userinfo = computed(() => {
-      return vm.ctx.$store.state.userinfo
-    })
+    const store = useStore()
+    const userinfo = ref(store.state.userInfo)
     const handleClick = (i) => {
       activeIndex.value = i
     }

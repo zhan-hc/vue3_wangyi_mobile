@@ -11,10 +11,6 @@
       />
       <div class="find-end">{{result.data.data.pageConfig.nodataToast}}</div>
     </div>
-    <!-- <Recommend v-if="status" :data='recommendInfo'/>
-    <IndexSong v-if="status" :data='songInfo'/> -->
-    <!-- <IndexVideo  v-if="status" :videoInfo='videoInfo'/> -->
-    <!-- <IndexLive  v-if="status" :data='liveInfo'/> -->
   </div>
 </template>
 
@@ -40,16 +36,13 @@ export default {
   setup () {
     const bannerList = ref([])
     const iconList = ref([])
-    const recommendInfo = ref({})
-    const songInfo = ref({})
-    const videoInfo = ref({})
-    const liveInfo = ref({})
     let result = ref({})
     const blockCode = reactive({
       // 'HOMEPAGE_BANNER' : '',
       'HOMEPAGE_BLOCK_PLAYLIST_RCMD': 'Recommend',
       'HOMEPAGE_BLOCK_LISTEN_LIVE': 'IndexLive',
-      'HOMEPAGE_BLOCK_STYLE_RCMD': 'IndexSong'
+      'HOMEPAGE_BLOCK_STYLE_RCMD': 'IndexSong',
+      'HOMEPAGE_MUSIC_MLOG': 'IndexVideo'
     })
     const status = ref(false)
     onMounted(async () => {
@@ -66,13 +59,9 @@ export default {
     return {
       status,
       iconList,
-      songInfo,
-      videoInfo,
-      liveInfo,
       result,
       blockCode,
-      bannerList,
-      recommendInfo
+      bannerList
     }
   }
 }

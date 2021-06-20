@@ -11,15 +11,13 @@
 </template>
 
 <script>
-import { ref, computed, getCurrentInstance} from "vue"
+import {useStore} from 'vuex';
+import { ref, computed} from "vue"
 export default {
   name: 'userInfo',
   setup (props, context) {
-    const vm = getCurrentInstance()
-    const userinfo = computed(() => {
-      console.log(vm.ctx.$store.state.userinfo)
-      return vm.ctx.$store.state.userinfo
-    })
+    const store = useStore()
+    const userinfo = ref(store.state.userInfo)
     const level = computed(() => {
       return localStorage.getItem('level')
     })

@@ -28,16 +28,17 @@
 </template>
 
 <script>
+import {useStore} from 'vuex';
 import { reactive, ref, getCurrentInstance } from "vue";
 import { list } from "@/assets/ts/drawerData";
 export default {
   name: 'DrawerInfo',
   setup () {
-    const vm = getCurrentInstance()
+    const store = useStore()
     const info = reactive({
       list: list
     })
-    const userinfo = ref(vm.ctx.$store.state.userinfo)
+    const userinfo = ref(store.state.userInfo)
     return {
       info,
       userinfo

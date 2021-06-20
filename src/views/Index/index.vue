@@ -29,7 +29,8 @@ import podcast from "@/views/podcast/index";
 import my from "@/views/my/index";
 import sing from "@/views/sing/index";
 import village from "@/views/village/index";
-import { ref, provide, getCurrentInstance, onMounted } from "vue";
+import {useStore} from 'vuex';
+import { ref, provide, onMounted } from "vue";
 import { user_account, user_level } from '@/api/user/index'
 export default {
   name: 'Index',
@@ -50,25 +51,23 @@ export default {
     const navList = ref(['find','podcast','my','sing','village'])
     const isShowPlayer = ref(false)
     const activeTab = ref(0)
-    const vm = getCurrentInstance()
+    const store = useStore()
     provide('visible', visible)
     provide('activeTab', activeTab)
     provide('isShowPlayer', isShowPlayer)
     onMounted(() => {
       user_account().then((res) => {
         if (res.data.code === 200) {
-          console.log(res)
           localStorage.setItem('uid',res.data.profile.userId)
-          vm.ctx.$store.state.userinfo = res.data.profile
+          store.commit('setUserInfo', res.data.profile)
         }
       }).catch((err) => {
         console.log(err, 'err')
       })
       user_level().then((res) => {
-        console.log(res)
         if (res.data.code === 200) {
           localStorage.setItem('level',res.data.data.level)
-          vm.ctx.$store.state.level = res.data.level
+          store.commit('setUserLevel', res.data.level)
         }
       }).catch((err) => {
         console.log(err, 'err')

@@ -138,7 +138,6 @@ export default {
 .detail-wrap{
   font-size: 24px;
   background: #fff;
-  height: 1000px;
   .detail-header{
     position: fixed;
     top: 0;
@@ -170,6 +169,7 @@ export default {
     position: relative;
     display: flex;
     padding: 120px 30px 100px;
+    height: 600px;
     border-radius: 0 0 80% 80% / 0 0 10% 10%;
     background-size: cover;
     .songList-img{
@@ -179,6 +179,7 @@ export default {
       height: 220px;
       margin-bottom: 10px;
       margin-right: 30px;
+      z-index: 1;
       img{
         border-radius: 10px;
         width: 100%;
@@ -201,6 +202,8 @@ export default {
       position: relative;
       flex: 1;
       color: #fff;
+      height: 220px;
+       z-index: 1;
       .info-name{
         font-size: 32px;
         margin-bottom: 20px;
@@ -307,7 +310,7 @@ export default {
       .item-sort{
         color: #999;
         font-size: 36px;
-        width: 50px;
+        width: 70px;
       }
       .item-info{
         flex: 1;
