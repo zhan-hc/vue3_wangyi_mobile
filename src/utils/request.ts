@@ -1,6 +1,9 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {message, notification} from 'ant-design-vue';
- 
+message.config({
+  top: `200px`,
+  duration: 0
+})
 export class Request {
     public static axiosInstance: AxiosInstance;
     // constructor() {
@@ -43,6 +46,7 @@ export class Request {
                   timestamp: +new Date()
                 }
               }
+              message.loading({ content: 'Loading...', key: 'globalLoading'})
                 // const token = Vue.ls.get(ACCESS_TOKEN)
                 // if (token) {
                 //     config.headers['Authorization'] = 'Bearer ' + token
@@ -52,10 +56,10 @@ export class Request {
                 // 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token
                 // 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码
                 // if (config.headers.isJwt) {
-                    const token = localStorage.getItem('ACCESS_TOKEN');
-                    if (token) {
-                        config.headers.Authorization = 'Bearer ' + token;
-                    }
+                    // const token = localStorage.getItem('ACCESS_TOKEN');
+                    // if (token) {
+                    //     config.headers.Authorization = 'Bearer ' + token;
+                    // }
                 // }
                 return config;
             },
@@ -79,6 +83,7 @@ export class Request {
  
                 if (response.status === 200) {
                     // return Promise.resolve(response.data);
+                    message.destroy()
                     return response;
                 } else {
                     Request.errorHandle(response);

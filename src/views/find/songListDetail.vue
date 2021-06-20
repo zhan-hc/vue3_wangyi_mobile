@@ -24,6 +24,7 @@
         <div class="info-desc">{{songList.description}} ></div>
       </div>
     </div>
+    <div v-else class="detail-info"></div>
     <div class="detail-songList">
       <div class="songList-count" ref="headerCount">
         <div class="count-item">
@@ -59,7 +60,7 @@
 </template>
 
 <script>
-import { ref, reactive, onMounted, getCurrentInstance } from "vue"
+import { ref, reactive, onMounted, getCurrentInstance, onUnmounted } from "vue"
 import { useRouter } from "vue-router";
 import { formatCount, getAuthor } from "@/assets/ts/common";
 import { songList_detail } from "@/api/home/songList";
@@ -73,12 +74,14 @@ export default {
     const id = route.currentRoute.value.params.id
     const fixedStatus = ref(true)
     const songList = ref({})
+    onUnmounted(() => {
+      window.removeEventListener("scroll", handleScroll)
+    })
     onMounted(() => {
-      window.addEventListener("scroll",handleScroll)
+      window.addEventListener("scroll", handleScroll)
       songList_detail({
         id: id
       }).then((res) => {
-        console.log(res)
         if (res.data.code === 200) {
           songList.value = res.data.playlist
         }

@@ -21,6 +21,7 @@ import Recommend from "./components/Recommend"
 import IndexSong from "./components/IndexSong"
 import IndexVideo from "./components/IndexVideo"
 import IndexLive from "./components/IndexLive"
+import {useStore} from 'vuex';
 import { home_icon, home_page } from "@/api/home/index";
 import { onMounted, ref, reactive } from "vue";
 export default {
@@ -36,7 +37,8 @@ export default {
   setup () {
     const bannerList = ref([])
     const iconList = ref([])
-    let result = ref({})
+    const result = ref({})
+    const store = useStore()
     const blockCode = reactive({
       // 'HOMEPAGE_BANNER' : '',
       'HOMEPAGE_BLOCK_PLAYLIST_RCMD': 'Recommend',
@@ -47,7 +49,14 @@ export default {
     const status = ref(false)
     onMounted(async () => {
       try {
-        result.value =  await home_page()
+        if (store.state.homeInfo.data) {
+          result.value = store.state.homeInfo
+        } else {
+          result.value = await home_page()
+          // 缓存发现首页信息
+          store.commit('setHomeInfo', result.value)
+        }
+        // result.value = await home_page()
         const iconResult = await home_icon()
         bannerList.value = result.value.data.data.blocks[0].extInfo.banners
         iconList.value = iconResult.data.data

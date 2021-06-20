@@ -45,7 +45,7 @@ export default {
   border-top: 1px solid #ccc;
   background: #fff;
   line-height: 120px;
-  z-index: 4;
+  z-index: 2; 
   font-size: 24px;
   .player-img{
     position: relative;
