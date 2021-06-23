@@ -97,7 +97,7 @@ export default {
 <style scoped lang="scss">
 .index-wrapper {
   background-color: #f5f5f5;
-  padding: 120px 0 150px;
+  padding: 120px 0 250px;
   box-sizing: border-box;
 }
 </style>

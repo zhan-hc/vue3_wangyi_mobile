@@ -49,6 +49,7 @@ export default {
   .header-content{
     flex: 1;
     height: 80px;
+    line-height: 80px;
     margin-right: 10px;
     padding: 0 20px;
     background-color: #fff;
