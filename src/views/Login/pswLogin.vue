@@ -12,14 +12,14 @@
 
 <script>
 import {ref} from 'vue'
-import Toast from 'components/Toast'
+// import Toast from 'components/Toast'
 import WYHeader from 'components/WYHeader'
 import { useRouter } from "vue-router";
 import { login_phonePsw } from "@/api/login/index";
 export default {
   name: 'pswLogin',
   components: {
-    Toast,
+    // Toast,
     WYHeader
   },
   setup () {

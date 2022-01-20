@@ -29,13 +29,13 @@ import { formatCount } from "@/assets/ts/common";
 export default {
   name: 'IndexVideo',
   props: {
-    videoInfo: {
+    data: {
       type: Object
     }
   },
   setup (props) {
-    const videoList = reactive(props.videoInfo.extInfo)
-    const videoheader = reactive(props.videoInfo.uiElement)
+    const videoList = reactive(props.data.extInfo)
+    const videoheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
     const content = ref(null)
     onMounted(() => {

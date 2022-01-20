@@ -25,8 +25,10 @@ import podcast from "@/views/podcast/index";
 import my from "@/views/my/index";
 import sing from "@/views/sing/index";
 import village from "@/views/village/index";
-import { ref, provide, getCurrentInstance, onMounted } from "vue";
+import { ref, provide, getCurrentInstance, onMounted, reactive } from "vue";
+import { useToast } from "@/components/Toast/toast";
 import { user_account, user_level } from '@/api/user/index'
+
 export default {
   name: 'Index',
   components: {
@@ -44,6 +46,9 @@ export default {
     const navList = ref(['find','podcast','my','sing','village'])
     const activeTab = ref(0)
     const vm = getCurrentInstance()
+    const {proxy} = getCurrentInstance()
+    const Toast = useToast()
+        Toast('aaaaaaa')
     provide('visible', visible)
     provide('activeTab', activeTab)
     onMounted(() => {

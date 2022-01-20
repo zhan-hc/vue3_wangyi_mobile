@@ -14,14 +14,14 @@
 
 <script>
 import WYHeader from 'components/WYHeader'
-import Toast from 'components/Toast'
+// import Toast from 'components/Toast'
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 export default {
   name: 'Login',
   components: {
     WYHeader,
-    Toast
+    // Toast
   },
   setup () {
     const route = useRouter()

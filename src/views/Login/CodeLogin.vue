@@ -16,19 +16,19 @@
       <input type="tel" maxLength='1' @keyup="handleInput"/>
     </div>
   </div>
-  <Toast :msg='msg' v-show="status"/>
+  <!-- <Toast :msg='msg' v-show="status"/> -->
 </template>
 
 <script>
 import WYHeader from 'components/WYHeader'
-import Toast from 'components/Toast'
+// import Toast from 'components/Toast'
 import {useRouter} from 'vue-router'
 import { login_cellphone, login_verifycode } from "@/api/login/index";
 import {ref, computed, reactive, onMounted, getCurrentInstance} from 'vue'
 export default {
   name: 'CodeLogin',
   components: {
-    Toast,
+    // Toast,
     WYHeader
   },
   setup () {
