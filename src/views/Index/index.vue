@@ -37,9 +37,9 @@ import { user_account, user_level } from '@/api/user/index'
 
     const state = reactive({
       visible: false,
-      navList: ['find','podcast','my','sing','village'],
-      activeTab: false,
-      isShowPlayer: 0
+      navList: [find,podcast,my,sing,village],
+      activeTab: 0,
+      isShowPlayer: false
     })
 
     // const vm = getCurrentInstance()
@@ -48,9 +48,9 @@ import { user_account, user_level } from '@/api/user/index'
     // Toast('aaaaaaa')
     const store = useStore()
 
-    provide('visible', state.visible)
-    provide('activeTab', state.activeTab)
-    provide('isShowPlayer', state.isShowPlayer)
+    provide('visible', visible)
+    provide('activeTab', activeTab)
+    provide('isShowPlayer',isShowPlayer)
 
     onMounted(() => {
       user_account().then((res) => {
@@ -72,7 +72,7 @@ import { user_account, user_level } from '@/api/user/index'
     })
     
     const onClose = () => {
-      state.visible = false
+      visible = false
     }
 
     const {visible, navList, activeTab, isShowPlayer} = toRefs(state)
