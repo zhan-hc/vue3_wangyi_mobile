@@ -49,42 +49,33 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {useStore} from 'vuex';
-import { ref } from "vue"
-export default {
-  name: '',
-  components: {
-  },
-  setup (props, context) {
-    const songTab = ref([
-      {
-        id: 101,
-        text: '创建歌单'
-      },
-      {
-        id: 102,
-        text: '收藏歌单'
-      },
-      {
-        id: 103,
-        text: '歌单助手'
-      }
-    ])
-    const activeIndex = ref(0)
+import { reactive, ref, toRefs } from "vue"
+    const state = reactive({
+      songTab: [
+        {
+          id: 101,
+          text: '创建歌单'
+        },
+        {
+          id: 102,
+          text: '收藏歌单'
+        },
+        {
+          id: 103,
+          text: '歌单助手'
+        }
+      ],
+      activeIndex: 0
+    })
+
+    const {songTab, activeIndex} = toRefs(state)
     const store = useStore()
     const userinfo = ref(store.state.userInfo)
     const handleClick = (i) => {
-      activeIndex.value = i
+      state.activeIndex = i
     }
-    return {
-      songTab,
-      userinfo,
-      activeIndex,
-      handleClick
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

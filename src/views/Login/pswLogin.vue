@@ -9,23 +9,19 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {ref} from 'vue'
 import WYHeader from 'components/WYHeader'
 import { useRouter } from "vue-router";
 import { login_phonePsw } from "@/api/login/index";
-export default {
-  name: 'pswLogin',
-  components: {
-    WYHeader
-  },
-  setup () {
+
     const route = useRouter()
     const password = ref('')
     const tel = route.currentRoute.value.params.tel
     const handleDelete = () => {
       password.value = ''
     }
+    
     const handleLogin = () => {
       const params = {
         phone: tel,
@@ -39,14 +35,6 @@ export default {
         console.log(err)
       })
     }
-    return {
-      tel,
-      password,
-      handleDelete,
-      handleLogin
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

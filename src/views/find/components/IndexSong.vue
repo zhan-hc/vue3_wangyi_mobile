@@ -26,22 +26,22 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive, onMounted } from "vue";
 import BScroll from "better-scroll";
 import { getAuthor } from "@/assets/ts/common";
-export default {
-  name: 'IndexSong',
-  props: {
+  const props = defineProps({
     data: {
-      type: Object
+      type: Object,
+      default: {}
     }
-  },
-  setup (props) {
+  })
+
     const songList = reactive(props.data.creatives)
     const songheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
     const content = ref(null)
+
     onMounted(() => {
       let recWidth = 650 // icon宽度
       let width = (recWidth * songList.length)/2
@@ -53,15 +53,6 @@ export default {
         eventPassthrough: 'vertical'
       })
     })
-    return {
-      content,
-      wrapper,
-      songList,
-      getAuthor,
-      songheader
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

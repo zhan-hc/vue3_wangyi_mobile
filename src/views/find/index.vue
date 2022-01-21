@@ -5,9 +5,10 @@
     <component v-for="item in homeList" :is="homeComMap[item.blockCode]" :key="item.blockCode" :data="item"></component>
     <div class="find-end">{{endText}}</div>
   </div>
+  <wy-loading v-model:value="loadingStatus"></wy-loading>
 </template>
 
-<script>
+<script setup>
 import Carousel from "./components/Carousel"
 import IndexIcon from "./components/IndexIcon"
 import Recommend from "./components/Recommend"
@@ -16,27 +17,11 @@ import IndexVideo from "./components/IndexVideo"
 import IndexCalendar from "./components/IndexCalendar"
 import IndexNewSong from "./components/IndexNewSong"
 import IndexBroadcast from "./components/IndexBroadcast"
+import WyLoading from "@/components/wy-loading.vue"
 import { home_icon, home_page } from "@/api/home/index";
 import { onMounted,ref,reactive, toRefs } from "vue";
 import IndexLive from "./components/IndexLive"
-export default {
-  name: 'Find',
-  components: {
-    Carousel,
-    IndexIcon,
-    Recommend,
-    IndexSong,
-    IndexVideo,
-    IndexCalendar,
-    IndexNewSong,
-    IndexBroadcast,
-    IndexLive
-  },
-  setup () {
-    const bannerList = ref([])
-    const iconList = ref([])
-    let endText = ref('')
-    const status = ref(false)
+
     const state = reactive({
       homeList: [],
       homeComMap: {
@@ -51,35 +36,35 @@ export default {
         'HOMEPAGE_VOICELIST_RCMD': IndexNewSong,
         'HOMEPAGE_PODCAST24': IndexBroadcast,
         'HOMEPAGE_BLOCK_VIDEO_PLAYLIST': Recommend
-      }
+      },
+      endText: '',
+      iconList: [],
+      bannerList: [],
+      status: false,
+      loadingStatus: true
     })
+    
     onMounted(async () => {
       try {
         let homeData =  await home_page()
         const iconResult = await home_icon()
+        state.loadingStatus = false
         state.homeList  = homeData.data.data.blocks.filter(item => !['HOMEPAGE_BANNER', 'HOMEPAGE_MUSIC_MLOG'].includes(item.blockCode))
-        bannerList.value = homeData.data.data.blocks[0].extInfo.banners
-        iconList.value = iconResult.data.data
-        endText.value = homeData.data.data.pageConfig.nodataToast
-        status.value = true
+        state.bannerList = homeData.data.data.blocks.filter(item => item.blockCode ==='HOMEPAGE_BANNER')[0].extInfo.banners
+        state.iconList = iconResult.data.data
+        state.endText = homeData.data.data.pageConfig.nodataToast
+        state.status = true
       } catch(err) {
         console.log('err:',err)
       }
     })
-    return {
-      status,
-      iconList,
-      bannerList,
-      endText,
-      ...toRefs(state),
-      bannerList
-    }
-  }
-}
+
+
+    const {homeList, homeComMap, iconList, bannerList, status, loadingStatus} = toRefs(state)
 </script>
 
 <style scoped lang="scss">
-.find-wrap{
+.find-wrapper{
   .find-end{
     font-size: 32px;
     text-align: center;

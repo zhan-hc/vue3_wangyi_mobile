@@ -22,22 +22,23 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive, onMounted } from "vue";
 import BScroll from "better-scroll";
 import { formatCount } from "@/assets/ts/common";
-export default {
-  name: 'IndexVideo',
-  props: {
+
+  const props = defineProps({
     data: {
-      type: Object
+      type: Object,
+      default: {}
     }
-  },
-  setup (props) {
+  })
+
     const videoList = reactive(props.data.extInfo)
     const videoheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
     const content = ref(null)
+
     onMounted(() => {
       let recWidth = 170 // icon宽度
       let margin = 30 // margin-right
@@ -50,15 +51,6 @@ export default {
         eventPassthrough: 'vertical'
       })
     })
-    return {
-      content,
-      wrapper,
-      videoList,
-      formatCount,
-      videoheader
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

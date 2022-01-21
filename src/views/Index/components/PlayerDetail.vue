@@ -3,8 +3,8 @@
     <div class="player-header">
       <i class="iconfont icon-bottom" @click="handleClose"></i>
       <div class="song-info">
-        <div class="song-name" @click="handleChangeStatus">四块五</div>
-        <div class="song-author" @click="handleChangeStatus1">隔壁老樊</div>
+        <div class="song-name">四块五</div>
+        <div class="song-author">隔壁老樊</div>
       </div>
       <i class="iconfont icon-fenxiangpt"></i>
     </div>
@@ -33,25 +33,15 @@
   </div>
 </template>
 
-<script>
-import { ref, reactive, inject } from "vue"
+<script setup>
+import {inject } from "vue"
 import { iconList, operateList } from "@/assets/ts/playerDetailData";
-export default {
-  name: 'PlayerDetail',
-  setup (props, context) {
+
     const isShowPlayer = inject('isShowPlayer')
+
     const handleClose = () => {
       isShowPlayer.value = false
     }
-    return {
-      status,
-      iconList,
-      operateList,
-      isShowPlayer,
-      handleClose,
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

@@ -7,20 +7,14 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useRouter } from 'vue-router'
-export default {
-  name: 'First',
-  setup () {
+
     const route = useRouter()
+    
     const handlehref = () => {
       route.push('/login')
     }
-    return {
-      handlehref
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

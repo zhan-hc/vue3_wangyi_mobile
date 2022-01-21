@@ -18,44 +18,26 @@
           <div class="item-title">{{item.resources[0].uiElement.mainTitle.title}}</div>
         </div>
         <img :src="item.resources[0].uiElement.image.imageUrl" alt="">
-
-        <!-- <div class="calendar-img">
-          <img :src="item.uiElement.image.imageUrl" alt="推荐歌单">
-        </div>
-        <div class="calendar-playCount">
-          <CaretRightOutlined/>
-          {{formatCount(.resourceExtInfo.playCount)}}
-        </div>
-        <div class="calendar-name">{{item.resources[0].uiElement.mainTitle.title}}</div> -->
       </div>
     </div>
   </div>
 </template>
-<script>
+
+<script setup>
 import { ref, reactive, onMounted } from "vue";
 import BScroll from "better-scroll";
 import { formatCount } from "@/assets/ts/common";
-export default {
-  name: 'Recommend',
-  props: {
+
+  const props = defineProps({
     data: {
-      type: Object
+      type: Object,
+      default: {}
     }
-  },
-  setup (props) {
+  })
+  
     const calendarList = reactive(props.data.creatives)
     const calendarheader = reactive(props.data.uiElement)
-    const wrapper = ref(null)
-    const content = ref(null)
-    return {
-      content,
-      wrapper,
-      calendarList,
-      formatCount,
-      calendarheader
-    }
-  }
-}
+
 </script>
 
 <style scoped lang="scss">

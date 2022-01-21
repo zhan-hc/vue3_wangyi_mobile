@@ -7,26 +7,12 @@
   </div>
 </template>
 
-<script>
-import { ref, getCurrentInstance} from "vue"
+<script setup>
+import { ref} from "vue"
 import userInfo from "./components/userInfo"
 import likeSong from "./components/likeSong"
 import myIconList from "./components/myIconList"
 import songList from "./components/songList"
-export default {
-  name: 'my',
-  components: {
-    userInfo,
-    likeSong,
-    songList,
-    myIconList
-  },
-  setup (props, context) {
-    const vm = getCurrentInstance()
-    return {
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

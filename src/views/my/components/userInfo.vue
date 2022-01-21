@@ -10,23 +10,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {useStore} from 'vuex';
 import { ref, computed} from "vue"
-export default {
-  name: 'userInfo',
-  setup (props, context) {
+
     const store = useStore()
     const userinfo = ref(store.state.userInfo)
     const level = computed(() => {
       return localStorage.getItem('level')
     })
-    return {
-      level,
-      userinfo
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

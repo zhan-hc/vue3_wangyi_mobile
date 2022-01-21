@@ -15,21 +15,22 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive, onMounted } from "vue";
 import BScroll from "better-scroll";
 import { formatCount } from "@/assets/ts/common";
-export default {
-  name: 'IndexBroadcast',
-  props: {
+
+  const props = defineProps({
     data: {
-      type: Object
+      type: Object,
+      default: {}
     }
-  },
-  setup (props) {
+  })
+
     const broadcastList = reactive(props.data.creatives[0])
     const wrapper = ref(null)
     const content = ref(null)
+
     onMounted(() => {
       let recWidth = 170 // icon宽度
       let margin = 30 // margin-right
@@ -42,19 +43,11 @@ export default {
         eventPassthrough: 'vertical'
       })
     })
+
     function randomHexColor(i) { //随机生成十六进制颜色
       let color =  ['#FFB6C1', '#E6E6FA','#6495ED','#98FB98','#EEE8AA','#F08080','#F5F5F5']
       return color[i]
     }
-    return {
-      content,
-      wrapper,
-      broadcastList,
-      formatCount,
-      randomHexColor
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">
@@ -94,7 +87,7 @@ export default {
         .broadcast-name{
           display: -webkit-box;
           -webkit-box-orient: vertical;
-          -webkit-line-clamp: 1;
+          -webkit-line-clamp: 2;
           overflow: hidden;
         }
         .broadcast-desc{

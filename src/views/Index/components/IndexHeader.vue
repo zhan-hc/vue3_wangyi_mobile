@@ -8,21 +8,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { inject } from "vue";
-export default {
-  name: 'IndexHeader',
-  setup () {
     const visible = inject('visible')
+    
     const onOpen = () => {
       visible.value = true
     }
-    return {
-      visible,
-      onOpen
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

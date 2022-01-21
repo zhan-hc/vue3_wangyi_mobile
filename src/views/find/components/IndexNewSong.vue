@@ -26,70 +26,62 @@
   </div>
 </template>
 
-<script>
-import { ref, reactive, onMounted, computed } from "vue";
+<script setup>
+import { ref, reactive, onMounted, computed, toRefs } from "vue";
 import BScroll from "better-scroll";
 import { getAuthor } from "@/assets/ts/common";
-export default {
-  name: 'IndexNewSong',
-  props: {
+  const props = defineProps({
     data: {
-      type: Object
+      type: Object,
+      default: {}
     }
-  },
-  setup (props) {
-    const songList = reactive(props.data.creatives)
-    const songTab = Object.keys(newSongMap(songList))
-    const currentTab = ref(0)
-    const songheader = reactive(props.data.uiElement)
-    const wrapper = ref(null)
-    const content = ref(null)
-    const newSongList = computed(() => {
-      return newSongMap(songList)[songTab[currentTab.value]]
-    })
-    onMounted(() => {
-      setSCroll()
-    })
+  })
 
-    // 重新设置bscroll
-    function setSCroll () {
-      let recWidth = 650 // icon宽度
-      let width = (recWidth * newSongList.value.length)/2
-      content.value.style.width = width + 'px' // 给container设置了宽度
-      new BScroll(wrapper.value, {
-        click: true,
-        scrollX: true,
-        bounce: true,
-        eventPassthrough: 'vertical'
-      })
-    }
+  const songList = reactive(props.data.creatives)
+  const songTab = Object.keys(newSongMap(songList))
+  const currentTab = ref(0)
+  const songheader = reactive(props.data.uiElement)
+  const wrapper = ref(null)
+  const content = ref(null)
+  // const state = reactive({
+  //   songList: props.data.creatives,
+  //   songTab: Object.keys(newSongMap(songList)),
+  //   currentTab: 0,
+  //   songheader: props.data.uiElement
+  // })
+  // 
+  const newSongList = computed(() => {
+    return newSongMap(songList)[songTab[currentTab.value]]
+  })
+  onMounted(() => {
+    setSCroll()
+  })
 
-    // 将新歌里的数据存入map
-    function newSongMap (list) {
-      const songObj = {}
-      list.forEach(item => {
-        const {title} = item.uiElement.mainTitle
-        if (!songObj[title]) {
-          songObj[title] = []
-        }
-         songObj[title].push(item)
-      });
-      return songObj
-    }
-    return {
-      content,
-      songTab,
-      wrapper,
-      songList,
-      newSongList,
-      currentTab,
-      getAuthor,
-      setSCroll,
-      newSongMap,
-      songheader
-    }
+  // 重新设置bscroll
+  function setSCroll () {
+    let recWidth = 650 // icon宽度
+    let width = (recWidth * newSongList.value.length)/2
+    content.value.style.width = width + 'px' // 给container设置了宽度
+    new BScroll(wrapper.value, {
+      click: true,
+      scrollX: true,
+      bounce: true,
+      eventPassthrough: 'vertical'
+    })
   }
-}
+
+  // 将新歌里的数据存入map
+  function newSongMap (list) {
+    const songObj = {}
+    list.forEach(item => {
+      const {title} = item.uiElement.mainTitle
+      if (!songObj[title]) {
+        songObj[title] = []
+      }
+        songObj[title].push(item)
+    });
+    return songObj
+  }
 </script>
 
 <style scoped lang="scss">

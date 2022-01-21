@@ -7,22 +7,16 @@
   </a-carousel>
 </template>
 
-<script>
+<script setup>
 import { reactive } from "vue";
-export default {
-  name: 'Carousel',
-  props: {
+  const props = defineProps({
     data: {
-      type: Array
+      type: Array,
+      default: []
     }
-  },
-  setup (props) {
-    const data = reactive(props.data)
-    return {
-      data
-    }
-  }
-}
+  })
+  
+  const data = reactive(props.data)
 </script>
 
 <style scoped lang="scss">

@@ -8,13 +8,9 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, inject } from "vue"
-export default {
-  name: 'BottomNav',
-  components: {
-  },
-  setup (props, context) {
+
     const activeTab = inject('activeTab')
     const iconList = ref([
       {
@@ -43,16 +39,10 @@ export default {
         text: '云村'
       }
     ])
+    
     const handleClick = (i) => {
       activeTab.value = i
     }
-    return {
-      iconList,
-      activeTab,
-      handleClick
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

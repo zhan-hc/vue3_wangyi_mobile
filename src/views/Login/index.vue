@@ -11,17 +11,12 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import WYHeader from 'components/WYHeader'
 // import {useToast} from '@/components/Toast/IndexToast'
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
-export default {
-  name: 'Login',
-  components: {
-    WYHeader
-  },
-  setup () {
+
     const route = useRouter()
     const tel = ref('')
     // const Toast = useToast()
@@ -35,13 +30,6 @@ export default {
     const handleDelete = () => {
       tel.value = ''
     }
-    return {
-      tel,
-      handleDelete,
-      handleCheckTel
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

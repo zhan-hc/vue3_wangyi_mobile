@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import IndexHeader from "./components/IndexHeader";
 import DrawerInfo from "./components/DrawerInfo";
 import BottomNav from "./components/BottomNav";
@@ -29,38 +29,29 @@ import podcast from "@/views/podcast/index";
 import my from "@/views/my/index";
 import sing from "@/views/sing/index";
 import village from "@/views/village/index";
-import { ref, provide, getCurrentInstance, onMounted, reactive } from "vue";
+import { ref, provide, onMounted, reactive, toRefs } from "vue";
 import {useStore} from 'vuex';
 // import { useToast } from "@/components/Toast/toast";
 import { user_account, user_level } from '@/api/user/index'
 
-export default {
-  name: 'Index',
-  components: {
-    my,
-    find,
-    sing,
-    podcast,
-    village,
-    BottomNav,
-    DrawerInfo,
-    IndexHeader,
-    BottomPlayer,
-    PlayerDetail
-  },
-  setup () {
-    const visible = ref(false)
-    const navList = ref(['find','podcast','my','sing','village'])
-    const isShowPlayer = ref(false)
-    const activeTab = ref(0)
+
+    const state = reactive({
+      visible: false,
+      navList: ['find','podcast','my','sing','village'],
+      activeTab: false,
+      isShowPlayer: 0
+    })
+
     // const vm = getCurrentInstance()
     // const {proxy} = getCurrentInstance()
     // const Toast = useToast()
     // Toast('aaaaaaa')
     const store = useStore()
-    provide('visible', visible)
-    provide('activeTab', activeTab)
-    provide('isShowPlayer', isShowPlayer)
+
+    provide('visible', state.visible)
+    provide('activeTab', state.activeTab)
+    provide('isShowPlayer', state.isShowPlayer)
+
     onMounted(() => {
       user_account().then((res) => {
         if (res.data.code === 200) {
@@ -81,18 +72,10 @@ export default {
     })
     
     const onClose = () => {
-      visible.value = false
+      state.visible = false
     }
 
-    return {
-      visible,
-      onClose,
-      navList,
-      activeTab,
-      isShowPlayer
-    }
-  }
-}
+    const {visible, navList, activeTab, isShowPlayer} = toRefs(state)
 </script>
 
 <style lang="scss">
