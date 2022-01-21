@@ -6,12 +6,15 @@
     </div>
     <div class="recommend-wrapper" ref="wrapper">
       <div class="recommend-content" ref="content">
-        <div class="recommend-item" v-for="item in recommendList" :key="item.creativeId">
+        <div class="recommend-item" 
+          v-for="item in recommendList" 
+          :key="item.creativeId" 
+          @click="handleClickJump(item.resources[0].resourceId)">
           <div class="recommend-img">
             <img :src="item.uiElement.image.imageUrl" alt="推荐歌单">
           </div>
           <div class="recommend-playCount">
-            <CaretRightOutlined/>
+            <i class="iconfont icon-bofang4"></i>
             {{formatCount(item.resources[0].resourceExtInfo.playCount)}}
           </div>
           <div class="recommend-name">{{item.resources[0].uiElement.mainTitle.title}}</div>
@@ -24,6 +27,7 @@
 <script>
 import { ref, reactive, onMounted } from "vue";
 import BScroll from "better-scroll";
+import { useRouter } from "vue-router";
 import { formatCount } from "@/assets/ts/common";
 export default {
   name: 'Recommend',
@@ -37,6 +41,7 @@ export default {
     const recommendheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
     const content = ref(null)
+    const route = useRouter()
     onMounted(() => {
       let recWidth = 200 // icon宽度
       let margin = 30 // margin-right
@@ -49,12 +54,16 @@ export default {
         eventPassthrough: 'vertical'
       })
     })
+    const handleClickJump = (id) => {
+      route.push(`/songListDetail/${id}`)
+    }
     return {
       content,
       wrapper,
       recommendList,
       formatCount,
-      recommendheader
+      recommendheader,
+      handleClickJump
     }
   }
 }
@@ -118,8 +127,8 @@ export default {
           padding: 5px 15px;
           background: rgba($color: #000, $alpha: 0.3);
           border-radius: 30px;
-          .anticon-caret-right{
-            font-size: 24px;
+          .icon-bofang4{
+            font-size: 22px;
           }
         }
         .recommend-name{

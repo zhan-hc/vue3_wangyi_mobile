@@ -2,17 +2,23 @@
   <div class="my-wrap">
     <userInfo />
     <myIconList />
+    <likeSong />
+    <songList />
   </div>
 </template>
 
 <script>
 import { ref, getCurrentInstance} from "vue"
-import userInfo from "./components/userInfo";
-import myIconList from "./components/myIconList";
+import userInfo from "./components/userInfo"
+import likeSong from "./components/likeSong"
+import myIconList from "./components/myIconList"
+import songList from "./components/songList"
 export default {
   name: 'my',
   components: {
     userInfo,
+    likeSong,
+    songList,
     myIconList
   },
   setup (props, context) {

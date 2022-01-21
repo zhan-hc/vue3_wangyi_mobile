@@ -1,6 +1,6 @@
 <template>
   <div class="index-wrapper">
-      <IndexHeader />
+      <index-header />
       <a-drawer
         placement="left"
         :closable="false"
@@ -12,21 +12,26 @@
       <keep-alive>
         <component :is='navList[activeTab]'/>
       </keep-alive>
-      <BottomNav/>
+      <player-detail v-show="isShowPlayer"/>
+      <bottom-player/>
+      <bottom-nav/>
   </div>
 </template>
 
 <script>
-import IndexHeader from "@/components/IndexHeader";
-import DrawerInfo from "@/components/DrawerInfo";
-import BottomNav from "@/components/BottomNav";
+import IndexHeader from "./components/IndexHeader";
+import DrawerInfo from "./components/DrawerInfo";
+import BottomNav from "./components/BottomNav";
+import PlayerDetail from "./components/PlayerDetail";
+import BottomPlayer from "./components/BottomPlayer";
 import find from "@/views/find/index";
 import podcast from "@/views/podcast/index";
 import my from "@/views/my/index";
 import sing from "@/views/sing/index";
 import village from "@/views/village/index";
 import { ref, provide, getCurrentInstance, onMounted, reactive } from "vue";
-import { useToast } from "@/components/Toast/toast";
+import {useStore} from 'vuex';
+// import { useToast } from "@/components/Toast/toast";
 import { user_account, user_level } from '@/api/user/index'
 
 export default {
@@ -39,33 +44,36 @@ export default {
     village,
     BottomNav,
     DrawerInfo,
-    IndexHeader
+    IndexHeader,
+    BottomPlayer,
+    PlayerDetail
   },
   setup () {
     const visible = ref(false)
     const navList = ref(['find','podcast','my','sing','village'])
+    const isShowPlayer = ref(false)
     const activeTab = ref(0)
-    const vm = getCurrentInstance()
-    const {proxy} = getCurrentInstance()
-    const Toast = useToast()
-        Toast('aaaaaaa')
+    // const vm = getCurrentInstance()
+    // const {proxy} = getCurrentInstance()
+    // const Toast = useToast()
+    // Toast('aaaaaaa')
+    const store = useStore()
     provide('visible', visible)
     provide('activeTab', activeTab)
+    provide('isShowPlayer', isShowPlayer)
     onMounted(() => {
       user_account().then((res) => {
         if (res.data.code === 200) {
-          console.log(res)
           localStorage.setItem('uid',res.data.profile.userId)
-          vm.ctx.$store.state.userinfo = res.data.profile
+          store.commit('setUserInfo', res.data.profile)
         }
       }).catch((err) => {
         console.log(err, 'err')
       })
       user_level().then((res) => {
-        console.log(res)
         if (res.data.code === 200) {
           localStorage.setItem('level',res.data.data.level)
-          vm.ctx.$store.state.level = res.data.level
+          store.commit('setUserLevel', res.data.level)
         }
       }).catch((err) => {
         console.log(err, 'err')
@@ -80,7 +88,8 @@ export default {
       visible,
       onClose,
       navList,
-      activeTab
+      activeTab,
+      isShowPlayer
     }
   }
 }

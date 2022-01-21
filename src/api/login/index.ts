@@ -1,7 +1,7 @@
 import { Request } from '@/utils/request';
 
 // 发送验证码
-export function login_cellphone (parameter: any)  {
+export function login_cellphone (parameter: Object)  {
     return Request.axiosInstance({
         url: '/captcha/sent',
         method: 'post',
@@ -9,7 +9,7 @@ export function login_cellphone (parameter: any)  {
     })
 }
 // 手机密码登录
-export function login_phonePsw (parameter: any)  {
+export function login_phonePsw (parameter: Object)  {
     return Request.axiosInstance({
         url: '/login/cellphone',
         method: 'post',
@@ -17,7 +17,7 @@ export function login_phonePsw (parameter: any)  {
     })
 }
 // 检查验证码
-export function login_verifycode (parameter: any)  {
+export function login_verifycode (parameter: Object)  {
   return Request.axiosInstance({
       url: '/captcha/verify',
       method: 'post',

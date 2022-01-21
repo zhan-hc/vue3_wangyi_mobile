@@ -2,11 +2,8 @@
   <div class="find-wrapper"  v-if="status">
     <Carousel :data='bannerList'/>
     <IndexIcon :iconList='iconList'/>
-    <!-- <Recommend v-if="status" :recommendInfo='recommendInfo'/>
-    <IndexSong v-if="status" :songInfo='songInfo'/>
-    <IndexVideo  v-if="status" :videoInfo='videoInfo'/> -->
-    <!-- <component v-for="item in homeList.slice(1, 5)" :is="homeComMap[item.blockCode]" :key="item.blockCode" :data="item"></component> -->
     <component v-for="item in homeList" :is="homeComMap[item.blockCode]" :key="item.blockCode" :data="item"></component>
+    <div class="find-end">{{endText}}</div>
   </div>
 </template>
 
@@ -21,6 +18,7 @@ import IndexNewSong from "./components/IndexNewSong"
 import IndexBroadcast from "./components/IndexBroadcast"
 import { home_icon, home_page } from "@/api/home/index";
 import { onMounted,ref,reactive, toRefs } from "vue";
+import IndexLive from "./components/IndexLive"
 export default {
   name: 'Find',
   components: {
@@ -31,14 +29,13 @@ export default {
     IndexVideo,
     IndexCalendar,
     IndexNewSong,
-    IndexBroadcast
+    IndexBroadcast,
+    IndexLive
   },
   setup () {
     const bannerList = ref([])
     const iconList = ref([])
-    const recommendInfo = ref({})
-    const songInfo = ref({})
-    const videoInfo = ref({})
+    let endText = ref('')
     const status = ref(false)
     const state = reactive({
       homeList: [],
@@ -63,6 +60,7 @@ export default {
         state.homeList  = homeData.data.data.blocks.filter(item => !['HOMEPAGE_BANNER', 'HOMEPAGE_MUSIC_MLOG'].includes(item.blockCode))
         bannerList.value = homeData.data.data.blocks[0].extInfo.banners
         iconList.value = iconResult.data.data
+        endText.value = homeData.data.data.pageConfig.nodataToast
         status.value = true
       } catch(err) {
         console.log('err:',err)
@@ -71,19 +69,22 @@ export default {
     return {
       status,
       iconList,
-      songInfo,
-      videoInfo,
       bannerList,
-      // homeList,
+      endText,
       ...toRefs(state),
-      recommendInfo
+      bannerList
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-// .find-wrapper{
-  // background-color: #f5f5f5;
-// }
+.find-wrap{
+  .find-end{
+    font-size: 32px;
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+  }
+}
 </style>

@@ -3,14 +3,11 @@
 </template>
 
 <script>
-import { provideToast } from './components/Toast/toast';
+import { provideToast } from '@/components/Toast/IndexToast';
 export default {
   name: 'App',
-  setup () {
-    provideToast({
-      width: '200px',        // 配置toast宽度
-      duration: 2000        // 配置toast持续显示时长
-    });
+  setup() {
+    provideToast({})
   }
 }
 </script>

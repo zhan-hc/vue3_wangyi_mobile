@@ -15,7 +15,7 @@
             <div class="song-info">
               <div class="info-base" :class="{'nodesc': !item.uiElement.subTitle}">
                 <span class="info-name">{{item.uiElement.mainTitle.title}}</span>
-                {{getAuthor(item.resourceExtInfo.artists)}}
+                 - {{getAuthor(item.resourceExtInfo.artists)}}
               </div>
               <div class="info-desc" v-if="item.uiElement.subTitle">{{item.uiElement.subTitle.title}}</div>
             </div>
@@ -65,6 +65,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/mixin.scss';
 .song-container{
   font-size: 24px;
   background: #fff;
@@ -141,9 +142,7 @@ export default {
             .info-base {
               font-size: 24px;
               color: #9A9A9A;
-              overflow: hidden;
-              white-space: nowrap;
-              text-overflow: ellipsis;
+              @include ellipsis;
               span{
                 display: inline-block;
               }

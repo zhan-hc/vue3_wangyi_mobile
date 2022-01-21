@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2586060 */
-  src: url('iconfont.woff2?t=1622796248358') format('woff2'),
-       url('iconfont.woff?t=1622796248358') format('woff'),
-       url('iconfont.ttf?t=1622796248358') format('truetype');
+  src: url('iconfont.woff2?t=1624030265354') format('woff2'),
+       url('iconfont.woff?t=1624030265354') format('woff'),
+       url('iconfont.ttf?t=1624030265354') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,166 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fire:before {
+  content: "\e610";
+}
+
+.icon-mv:before {
+  content: "\e60e";
+}
+
+.icon-duoxuanpt:before {
+  content: "\e661";
+}
+
+.icon-VIP:before {
+  content: "\e670";
+}
+
+.icon-dujia:before {
+  content: "\e672";
+}
+
+.icon-shiting:before {
+  content: "\e673";
+}
+
+.icon-shuzizhuanji:before {
+  content: "\e674";
+}
+
+.icon-yigou1:before {
+  content: "\e676";
+}
+
+.icon-yushou:before {
+  content: "\e677";
+}
+
+.icon-VIPxiazai:before {
+  content: "\e678";
+}
+
+.icon-HQ:before {
+  content: "\e679";
+}
+
+.icon-MV:before {
+  content: "\e67a";
+}
+
+.icon-bofang5:before {
+  content: "\e60d";
+}
+
+.icon-plus1:before {
+  content: "\e60b";
+}
+
+.icon-bofang4:before {
+  content: "\e6eb";
+}
+
+.icon-search:before {
+  content: "\e6d0";
+}
+
+.icon-leftarrow:before {
+  content: "\e608";
+}
+
+.icon-xiazaipt:before {
+  content: "\e660";
+}
+
+.icon-changba:before {
+  content: "\e62b";
+}
+
+.icon-bottom:before {
+  content: "\e604";
+}
+
+.icon-fenxiangpt:before {
+  content: "\e65f";
+}
+
+.icon-caidan:before {
+  content: "\e663";
+}
+
+.icon-bofang3:before {
+  content: "\e664";
+}
+
+.icon-zanting:before {
+  content: "\e666";
+}
+
+.icon-danquxunhuan:before {
+  content: "\e667";
+}
+
+.icon-pinglunpt:before {
+  content: "\e668";
+}
+
+.icon-xihuan-kongpt-wangyiicon:before {
+  content: "\e616";
+}
+
+.icon-xihuan-wangyiicon:before {
+  content: "\e617";
+}
+
+.icon-suijibofang-wangyiicon:before {
+  content: "\e619";
+}
+
+.icon-shangyiqu:before {
+  content: "\e605";
+}
+
+.icon-shangyiqu-wangyiicon:before {
+  content: "\e606";
+}
+
+.icon-list-loop:before {
+  content: "\e607";
+}
+
+.icon-bofang1:before {
+  content: "\e671";
+}
+
+.icon-bofang2:before {
+  content: "\e60c";
+}
+
+.icon-xiangqing:before {
+  content: "\e61c";
+}
+
+.icon-sandian:before {
+  content: "\e618";
+}
+
+.icon-plus:before {
+  content: "\e6c9";
+}
+
+.icon-daoru:before {
+  content: "\eab3";
+}
+
+.icon-xindong:before {
+  content: "\e63c";
+}
+
+.icon-ziyuan1:before {
+  content: "\e65e";
 }
 
 .icon-shoucang:before {

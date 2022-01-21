@@ -1,6 +1,6 @@
 <template>
-  <div class="toast-wrap" v-show="isShow">
-    {{msg}}
+  <div class="toast-wrap" v-show="state.show">
+    {{state.msg}}
   </div>
 </template>
 
@@ -10,7 +10,10 @@ export default {
   name: 'Toast',
   props: {
     msg: {
-      type: String
+      type: Object
+    },
+    isShow: {
+      type: Object
     }
     // ,
     // isShow: {
@@ -18,15 +21,12 @@ export default {
     // }
   },
   setup (props) {
-    const isShow = ref(props.isShow)
-    const msg = ref(props.msg)
-    // console.log('isShow',isShow)
-    watch(isShow,(newValue, old) => {
-       console.log(isShow,newValue,old)
-     });
+    const state = reactive({
+      show: props.isShow,
+      msg: props.msg
+    })
     return {
-      isShow,
-      msg
+      state
     }
   }
 }
@@ -44,6 +44,6 @@ export default {
   padding: 15px 30px;
   border-radius: 30px;
   background-color: #F5F5F5;
-  z-index: 2;
+  z-index: 9;
 }
 </style>
