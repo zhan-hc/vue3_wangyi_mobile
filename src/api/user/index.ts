@@ -2,7 +2,7 @@ import myRequest from '@/utils/http/axios/index'
 // 获取账号信息
 export function user_account ()  {
   return myRequest.request({
-    url: 'user/accoun',
+    url: 'user/account',
     method: 'post'
   })
 }
