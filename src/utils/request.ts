@@ -1,5 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
-import {message, notification} from 'ant-design-vue';
+import {message} from 'ant-design-vue';
 message.config({
   top: `200px`,
   duration: 0

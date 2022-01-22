@@ -1,26 +1,26 @@
-import { Request } from '@/utils/request';
+import myRequest from '@/utils/http/axios/index'
 
 // 发送验证码
 export function login_cellphone (parameter: Object)  {
-    return Request.axiosInstance({
-        url: '/captcha/sent',
-        method: 'post',
-        data: parameter
+    return myRequest.request({
+      url: 'captcha/sent',
+      method: 'post',
+      data: parameter
     })
 }
 // 手机密码登录
 export function login_phonePsw (parameter: Object)  {
-    return Request.axiosInstance({
-        url: '/login/cellphone',
-        method: 'post',
-        data: parameter
+    return myRequest.request({
+      url: 'login/cellphone',
+      method: 'post',
+      data: parameter
     })
 }
 // 检查验证码
 export function login_verifycode (parameter: Object)  {
-  return Request.axiosInstance({
-      url: '/captcha/verify',
-      method: 'post',
-      data: parameter
+  return myRequest.request({
+    url: 'captcha/verify',
+    method: 'post',
+    data: parameter
   })
 }

@@ -1,8 +1,8 @@
-import { Request } from '@/utils/request';
+import myRequest from '@/utils/http/axios/index'
 // 云村
 export function village_video ()  {
-    return Request.axiosInstance({
-        url: '/video/timeline/recommend',
-        method: 'post'
+    return myRequest.request({
+      url: '/video/timeline/recommend',
+      method: 'post'
     })
 }
