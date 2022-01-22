@@ -12,24 +12,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive, inject } from "vue"
-export default {
-  name: 'BottomPlayer',
-  components: {
-  },
-  setup (props, context) {
     const isShowPlayer = inject('isShowPlayer')
+    
     const handleOpenPlayer = () => {
-      console.log('111')
       isShowPlayer.value = true
     }
-    return {
-      isShowPlayer,
-      handleOpenPlayer
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

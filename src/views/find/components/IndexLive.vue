@@ -21,43 +21,38 @@
   </div>
 </template>
 
-<script>
-import { ref, reactive, onMounted } from "vue";
+<script setup>
+import { ref, reactive, onMounted, toRefs } from "vue";
 import BScroll from "better-scroll";
 import { formatCount } from "@/assets/ts/common";
-export default {
-  name: 'IndexLive',
-  props: {
+
+  const props = defineProps({
     data: {
-      type: Object
+      type: Object,
+      default: {}
     }
-  },
-  setup (props) {
-    const liveList = reactive(props.data.extInfo)
-    const liveheader = reactive(props.data.uiElement)
-    const wrapper = ref(null)
-    const content = ref(null)
-    onMounted(() => {
-      let recWidth = 200 // icon宽度
-      let margin = 30 // margin-right
-      let width = ((recWidth + margin) * liveList.length)/2
-      content.value.style.width = width + 'px' // 给container设置了宽度
-      new BScroll(wrapper.value, {
-        click: true,
-        scrollX: true,
-        bounce: true,
-        eventPassthrough: 'vertical'
-      })
+  })
+
+  const wrapper = ref(null)
+  const content = ref(null)
+  const state = reactive({
+    liveList: props.data.extInfo,
+    liveheader: props.data.uiElement
+  })
+
+  onMounted(() => {
+    let recWidth = 200 // icon宽度
+    let margin = 30 // margin-right
+    let width = ((recWidth + margin) * liveList.length)/2
+    content.value.style.width = width + 'px' // 给container设置了宽度
+    new BScroll(wrapper.value, {
+      click: true,
+      scrollX: true,
+      bounce: true,
+      eventPassthrough: 'vertical'
     })
-    return {
-      content,
-      wrapper,
-      liveList,
-      formatCount,
-      liveheader
-    }
-  }
-}
+  })
+
 </script>
 
 <style scoped lang="scss">

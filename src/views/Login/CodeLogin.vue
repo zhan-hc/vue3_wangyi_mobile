@@ -18,30 +18,30 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import WYHeader from 'components/WYHeader'
-import {useToast} from 'components/toast/IndexToast'
+// import {useToast} from '@/components/Toast/IndexToast'
 import {useRouter} from 'vue-router'
 import { login_cellphone, login_verifycode } from "@/api/login/index";
 import {ref, computed, reactive, onMounted, getCurrentInstance} from 'vue'
-export default {
-  name: 'CodeLogin',
-  components: {
-    WYHeader
-  },
-  setup () {
+
     const route = useRouter()
     const {ctx} = getCurrentInstance()
-    const Toast = useToast()
+    const codeInput = ref(null)
+    // const Toast = useToast()
     const tel = route.currentRoute.value.params.tel
     const state = reactive({
       timer: 59,
       text: '重新获取',
       code: ''
     })
+    
+    // 隐藏手机号
     const formatTel = computed(() => {
       return tel.substr(0,3)+'****'+tel.substr(7)
     })
+
+    // 获取验证码
     const code = computed(() => {
       let codesum = ''
       const node = ctx.$refs.codeInput
@@ -50,7 +50,9 @@ export default {
       }
       return  codesum
     })
-    const handleSendCode = () => { // 获取验证码倒计时
+
+    // 获取验证码倒计时
+    const handleSendCode = () => {
       sendCode()
       if (state.timer === 0) {
         state.timer = 59
@@ -62,6 +64,8 @@ export default {
         }
       },1000)
     }
+
+    // 发送验证码
     const sendCode = () => {
       const params = {
         phone: tel
@@ -70,15 +74,19 @@ export default {
         console.log('发送验证码')
       }).catch((err) => {
         console.log(err,'err')
-        Toast(err.message)
+        // Toast(err.message)
       })
     }
+
+    // input框绑定索引
     const handleBindIndex = () => {
       const node = ctx.$refs.codeInput
       for (var i = 0; i < node.childNodes.length; i++) {
         node.childNodes[i].index = i
       }
     }
+
+
     const handleInput = (e) => {
       const {value,index} = e.target
       const node = ctx.$refs.codeInput.childNodes
@@ -102,20 +110,11 @@ export default {
         })
       }
     }
+    
     onMounted(() => {
       handleSendCode()
       handleBindIndex()
     })
-    return {
-      tel,
-      state,
-      formatTel,
-      sendCode,
-      handleSendCode,
-      handleInput
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

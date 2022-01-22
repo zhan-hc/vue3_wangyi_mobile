@@ -11,23 +11,18 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import WYHeader from 'components/WYHeader'
-import {useToast} from 'components/toast/IndexToast'
+// import {useToast} from '@/components/Toast/IndexToast'
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
-export default {
-  name: 'Login',
-  components: {
-    WYHeader
-  },
-  setup () {
+
     const route = useRouter()
     const tel = ref('')
-    const Toast = useToast()
+    // const Toast = useToast()
     const handleCheckTel = () => {
       if (tel.value.length < 11) {
-        Toast('请输入11位数字的手机号')
+        // Toast('请输入11位数字的手机号')
       } else {
         route.push(`/CodeLogin/${tel.value}`)
       }
@@ -35,13 +30,6 @@ export default {
     const handleDelete = () => {
       tel.value = ''
     }
-    return {
-      tel,
-      handleDelete,
-      handleCheckTel
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

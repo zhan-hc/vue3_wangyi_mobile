@@ -24,24 +24,24 @@
   </div>
 </template>
 
-<script>
-import { ref, reactive, onMounted } from "vue";
+<script setup>
+import { ref, reactive, onMounted, defineProps } from "vue";
 import BScroll from "better-scroll";
 import { useRouter } from "vue-router";
 import { formatCount } from "@/assets/ts/common";
-export default {
-  name: 'Recommend',
-  props: {
+
+  const props = defineProps({
     data: {
-      type: Object
+      type: Object,
+      default: {}
     }
-  },
-  setup (props) {
+  })
     const recommendList = reactive(props.data.creatives)
     const recommendheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
     const content = ref(null)
     const route = useRouter()
+
     onMounted(() => {
       let recWidth = 200 // icon宽度
       let margin = 30 // margin-right
@@ -54,19 +54,11 @@ export default {
         eventPassthrough: 'vertical'
       })
     })
+
+    // 歌单详情跳转
     const handleClickJump = (id) => {
       route.push(`/songListDetail/${id}`)
     }
-    return {
-      content,
-      wrapper,
-      recommendList,
-      formatCount,
-      recommendheader,
-      handleClickJump
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

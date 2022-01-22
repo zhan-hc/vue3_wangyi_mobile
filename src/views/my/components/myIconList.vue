@@ -11,19 +11,9 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive } from "vue"
 import { iconList } from "@/assets/ts/my_Data";
-export default {
-  name: 'myIconList',
-  components: {
-  },
-  setup (props, context) {
-    return {
-      iconList
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

@@ -2,12 +2,12 @@
   <router-view/>
 </template>
 
-<script>
-import { provideToast } from '@/components/toast/IndexToast';
+<script >
+// import { provideToast } from '@/components/Toast/IndexToast';
 export default {
   name: 'App',
   setup() {
-    provideToast({})
+    // provideToast({})
   }
 }
 </script>

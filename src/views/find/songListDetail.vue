@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-wrap">
+  <div class="detail-wrap" v-if="status">
     <div class="detail-header" ref="detailHeader">
       <i class="iconfont icon-leftarrow" @click="handleBack"></i>
       <span>歌单</span>
@@ -59,24 +59,22 @@
   </div>
 </template>
 
-<script>
-import { ref, reactive, onMounted, getCurrentInstance, onUnmounted } from "vue"
+<script setup>
+import { ref, reactive, onMounted, getCurrentInstance } from "vue"
 import { useRouter } from "vue-router";
 import { formatCount, getAuthor } from "@/assets/ts/common";
 import { songList_detail } from "@/api/home/songList";
-export default {
-  name: 'songListDetail',
-  components: {
-  },
-  setup (props, context) {
+
     const route = useRouter()
-    const { ctx } = getCurrentInstance()
     const id = route.currentRoute.value.params.id
     const fixedStatus = ref(true)
     const songList = ref({})
     onUnmounted(() => {
       window.removeEventListener("scroll", handleScroll)
     })
+    const detailHeader = ref(null)
+    const status = ref(false)
+
     onMounted(() => {
       window.addEventListener("scroll", handleScroll)
       songList_detail({
@@ -84,40 +82,31 @@ export default {
       }).then((res) => {
         if (res.data.code === 200) {
           songList.value = res.data.playlist
+          status.value = true
         }
       }).catch((err) => {
         console.log('err',err)
       })
     })
+
+    // 回退
     const handleBack = () => {
       route.go(-1)
     }
+    // 滚动的时候固定头部
     const handleScroll = () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       if (scrollTop >= 200) {
-        // ctx.$refs.headerCount.style.opacity = '0'
         fixedStatus.value = false
         // 待优化
-        ctx.$refs.detailHeader.style.backgroundImage = `url('${songList.value.tracks[0].al.picUrl}')`
-        ctx.$refs.detailHeader.style.backgroundPosition = 'bottom'
-        ctx.$refs.detailHeader.style.backgroundSize = 'cover'
+        detailHeader.value.style.backgroundImage = `url('${songList.value.tracks[0].al.picUrl}')`
+        detailHeader.value.style.backgroundPosition = 'bottom'
+        detailHeader.value.style.backgroundSize = 'cover'
       } else {
-        // ctx.$refs.headerCount.style.opacity = '1'
         fixedStatus.value = true
-        ctx.$refs.detailHeader.style.backgroundImage = 'none'
+        detailHeader.value.style.backgroundImage = 'none'
       }
     }
-    return {
-      id,
-      songList,
-      fixedStatus,
-      handleBack,
-      getAuthor,
-      handleScroll,
-      formatCount
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

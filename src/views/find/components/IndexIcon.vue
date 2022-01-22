@@ -11,39 +11,33 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive, onMounted } from "vue";
 import BScroll from "better-scroll";
-export default {
-  name: 'IndexIcon',
-  props: {
+
+  const props = defineProps({
     iconList: {
-      type: Array
+      type: Array,
+      default: []
     }
-  },
-  setup (props) {
-    const iconList = reactive(props.iconList)
-    const wrapper = ref(null)
-    const content = ref(null)
-    onMounted(() => {
-      let recWidth = 100 // icon宽度
-      let margin = 30 // margin-right
-      let width = ((recWidth + margin) * iconList.length)/2
-      content.value.style.width = width + 'px' // 给container设置了宽度
-      new BScroll(wrapper.value, {
-        click: true,
-        scrollX: true,
-        bounce: true,
-        eventPassthrough: 'vertical'
-      })
+  })
+
+  const iconList = reactive(props.iconList)
+  const wrapper = ref(null)
+  const content = ref(null)
+
+  onMounted(() => {
+    let recWidth = 100 // icon宽度
+    let margin = 30 // margin-right
+    let width = ((recWidth + margin) * iconList.length)/2
+    content.value.style.width = width + 'px' // 给container设置了宽度
+    new BScroll(wrapper.value, {
+      click: true,
+      scrollX: true,
+      bounce: true,
+      eventPassthrough: 'vertical'
     })
-    return {
-      content,
-      wrapper,
-      iconList
-    }
-  }
-}
+  })
 </script>
 
 <style scoped lang="scss">

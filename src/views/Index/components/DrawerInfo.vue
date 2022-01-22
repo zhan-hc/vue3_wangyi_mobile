@@ -1,6 +1,6 @@
 <template>
   <div class="info-wrap">
-    <div class="person-info">
+    <div class="person-info" v-if="userinfo">
       <a-avatar size="large" :src="userinfo.avatarUrl" />
       <span>{{userinfo.nickname}} ></span>
       <i class="iconfont icon-saoma"></i>
@@ -27,24 +27,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import {useStore} from 'vuex';
-import { reactive, ref, getCurrentInstance } from "vue";
+import { reactive, ref } from "vue";
 import { list } from "@/assets/ts/drawerData";
-export default {
-  name: 'DrawerInfo',
-  setup () {
     const store = useStore()
     const info = reactive({
       list: list
     })
     const userinfo = ref(store.state.userInfo)
-    return {
-      info,
-      userinfo
-    }
-  }
-}
 </script>
 
 <style scoped lang="scss">

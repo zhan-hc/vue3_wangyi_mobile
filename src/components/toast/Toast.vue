@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { reactive} from "vue";
+import { reactive,ref,watch } from "vue";
 export default {
   name: 'Toast',
   props: {
@@ -15,6 +15,10 @@ export default {
     isShow: {
       type: Object
     }
+    // ,
+    // isShow: {
+    //   type: Boolean
+    // }
   },
   setup (props) {
     const state = reactive({

@@ -1,28 +1,22 @@
 <template>
   <a-carousel autoplay>
-    <div class="slide-item" v-for="(item, i) in bannerList" :key="i">
+    <div class="slide-item" v-for="(item, i) in data" :key="i">
       <img :src="item.pic" alt="">
       <span class="tag" :style="{'background-color': item.titleColor}">{{item.typeTitle}}</span>
     </div>
   </a-carousel>
 </template>
 
-<script>
+<script setup>
 import { reactive } from "vue";
-export default {
-  name: 'Carousel',
-  props: {
-    bannerList: {
-      type: Array
+  const props = defineProps({
+    data: {
+      type: Array,
+      default: []
     }
-  },
-  setup (props) {
-    const bannerList = reactive(props.bannerList)
-    return {
-      bannerList
-    }
-  }
-}
+  })
+  
+  const data = reactive(props.data)
 </script>
 
 <style scoped lang="scss">
