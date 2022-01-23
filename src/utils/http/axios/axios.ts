@@ -107,7 +107,7 @@ export class MyAxios {
         }
 
         if (res.data.code !== 200) {
-          message.error({content: res.data.message, key: 'globalLoading'})
+          message.error({content: res.data.message || '服务器发生错误', key: 'globalLoading'})
           setTimeout(() => {
             message.destroy()
           },2000)
@@ -125,9 +125,6 @@ export class MyAxios {
         else if (Object.keys(CODE_MESSAGE).includes(code.toString())) {
           message.error({content: CODE_MESSAGE[code], key: 'globalLoading'})
         }
-        setTimeout(() => {
-          message.destroy()
-        },2000)
 
         return err
       }

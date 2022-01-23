@@ -8,7 +8,7 @@
       <div class="live-content" ref="content">
         <div class="live-item" v-for="item in liveList" :key="item.anchorId">
           <div class="live-img">
-            <img :src="item.cover" alt="">
+            <img v-lazy="item.cover" alt="">
           </div>
           <div class="live-playCount">
             <i class="iconfont icon-fire"></i>

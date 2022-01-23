@@ -8,7 +8,7 @@
       <div class="video-content" ref="content">
         <div class="video-item" v-for="item in videoList" :key="item.creativeId">
           <div class="video-img">
-            <img :src="item.resource.mlogBaseData.coverUrl" alt="">
+            <img v-lazy="item.resource.mlogBaseData.coverUrl" alt="">
             <CaretRightOutlined/>
           </div>
           <div class="video-playCount">

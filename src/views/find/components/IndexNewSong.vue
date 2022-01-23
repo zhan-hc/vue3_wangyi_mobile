@@ -9,7 +9,7 @@
         <div class="song-list" v-for="(list, i) in newSongList" :key="i">
           <div class="song-item" v-for="(item, i) in list.resources" :key="i">
             <div class="song-img">
-              <img :src="item.uiElement.image.imageUrl" alt="">
+              <img v-lazy="item.uiElement.image.imageUrl" alt="">
               <CaretRightOutlined/>
             </div>
             <div class="song-info">
