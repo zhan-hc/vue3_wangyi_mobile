@@ -29,55 +29,30 @@
   import my from '@/views/my/index'
   import sing from '@/views/sing/index'
   import village from '@/views/village/index'
-  import { ref, provide, onMounted, reactive, toRefs } from 'vue'
+  import { ref, provide, onMounted, reactive, toRefs, getCurrentInstance } from 'vue'
   import { useStore } from 'vuex'
-  // import { useToast } from "@/components/Toast/toast";
-  import { user_account, user_level } from '@/api/user/index'
+  import { user_account, user_level, user_detail } from '@/api/user/index'
 
   const state = reactive({
-    visible: false,
     navList: [find, podcast, my, sing, village],
-    activeTab: 0,
   })
   const isShowPlayer = ref(false)
-  // const vm = getCurrentInstance()
-  // const {proxy} = getCurrentInstance()
-  // const Toast = useToast()
-  // Toast('aaaaaaa')
+  const visible = ref(false)
+  const activeTab = ref(0)
+  const {proxy} = getCurrentInstance()
+  const toast = proxy.$toast
+
   const store = useStore()
 
-  provide('visible', state.visible)
-  provide('activeTab', state.activeTab)
+  provide('visible', visible)
+  provide('activeTab', activeTab)
   provide('isShowPlayer', isShowPlayer)
 
-  onMounted(() => {
-    user_account()
-      .then((res) => {
-        if (res.code === 200) {
-          localStorage.setItem('uid', res.profile.userId)
-          store.commit('setUserInfo', res.profile)
-        }
-      })
-      .catch((err) => {
-        console.log(err, 'err')
-      })
-    user_level()
-      .then((res) => {
-        if (res.code === 200) {
-          localStorage.setItem('level', res.data.level)
-          store.commit('setUserLevel', res.level)
-        }
-      })
-      .catch((err) => {
-        console.log(err, 'err')
-      })
-  })
-
   const onClose = () => {
-    visible = false
+    visible.value = false
   }
 
-  const { visible, navList, activeTab } = toRefs(state)
+  const { navList } = toRefs(state)
 </script>
 
 <style lang="scss">

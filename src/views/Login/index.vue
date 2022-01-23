@@ -13,23 +13,24 @@
 
 <script setup>
 import WYHeader from 'components/WYHeader'
-// import {useToast} from '@/components/Toast/IndexToast'
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 
-    const route = useRouter()
-    const tel = ref('')
-    // const Toast = useToast()
-    const handleCheckTel = () => {
-      if (tel.value.length < 11) {
-        // Toast('请输入11位数字的手机号')
-      } else {
-        route.push(`/CodeLogin/${tel.value}`)
-      }
+  const {proxy} = getCurrentInstance()
+  const toast = proxy.$toast
+
+  const route = useRouter()
+  const tel = ref('')
+  const handleCheckTel = () => {
+    if (tel.value.length < 11) {
+      toast('请输入11位数字的手机号')
+    } else {
+      route.push(`/CodeLogin/${tel.value}`)
     }
-    const handleDelete = () => {
-      tel.value = ''
-    }
+  }
+  const handleDelete = () => {
+    tel.value = ''
+  }
 </script>
 
 <style scoped lang="scss">

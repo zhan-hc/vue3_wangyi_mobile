@@ -25,16 +25,18 @@
 
 <script setup>
   import WYHeader from 'components/WYHeader'
-  // import {useToast} from '@/components/Toast/IndexToast'
   import { useRouter } from 'vue-router'
-  import { login_cellphone, login_verifycode } from '@/api/login/index'
+  import { login_cellphone, login_verifycode, login_refresh, login_phonePsw } from '@/api/login/index'
   import { ref, computed, reactive, onMounted, getCurrentInstance } from 'vue'
-
+    import { useStore } from 'vuex'
   const route = useRouter()
-  const { ctx } = getCurrentInstance()
+  const { ctx, proxy } = getCurrentInstance()
   const codeInput = ref(null)
-  // const Toast = useToast()
+
+  const toast = proxy.$toast
+
   const tel = route.currentRoute.value.params.tel
+  const store = useStore()
   const state = reactive({
     timer: 59,
     text: '重新获取',
@@ -49,7 +51,7 @@
   // 获取验证码
   const code = computed(() => {
     let codesum = ''
-    const node = ctx.$refs.codeInput
+    const node = codeInput.value
     for (var i = 0; i < node.childNodes.length; i++) {
       codesum += node.childNodes[i].value.toString()
     }
@@ -81,13 +83,13 @@
       })
       .catch((err) => {
         console.log(err, 'err')
-        // Toast(err.message)
+        toast(err.message)
       })
   }
 
   // input框绑定索引
   const handleBindIndex = () => {
-    const node = ctx.$refs.codeInput
+    const node = codeInput.value
     for (var i = 0; i < node.childNodes.length; i++) {
       node.childNodes[i].index = i
     }
@@ -95,7 +97,7 @@
 
   const handleInput = (e) => {
     const { value, index } = e.target
-    const node = ctx.$refs.codeInput.childNodes
+    const node = codeInput.value.childNodes
     if (e.keyCode === 8 && index > 0) {
       // 监听退格事件
       node[index - 1].focus()
@@ -110,14 +112,20 @@
         phone: tel,
         captcha: code.value,
       }
-      login_verifycode(params)
-        .then((res) => {
+      login_phonePsw(params)
+        .then(async (res) => {
           if (res.code === 200) {
+            sessionStorage.setItem('wangyi_uid', res.account.id)
+            sessionStorage.setItem('wangyi_token', res.token)
+            sessionStorage.setItem('wangyi_cookie', res.cookie)
+            sessionStorage.setItem('wangyi_userInfo', JSON.stringify(res.profile))
+            // store.commit('setUserInfo', res.profile)
             route.push('/')
           }
         })
         .catch((err) => {
-          Toast(err.message)
+          console.log(err)
+          toast(err.message)
         })
     }
   }

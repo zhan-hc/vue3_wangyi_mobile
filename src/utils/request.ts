@@ -56,7 +56,7 @@ export class Request {
                 // 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token
                 // 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码
                 // if (config.headers.isJwt) {
-                    // const token = localStorage.getItem('ACCESS_TOKEN');
+                    // const token = sessionStorage.getItem('ACCESS_TOKEN');
                     // if (token) {
                     //     config.headers.Authorization = 'Bearer ' + token;
                     // }
@@ -74,10 +74,10 @@ export class Request {
             // 请求成功
             (response: AxiosResponse) => {
                 // if (res.headers.authorization) {
-                //     localStorage.setItem('id_token', res.headers.authorization);
+                //     sessionStorage.setItem('id_token', res.headers.authorization);
                 // } else {
                 //     if (res.data && res.data.token) {
-                //         localStorage.setItem('id_token', res.data.token);
+                //         sessionStorage.setItem('id_token', res.data.token);
                 //     }
                 // }
  

@@ -34,6 +34,11 @@
     login_phonePsw(params)
       .then((res) => {
         if (res.code) {
+          sessionStorage.setItem('wangyi_uid', res.account.id)
+          sessionStorage.setItem('wangyi_userInfo', res.profile)
+          sessionStorage.setItem('wangyi_cookie', res.cookie)
+          sessionStorage.setItem('wangyi_userInfo', JSON.stringify(res.profile))
+          // store.commit('setUserInfo', res.profile)
           route.push('/')
         }
       })

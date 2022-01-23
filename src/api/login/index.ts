@@ -24,3 +24,11 @@ export function login_verifycode (parameter: Object)  {
     data: parameter
   })
 }
+
+// 检查验证码
+export function login_refresh ()  {
+  return myRequest.request({
+    url: 'login/refresh',
+    method: 'post'
+  })
+}

@@ -21,7 +21,6 @@
   import IndexCalendar from './components/IndexCalendar'
   import IndexNewSong from './components/IndexNewSong'
   import IndexBroadcast from './components/IndexBroadcast'
-  import WyLoading from '@/components/wy-loading.vue'
   import { home_icon, home_page } from '@/api/home/index'
   import { onMounted, ref, reactive, toRefs } from 'vue'
   import IndexLive from './components/IndexLive'
@@ -29,17 +28,17 @@
   const state = reactive({
     homeList: [],
     homeComMap: {
-      HOMEPAGE_BANNER: Carousel,
-      HOMEPAGE_BLOCK_PLAYLIST_RCMD: Recommend,
-      HOMEPAGE_BLOCK_STYLE_RCMD: IndexSong,
-      HOMEPAGE_BLOCK_NEW_ALBUM_NEW_SONG: IndexNewSong,
-      HOMEPAGE_MUSIC_CALENDAR: IndexCalendar,
-      HOMEPAGE_MUSIC_MLOG: IndexSong, //
-      HOMEPAGE_BLOCK_MGC_PLAYLIST: Recommend,
-      HOMEPAGE_BLOCK_OFFICIAL_PLAYLIST: Recommend,
-      HOMEPAGE_VOICELIST_RCMD: IndexNewSong,
-      HOMEPAGE_PODCAST24: IndexBroadcast,
-      HOMEPAGE_BLOCK_VIDEO_PLAYLIST: Recommend,
+      'HOMEPAGE_BANNER': Carousel,
+      'HOMEPAGE_BLOCK_PLAYLIST_RCMD': Recommend,
+      'HOMEPAGE_BLOCK_STYLE_RCMD': IndexSong,
+      'HOMEPAGE_BLOCK_NEW_ALBUM_NEW_SONG': IndexNewSong,
+      'HOMEPAGE_MUSIC_CALENDAR': IndexCalendar,
+      'HOMEPAGE_MUSIC_MLOG': IndexSong, //
+      'HOMEPAGE_BLOCK_MGC_PLAYLIST': Recommend,
+      'HOMEPAGE_BLOCK_OFFICIAL_PLAYLIST': Recommend,
+      'HOMEPAGE_VOICELIST_RCMD': IndexNewSong,
+      'HOMEPAGE_PODCAST24': IndexBroadcast,
+      'HOMEPAGE_BLOCK_VIDEO_PLAYLIST': Recommend,
     },
     endText: '',
     iconList: [],
@@ -49,32 +48,25 @@
 
   onMounted(async () => {
     try {
-      // if (store.state.homeInfo.data) {
-      //   result.value = store.state.homeInfo
-      // } else {
-      //   result.value = await home_page()
-      //   // 缓存发现首页信息
-      //   store.commit('setHomeInfo', result.value)
-      // }
-      // result.value = await home_page()
-      const homeData = await home_page()
-      const iconResult = await home_icon()
-      state.homeList = homeData.data.blocks.filter(
+      const homeModule = home_page()
+      const homeIcon = home_icon()
+      const homeData = await Promise.all([homeModule, homeIcon])
+      state.homeList = homeData[0].data.blocks.filter(
         (item) =>
           !['HOMEPAGE_BANNER', 'HOMEPAGE_MUSIC_MLOG'].includes(item.blockCode)
       )
-      state.bannerList = homeData.data.blocks.filter(
+      state.bannerList = homeData[0].data.blocks.filter(
         (item) => item.blockCode === 'HOMEPAGE_BANNER'
       )[0].extInfo.banners
-      state.iconList = iconResult.data
-      state.endText = homeData.data.pageConfig.nodataToast
+      state.iconList = homeData[1].data
+      state.endText = homeData[0].data.pageConfig.nodataToast
       state.status = true
     } catch (err) {
       console.log('err:', err)
     }
   })
 
-  const { homeList, homeComMap, iconList, bannerList, status } = toRefs(state)
+  const { homeList, homeComMap, iconList, bannerList, status,endText } = toRefs(state)
 </script>
 
 <style scoped lang="scss">

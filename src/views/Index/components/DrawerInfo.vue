@@ -1,8 +1,8 @@
 <template>
   <div class="info-wrap">
-    <div class="person-info" v-if="userinfo">
-      <a-avatar size="large" :src="userinfo.avatarUrl" />
-      <span>{{userinfo.nickname}} ></span>
+    <div class="person-info" v-if="userInfo">
+      <a-avatar size="large" :src="userInfo.avatarUrl" />
+      <span>{{userInfo.nickname}} ></span>
       <i class="iconfont icon-saoma"></i>
     </div>
     <div class="info-vip">
@@ -35,7 +35,8 @@ import { list } from "@/assets/ts/drawerData";
     const info = reactive({
       list: list
     })
-    const userinfo = ref(store.state.userInfo)
+    const userInfo = ref(store.state.userInfo)
+    console.log()
 </script>
 
 <style scoped lang="scss">

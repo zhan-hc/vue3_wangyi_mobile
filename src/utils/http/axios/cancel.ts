@@ -15,7 +15,7 @@ export class AxiosCanceler {
           pendingMap.set(pendingUrl, cancel)
         }
       })
-    console.log(pendingMap, 'pendingMap')
+      console.log(pendingMap,'pendingMap')
   }
 
   removePending(config: AxiosRequestConfig) {

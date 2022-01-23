@@ -11,4 +11,5 @@ export interface MyRequestInterceptors {
 export interface MyRequestConfig extends AxiosRequestConfig {
   interceptor?: MyRequestInterceptors
   showLoading?: boolean
+  hasCookie?: boolean
 }

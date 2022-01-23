@@ -1,8 +1,8 @@
 <template>
-  <div class="userinfo-wrap">
-    <a-avatar size="large" :src="userinfo.avatarUrl" />
+  <div class="userInfo-wrap" v-if="userInfo">
+    <a-avatar size="large" :src="userInfo.avatarUrl" />
     <div class="user">
-      <div class="user-name">{{userinfo.nickname}}</div>
+      <div class="user-name">{{userInfo.nickname}}</div>
       <span class="user-vip"><i class="iconfont icon-vip"></i> 开通></span>
       <span class="user-grade">Lv.{{level}}</span>
     </div>
@@ -15,14 +15,14 @@ import {useStore} from 'vuex';
 import { ref, computed} from "vue"
 
     const store = useStore()
-    const userinfo = ref(store.state.userInfo)
+    const userInfo = ref(store.state.userInfo)
     const level = computed(() => {
-      return localStorage.getItem('level')
+      return sessionStorage.getItem('level')
     })
 </script>
 
 <style scoped lang="scss">
-.userinfo-wrap{
+.userInfo-wrap{
   height: 100px;
   display: flex;
   margin-bottom: 30px;

@@ -28,7 +28,8 @@ export class MyAxios {
   private axiosInstance: AxiosInstance
   private interceptors?: MyRequestInterceptors
   private showLoading?: boolean
-  private loading?: void
+  private loadingCount: number
+  private hasCookie?: boolean
 
   constructor(config: MyRequestConfig) {
     // 创建实例
@@ -36,6 +37,9 @@ export class MyAxios {
     // 初始化变量
     this.interceptors = config.interceptor
     this.showLoading = config.showLoading ?? DEFAULT_LOADING
+    this.hasCookie =  config.hasCookie ?? false
+    this.loadingCount = 0 // 保存loading请求个数
+    // 初始化信息提示
     message.config({
       top: `200px`,
       duration: 0
@@ -59,11 +63,28 @@ export class MyAxios {
       (config) => {
         console.log('全局请求拦截',config)
         config.baseURL = 'https://netease-cloud-music-api-gamma-eight.vercel.app'
+        
+        console.log(this.loadingCount, 'this.loadingCountthis.loadingCountthis.loadingCountthis.loadingCount')
+        // 添加token
+        // const token = sessionStorage.getItem('wangyi_token')
+        // if (token) {
+        //   config.headers['Authorization'] = token
+        // }
+        if (this.hasCookie) {
+          config.data = {
+            ...config.data,
+            cookie: sessionStorage.getItem('wangyi_cookie')
+          }
+        }
         // 取消频繁请求，只取最后一个
         AxiosCancel.addPending(config)
-        // 判断loading
-        if (this.showLoading) {
-          message.loading({ content: 'Loading...', key: 'globalLoading'})
+        // 当第一次请求的时候并且需要loading效果
+        if (this.loadingCount===0 && this.showLoading) {
+          message.loading('Loading...')
+        }
+        this.loadingCount++
+        if (!this.showLoading) {
+          message.destroy()
         }
 
         return config
@@ -77,20 +98,36 @@ export class MyAxios {
      */
     this.axiosInstance.interceptors.response.use(
       (res) => {
-        console.log('全局响应拦截')
+        this.loadingCount--
+        console.log('全局响应拦截',res)
         AxiosCancel.removePending(res.config)
         // 移除loading
-        // this.loading?.close()
-        message.destroy()
+        if (this.loadingCount<=0) {
+          message.destroy()
+        }
+
+        if (res.data.code !== 200) {
+          message.error({content: res.data.message, key: 'globalLoading'})
+          setTimeout(() => {
+            message.destroy()
+          },2000)
+        }
         return res.data
       },
       (err) => {
+        console.log(err.response,'err.response')
         const code = err.response.status
-
-        // 如果存在以上code则输出log
-        if (code && Object.keys(CODE_MESSAGE).includes(code)) {
-          message.error(CODE_MESSAGE[err.response.status])
+        const errMsg = err.response.data.msg || err.response.data.message
+        message.destroy()
+        if (errMsg) {
+          message.error({content: errMsg, key: 'globalLoading'})
         }
+        else if (Object.keys(CODE_MESSAGE).includes(code.toString())) {
+          message.error({content: CODE_MESSAGE[code], key: 'globalLoading'})
+        }
+        setTimeout(() => {
+          message.destroy()
+        },2000)
 
         return err
       }
@@ -106,6 +143,10 @@ export class MyAxios {
       // 如果设置中取消showloading
       if (config.showLoading === false) {
         this.showLoading = config.showLoading
+      }
+      // 如果需要cookie
+      if (config?.hasCookie) {
+        this.hasCookie = config.hasCookie
       }
 
       this.axiosInstance

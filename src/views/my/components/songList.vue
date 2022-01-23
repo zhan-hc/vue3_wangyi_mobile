@@ -16,7 +16,7 @@
           <img src="https://p2.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg" alt="">
         </div>
         <div class="song-info">
-          <div class="info-title">{{userinfo.nickname}}的2020年度歌单</div>
+          <div class="info-title">{{userInfo.nickname}}的2020年度歌单</div>
           <div class="info-num">48首</div>
         </div>
         <i class="iconfont icon-sandian"></i>
@@ -40,7 +40,7 @@
           <img src="https://p2.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg" alt="">
         </div>
         <div class="song-info">
-          <div class="info-title">{{userinfo.nickname}}的2020年度歌单</div>
+          <div class="info-title">{{userInfo.nickname}}的2020年度歌单</div>
           <div class="info-num">48首</div>
         </div>
         <i class="iconfont icon-sandian"></i>
@@ -72,7 +72,7 @@ import { reactive, ref, toRefs } from "vue"
 
     const {songTab, activeIndex} = toRefs(state)
     const store = useStore()
-    const userinfo = ref(store.state.userInfo)
+    const userInfo = ref(store.state.userInfo)
     const handleClick = (i) => {
       state.activeIndex = i
     }
