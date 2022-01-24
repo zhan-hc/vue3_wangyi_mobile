@@ -30,7 +30,7 @@
   import { ref, computed, reactive, onMounted, getCurrentInstance } from 'vue'
     import { useStore } from 'vuex'
   const route = useRouter()
-  const { ctx, proxy } = getCurrentInstance()
+  const { proxy } = getCurrentInstance()
   const codeInput = ref(null)
 
   const toast = proxy.$toast
