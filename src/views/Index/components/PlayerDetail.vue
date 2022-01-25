@@ -3,16 +3,16 @@
     <div class="player-header">
       <i class="iconfont icon-bottom" @click="handleClose"></i>
       <div class="song-info">
-        <div class="song-name">四块五</div>
-        <div class="song-author">隔壁老樊</div>
+        <div class="song-name">{{songInfo.title}}</div>
+        <div class="song-author">{{songInfo.authors}}</div>
       </div>
       <i class="iconfont icon-fenxiangpt"></i>
     </div>
     <div class="player-content">
-      <img class="content-needle" src="@/assets/images/needle.png" alt="" />
-      <div class="content-disc">
+      <img class="content-needle" src="@/assets/images/needle.png" alt="" :class="playStatus ? 'play': 'paused'"/>
+      <div class="content-disc" :style="{'animation-play-state' : playStatus ? 'running' : 'paused'}">
         <img
-          src="https://p2.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg"
+          :src="songInfo.imageUrl"
           alt=""
         />
       </div>
@@ -28,32 +28,50 @@
         ></i>
       </div>
       <div class="song-progress">
-        <span>00:00</span>
-        <div class="progress">
-          <div class="progress-spot"></div>
-        </div>
-        <span>04:36</span>
+        <span class="progress-start">{{afterTime}}</span>
+        <van-slider v-model="currentTime" active-color="#fff" inactive-color="#b3b3b3" :min="0" :max="songInfo.sumTime" @change="changeProgress" @drag-end="changeProgress">
+          <template #button>
+            <div class="progress-spot"></div>
+          </template>
+        </van-slider>
+        <span>{{songInfo.duration || '00:00'}}</span>
       </div>
       <div class="song-operate">
-        <i
-          class="iconfont"
-          v-for="item in operateList"
-          :key="item.id"
-          :class="item.icon"
-        ></i>
+        <i class="iconfont icon-list-loop"></i>
+        <i class="iconfont icon-shangyiqu-wangyiicon" ></i>
+        <i class="iconfont" :class="playStatus ? 'icon-bofang3' : 'icon-zanting'"  @click="changePlayStatus()"></i>
+        <i class="iconfont icon-shangyiqu" ></i>
+        <i class="iconfont icon-caidan"></i>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-  import { inject } from 'vue'
+  import { inject,computed, ref } from 'vue'
   import { iconList, operateList } from '@/assets/ts/playerDetailData'
+  import { useStore } from 'vuex'
+  import { durationTrans } from "@/assets/ts/common";
 
+  const store = useStore()
   const isShowPlayer = inject('isShowPlayer')
-
+  const songInfo = computed(() => store.state.currentSongInfo)
+  const playStatus = computed(() => store.state.currentPlayStatus)
+  const currentTime = computed(() => store.state.currentTime)
+  const afterTime = computed(() => durationTrans(store.state.currentTime))
+  // const currentDuration = ref(0)
   const handleClose = () => {
     isShowPlayer.value = false
+  }
+
+  // 改变播放状态
+  const changePlayStatus = () => {
+    store.commit('changePlayStatus', !store.state.currentPlayStatus)
+  }
+
+  const changeProgress = (val) => {
+    const audio = document.getElementById('musicAudio')
+    audio.currentTime = val
   }
 </script>
 
@@ -63,10 +81,18 @@
     0% {
       transform: rotate(0);
     }
-    // 100% {
-    // transform: rotate(30deg);
-    // transform-origin: 10px 10px;
-    // }
+  }
+  @keyframes paused {
+    0% {
+      transform: rotate(30deg);
+    }
+  }
+  @keyframes rotateLP {
+    100% {
+      width: 500px;
+      height: 500px;
+      transform: rotate(360deg);
+    }
   }
   .playerDetail-wrap {
     position: fixed;
@@ -95,7 +121,10 @@
           @include ellipsis;
         }
         .song-author {
+          width: 400px;
+          margin: 0 auto;
           color: #b3b3b3;
+          @include ellipsis;
         }
       }
       .iconfont {
@@ -108,9 +137,16 @@
         margin-left: 250px;
         width: 300px;
         height: 250px;
-        transform: rotate(30deg);
-        transform-origin: 10px 10px;
-        animation: play 3s linear;
+        &.play{
+          transform: rotate(30deg);
+          transform-origin: 10px 10px;
+          animation: play 3s linear;
+        }
+        &.paused{
+          transform: rotate(0);
+          transform-origin: 10px 10px;
+          animation: paused 3s linear;
+        }
       }
       .content-disc {
         position: relative;
@@ -120,6 +156,7 @@
         background-size: cover;
         margin: 0 auto;
         z-index: -1;
+        animation:rotateLP 5s linear infinite;
         img {
           position: absolute;
           top: 50%;
@@ -149,15 +186,19 @@
         display: flex;
         padding: 0 30px;
         color: #b3b3b3;
+        .van-slider{
+          margin-top: 16px;
+          margin-right: 20px;
+        }
+        .progress-start {
+          margin-right: 20px;
+        }
         .progress {
           position: relative;
           flex: 1;
           margin: 0 30px 17px;
-          border-bottom: 3px solid #b3b3b3;
+          // border-bottom: 3px solid #b3b3b3;
           &-spot {
-            position: absolute;
-            left: 0;
-            top: 14px;
             width: 10px;
             height: 10px;
             background: #fff;
@@ -175,7 +216,7 @@
           display: block;
           text-align: center;
         }
-        .icon-bofang3 {
+        .icon-bofang3,.icon-zanting {
           font-size: 100px;
         }
       }

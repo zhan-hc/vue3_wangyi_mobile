@@ -13,7 +13,7 @@
 
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import BScroll from "better-scroll";
+import { initScroll } from "@/assets/ts/common";
 
   const props = defineProps({
     iconList: {
@@ -27,16 +27,7 @@ import BScroll from "better-scroll";
   const content = ref(null)
 
   onMounted(() => {
-    let recWidth = 100 // icon宽度
-    let margin = 30 // margin-right
-    let width = ((recWidth + margin) * iconList.length)/2
-    content.value.style.width = width + 'px' // 给container设置了宽度
-    new BScroll(wrapper.value, {
-      click: true,
-      scrollX: true,
-      bounce: true,
-      eventPassthrough: 'vertical'
-    })
+    initScroll(130, iconList.length, content, wrapper)
   })
 </script>
 

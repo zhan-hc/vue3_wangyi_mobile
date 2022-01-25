@@ -1,0 +1,27 @@
+import myRequest from '@/utils/http/axios/index'
+// 歌单详细信息
+export function songList_detail (parameter: Object)  {
+    return myRequest.request({
+      url: 'playlist/detail',
+      method: 'post',
+      data: parameter
+    })
+}
+
+// 获取音乐url(多个id用逗号隔开)
+export function song_url (id: string | number)  {
+    return myRequest.request({
+      url: 'song/url',
+      method: 'post',
+      data: {id}
+    })
+}
+
+// 音乐是否可用
+export function check_music (id: string | number)  {
+    return myRequest.request({
+      url: 'check/music',
+      method: 'post',
+      data: {id}
+    })
+}

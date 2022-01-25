@@ -7,7 +7,7 @@
     <div class="song-wrapper" ref="wrapper">
       <div class="song-content" ref="content">
         <div class="song-list" v-for="(list, i) in songList" :key="i">
-          <div class="song-item" v-for="(item, i) in list.resources" :key="i">
+          <div class="song-item" v-for="(item, i) in list.resources" :key="i" @click="playMusic(item)">
             <div class="song-img">
               <img v-lazy="item.uiElement.image.imageUrl" alt="">
               <CaretRightOutlined/>
@@ -28,31 +28,32 @@
 
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import BScroll from "better-scroll";
-import { getAuthor } from "@/assets/ts/common";
+import { getAuthor, playMusic, initScroll } from "@/assets/ts/common";
+import { useStore } from 'vuex'
   const props = defineProps({
     data: {
       type: Object,
       default: {}
     }
   })
+  const store = useStore()
+  const songList = reactive(props.data.creatives)
+  const songheader = reactive(props.data.uiElement)
+  const wrapper = ref(null)
+  const content = ref(null)
 
-    const songList = reactive(props.data.creatives)
-    const songheader = reactive(props.data.uiElement)
-    const wrapper = ref(null)
-    const content = ref(null)
-
-    onMounted(() => {
-      let recWidth = 650 // icon宽度
-      let width = (recWidth * songList.length)/2
-      content.value.style.width = width + 'px' // 给container设置了宽度
-      new BScroll(wrapper.value, {
-        click: true,
-        scrollX: true,
-        bounce: true,
-        eventPassthrough: 'vertical'
-      })
-    })
+  onMounted(() => {
+    initScroll(650, songList.length, content, wrapper)
+    // let recWidth = 650 // icon宽度
+    // let width = (recWidth * songList.length)/2
+    // content.value.style.width = width + 'px' // 给container设置了宽度
+    // new BScroll(wrapper.value, {
+    //   click: true,
+    //   scrollX: true,
+    //   bounce: true,
+    //   eventPassthrough: 'vertical'
+    // })
+  })
 </script>
 
 <style scoped lang="scss">

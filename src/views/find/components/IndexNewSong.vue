@@ -1,13 +1,13 @@
 <template>
   <div class="song-container">
     <div class="song-header">
-      <span class="title" v-for="(tab,i) in songTab" :key="i" :class="{'active': currentTab === i}" @click="currentTab=i;setSCroll()">{{tab}}</span>
+      <span class="title" v-for="(tab,i) in songTab" :key="i" :class="{'active': currentTab === i}" @click="changeTab(i)">{{tab}}</span>
       <span class="more"><CaretRightOutlined/>更多</span>
     </div>
     <div class="song-wrapper" ref="wrapper">
       <div class="song-content" ref="content">
         <div class="song-list" v-for="(list, i) in newSongList" :key="i">
-          <div class="song-item" v-for="(item, i) in list.resources" :key="i">
+          <div class="song-item" v-for="(item, i) in list.resources" :key="i" @click="playMusic(item)">
             <div class="song-img">
               <img v-lazy="item.uiElement.image.imageUrl" alt="">
               <CaretRightOutlined/>
@@ -15,7 +15,7 @@
             <div class="song-info">
               <div class="info-base" :class="{'nodesc': !item.uiElement.subTitle}">
                 <span class="info-name">{{item.uiElement.mainTitle.title}}</span>
-                <span v-if="item.resourceExtInfo && item.resourceExtInfo.artists">{{getAuthor(item.resourceExtInfo.artists)}}</span>
+                <span v-if="item.resourceExtInfo && item.resourceExtInfo.artists">- {{getAuthor(item.resourceExtInfo.artists)}}</span>
               </div>
               <div class="info-desc" v-if="item.uiElement.subTitle">{{item.uiElement.subTitle.title}}</div>
             </div>
@@ -28,8 +28,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, computed, toRefs } from "vue";
-import BScroll from "better-scroll";
-import { getAuthor } from "@/assets/ts/common";
+import { getAuthor, playMusic, initScroll } from "@/assets/ts/common";
   const props = defineProps({
     data: {
       type: Object,
@@ -43,32 +42,14 @@ import { getAuthor } from "@/assets/ts/common";
   const songheader = reactive(props.data.uiElement)
   const wrapper = ref(null)
   const content = ref(null)
-  // const state = reactive({
-  //   songList: props.data.creatives,
-  //   songTab: Object.keys(newSongMap(songList)),
-  //   currentTab: 0,
-  //   songheader: props.data.uiElement
-  // })
-  // 
+
   const newSongList = computed(() => {
     return newSongMap(songList)[songTab[currentTab.value]]
   })
   onMounted(() => {
-    setSCroll()
+    initScroll(650, newSongList.value.length, content, wrapper)
   })
 
-  // 重新设置bscroll
-  function setSCroll () {
-    let recWidth = 650 // icon宽度
-    let width = (recWidth * newSongList.value.length)/2
-    content.value.style.width = width + 'px' // 给container设置了宽度
-    new BScroll(wrapper.value, {
-      click: true,
-      scrollX: true,
-      bounce: true,
-      eventPassthrough: 'vertical'
-    })
-  }
 
   // 将新歌里的数据存入map
   function newSongMap (list) {
@@ -81,6 +62,11 @@ import { getAuthor } from "@/assets/ts/common";
         songObj[title].push(item)
     });
     return songObj
+  }
+  
+  const changeTab = (i) => {
+    currentTab.value=i
+    initScroll(650, newSongList.value.length, content, wrapper)
   }
 </script>
 

@@ -24,8 +24,7 @@
 
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import BScroll from "better-scroll";
-import { formatCount } from "@/assets/ts/common";
+import { formatCount, initScroll } from "@/assets/ts/common";
 
   const props = defineProps({
     data: {
@@ -40,16 +39,7 @@ import { formatCount } from "@/assets/ts/common";
     const content = ref(null)
 
     onMounted(() => {
-      let recWidth = 170 // icon宽度
-      let margin = 30 // margin-right
-      let width = ((recWidth + margin) * videoList.length)/2
-      content.value.style.width = width + 'px' // 给container设置了宽度
-      new BScroll(wrapper.value, {
-        click: true,
-        scrollX: true,
-        bounce: true,
-        eventPassthrough: 'vertical'
-      })
+      initScroll(200, videoList.length, content, wrapper)
     })
 </script>
 

@@ -2,25 +2,33 @@
   <div class="player-wrap" @click="handleOpenPlayer">
     <div class="player-img">
       <img
-        src="https://p2.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg"
+        :src="songInfo.imageUrl"
         alt=""
       />
     </div>
     <div class="song-info">
-      <span>阿拉斯加海湾</span>
-      <span> - 袁潇崴</span>
+      <span>{{songInfo.title}}</span>
+      <span> - {{songInfo.authors}}</span>
     </div>
-    <i class="iconfont icon-bofang1"></i>
+    <i @click.stop="changePlayStatus" class="iconfont" :class="playStatus ? 'icon-zanting1' : 'icon-bofang1'"></i>
     <i class="iconfont icon-caidan"></i>
   </div>
 </template>
 
 <script setup>
-  import { ref, reactive, inject } from 'vue'
+  import { ref, reactive, inject, watch, computed } from 'vue'
+  import { useStore } from 'vuex'
+  const store = useStore()
+  const songInfo = computed(() => store.state.currentSongInfo)
+  const playStatus = computed(() => store.state.currentPlayStatus)
   const isShowPlayer = inject('isShowPlayer')
 
   const handleOpenPlayer = () => {
     isShowPlayer.value = true
+  }
+
+  const changePlayStatus = () => {
+    store.commit('changePlayStatus', !store.state.currentPlayStatus)
   }
 </script>
 
@@ -73,7 +81,7 @@
     .iconfont {
       font-size: 48px;
     }
-    .icon-bofang1 {
+    .icon-bofang1,.icon-zanting1 {
       margin-right: 50px;
     }
   }

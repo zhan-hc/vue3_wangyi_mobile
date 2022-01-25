@@ -23,8 +23,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, toRefs } from "vue";
-import BScroll from "better-scroll";
-import { formatCount } from "@/assets/ts/common";
+import { formatCount, initScroll } from "@/assets/ts/common";
 
   const props = defineProps({
     data: {
@@ -41,16 +40,7 @@ import { formatCount } from "@/assets/ts/common";
   })
 
   onMounted(() => {
-    let recWidth = 200 // icon宽度
-    let margin = 30 // margin-right
-    let width = ((recWidth + margin) * liveList.length)/2
-    content.value.style.width = width + 'px' // 给container设置了宽度
-    new BScroll(wrapper.value, {
-      click: true,
-      scrollX: true,
-      bounce: true,
-      eventPassthrough: 'vertical'
-    })
+    initScroll(230, liveList.length, content, wrapper)
   })
 
 </script>

@@ -25,7 +25,6 @@
 
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import BScroll from "better-scroll";
 import { formatCount } from "@/assets/ts/common";
 
   const props = defineProps({

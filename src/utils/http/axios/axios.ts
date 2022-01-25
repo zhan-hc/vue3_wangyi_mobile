@@ -63,13 +63,17 @@ export class MyAxios {
       (config) => {
         console.log('全局请求拦截',config)
         config.baseURL = 'https://netease-cloud-music-api-gamma-eight.vercel.app'
-        
-        console.log(this.loadingCount, 'this.loadingCountthis.loadingCountthis.loadingCountthis.loadingCount')
         // 添加token
         // const token = sessionStorage.getItem('wangyi_token')
         // if (token) {
         //   config.headers['Authorization'] = token
         // }
+        if (config.method == 'post') {
+          config.data = {
+            ...config.data,
+            timestamp: +new Date()
+          }
+        }
         if (this.hasCookie) {
           config.data = {
             ...config.data,

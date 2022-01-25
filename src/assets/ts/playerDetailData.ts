@@ -1,3 +1,4 @@
+import { reactive } from "vue";
 interface icons {
   id: Number,
   icon: String
@@ -25,7 +26,7 @@ const iconList: Array<icons> = [
     icon: 'icon-sandian'
   }
 ]
-const operateList: Array<icons> = [
+const operateList: Array<icons> = reactive([
   {
     id: 101,
     icon: 'icon-list-loop'
@@ -36,7 +37,7 @@ const operateList: Array<icons> = [
   },
   {
     id: 103,
-    icon: 'icon-bofang3'
+    icon: 'icon-zanting'
   },
   {
     id: 104,
@@ -46,7 +47,7 @@ const operateList: Array<icons> = [
     id: 105,
     icon: 'icon-caidan'
   }
-]
+])
 export {
   iconList,
   operateList

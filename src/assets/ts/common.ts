@@ -1,3 +1,12 @@
+import store from "@/store/index";
+import BScroll from "better-scroll";
+import { Ref } from "vue";
+interface artists {
+  name: String,
+  id: Number,
+  picUrl: String
+}
+
 // 转换播放量等数据
 const formatCount = (num : Number): String => {
   let str = String(num)
@@ -9,11 +18,7 @@ const formatCount = (num : Number): String => {
   }
   return str
 }
-interface artists {
-  name: String,
-  id: Number,
-  picUrl: String
-}
+
 // 获取作者
 const getAuthor = (obj: Array<artists>): String => {
   let authors = ''
@@ -22,6 +27,7 @@ const getAuthor = (obj: Array<artists>): String => {
   }
   return authors.slice(1)
 } 
+
 // 音频时长转换
 const durationTrans = (num: number, divider: number = 1) => {
   const dur: number = Math.floor(num / divider)
@@ -38,8 +44,47 @@ const durationTrans = (num: number, divider: number = 1) => {
   str += m + ":" + s
   return str
 }
+
+// 点击播放音乐
+const playMusic = (song: any) => {
+  const songInfo = {
+    id: song.resourceId,
+    imageUrl: song.uiElement.image.imageUrl,
+    title: song.uiElement.mainTitle.title,
+    authors: getAuthor(song.resourceExtInfo.artists)
+  }
+  store.commit('changeSongId', song.resourceId)
+  store.commit('changeSongInfo', songInfo)
+  store.commit('changePlayStatus', true)
+}
+
+// 
+/**
+* 使用滚动组件
+@params
+  visualWidth: 可视宽度
+  sumLen: dom总数量
+  content：内容dom
+  wrapper：外层dom
+  direction: 滚动方向
+}
+*/
+const initScroll = (visualWidth: number, sumLen: number, content: Ref, wrapper: Ref, direction: string = 'vertical') => {
+  // let visualWidth = 650 // 可视宽度
+  let width = (visualWidth * sumLen)/2
+  content.value.style.width = width + 'px' // 给container设置了宽度
+  new BScroll(wrapper.value, {
+    click: true,
+    scrollX: true,
+    bounce: true,
+    eventPassthrough: direction
+  })
+}
+
 export {
   formatCount,
   getAuthor,
-  durationTrans
+  durationTrans,
+  playMusic,
+  initScroll
 }

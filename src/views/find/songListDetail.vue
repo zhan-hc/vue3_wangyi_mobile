@@ -78,7 +78,7 @@
   import { ref, reactive, onMounted, onUnmounted } from 'vue'
   import { useRouter } from 'vue-router'
   import { formatCount, getAuthor } from '@/assets/ts/common'
-  import { songList_detail } from '@/api/home/songList'
+  import { songList_detail } from '@/api/song'
 
   const route = useRouter()
   const id = route.currentRoute.value.params.id

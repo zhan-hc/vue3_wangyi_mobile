@@ -26,9 +26,8 @@
 
 <script setup>
 import { ref, reactive, onMounted, defineProps } from "vue";
-import BScroll from "better-scroll";
 import { useRouter } from "vue-router";
-import { formatCount } from "@/assets/ts/common";
+import { formatCount, initScroll } from "@/assets/ts/common";
 
   const props = defineProps({
     data: {
@@ -43,16 +42,7 @@ import { formatCount } from "@/assets/ts/common";
     const route = useRouter()
 
     onMounted(() => {
-      let recWidth = 200 // icon宽度
-      let margin = 30 // margin-right
-      let width = ((recWidth + margin) * recommendList.length)/2
-      content.value.style.width = width + 'px' // 给container设置了宽度
-      new BScroll(wrapper.value, {
-        click: true,
-        scrollX: true,
-        bounce: true,
-        eventPassthrough: 'vertical'
-      })
+      initScroll(230, recommendList.length, content, wrapper)
     })
 
     // 歌单详情跳转
