@@ -58,7 +58,7 @@ const playMusic = (song: any) => {
   store.commit('changePlayStatus', true)
 }
 
-// 
+
 /**
 * 使用滚动组件
 @params
@@ -80,6 +80,7 @@ const initScroll = (visualWidth: number, sumLen: number, content: Ref, wrapper: 
     eventPassthrough: direction
   })
 }
+
 
 export {
   formatCount,

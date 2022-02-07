@@ -33,6 +33,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/songListDetail/:id',
     name: 'songListDetail',
     component: () => import('views/find/songListDetail.vue')
+  },
+  {
+    path: '/indexSearch',
+    name: 'indexSearch',
+    component: () => import('views/Index/indexSearch.vue')
   }
 ]
 
