@@ -15,7 +15,7 @@
     <player-detail v-show="isShowPlayer" />
     <bottom-player />
     <bottom-nav />
-    <index-player/>
+    <index-player />
   </div>
 </template>
 
@@ -31,7 +31,15 @@
   import sing from '@/views/sing/index'
   import village from '@/views/village/index'
   import indexPlayer from './indexPlayer.vue'
-  import { ref, provide, onMounted, reactive, toRefs, getCurrentInstance, watch } from 'vue'
+  import {
+    ref,
+    provide,
+    onMounted,
+    reactive,
+    toRefs,
+    getCurrentInstance,
+    watch,
+  } from 'vue'
   import { useStore } from 'vuex'
   import { user_account, user_level, user_detail } from '@/api/user/index'
 
@@ -44,9 +52,8 @@
   const isShowPlayer = ref(false)
   const visible = ref(false)
   const activeTab = ref(0)
-  const {proxy} = getCurrentInstance()
+  const { proxy } = getCurrentInstance()
   const toast = proxy.$toast
-
 
   provide('visible', visible)
   provide('activeTab', activeTab)

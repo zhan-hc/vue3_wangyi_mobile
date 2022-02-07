@@ -4,6 +4,9 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'index',
+    meta: {
+      keepAlive: true
+    },
     component: () => import('views/Index/index.vue')
   },
   {
