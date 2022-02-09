@@ -23,19 +23,27 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, onMounted } from "vue";
+<script>
+import { ref, reactive, onMounted, defineComponent } from "vue";
 import { formatCount } from "@/assets/ts/common";
-
-  const props = defineProps({
+export default defineComponent({
+  name: 'IndexCalendar',
+  props:{
     data: {
       type: Object,
       default: {}
     }
-  })
-  
+  },
+  setup(props) {
     const calendarList = reactive(props.data.creatives)
     const calendarheader = reactive(props.data.uiElement)
+
+    return {
+      calendarList,
+      calendarheader
+    }
+  }
+})
 
 </script>
 

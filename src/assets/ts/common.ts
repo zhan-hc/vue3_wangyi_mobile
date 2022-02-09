@@ -62,7 +62,7 @@ const playMusic = (song: any) => {
 /**
 * 使用滚动组件
 @params
-  visualWidth: 可视宽度
+  visualWidth: 单个dom的宽或高
   sumLen: dom总数量
   content：内容dom
   wrapper：外层dom

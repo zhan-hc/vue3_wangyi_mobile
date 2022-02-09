@@ -21,27 +21,37 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, onMounted, toRefs } from "vue";
+<script>
+import { ref, reactive, onMounted, toRefs, defineComponent } from "vue";
 import { formatCount, initScroll } from "@/assets/ts/common";
 
-  const props = defineProps({
+export default defineComponent({
+  name: 'IndexLive',
+  props:{
     data: {
       type: Object,
       default: {}
     }
-  })
+  },
+  setup(props) {
+    const wrapper = ref(null)
+    const content = ref(null)
+    const state = reactive({
+      liveList: props.data.extInfo,
+      liveheader: props.data.uiElement
+    })
 
-  const wrapper = ref(null)
-  const content = ref(null)
-  const state = reactive({
-    liveList: props.data.extInfo,
-    liveheader: props.data.uiElement
-  })
-
-  onMounted(() => {
-    initScroll(230, liveList.length, content, wrapper)
-  })
+    onMounted(() => {
+      initScroll(230, liveList.length, content, wrapper)
+    })
+    return {
+      wrapper,
+      content,
+      formatCount,
+      ...toRefs(state)
+    }
+  }
+})
 
 </script>
 

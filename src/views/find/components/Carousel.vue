@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import { reactive } from "vue";
-export default {
+import { reactive, defineComponent } from "vue";
+export default defineComponent({
   name: 'Carousel',
   props: {
     data: {
@@ -22,7 +22,7 @@ export default {
       data
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

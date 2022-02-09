@@ -26,48 +26,66 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, onMounted, computed, toRefs } from "vue";
+<script>
+import { ref, reactive, onMounted, computed, toRefs, defineComponent } from "vue";
 import { getAuthor, playMusic, initScroll } from "@/assets/ts/common";
-  const props = defineProps({
+export default defineComponent({
+  name: 'IndexNewSong',
+  props:{
     data: {
       type: Object,
       default: {}
     }
-  })
+  },
+  setup(props) {
+    const songList = reactive(props.data.creatives)
+    const songTab = Object.keys(newSongMap(songList))
+    const currentTab = ref(0)
+    const songheader = reactive(props.data.uiElement)
+    const wrapper = ref(null)
+    const content = ref(null)
 
-  const songList = reactive(props.data.creatives)
-  const songTab = Object.keys(newSongMap(songList))
-  const currentTab = ref(0)
-  const songheader = reactive(props.data.uiElement)
-  const wrapper = ref(null)
-  const content = ref(null)
+    const newSongList = computed(() => {
+      return newSongMap(songList)[songTab[currentTab.value]]
+    })
 
-  const newSongList = computed(() => {
-    return newSongMap(songList)[songTab[currentTab.value]]
-  })
-  onMounted(() => {
-    initScroll(650, newSongList.value.length, content, wrapper)
-  })
+    onMounted(() => {
+      initScroll(650, newSongList.value.length, content, wrapper)
+    })
 
+    // 将新歌里的数据存入map
+    function newSongMap (list) {
+      const songObj = {}
+      list.forEach(item => {
+        const {title} = item.uiElement.mainTitle
+        if (!songObj[title]) {
+          songObj[title] = []
+        }
+          songObj[title].push(item)
+      });
+      return songObj
+    }
 
-  // 将新歌里的数据存入map
-  function newSongMap (list) {
-    const songObj = {}
-    list.forEach(item => {
-      const {title} = item.uiElement.mainTitle
-      if (!songObj[title]) {
-        songObj[title] = []
-      }
-        songObj[title].push(item)
-    });
-    return songObj
+    // 切换tab重新初始化滚动插件
+    const changeTab = (i) => {
+      currentTab.value=i
+      initScroll(650, newSongList.value.length, content, wrapper)
+    }
+
+    return {
+      songList,
+      songTab,
+      wrapper,
+      content,
+      currentTab,
+      songheader,
+      newSongList,
+      changeTab,
+      getAuthor,
+      playMusic
+    }
   }
-  
-  const changeTab = (i) => {
-    currentTab.value=i
-    initScroll(650, newSongList.value.length, content, wrapper)
-  }
+})
 </script>
 
 <style scoped lang="scss">

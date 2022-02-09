@@ -11,24 +11,33 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, onMounted } from "vue";
+<script>
+import { ref, reactive, onMounted, defineComponent } from "vue";
 import { initScroll } from "@/assets/ts/common";
-
-  const props = defineProps({
-    iconList: {
+export default defineComponent({
+  name: 'IndexIcon',
+  props:{
+  iconList: {
       type: Array,
       default: []
     }
-  })
+  },
+  setup(props) {
+    const iconList = reactive(props.iconList)
+    const wrapper = ref(null)
+    const content = ref(null)
 
-  const iconList = reactive(props.iconList)
-  const wrapper = ref(null)
-  const content = ref(null)
+    onMounted(() => {
+      initScroll(130, iconList.length, content, wrapper)
+    })
 
-  onMounted(() => {
-    initScroll(130, iconList.length, content, wrapper)
-  })
+    return {
+      iconList,
+      wrapper,
+      content
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">

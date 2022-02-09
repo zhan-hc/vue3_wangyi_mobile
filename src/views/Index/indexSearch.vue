@@ -35,7 +35,7 @@
   import { useDebounceFn } from '@vueuse/core'
   import { search_suggest } from '@/api/search/index'
   export default defineComponent({
-    name: '',
+    name: 'IndexSearch',
     setup() {
       const route = useRouter()
       const state = reactive({

@@ -24,17 +24,19 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, onMounted, defineProps } from "vue";
+<script>
+import { ref, reactive, onMounted, defineComponent } from "vue";
 import { useRouter } from "vue-router";
 import { formatCount, initScroll } from "@/assets/ts/common";
-
-  const props = defineProps({
+export default defineComponent({
+  name: 'IndexRecommend',
+  props:{
     data: {
       type: Object,
       default: {}
     }
-  })
+  },
+  setup(props) {
     const recommendList = reactive(props.data.creatives)
     const recommendheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
@@ -49,6 +51,15 @@ import { formatCount, initScroll } from "@/assets/ts/common";
     const handleClickJump = (id) => {
       route.push(`/songListDetail/${id}`)
     }
+    return{
+      wrapper,
+      content,
+      recommendList,
+      recommendheader,
+      formatCount
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">
