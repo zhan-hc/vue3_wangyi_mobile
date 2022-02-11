@@ -1,14 +1,15 @@
 <template>
   <div className='header-wrap'>
-    <LeftOutlined class='header-icon' @click="goback"/>
+    <LeftOutlined class='header-icon' @click="handleRouterBack"/>
     <span class='header-tellogin'>手机号登录</span>
     <span v-if="status===1" className='header-pswlogin' @click='pswLogin'>密码登录</span>
   </div>
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
 import { reactive } from "vue";
+import useRouteFun from '@/hooks/router/useRouteFun'
+
 export default {
   props: {
     status: {
@@ -16,20 +17,18 @@ export default {
     }
   },
   setup (props) {
+    const {getUrlParams, handleRouterJump, handleRouterBack} = useRouteFun()
     const status =reactive(props.status)
-    const route = useRouter()
-    const tel = route.currentRoute.value.params.tel
-    const goback = () => {
-      route.go(-1)
-    }
+    const tel = getUrlParams('tel')
+
     const pswLogin = () => {
-      route.push(`/pswLogin/${tel}`)
+      handleRouterJump(`/pswLogin/${tel}`)
     }
     return{
       tel,
       status,
-      goback,
-      pswLogin
+      pswLogin,
+      handleRouterBack
     }
   }
 }

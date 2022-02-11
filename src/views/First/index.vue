@@ -1,20 +1,17 @@
 <template>
   <div class='First'>
     <div clasS="First-button">
-      <button class='First-button-default' @click="handlehref">登录</button>
+      <button class='First-button-default' @click="handleRouterJump('/login')">登录</button>
       <button class='First-button-primary'>立即体验</button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
+import useRouteFun from '@/hooks/router/useRouteFun'
 
-    const route = useRouter()
-    
-    const handlehref = () => {
-      route.push('/login')
-    }
+const {handleRouterJump} = useRouteFun()
+
 </script>
 
 <style scoped lang="scss">

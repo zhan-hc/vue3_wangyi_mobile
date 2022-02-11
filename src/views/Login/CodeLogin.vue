@@ -25,17 +25,18 @@
 
 <script setup>
   import WYHeader from 'components/WYHeader'
-  import { useRouter } from 'vue-router'
   import { login_cellphone, login_verifycode, login_refresh, login_phonePsw } from '@/api/login/index'
   import { ref, computed, reactive, onMounted, getCurrentInstance } from 'vue'
   import { useStore } from 'vuex'
-  const route = useRouter()
+  import useRouteFun from '@/hooks/router/useRouteFun'
+  
+  const {handleRouterJump, getUrlParams} = useRouteFun()
   const { proxy } = getCurrentInstance()
   const codeInput = ref(null)
 
   const toast = proxy.$toast
 
-  const tel = route.currentRoute.value.params.tel
+  const tel = getUrlParams('tel')
   const store = useStore()
   const state = reactive({
     timer: 59,
@@ -120,7 +121,7 @@
             sessionStorage.setItem('wangyi_cookie', res.cookie)
             sessionStorage.setItem('wangyi_userInfo', JSON.stringify(res.profile))
             // store.commit('setUserInfo', res.profile)
-            route.push('/')
+            handleRouterJump('/')
           }
         })
         .catch((err) => {

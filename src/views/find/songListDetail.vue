@@ -1,7 +1,7 @@
 <template>
   <div class="detail-wrap" v-if="status">
     <div class="detail-header" ref="detailHeader">
-      <i class="iconfont icon-leftarrow" @click="handleBack"></i>
+      <i class="iconfont icon-leftarrow" @click="handleRouterBack"></i>
       <span>歌单</span>
       <i class="iconfont icon-search"></i>
       <i class="iconfont icon-sandian"></i>
@@ -29,6 +29,7 @@
       </div>
     </div>
     <div v-else class="detail-info"></div>
+
     <div class="detail-songList">
       <div class="songList-count" ref="headerCount">
         <div class="count-item">
@@ -51,80 +52,89 @@
         :class="fixedStatus ? 'songList-header' : 'fixed-header'"
       >
         <i class="iconfont icon-bofang5"></i>
-        <div class="all">播放全部<span>(94)</span></div>
+        <div class="all">播放全部<span>({{songList.trackCount}})</span></div>
         <i class="iconfont icon-xiazaipt"></i>
         <i class="iconfont icon-duoxuanpt"></i>
       </div>
-      <div
-        class="songList-item"
-        v-for="(item, i) in songList.tracks"
-        :key="item.id"
+      <van-list
+        v-model:loading="loading"
+        :finished="finished"
+        finished-text="没有更多了"
+        @load="handleLoad"
       >
-        <div class="item-sort">{{ i + 1 }}</div>
-        <div class="item-info">
-          <div class="info-name">{{ item.name }}</div>
-          <div class="info-authors">
-            {{ getAuthor(item.ar) }} - {{ item.al.name }}
+        <div
+          class="songList-item van-clearfix"
+          v-for="(item, i) in songList.tracks"
+          :key="item.id"
+        >
+          <div class="item-sort">{{ i + 1 }}</div>
+          <div class="item-info">
+            <div class="info-name">{{ item.name }}</div>
+            <div class="info-authors">
+              {{ getAuthor(item.ar) }} - {{ item.al.name }}
+            </div>
           </div>
+          <i class="iconfont icon-mv"></i>
+          <i class="iconfont icon-sandian"></i>
         </div>
-        <i class="iconfont icon-mv"></i>
-        <i class="iconfont icon-sandian"></i>
-      </div>
+      </van-list>
     </div>
   </div>
 </template>
 
 <script setup>
-  import { ref, reactive, onMounted, onUnmounted } from 'vue'
-  import { useRouter } from 'vue-router'
+  import { ref, reactive, onMounted, onUnmounted, toRefs } from 'vue'
   import { formatCount, getAuthor } from '@/assets/ts/common'
-  import { songList_detail } from '@/api/song'
+  import { songList_detail,song_detail } from '@/api/song'
+  import useDetailScroll from '@/hooks/song/useDetailScroll'
+  import useRouteFun from '@/hooks/router/useRouteFun'
 
-  const route = useRouter()
-  const id = route.currentRoute.value.params.id
-  const fixedStatus = ref(true)
-  const songList = ref({})
-  onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll)
-  })
+  const {handleScroll} = useDetailScroll()
+  const {getUrlParams, handleRouterBack} = useRouteFun()
+  const id = getUrlParams('id')
   const detailHeader = ref(null)
-  const status = ref(false)
+  const state = reactive({
+    songList: {},
+    loading: false,
+    finished: false,
+    status: false,
+    currentPage: 0,
+    pageSize: 10,
+    trackIds: [],
+    fixedStatus: true // 表单详情header fixed样式状态
+  })
 
-  onMounted(() => {
-    window.addEventListener('scroll', handleScroll)
-    songList_detail({
-      id: id,
+  const { songList, loading, finished, status, currentPage, pageSize, trackIds, fixedStatus } = toRefs(state)
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', () => handleScroll(state.fixedStatus, detailHeader, state.songList.tracks[0].al.picUrl))
+  })
+
+  onMounted(async () => {
+    await songList_detail({id}).then((res) => {
+      state.songList = res.playlist
+      state.trackIds = res.playlist.trackIds.map(item => item.id)
+      state.status = true
+      state.currentPage = state.currentPage + 1
     })
-      .then((res) => {
-        if (res.code === 200) {
-          songList.value = res.playlist
-          status.value = true
+    window.addEventListener('scroll', () => handleScroll(state.fixedStatus, detailHeader, state.songList.tracks[0].al.picUrl))
+  })
+
+  // 按需加载
+  const handleLoad = async () => {
+    const start = state.pageSize * state.currentPage
+    const end = state.pageSize*(state.currentPage + 1)
+    const ids = state.trackIds.slice(start, end).join(',')
+    if (!state.finished) {
+      state.loading = true
+      await song_detail(ids).then((res) => {
+        state.loading = false
+        state.songList.tracks.push(...res.songs)
+        state.currentPage += 1
+        if (state.songList.tracks.length >= state.trackIds.length) {
+          state.finished = true
         }
       })
-      .catch((err) => {
-        console.log('err', err)
-      })
-  })
-
-  // 回退
-  const handleBack = () => {
-    route.go(-1)
-  }
-  // 滚动的时候固定头部
-  const handleScroll = () => {
-    let scrollTop =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop
-    if (scrollTop >= 200) {
-      fixedStatus.value = false
-      // 待优化
-      detailHeader.value.style.backgroundImage = `url('${songList.value.tracks[0].al.picUrl}')`
-      detailHeader.value.style.backgroundPosition = 'bottom'
-      detailHeader.value.style.backgroundSize = 'cover'
-    } else {
-      fixedStatus.value = true
-      detailHeader.value.style.backgroundImage = 'none'
     }
   }
 </script>
@@ -150,6 +160,8 @@
   .detail-wrap {
     font-size: 24px;
     background: #fff;
+    // height: 500px;
+    // overflow: auto;
     .detail-header {
       position: fixed;
       top: 0;
@@ -243,7 +255,7 @@
         }
         .info-desc {
           position: absolute;
-          bottom: 10px;
+          // bottom: 10px;
           left: 0;
           right: 0;
           color: #828283;
@@ -268,7 +280,9 @@
         margin-bottom: 30px;
         .count-item {
           flex: 1;
-          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           border-right: 2px solid #ccc;
           box-sizing: border-box;
           .iconfont {

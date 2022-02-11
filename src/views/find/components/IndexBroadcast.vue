@@ -15,17 +15,19 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, onMounted } from "vue";
+<script>
+import { ref, reactive, onMounted, defineComponent } from "vue";
 import { formatCount, initScroll } from "@/assets/ts/common";
 
-  const props = defineProps({
+export default defineComponent({
+  name:'IndexBroadcast',
+  props: {
     data: {
       type: Object,
       default: {}
     }
-  })
-
+  },
+  setup(props) {
     const broadcastList = reactive(props.data.creatives[0])
     const wrapper = ref(null)
     const content = ref(null)
@@ -38,6 +40,15 @@ import { formatCount, initScroll } from "@/assets/ts/common";
       let color =  ['#FFB6C1', '#E6E6FA','#6495ED','#98FB98','#EEE8AA','#F08080','#F5F5F5']
       return color[i]
     }
+    return {
+      wrapper,
+      content,
+      broadcastList,
+      formatCount,
+      randomHexColor
+    }
+  }
+}) 
 </script>
 
 <style scoped lang="scss">

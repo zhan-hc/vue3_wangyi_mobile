@@ -1,7 +1,7 @@
 <template>
   <div class="header-wrapper">
     <MenuOutlined @click="onOpen" />
-    <div class="header-content" @click="onSearch">
+    <div class="header-content" @click="handleRouterJump('/indexSearch')">
       <SearchOutlined />
     </div>
     <AudioFilled />
@@ -10,14 +10,10 @@
 
 <script setup>
   import { inject } from 'vue'
-  import { useRouter } from 'vue-router'
+  import useRouteFun from '@/hooks/router/useRouteFun'
+  const {handleRouterJump} = useRouteFun()
 
   const visible = inject('visible')
-  const route = useRouter()
-
-  const onSearch = () => {
-    route.push('/indexSearch')
-  }
 
   const onOpen = () => {
     visible.value = true

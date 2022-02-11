@@ -22,17 +22,18 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, onMounted } from "vue";
+<script>
+import { ref, reactive, onMounted, defineComponent } from "vue";
 import { formatCount, initScroll } from "@/assets/ts/common";
-
-  const props = defineProps({
+export default defineComponent({
+  name: 'IndexVideo',
+  props:{
     data: {
       type: Object,
       default: {}
     }
-  })
-
+  },
+  setup(props) {
     const videoList = reactive(props.data.extInfo)
     const videoheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
@@ -41,6 +42,15 @@ import { formatCount, initScroll } from "@/assets/ts/common";
     onMounted(() => {
       initScroll(200, videoList.length, content, wrapper)
     })
+
+    return{
+      wrapper,
+      content,
+      videoList,
+      videoheader
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">

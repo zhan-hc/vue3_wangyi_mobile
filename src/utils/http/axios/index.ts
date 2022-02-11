@@ -6,11 +6,11 @@ const MyRequest = new MyAxios({
       // if (token) {
       //   config.headers.Authorization = `Bearer ${token}`
       // }
-      console.log('请求成功拦截')
+      // console.log('请求成功拦截')
       return config
     },
     responseInterceptor: (res) => {
-      console.log('响应成功拦截')
+      // console.log('响应成功拦截')
       return res
     }
   }

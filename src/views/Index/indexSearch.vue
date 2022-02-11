@@ -1,7 +1,7 @@
 <template>
   <div class="search-wrap">
     <div class="search-header">
-      <LeftOutlined class="header-icon" @click="goback" />
+      <LeftOutlined class="header-icon" @click="handleRouterBack" />
       <input
         v-model="keyword"
         class="search-input"
@@ -31,20 +31,18 @@
 
 <script>
   import { defineComponent, reactive, ref, toRefs } from 'vue'
-  import { useRouter } from 'vue-router'
   import { useDebounceFn } from '@vueuse/core'
   import { search_suggest } from '@/api/search/index'
+  import useRouteFun from '@/hooks/router/useRouteFun'
+
   export default defineComponent({
-    name: '',
+    name: 'IndexSearch',
     setup() {
-      const route = useRouter()
+      const {handleRouterBack} = useRouteFun()
       const state = reactive({
         keyword: '',
         searchList: [],
       })
-      const goback = () => {
-        route.go(-1)
-      }
 
       function onSearch() {
         state.keyword !== '' &&
@@ -54,7 +52,7 @@
       }
       return {
         ...toRefs(state),
-        goback,
+        handleRouterBack,
         onSearch: useDebounceFn(onSearch, 300),
       }
     },

@@ -24,22 +24,25 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, onMounted, defineProps } from "vue";
-import { useRouter } from "vue-router";
+<script>
+import { ref, reactive, onMounted, defineComponent } from "vue";
+import useRouteFun from '@/hooks/router/useRouteFun'
 import { formatCount, initScroll } from "@/assets/ts/common";
 
-  const props = defineProps({
+export default defineComponent({
+  name: 'IndexRecommend',
+  props:{
     data: {
       type: Object,
       default: {}
     }
-  })
+  },
+  setup(props) {
     const recommendList = reactive(props.data.creatives)
     const recommendheader = reactive(props.data.uiElement)
     const wrapper = ref(null)
     const content = ref(null)
-    const route = useRouter()
+    const {getUrlParams, handleRouterJump} = useRouteFun()
 
     onMounted(() => {
       initScroll(230, recommendList.length, content, wrapper)
@@ -47,8 +50,18 @@ import { formatCount, initScroll } from "@/assets/ts/common";
 
     // 歌单详情跳转
     const handleClickJump = (id) => {
-      route.push(`/songListDetail/${id}`)
+      handleRouterJump(`/songListDetail/${id}`)
     }
+    return{
+      wrapper,
+      content,
+      recommendList,
+      recommendheader,
+      formatCount,
+      handleClickJump
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">

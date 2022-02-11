@@ -26,34 +26,38 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, onMounted } from "vue";
+<script>
+import { ref, reactive, onMounted, defineComponent } from "vue";
 import { getAuthor, playMusic, initScroll } from "@/assets/ts/common";
 import { useStore } from 'vuex'
-  const props = defineProps({
+export default defineComponent({
+  name: 'IndexSong',
+  props:{
     data: {
       type: Object,
       default: {}
     }
-  })
-  const store = useStore()
-  const songList = reactive(props.data.creatives)
-  const songheader = reactive(props.data.uiElement)
-  const wrapper = ref(null)
-  const content = ref(null)
+  },
+  setup(props) {
+    const store = useStore()
+    const songList = reactive(props.data.creatives)
+    const songheader = reactive(props.data.uiElement)
+    const wrapper = ref(null)
+    const content = ref(null)
 
-  onMounted(() => {
-    initScroll(650, songList.length, content, wrapper)
-    // let recWidth = 650 // icon宽度
-    // let width = (recWidth * songList.length)/2
-    // content.value.style.width = width + 'px' // 给container设置了宽度
-    // new BScroll(wrapper.value, {
-    //   click: true,
-    //   scrollX: true,
-    //   bounce: true,
-    //   eventPassthrough: 'vertical'
-    // })
-  })
+    onMounted(() => {
+      initScroll(650, songList.length, content, wrapper)
+    })
+    return {
+      songList,
+      songheader,
+      wrapper,
+      content,
+      getAuthor,
+      playMusic
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">

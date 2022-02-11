@@ -61,17 +61,17 @@ export class MyAxios {
      */
     this.axiosInstance.interceptors.request.use(
       (config) => {
-        console.log('全局请求拦截',config)
+        // console.log('全局请求拦截',config)
         config.baseURL = 'https://netease-cloud-music-api-gamma-eight.vercel.app'
         // 添加token
         // const token = sessionStorage.getItem('wangyi_token')
         // if (token) {
         //   config.headers['Authorization'] = token
         // }
+        config.url += `?timestamp=${+new Date()}`
         if (config.method == 'post') {
           config.data = {
             ...config.data,
-            timestamp: +new Date()
           }
         }
         if (this.hasCookie) {
@@ -103,7 +103,7 @@ export class MyAxios {
     this.axiosInstance.interceptors.response.use(
       (res) => {
         this.loadingCount--
-        console.log('全局响应拦截',res)
+        // console.log('全局响应拦截',res)
         AxiosCancel.removePending(res.config)
         // 移除loading
         if (this.loadingCount<=0) {
@@ -119,7 +119,7 @@ export class MyAxios {
         return res.data
       },
       (err) => {
-        console.log(err.response,'err.response')
+        // console.log(err.response,'err.response')
         const code = err.response.status
         const errMsg = err.response.data.msg || err.response.data.message
         message.destroy()
