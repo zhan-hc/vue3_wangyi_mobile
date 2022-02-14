@@ -27,15 +27,15 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .ant-carousel /deep/ .slick-dots-bottom {
-  bottom: 40px;
+  bottom: .625rem;
 }
 .ant-carousel{
-  font-size: 24px;
+  // font-size: 24px;
   background: #fff;
   // margin-top: 120px;
   .slide-item{
     position: relative;
-    padding: 20px 30px;
+    padding: .3125rem .625rem;
     img {
       width: 100%;
       height: 100%;
@@ -43,10 +43,11 @@ export default defineComponent({
     }
     .tag{
       position: absolute;
-      bottom: 20px;
-      right: 30px;
+      bottom: .3125rem;
+      right: .625rem;
       color: #fff;
-      padding: 5px 15px;
+      font-size: 12px;
+      padding: .125rem .4375rem;
       border-bottom-right-radius: 20px;
       border-top-left-radius: 20px;
     }

@@ -5,7 +5,7 @@
       <input
         v-model="keyword"
         class="search-input"
-        placeholder="坏女孩 最近很火哦"
+        :placeholder="hotKeyword"
         @input="onSearch"
       />
     </div>
@@ -33,6 +33,7 @@
           <span>{{ item.searchWord }}</span>
         </div>
       </div>
+      <search-tab></search-tab>
     </div>
   </div>
 </template>
@@ -40,23 +41,28 @@
 <script>
   import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue'
   import { useDebounceFn } from '@vueuse/core'
-  import { search_suggest, search_hot } from '@/api/search/index'
+  import { search_suggest, search_hot, search_default } from '@/api/search/index'
   import useRouteFun from '@/hooks/router/useRouteFun'
-
+  import searchTab from '@/components/searchTab'
   export default defineComponent({
-    name: 'IndexSearch',
+    name: 'search',
+    components: {
+      searchTab
+    },
     setup() {
       const { handleRouterBack } = useRouteFun()
       const state = reactive({
         keyword: '',
+        hotKeyword: '',
         searchList: [],
         hotList: [],
       })
 
       onMounted(async () => {
-        const res = await search_hot()
-        state.hotList = res.data
-        console.log(res, 'ererser')
+        const hotRes = await search_hot()
+        const keyRes = await search_default()
+        state.hotList = hotRes.data
+        state.hotKeyword = keyRes.data.showKeyword
       })
 
       function onSearch() {
@@ -85,7 +91,7 @@
   @import '@/assets/scss/mixin.scss';
   .search-wrap {
     padding: 20px;
-    font-size: 28px;
+    font-size: 16px;
     .search-header {
       display: flex;
       align-items: center;
@@ -98,9 +104,9 @@
         background: none;
         outline: none;
         border: none;
-        font-size: 24px;
+        // font-size: 24px;
         border-bottom: 1px solid #ccc;
-        font-size: 32px;
+        // font-size: 32px;
         caret-color: #cf0000;
       }
     }
@@ -115,7 +121,7 @@
         }
         .van-icon-search {
           margin-right: 10px;
-          font-size: 32px;
+          // font-size: 32px;
         }
         .search-null {
           color: #4169e1;
@@ -123,9 +129,9 @@
       }
     }
     .hot-content {
-      font-size: 32px;
+      // font-size: 32px;
       p {
-        font-size: 32px;
+        // font-size: 32px;
       }
       .search-hot {
         display: flex;

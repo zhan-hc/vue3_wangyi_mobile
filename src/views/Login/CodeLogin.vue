@@ -168,7 +168,7 @@
         width: 120px;
         border: none;
         outline: none;
-        font-size: 36px;
+        font-size: 18px;
         text-align: center;
         box-sizing: border-box;
         border-bottom: 1px solid #c0c0c0;

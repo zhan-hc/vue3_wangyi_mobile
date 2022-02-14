@@ -13,6 +13,14 @@ export function search_suggest (parameter:string)  {
     })
 }
 
+// 默认搜索关键词
+export function search_default()  {
+    return myRequest.request({
+      url: '/search/default',
+      method: 'post'
+    })
+}
+
 // 热搜
 export function search_hot ()  {
     return myRequest.request({

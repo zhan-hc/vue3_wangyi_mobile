@@ -69,7 +69,7 @@ export default defineComponent({
     // 切换tab重新初始化滚动插件
     const changeTab = (i) => {
       currentTab.value=i
-      initScroll(650, newSongList.value.length, content, wrapper)
+      initScroll(600, newSongList.value.length, content, wrapper)
     }
 
     return {
@@ -89,21 +89,22 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/mixin.scss';
 .song-container{
-  font-size: 24px;
+  font-size: 14px;
   background: #fff;
-  border-radius: 20px;
-  padding: 20px 0 30px;
-  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: .3125rem 0 .3125rem;
+  margin-bottom: .625rem;
   .song-header{
     position: relative;
-    margin: 20px 30px;
+    margin: .3125rem .5rem;
     .title {
-      font-size: 36px;
+      font-size: 18px;
       font-weight: bold;
-      margin-right: 10px;
+      margin-right: .3125rem;
       border-right: 1px solid #ccc;
-      padding-right: 10px;
+      padding-right: .3125rem;
       color: #808080;
       &.active{
         color: #000;
@@ -116,7 +117,7 @@ export default defineComponent({
       position: absolute;
       right: 0;
       top: 50%;
-      padding: 5px 15px;
+      padding: .0625rem .125rem;
       border-radius: 30px;
       border: 1px solid #ccc;
       background: #fff;
@@ -124,42 +125,42 @@ export default defineComponent({
     }
   }
   .song-wrapper{
-    width: 720px;
-    box-sizing: border-box;
-    margin: 0 30px;
-    padding-bottom: 20px;
+    // width: calc(100vh-.625rem);
+    // box-sizing: border-box;
+    margin: 0 .5rem;
+    padding-bottom: 1rem;
     overflow: hidden;
     .song-content{
       touch-action: none;
-      overflow: hidden;
+      // overflow: hidden;
       .song-list{
         position: relative;
         display: inline-block;
-        height: 330px;
-        margin-bottom: 20px;
-        width: 650px;
+        height: 1rem;
+        margin-bottom: .625rem;
+        width: 300px;
         .song-item{
           position: relative;
           display: flex;
-          height: 100px;
+          align-items: center;
+          height: 1.25rem;
           box-sizing: border-box;
           padding: 10px;
           margin-bottom: 20px;
           .song-img{
             position: relative;
-            border-radius: 10px;
-            width: 100px;
-            height: 100px;
-            margin-bottom: 10px;
-            margin-right: 20px;
+            border-radius: 5px;
+            width: 1rem;
+            height: 1rem;
+            margin-right: .3125rem;
             img{
               vertical-align: middle;
-              border-radius: 10px;
+              border-radius: 5px;
               width: 100%;
               height: 100%;
             }
             .anticon-caret-right{
-              font-size: 48px;
+              font-size: 16px;
               position: absolute;
               top: 50%;
               left: 50%;
@@ -170,20 +171,18 @@ export default defineComponent({
           .song-info{
             flex: 1;
             border-bottom: 1px solid #ccc;
-            height: 100px;
+            height: 1.25rem;
             width: calc(100% - 120px);
             .info-base {
-              font-size: 24px;
+              // font-size: 24px;
               color: #9A9A9A;
-              overflow: hidden;
-              white-space: nowrap;
-              text-overflow: ellipsis;
+              @include ellipsis;
               span{
                 display: inline-block;
               }
               .info-name {
                 color: #000;
-                font-size: 32px;
+                // font-size: 32px;
               }
               &.nodesc {
                 margin-top: 20px;

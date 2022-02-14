@@ -36,53 +36,54 @@
   @import '@/assets/scss/mixin.scss';
   .player-wrap {
     position: fixed;
-    bottom: 140px;
+    bottom: 1.5rem;
     left: 0;
     right: 0;
     display: flex;
-    height: 120px;
-    padding: 0 30px;
+    height: 1.5rem;
+    align-items: center;
+    padding: 0 .3125rem;
     border-top: 1px solid #ccc;
     background: #fff;
-    line-height: 120px;
     z-index: 2;
-    font-size: 24px;
+    // font-size: 24px;
     .player-img {
       position: relative;
       border-radius: 50%;
-      width: 110px;
-      height: 110px;
+      width: 1.5rem;
+      height: 1.5rem;
       box-sizing: border-box;
       background: #000;
       background: linear-gradient(-45deg, #545454 0%, #000 100%);
-      margin: -10px 20px 0 0;
+      margin: -0.375rem -0.3125rem 0 0;
       img {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         border-radius: 50%;
-        width: 80px;
-        height: 80px;
+        width: 1rem;
+        height: 1rem;
       }
     }
     .song-info {
       flex: 1;
-      margin-right: 70px;
+      margin-right: .625rem;
+      margin-left: .625rem;
       @include ellipsis;
       span {
-        font-size: 36px;
+        font-size: 16px;
         &:last-child {
-          font-size: 28px;
+          font-size: 14px;
           color: #9a9a9a;
         }
       }
     }
     .iconfont {
-      font-size: 48px;
+      font-size: 24px;
     }
     .icon-bofang1,.icon-zanting1 {
-      margin-right: 50px;
+      margin-right: .625rem;
     }
   }
 </style>

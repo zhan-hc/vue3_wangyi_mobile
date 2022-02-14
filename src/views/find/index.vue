@@ -33,10 +33,10 @@
 <style scoped lang="scss">
   .find-wrapper {
     .find-end {
-      font-size: 32px;
+      font-size: 16px;
       text-align: center;
-      height: 100px;
-      line-height: 100px;
+      height: 1rem;
+      line-height: 1rem;
     }
   }
 </style>

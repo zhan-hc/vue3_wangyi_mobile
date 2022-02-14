@@ -175,7 +175,7 @@
       z-index: 1;
       span {
         flex: 1;
-        font-size: 36px;
+        font-size: 18px;
         font-weight: 600;
         letter-spacing: 2px;
       }
@@ -335,7 +335,7 @@
         color: #999;
         .item-sort {
           color: #999;
-          font-size: 36px;
+          font-size: 18px;
           width: 70px;
         }
         .item-info {

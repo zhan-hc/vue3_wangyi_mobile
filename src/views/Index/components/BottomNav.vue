@@ -51,30 +51,34 @@ import { ref, inject } from "vue"
   bottom: 0;
   left: 0;
   right: 0;
-  height: 140px;
+  height: 1.5rem;
   display: flex;
   align-items: center;
   background: #fff;
   z-index: 2;
-  font-size: 24px;
+  font-size: 10px;
   border-top: 1px solid #ccc;
   .nav-item{
     flex: 1;
     text-align: center;
     color: #9A9A9A;
+    .iconfont {
+      font-size: 22px;
+    }
     &.active {
       color: #FE3A3B;
       text-align: center;
       .iconfont {
+        font-size: 22px;
         margin: 0 auto;
-        width: 80px;
+        width: 1rem;
         border-radius: 50%;
         background-image: linear-gradient(to top right, #FE3A3B, #FF9D9C);
         color: #fff;
       }
     }
     .iconfont{
-      font-size: 48px;
+      // font-size: 48px;
     }
   }
 }

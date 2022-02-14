@@ -45,15 +45,15 @@
 
 <style scoped lang="scss">
   .info-wrap {
-    font-size: 24px;
+    // font-size: 24px;
     .person-info {
       position: relative;
-      font-size: 28px;
-      margin-bottom: 20px;
+      // font-size: 28px;
+      margin-bottom: .3125rem;
       .ant-avatar {
-        width: 75px;
-        height: 75px;
-        margin-right: 30px;
+        width: .75rem;
+        height: .75rem;
+        margin-right: .3125rem;
       }
       span {
         font-weight: bold;
@@ -61,88 +61,95 @@
       .icon-saoma {
         position: absolute;
         top: 50%;
-        right: 20px;
+        right: .3125rem;
         transform: translateY(-50%);
         font-weight: bold;
-        font-size: 36px;
+        font-size: 18px;
       }
     }
     .info-vip {
-      padding: 20px 30px;
+      padding: .3125rem .3125rem;
       border-radius: 20px;
       box-sizing: border-box;
       background-image: linear-gradient(to right, #8c8c8c, #b6b6b6);
       color: #d2d2d2;
-      margin-bottom: 30px;
+      margin-bottom: .3125rem;
       .content-top {
+        font-size: 14px;
         position: relative;
-        padding-bottom: 20px;
+        padding-bottom: .3125rem;
         border-bottom: 1px solid #d2d2d2;
         .main {
-          font-size: 44px;
+          font-size: 16px;
           font-weight: bold;
           color: #fff;
         }
         .content-right {
+          font-size: 10px;
           color: #fff;
           position: absolute;
-          top: 10px;
+          top: .125rem;
           right: 0;
-          padding: 5px 10px;
+          padding: .0625rem .125rem;
           border: 1px solid #fff;
           border-radius: 30px;
         }
       }
       .content-bottom {
-        padding-top: 20px;
+        padding-top: .3125rem;
       }
     }
     .info-list {
-      font-size: 36px;
+      font-size: 16px;
       background: #fff;
-      border-radius: 20px;
-      margin-bottom: 20px;
+      border-radius: 10px;
+      margin-bottom: .3125rem;
       .list-title {
-        font-size: 24px;
+        // font-size: 24px;
         color: #989898;
-        padding: 20px 0 20px 30px;
+        padding: .25rem 0 .25rem .25rem;
         border-bottom: 1px solid #ccc;
       }
       .list-item {
         position: relative;
-        margin-left: 30px;
-        line-height: 100px;
+        margin-left: .3125rem;
+        display: flex;
+        align-items: center;
+        // line-height: 100px;
         box-sizing: border-box;
-        height: 100px;
+        height: 1rem;
         &.borderBom {
-          margin-left: 30px;
+          margin-left: .3125rem;
           padding-left: 0;
           border-bottom: 1px solid #ccc;
+          &:last-child{
+            border: none;
+          }
         }
         .item-icon {
-          font-size: 48px;
-          margin-right: 20px;
+          // font-size: 48px;
+          margin-right: .3125rem;
         }
         .item-text {
-          font-size: 30px;
+          // font-size: 30px;
           vertical-align: top;
         }
         .anticon-right {
           color: #ccc;
           position: absolute;
-          right: 20px;
+          right: .3125rem;
           top: 50%;
           transform: translateY(-50%);
         }
       }
     }
     .info-close {
-      padding: 15px 0;
-      border-radius: 20px;
+      padding: .3125rem 0;
+      border-radius: .3125rem;
       color: #dc2c1f;
       background: #fff;
       text-align: center;
-      font-size: 32px;
+      // font-size: 32px;
     }
   }
 </style>

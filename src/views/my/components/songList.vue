@@ -87,7 +87,7 @@ import { reactive, ref, toRefs } from "vue"
     .tab-item{
       flex: 1;
       text-align: center;
-      font-size: 36px;
+      font-size: 18px;
       font-weight: bold;
       border-right: 1px solid #D0D0D0;
       span{

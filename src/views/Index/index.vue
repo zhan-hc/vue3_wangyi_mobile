@@ -74,7 +74,7 @@
 <style scoped lang="scss">
   .index-wrapper {
     background-color: #f5f5f5;
-    padding: 120px 0 250px;
+    padding: 1.625rem 0 3rem;
     box-sizing: border-box;
   }
 </style>

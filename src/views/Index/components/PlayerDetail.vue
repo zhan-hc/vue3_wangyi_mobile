@@ -128,7 +128,7 @@
         }
       }
       .iconfont {
-        font-size: 48px;
+        // font-size: 48px;
       }
     }
     .player-content {
@@ -176,7 +176,7 @@
       .icon-list {
         display: flex;
         .iconfont {
-          font-size: 48px;
+          // font-size: 48px;
           flex: 1;
           text-align: center;
           display: block;
@@ -211,13 +211,13 @@
         height: 150px;
         line-height: 150px;
         .iconfont {
-          font-size: 48px;
+          // font-size: 48px;
           flex: 1;
           display: block;
           text-align: center;
         }
         .icon-bofang3,.icon-zanting {
-          font-size: 100px;
+          // font-size: 100px;
         }
       }
     }

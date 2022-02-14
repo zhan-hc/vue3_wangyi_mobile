@@ -43,7 +43,7 @@ export default {
   margin-bottom: 20px;
   &-icon{
     margin-right: 20px;
-    font-size: 36px;
+    font-size: 18px;
     vertical-align: middle;
   }
   span{
@@ -52,12 +52,12 @@ export default {
     font-weight: 600;
   }
   &-tellogin{
-    font-size: 32px;
+    // font-size: 32px;
   }
   &-pswlogin{
     position: absolute;
     right: 40px;
-    font-size: 24px;
+    // font-size: 24px;
     border: 1px solid #ccc;
     border-radius: 30px;
     padding: 5px 20px;

@@ -53,38 +53,38 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .broadcast-container{
-  font-size: 24px;
+  font-size: 14px;
   background: #fff;
-  padding: 20px 0;
-  border-radius: 20px;
-  margin-bottom: 20px;
+  padding: .3125rem 0;
+  border-radius: 10px;
+  margin-bottom: .625rem;
   .broadcast-header{
-    font-size: 36px;
-    margin: 20px 30px;
+    font-size: 18px;
+    margin: .3125rem .3125rem;
     color: #fff;
   }
   .broadcast-wrapper{
-    width: 690px;
+    // width: 280px;
     box-sizing: border-box;
-    margin: 0 30px;
-    padding-bottom: 20px;
+    margin: 0 .3125rem;
+    padding-bottom: .3125rem;
     overflow: hidden;
-    background: #26292b;
+    background: #555;
     border-radius: 10px;
     .broadcast-content{
       touch-action: none;
       overflow: hidden;
-      padding: 10px 20px;
+      padding: 0 .3125rem .3125rem;
       .broadcast-item{
         position: relative;
         display: inline-block;
-        margin-right: 30px;
-        width: 160px;
-        height: 160px;
+        margin-right: .3125rem;
+        width: 2rem;
+        height: 2rem;
         // background: olivedrab;
         vertical-align: top;
         border-radius: 10px;
-        padding: 10px;
+        padding: .125rem;
         .broadcast-name{
           display: -webkit-box;
           -webkit-box-orient: vertical;
@@ -92,23 +92,23 @@ export default defineComponent({
           overflow: hidden;
         }
         .broadcast-desc{
+          font-size: 10px;
           position: absolute;
-          bottom: 10px;
-          left: 10px;
-          right: 10px;
+          bottom: .0625rem;
+          left: .3125rem;
+          right: .3125rem;
           display: flex;
           .desc-type{
             flex: 1;
           }
         }
         .anticon-caret-right{
-          font-size: 36px;
-          // position: absolute;
-          // right: 20px;
-          // bottom: 20px;
+          position: absolute;
+          right: .0625rem;
+          bottom: .0625rem;
           color: red;
           background: #fff;
-          padding: 3px;
+          padding: .0625rem;
           border-radius: 50%;
         }
       }

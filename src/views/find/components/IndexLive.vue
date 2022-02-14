@@ -58,7 +58,7 @@ export default defineComponent({
 <style scoped lang="scss">
 @import '@/assets/scss/mixin.scss';
 .live-container{
-  font-size: 24px;
+  // font-size: 24px;
   background: #fff;
   padding: 20px 0;
   border-radius: 20px;
@@ -67,7 +67,7 @@ export default defineComponent({
     position: relative;
     margin: 20px 30px;
     .title {
-      font-size: 36px;
+      font-size: 18px;
       font-weight: bold;
     }
     .more{

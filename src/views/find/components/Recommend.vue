@@ -49,7 +49,7 @@
       const { getUrlParams, handleRouterJump } = useRouteFun()
 
       onMounted(() => {
-        initScroll(230, recommendList.length, content, wrapper)
+        initScroll(217, recommendList.length, content, wrapper)
       })
 
       // 歌单详情跳转
@@ -70,22 +70,23 @@
 
 <style scoped lang="scss">
   .recommend-container {
-    font-size: 24px;
+    font-size: 14px;
     background: #fff;
-    padding: 20px 0;
+    padding: .3125rem 0;
     margin-bottom: 20px;
     .recommend-header {
       position: relative;
-      margin: 20px 30px;
+      margin: .3125rem .5rem;
       .title {
-        font-size: 36px;
+        font-size: 18px;
         font-weight: bold;
       }
       .more {
+        font-size: 12px;
         position: absolute;
         right: 0;
         top: 50%;
-        padding: 5px 15px;
+        padding: .0625rem .125rem;
         border-radius: 30px;
         border: 1px solid #ccc;
         background: #fff;
@@ -93,24 +94,25 @@
       }
     }
     .recommend-wrapper {
-      width: 720px;
+      width: calc(100vh-1.875rem);
       box-sizing: border-box;
-      margin: 0 30px;
-      padding-bottom: 20px;
+      margin: 0 .625rem;
+      padding-bottom: .4375rem;
       overflow: hidden;
       .recommend-content {
         touch-action: none;
         .recommend-item {
+          font-size: 12px;
           position: relative;
           display: inline-block;
-          margin-right: 30px;
-          width: 200px;
+          margin-right: .625rem;
+          width: 2.25rem;
           vertical-align: top;
           .recommend-img {
             border-radius: 10px;
-            width: 200px;
-            height: 200px;
-            margin-bottom: 10px;
+            width: 2.25rem;
+            height: 2.25rem;
+            margin-bottom: .3125rem;
             img {
               vertical-align: middle;
               border-radius: 10px;
@@ -119,15 +121,17 @@
             }
           }
           .recommend-playCount {
+            font-size: 10px;
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: .125rem;
+            right: .125rem;
             color: #fff;
-            padding: 5px 15px;
+            padding: .0625rem .125rem;
             background: rgba($color: #000, $alpha: 0.3);
             border-radius: 30px;
             .icon-bofang4 {
-              font-size: 22px;
+              font-size: 10px;
+              // font-size: 22px;
             }
           }
           .recommend-name {

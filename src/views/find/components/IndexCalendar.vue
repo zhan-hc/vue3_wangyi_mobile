@@ -49,22 +49,23 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .calendar-container{
-  font-size: 24px;
+  font-size: 14px;
   background: #fff;
-  padding: 20px 0;
-  margin-bottom: 20px;
+  padding: .3125rem 0;
+  margin-bottom: .625rem;
+  border-radius: 10px;
   .calendar-header{
     position: relative;
-    margin: 20px 30px;
+    margin: .3125rem .3125rem;
     .title {
-      font-size: 36px;
+      font-size: 18px;
       font-weight: bold;
     }
     .more{
       position: absolute;
       right: 0;
       top: 50%;
-      padding: 5px 15px;
+      padding: .0625rem .3125rem;
       border-radius: 30px;
       border: 1px solid #ccc;
       background: #fff;
@@ -78,7 +79,7 @@ export default defineComponent({
       display: flex;
       border: 1px solid #ccc;
       border-radius: 10px;
-      margin-bottom: 10px;
+      margin-bottom: .3125rem;
       P{
         padding: 10px;
         margin: 0;
@@ -93,7 +94,7 @@ export default defineComponent({
     .calendar-item{
       display: flex;
       align-items: center;
-      padding: 15px;
+      padding: .125rem;
       border-bottom: 1px solid #ccc;
       &:last-child{
         border-bottom: none
@@ -102,24 +103,24 @@ export default defineComponent({
         flex: 1;
         span{
           color: #ccc;
-          margin-right: 15px;
+          margin-right: .3125rem;
         }
         .item-tag{
           color: #FFD700;
         }
         .item-title{
-        font-size: 26px;
-        margin-top: 5px;
-        width: 540px;
+        // font-size: 26px;
+        margin-top: .125rem;
+        // width: 540px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
       }
       }
       img{
-        width: 80px;
-        height: 80px;
-        border-radius: 10px;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 5px;
       }
     }
   }  

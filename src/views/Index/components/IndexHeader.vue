@@ -1,7 +1,7 @@
 <template>
   <div class="header-wrapper">
     <MenuOutlined @click="onOpen" />
-    <div class="header-content" @click="handleRouterJump('/indexSearch')">
+    <div class="header-content" @click="handleRouterJump('/search')">
       <SearchOutlined />
     </div>
     <AudioFilled />
@@ -31,27 +31,23 @@
     align-items: center;
     background-color: #f5f5f5;
     box-sizing: border-box;
-    padding: 20px 30px;
-    margin-bottom: 10px;
+    padding: .3125rem .4375rem;
     z-index: 2;
     .anticon-menu {
-      font-size: 48px;
-      margin-right: 20px;
-    }
-    .anticon-audio {
-      font-size: 48px;
+      margin-right: .3125rem;
     }
     .header-content {
       flex: 1;
-      height: 80px;
-      line-height: 80px;
-      margin-right: 10px;
-      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      height: 1rem;
+      margin-right: .3125rem;
+      padding: 0 .3125rem;
       background-color: #fff;
       border-radius: 40px;
+      box-sizing: border-box;
       .anticon-search {
         color: #bababa;
-        font-size: 42px;
         vertical-align: middle;
       }
     }

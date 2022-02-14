@@ -28,7 +28,7 @@ export default defineComponent({
     const content = ref(null)
 
     onMounted(() => {
-      initScroll(130, iconList.length, content, wrapper)
+      initScroll(142, iconList.length, content, wrapper)
     })
 
     return {
@@ -42,10 +42,9 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .wrapper{
-  font-size: 24px;
-  width: 750px;
+  font-size: 14px;
   box-sizing: border-box;
-  padding: 20px 30px;
+  padding: .3125rem .3125rem;
   border-bottom: 1px solid #ccc;
   background: #fff;
   overflow: hidden;
@@ -53,14 +52,14 @@ export default defineComponent({
     touch-action: none;
     .icon-item{
       display: inline-block;
-      margin-right: 30px;
+      margin-right: .625rem;
       text-align: center;
       .icon-img{
         background: #FFF1F1;
         border-radius: 50%;
-        width: 100px;
-        height: 100px;
-        margin-bottom: 10px;
+        width: 1rem;
+        height: 1rem;
+        margin-bottom: .3125rem;
         img{
           width: 100%;
           height: 100%;

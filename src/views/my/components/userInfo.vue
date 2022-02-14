@@ -36,7 +36,7 @@ import { ref, computed} from "vue"
   .user{
     flex: 1;
     .user-name {
-      font-size: 36px;
+      font-size: 18px;
       font-weight: bold;
     }
     .user-vip {
