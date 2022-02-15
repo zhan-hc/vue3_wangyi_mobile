@@ -6,7 +6,9 @@ import {
   RightOutlined,
   PlusOutlined,
   AudioFilled,
-  CaretRightOutlined
+  CaretRightOutlined,
+  ManOutlined,
+  WomanOutlined
  } from '@ant-design/icons-vue'
 
  import { Carousel, Drawer, Avatar } from 'ant-design-vue'
@@ -19,6 +21,8 @@ const ant = {
     Vue.component(RightOutlined.name, RightOutlined)
     Vue.component(CloseOutlined.name, CloseOutlined)
     Vue.component(PlusOutlined.name, PlusOutlined)
+    Vue.component(ManOutlined.name, ManOutlined)
+    Vue.component(WomanOutlined.name, WomanOutlined)
     Vue.component(CaretRightOutlined.name, CaretRightOutlined)
     Vue.component(Carousel.name, Carousel)
     Vue.component(Drawer.name, Drawer)

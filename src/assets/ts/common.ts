@@ -69,6 +69,7 @@ const playMusic = (song: any) => {
   direction: 滚动方向
 }
 */
+
 const initScroll = (visualWidth: number, sumLen: number, content: Ref, wrapper: Ref, direction: string = 'vertical') => {
   // let visualWidth = 650 // 可视宽度
   let width = (visualWidth * sumLen)/2
@@ -82,10 +83,25 @@ const initScroll = (visualWidth: number, sumLen: number, content: Ref, wrapper: 
 }
 
 
+/**
+* 高亮显示
+@params
+  str: 总字符串
+  key: 匹配字符串
+  className：高亮类名
+}
+*/
+const highLightStr = (str: string, key: string, className:string = 'high-light') => {
+  const strArr = str.split(key)
+  return strArr.join(`<span class="high-light">${key}</span>`)
+}
+
+
 export {
   formatCount,
   getAuthor,
   durationTrans,
   playMusic,
-  initScroll
+  initScroll,
+  highLightStr
 }

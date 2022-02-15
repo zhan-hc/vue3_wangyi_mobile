@@ -1,5 +1,10 @@
 import myRequest from '@/utils/http/axios/index'
 
+interface searchData {
+  keywords: string,
+  limit?: string | number,
+  type?: string | number
+}
 
 // 搜索建议
 export function search_suggest (parameter:string)  {
@@ -30,13 +35,10 @@ export function search_hot ()  {
 }
 
 // 搜索结果
-export function search_multimatch (parameter:string)  {
+export function search_result (data: searchData)  {
     return myRequest.request({
-      url: '/search/multimatch',
+      url: '/search',
       method: 'post',
-      data: {
-        'keywords': parameter,
-        'type':'mobile'
-      }
+      data
     })
 }

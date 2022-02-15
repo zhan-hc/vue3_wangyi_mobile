@@ -167,11 +167,11 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 100px;
+      height: 1.5rem;
       color: #fff;
       display: flex;
-      padding: 0 30px;
-      line-height: 100px;
+      padding: 0 .3125rem;
+      line-height: 1.5rem;
       z-index: 1;
       span {
         flex: 1;
@@ -180,29 +180,29 @@
         letter-spacing: 2px;
       }
       .iconfont {
-        font-size: 48px;
+        font-size: 20px;
       }
       .icon-leftarrow {
-        margin-right: 20px;
+        margin-right: .3125rem;
       }
       .icon-search {
-        margin-right: 40px;
+        margin-right: .3125rem;
       }
     }
     .detail-info {
       position: relative;
       display: flex;
-      padding: 120px 30px 100px;
-      height: 600px;
+      padding: 1rem .3125rem 1rem;
+      height: 8rem;
       border-radius: 0 0 80% 80% / 0 0 10% 10%;
       background-size: cover;
       .songList-img {
         position: relative;
         border-radius: 10px;
-        width: 220px;
-        height: 220px;
-        margin-bottom: 10px;
-        margin-right: 30px;
+        width: 3rem;
+        height: 3rem;
+        margin-bottom: .125rem;
+        margin-right: .3125rem;
         z-index: 1;
         img {
           border-radius: 10px;
@@ -210,15 +210,16 @@
           height: 100%;
         }
         .songList-playCount {
+          font-size: 10px;
           position: absolute;
-          top: 10px;
-          right: 10px;
+          top: .125rem;
+          right: .125rem;
           color: #fff;
-          padding: 5px 15px;
+          padding: .0625rem .125rem;
           background: rgba($color: #000, $alpha: 0.3);
-          border-radius: 30px;
+          border-radius: 15px;
           .icon-bofang4 {
-            font-size: 24px;
+            font-size: 12px;
           }
         }
       }
@@ -226,11 +227,12 @@
         position: relative;
         flex: 1;
         color: #fff;
-        height: 220px;
+        height: 4rem;
         z-index: 1;
+        font-size: 16px;
         .info-name {
-          font-size: 32px;
-          margin-bottom: 20px;
+          font-size: 16px;
+          margin-bottom: .3125rem;
           @include ellipsisBasic(2);
         }
         .info-creator {
@@ -238,18 +240,18 @@
           font-weight: 600;
           img {
             display: inline-block;
-            width: 60px;
-            height: 60px;
+            width: .75rem;
+            height: .75rem;
             border-radius: 50%;
             margin-right: 20px;
           }
           span {
-            margin-right: 10px;
+            margin-right: .125rem;
           }
           .icon-plus {
             color: #bfbdbe;
             background: #828283;
-            padding: 5px 15px;
+            padding: .0625rem .125rem;
             border-radius: 20px;
           }
         }
@@ -260,25 +262,26 @@
           right: 0;
           color: #828283;
           font-weight: 600;
-          @include ellipsis;
+          @include ellipsisBasic(2);
         }
       }
     }
     .detail-songList {
-      padding: 0 30px;
+      padding: 0 .3125rem;
       .songList-count {
         position: relative;
-        width: 500px;
-        height: 80px;
+        width: 250px;
+        height: 1.25rem;
         display: flex;
         align-items: center;
-        padding: 20px 0;
-        margin: -40px auto 0;
-        border-radius: 30px;
+        padding: .3125rem 0;
+        margin: -0.625rem auto 0;
+        border-radius: 15px;
         background: #fff;
-        box-shadow: 0 10px 5px #828283;
-        margin-bottom: 30px;
+        box-shadow: 0 .3125rem .3125rem #828283;
+        margin-bottom: .3125rem;
         .count-item {
+          font-size: 12px;
           flex: 1;
           display: flex;
           justify-content: center;
@@ -286,8 +289,8 @@
           border-right: 2px solid #ccc;
           box-sizing: border-box;
           .iconfont {
-            font-size: 40px;
-            margin-right: 20px;
+            font-size: 20px;
+            margin-right: .3125rem;
           }
           &:last-child {
             border-right: none;
@@ -301,67 +304,67 @@
         background: #fff;
         .all {
           flex: 1;
-          font-size: 32px;
+          font-size: 18px;
           font-weight: bold;
           span {
-            margin-left: 20px;
-            font-size: 24px;
+            margin-left: .3125rem;
+            font-size: 12px;
             color: #999;
             font-weight: 400;
           }
         }
         .iconfont {
-          font-size: 48px;
+          font-size: 22px;
         }
         .icon-bofang5 {
-          margin-right: 30px;
+          margin-right: .3125rem;
           color: #ff4639;
         }
         .icon-xiazaipt {
-          font-size: 52px;
-          margin-right: 40px;
+          font-size: 24px;
+          margin-right: .3125rem;
         }
       }
       .fixed-header {
         position: fixed;
-        top: 100px;
-        left: 30px;
-        right: 30px;
+        top: 1rem;
+        left: .3125rem;
+        right: .3125rem;
       }
       .songList-item {
         display: flex;
         align-items: center;
-        height: 120px;
+        height: 1.5rem;
         color: #999;
         .item-sort {
           color: #999;
           font-size: 18px;
-          width: 70px;
+          width: .875rem;
         }
         .item-info {
           flex: 1;
-          width: 450px;
-          margin-right: 30px;
+          width: 250px;
+          margin-right: .3125rem;
           .info-name {
-            font-size: 28px;
-            letter-spacing: 2px;
+            font-size: 14px;
+            letter-spacing: .0625rem;
             font-weight: 600;
             color: #000;
             @include ellipsis;
           }
           .info-authors {
-            font-size: 24px;
+            font-size: 12px;
             @include ellipsis;
           }
         }
         .iconfont {
-          font-size: 48px;
+          font-size: 24px;
         }
         .icon-mv {
-          margin-right: 40px;
+          margin-right: .3125rem;
         }
         .icon-sandian {
-          font-size: 42px;
+          font-size: 20px;
         }
       }
     }

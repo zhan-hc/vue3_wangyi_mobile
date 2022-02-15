@@ -3,15 +3,17 @@
     <div class="search-header">
       <LeftOutlined class="header-icon" @click="handleBack" />
       <input
+        type="text"
         v-model="keyword"
         class="search-input"
         :placeholder="hotKeyword"
         @input="onSearch"
+        @keyup.enter="isSearch=true"
       />
     </div>
-    <div class="search-content" v-if="keyword">
+    <div class="search-content" v-if="keyword && !isSearch">
       <div v-if="searchList">
-        <div class="search-item" v-for="(item, i) in searchList" :key="i">
+        <div class="search-item" v-for="(item, i) in searchList" :key="i"  @click="handleClickWord(item.keyword)">
           <van-icon name="search" />
           <span class="search-current">{{
             item.keyword.slice(0, keyword.length)
@@ -20,20 +22,20 @@
         </div>
       </div>
       <div v-else>
-        <div class="search-item">
+        <div class="search-item"  @click="handleClickWord(item.keyword)">
           <span class="search-null">{{ `搜索 "${keyword} "` }}</span>
         </div>
       </div>
     </div>
+    <search-tab v-else-if="isSearch" :keywords="keyword"></search-tab>
     <div v-else class="hot-content">
       <p>热搜榜</p>
-      <div class="search-hot">
+      <div class="search-hot" v-if="hotList.length">
         <div class="hot-item" v-for="(item, i) in hotList" :key="i">
           <span :class="{ hot: i <= 3 }">{{ i + 1 }}</span>
           <span>{{ item.searchWord }}</span>
         </div>
       </div>
-      <search-tab></search-tab>
     </div>
   </div>
 </template>
@@ -56,6 +58,7 @@
         hotKeyword: '',
         searchList: [],
         hotList: [],
+        isSearch: false
       })
 
       onMounted(async () => {
@@ -65,22 +68,36 @@
         state.hotKeyword = keyRes.data.showKeyword
       })
 
-      function onSearch() {
+      // 搜索建议
+      const onSearch = () => {
+        state.isSearch = false
         state.keyword !== '' &&
           search_suggest(state.keyword).then((res) => {
             state.searchList = res.result.allMatch
           })
       }
+
+
+      // 点击查询
+      const handleClickWord = (keyword) => {
+        state.keyword = keyword
+        state.isSearch = true
+      }
+
+      // 回退
       const handleBack = () => {
         if (state.keyword) {
           state.keyword = ''
+          state.isSearch = false
         } else {
           handleRouterBack
         }
       }
+
       return {
         ...toRefs(state),
         handleBack,
+        handleClickWord,
         onSearch: useDebounceFn(onSearch, 300),
       }
     },
@@ -95,18 +112,16 @@
     .search-header {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: .125rem;
       .header-icon {
-        margin-right: 20px;
+        margin-right: .3125rem;
       }
       .search-input {
         flex: 1;
         background: none;
         outline: none;
         border: none;
-        // font-size: 24px;
         border-bottom: 1px solid #ccc;
-        // font-size: 32px;
         caret-color: #cf0000;
       }
     }
@@ -121,7 +136,6 @@
         }
         .van-icon-search {
           margin-right: 10px;
-          // font-size: 32px;
         }
         .search-null {
           color: #4169e1;
@@ -136,18 +150,18 @@
       .search-hot {
         display: flex;
         flex-wrap: wrap;
-        padding: 20px;
+        padding: .625rem;
         border-radius: 20px;
         box-shadow: 0 0 5px 5px #ccc;
         .hot-item {
           width: 50%;
-          padding: 10px;
+          padding: .0625rem;
           @include ellipsis;
           span {
             &:first-child {
               display: inline-block;
-              width: 30px;
-              margin-right: 20px;
+              width: .625rem;
+              margin-right: .125rem;
               color: #ccc;
             }
             &.hot {

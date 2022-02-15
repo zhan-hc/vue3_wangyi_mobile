@@ -5,6 +5,7 @@ import store from './store'
 import Antd from './plugins/Ant/index'
 import 'amfe-flexible'
 import '@/assets/iconfont/iconfont.css'
+import '@/assets/css/common.css'
 import Vant from 'vant';
 import {Toast} from 'vant'
 import 'vant/lib/index.css';

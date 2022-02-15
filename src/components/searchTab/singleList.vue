@@ -1,78 +1,124 @@
 <template>
-  <div>单曲</div>
-  <!-- <van-list
-    v-model:loading="loading"
-    :finished="finished"
-    finished-text="没有更多了"
-    @load="handleLoad"
+
+  <div class="singleList-header">
+    <i class="iconfont icon-bofang5"></i>
+    <div class="all">播放全部</div>
+    <i class="iconfont icon-duoxuanpt"></i>
+  </div>
+  <div
+    class="singleList-item van-clearfix"
+    v-for="(item, i) in dataList"
+    :key="item.id"
   >
-    <div
-      class="songList-item van-clearfix"
-      v-for="(item, i) in songList.tracks"
-      :key="item.id"
-    >
-      <div class="item-sort">{{ i + 1 }}</div>
-      <div class="item-info">
-        <div class="info-name">{{ item.name }}</div>
-        <div class="info-authors">
-          {{ getAuthor(item.ar) }} - {{ item.al.name }}
-        </div>
+    <div class="item-info">
+      <div class="info-name">
+        <span v-html="highLightStr(item.name, keywords)"></span>
+        <span class="item-desc"> {{item.transNames ? `（${item.transNames}）` : ''}}</span>
       </div>
-      <i class="iconfont icon-mv"></i>
-      <i class="iconfont icon-sandian"></i>
+      <div class="info-authors">
+        {{ getAuthor(item.artists) }} - {{ item.album.name }}
+      </div>
     </div>
-  </van-list> -->
+    <i class="iconfont icon-mv"></i>
+    <i class="iconfont icon-sandian"></i>
+  </div>
 </template>
 
 <script>
-import {defineComponent, reactive, toRefs} from 'vue'
+import {computed, defineComponent, reactive, toRefs} from 'vue'
   import { getAuthor } from '@/assets/ts/common'
+import { state } from '@/store/state'
+import { highLightStr } from "@/assets/ts/common";
 export default defineComponent({
   name: 'singleList',
   props: {
+    dataList: {
+      type: Array,
+      default: () => []
+    },
+    keywords: {
+      type: String,
+      default: () => ''
+    }
   },
-  setup() {
-    
+  setup(props) {
+    let dataList = props.dataList
+    let keywords = props.keywords
+    const state = reactive({
+      currentPage: 1,
+      pageSize: 10
+    })
+
+    return {
+      ...toRefs(state),
+      dataList,
+      keywords,
+      getAuthor,
+      highLightStr
+    }
   }
 })
 </script>
 
 <style scoped lang='scss'>
   @import '@/assets/scss/mixin.scss';
-  .songList-item {
+  .singleList-header {
     display: flex;
     align-items: center;
-    height: 120px;
+    margin-bottom: 5px;
+    .all {
+      flex: 1;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .iconfont {
+      font-size: 22px;
+    }
+    .icon-bofang5 {
+      margin-right: .3125rem;
+      color: #ff4639;
+    }
+    .icon-xiazaipt {
+      font-size: 24px;
+      margin-right: .3125rem;
+    }
+  }
+  .singleList-item {
+    display: flex;
+    align-items: center;
+    height: 1rem;
     color: #999;
+    margin-bottom: .3125rem;
     .item-sort {
       color: #999;
-      font-size: 36px;
-      width: 70px;
+      font-size: 18px;
+      width: .625rem;
     }
     .item-info {
       flex: 1;
-      width: 450px;
-      margin-right: 30px;
+      width: 260px;
+      margin-right: .3125rem;
       .info-name {
-        font-size: 28px;
-        letter-spacing: 2px;
-        font-weight: 600;
+        letter-spacing: .0625rem;
         color: #000;
         @include ellipsis;
+        .item-desc{
+          color: #999;
+        }
       }
       .info-authors {
-        font-size: 24px;
+        font-size: 10px;
         @include ellipsis;
       }
     }
     .iconfont {
-      font-size: 48px;
+      font-size: 20px;
     }
     .icon-mv {
-      margin-right: 40px;
+      margin-right: .625rem;
     }
     .icon-sandian {
-      font-size: 42px;
+      font-size: 20px;
     }
   }
 </style>
