@@ -9,6 +9,7 @@
     class="singleList-item van-clearfix"
     v-for="(item, i) in dataList"
     :key="item.id"
+    @click="playMusicParams(item)"
   >
     <div class="item-info">
       <div class="info-name">
@@ -26,7 +27,7 @@
 
 <script>
 import {computed, defineComponent, reactive, toRefs} from 'vue'
-  import { getAuthor } from '@/assets/ts/common'
+  import { getAuthor, playMusic } from '@/assets/ts/common'
 import { state } from '@/store/state'
 import { highLightStr } from "@/assets/ts/common";
 export default defineComponent({
@@ -49,12 +50,24 @@ export default defineComponent({
       pageSize: 10
     })
 
+    // 播放音乐
+    function playMusicParams(item) {
+      const songInfo = {
+        id: item.id,
+        imageUrl: item.artists.img1v1Url,
+        title: item.name,
+        authors: getAuthor(item.artists)
+      }
+      playMusic(songInfo)
+    }
+
     return {
       ...toRefs(state),
       dataList,
       keywords,
       getAuthor,
-      highLightStr
+      highLightStr,
+      playMusicParams
     }
   }
 })

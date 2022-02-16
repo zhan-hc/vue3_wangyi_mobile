@@ -66,6 +66,7 @@
           class="songList-item van-clearfix"
           v-for="(item, i) in songList.tracks"
           :key="item.id"
+          @click="playMusicParams(item)"
         >
           <div class="item-sort">{{ i + 1 }}</div>
           <div class="item-info">
@@ -84,7 +85,7 @@
 
 <script setup>
   import { ref, reactive, onMounted, onUnmounted, toRefs } from 'vue'
-  import { formatCount, getAuthor } from '@/assets/ts/common'
+  import { formatCount, getAuthor, playMusic } from '@/assets/ts/common'
   import { songList_detail,song_detail } from '@/api/song'
   import useDetailScroll from '@/hooks/song/useDetailScroll'
   import useRouteFun from '@/hooks/router/useRouteFun'
@@ -136,6 +137,17 @@
         }
       })
     }
+  }
+
+  // 播放音乐
+  function playMusicParams(item) {
+    const songInfo = {
+      id: item.id,
+      imageUrl: item.al.picUrl,
+      title: item.name,
+      authors: getAuthor(item.ar)
+    }
+    playMusic(songInfo)
   }
 </script>
 

@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-  import { inject,computed, ref } from 'vue'
+  import { inject,computed, ref, watch } from 'vue'
   import { iconList, operateList } from '@/assets/ts/playerDetailData'
   import { useStore } from 'vuex'
   import { durationTrans } from "@/assets/ts/common";
@@ -89,8 +89,8 @@
   }
   @keyframes rotateLP {
     100% {
-      width: 500px;
-      height: 500px;
+      width: 240px;
+      height: 240px;
       transform: rotate(360deg);
     }
   }
@@ -101,27 +101,28 @@
     right: 0;
     bottom: 0;
     z-index: 3;
-    padding: 30px;
+    padding: .3125rem;
     color: #fff;
-    font-size: 24px;
+    font-size: .75rem;
     background: #ccc;
     z-index: 999;
     .player-header {
       display: flex;
-      margin-bottom: 30px;
+      margin-bottom: .3125rem;
       .song-info {
         flex: 1;
         text-align: center;
         letter-spacing: 1px;
         .song-name {
           color: #fff;
-          font-size: 32px;
-          width: 400px;
+          font-size: 16px;
+          width: 240px;
           margin: 0 auto;
           @include ellipsis;
         }
         .song-author {
-          width: 400px;
+          font-size: 14px;
+          width: 240px;
           margin: 0 auto;
           color: #b3b3b3;
           @include ellipsis;
@@ -134,25 +135,25 @@
     .player-content {
       text-align: center;
       .content-needle {
-        margin-left: 250px;
-        width: 300px;
-        height: 250px;
+        margin-left: 2.8rem;
+        width: 120px;
+        height: 100px;
         &.play{
           transform: rotate(30deg);
-          transform-origin: 10px 10px;
+          transform-origin: .0625rem .0625rem;
           animation: play 3s linear;
         }
         &.paused{
           transform: rotate(0);
-          transform-origin: 10px 10px;
+          transform-origin: .0625rem .0625rem;
           animation: paused 3s linear;
         }
       }
       .content-disc {
         position: relative;
-        background-image: url(../../../assets/images/disc.png);
-        width: 500px;
-        height: 500px;
+        background-image: url(../../assets/images/disc.png);
+        width: 240px;
+        height: 240px;
         background-size: cover;
         margin: 0 auto;
         z-index: -1;
@@ -161,8 +162,8 @@
           position: absolute;
           top: 50%;
           left: 50%;
-          width: 330px;
-          height: 330px;
+          width: 160px;
+          height: 160px;
           border-radius: 50%;
           transform: translate(-50%, -50%);
         }
@@ -176,7 +177,7 @@
       .icon-list {
         display: flex;
         .iconfont {
-          // font-size: 48px;
+          font-size: 24px;
           flex: 1;
           text-align: center;
           display: block;
@@ -184,23 +185,24 @@
       }
       .song-progress {
         display: flex;
-        padding: 0 30px;
+        padding: 0 .3125rem;
         color: #b3b3b3;
+        font-size: 12px;
         .van-slider{
-          margin-top: 16px;
-          margin-right: 20px;
+          margin-top: .2188rem;
+          margin-right: .3125rem;
         }
         .progress-start {
-          margin-right: 20px;
+          margin-right: .3125rem;
         }
         .progress {
           position: relative;
           flex: 1;
-          margin: 0 30px 17px;
+          margin: 0 .3125rem .125rem;
           // border-bottom: 3px solid #b3b3b3;
           &-spot {
-            width: 10px;
-            height: 10px;
+            width: .125rem;
+            height: .125rem;
             background: #fff;
             border-radius: 50%;
           }
@@ -208,16 +210,16 @@
       }
       .song-operate {
         display: flex;
-        height: 150px;
-        line-height: 150px;
+        height: 80px;
+        line-height: 80px;
         .iconfont {
-          // font-size: 48px;
+          font-size: 24px;
           flex: 1;
           display: block;
           text-align: center;
         }
         .icon-bofang3,.icon-zanting {
-          // font-size: 100px;
+          font-size: 40px;
         }
       }
     }

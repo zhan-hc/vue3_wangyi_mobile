@@ -72,6 +72,17 @@ export default defineComponent({
       initScroll(600, newSongList.value.length, content, wrapper)
     }
 
+    // 播放音乐
+    function playMusicParams(item) {
+      const songInfo = {
+        id: item.resourceId,
+        imageUrl: item.uiElement.image.imageUrl,
+        title: item.uiElement.mainTitle.title,
+        authors: getAuthor(item.resourceExtInfo.artists)
+      }
+      playMusic(songInfo)
+    }
+
     return {
       songList,
       songTab,
@@ -82,7 +93,7 @@ export default defineComponent({
       newSongList,
       changeTab,
       getAuthor,
-      playMusic
+      playMusic: playMusicParams
     }
   }
 })

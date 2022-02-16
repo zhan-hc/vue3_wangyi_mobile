@@ -33,6 +33,10 @@ export default defineComponent({
   setup(props) {
     let dataList = props.dataList
     let keywords = props.keywords
+    // 歌单详情跳转
+    const handleClickJump = (id: number) => {
+      handleRouterJump(`/songListDetail/${id}`)
+    }
     return{
       dataList,
       keywords,

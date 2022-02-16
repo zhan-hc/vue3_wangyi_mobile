@@ -46,14 +46,14 @@ const durationTrans = (num: number, divider: number = 1) => {
 }
 
 // 点击播放音乐
-const playMusic = (song: any) => {
-  const songInfo = {
-    id: song.resourceId,
-    imageUrl: song.uiElement.image.imageUrl,
-    title: song.uiElement.mainTitle.title,
-    authors: getAuthor(song.resourceExtInfo.artists)
-  }
-  store.commit('changeSongId', song.resourceId)
+const playMusic = (songInfo: any) => {
+  // const songInfo = {
+  //   id: song.resourceId,
+  //   imageUrl: song.uiElement.image.imageUrl,
+  //   title: song.uiElement.mainTitle.title,
+  //   authors: getAuthor(song.resourceExtInfo.artists)
+  // }
+  store.commit('changeSongId', songInfo.id)
   store.commit('changeSongInfo', songInfo)
   store.commit('changePlayStatus', true)
 }

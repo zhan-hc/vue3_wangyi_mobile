@@ -12,10 +12,7 @@
     <keep-alive>
       <component :is="navList[activeTab]" />
     </keep-alive>
-    <player-detail v-show="isShowPlayer" />
-    <bottom-player />
     <bottom-nav />
-    <index-player />
   </div>
 </template>
 
@@ -23,14 +20,11 @@
   import IndexHeader from './components/IndexHeader'
   import DrawerInfo from './components/DrawerInfo'
   import BottomNav from './components/BottomNav'
-  import PlayerDetail from './components/PlayerDetail'
-  import BottomPlayer from './components/BottomPlayer'
   import find from '@/views/find/index'
   import podcast from '@/views/podcast/index'
   import my from '@/views/my/index'
   import sing from '@/views/sing/index'
   import village from '@/views/village/index'
-  import indexPlayer from './indexPlayer.vue'
   import {
     ref,
     provide,
@@ -49,7 +43,6 @@
 
   const store = useStore()
 
-  const isShowPlayer = ref(false)
   const visible = ref(false)
   const activeTab = ref(0)
   const { proxy } = getCurrentInstance()
@@ -57,7 +50,7 @@
 
   provide('visible', visible)
   provide('activeTab', activeTab)
-  provide('isShowPlayer', isShowPlayer)
+  // provide('isShowPlayer', isShowPlayer)
 
   const onClose = () => {
     visible.value = false

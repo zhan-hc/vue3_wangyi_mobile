@@ -48,13 +48,25 @@ export default defineComponent({
     onMounted(() => {
       initScroll(700, songList.length, content, wrapper)
     })
+
+    // 播放音乐
+    function playMusicParams(item) {
+      const songInfo = {
+        id: item.resourceId,
+        imageUrl: item.uiElement.image.imageUrl,
+        title: item.uiElement.mainTitle.title,
+        authors: getAuthor(item.resourceExtInfo.artists)
+      }
+      playMusic(songInfo)
+    }
+
     return {
       songList,
       songheader,
       wrapper,
       content,
       getAuthor,
-      playMusic
+      playMusic: playMusicParams
     }
   }
 })

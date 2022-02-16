@@ -62,10 +62,11 @@
       })
 
       onMounted(async () => {
-        const hotRes = await search_hot()
-        const keyRes = await search_default()
-        state.hotList = hotRes.data
-        state.hotKeyword = keyRes.data.showKeyword
+        const hotRes = search_hot()
+        const keyRes = search_default()
+        const res = await Promise.all([hotRes, keyRes])
+        state.hotList = res[0].data
+        state.hotKeyword = res[1].data.showKeyword
       })
 
       // 搜索建议
@@ -90,7 +91,7 @@
           state.keyword = ''
           state.isSearch = false
         } else {
-          handleRouterBack
+          handleRouterBack()
         }
       }
 

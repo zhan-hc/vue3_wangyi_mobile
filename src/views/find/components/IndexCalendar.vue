@@ -48,6 +48,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/mixin.scss';
 .calendar-container{
   font-size: 14px;
   background: #fff;
@@ -111,10 +112,8 @@ export default defineComponent({
         .item-title{
         // font-size: 26px;
         margin-top: .125rem;
-        // width: 540px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        width: 240px;
+        @include ellipsis;
       }
       }
       img{

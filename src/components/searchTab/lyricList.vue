@@ -1,6 +1,6 @@
 <template>
   <div class="lyricList-wrap">
-    <div class="lyricList-item" v-for="(item, i) in dataList" :key="item.id">
+    <div class="lyricList-item" v-for="(item, i) in dataList" :key="item.id" @click="playMusicParams(item)">
       <div class="item-song">
         <div class="item-info">
           <div class="info-title">
@@ -14,7 +14,7 @@
       </div>
       <div class="item-lyric">
         <div class="lyric-info" v-for="(lyric, _index) in lyricList(item.lyrics.txt).slice(0,item.expand?lyricList(item.lyrics.txt).length : 3)" :key="_index" v-html="highLightStr(lyric, keywords)"></div>
-        <div class="lyric-expand" @click="item.expand = !item.expand">{{item.expand ? '收起' : '展开'}}歌词 <van-icon :name="`arrow-${item.expand ? 'up' : 'down'}`" /></div>
+        <div class="lyric-expand" @click.stop="item.expand = !item.expand">{{item.expand ? '收起' : '展开'}}歌词 <van-icon :name="`arrow-${item.expand ? 'up' : 'down'}`" /></div>
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@
 
 <script lang='ts'>
 import {defineComponent, reactive, toRefs} from 'vue'
-import { formatCount, highLightStr, getAuthor } from '@/assets/ts/common'
+import { formatCount, highLightStr, getAuthor, playMusic } from '@/assets/ts/common'
 export default defineComponent({
   name: 'lyricList',
   props: {
@@ -42,13 +42,25 @@ export default defineComponent({
     const lyricList = (str: string) => {
       return str.split('\n')
     }
+
+    // 播放音乐
+    function playMusicParams(item) {
+      const songInfo = {
+        id: item.id,
+        imageUrl: item.artists.img1v1Url,
+        title: item.name,
+        authors: getAuthor(item.artists)
+      }
+      playMusic(songInfo)
+    }
     return{
       dataList,
       keywords,
       getAuthor,
       formatCount,
       highLightStr,
-      lyricList
+      lyricList,
+      playMusicParams
     }
   }
 })

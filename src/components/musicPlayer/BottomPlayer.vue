@@ -1,5 +1,5 @@
 <template>
-  <div class="player-wrap" @click="handleOpenPlayer">
+  <div class="player-wrap" @click="handleOpenPlayer" :style="{'bottom': routerPath === '/' ? '1.5rem' : '0'}">
     <div class="player-img">
       <img
         :src="songInfo.imageUrl"
@@ -18,10 +18,14 @@
 <script setup>
   import { ref, reactive, inject, watch, computed } from 'vue'
   import { useStore } from 'vuex'
+  import useRouteFun from '@/hooks/router/useRouteFun'
   const store = useStore()
+  const { getRoutePath } = useRouteFun()
+  const routerPath = computed(() => getRoutePath())
   const songInfo = computed(() => store.state.currentSongInfo)
   const playStatus = computed(() => store.state.currentPlayStatus)
   const isShowPlayer = inject('isShowPlayer')
+
 
   const handleOpenPlayer = () => {
     isShowPlayer.value = true

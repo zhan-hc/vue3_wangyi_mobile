@@ -1,6 +1,6 @@
 <template>
   <div class="songList-wrap">
-    <div class="songList-item" v-for="item in dataList" :key="item.id">
+    <div class="songList-item" v-for="item in dataList" :key="item.id" @click="handleClickJump(item.id)">
       <div class="item-img">
         <img v-lazy="item.coverImgUrl" alt="歌单图片">
       </div>
@@ -14,7 +14,8 @@
 
 <script lang='ts'>
 import {defineComponent, reactive, toRefs} from 'vue'
-  import { formatCount } from '@/assets/ts/common'
+import { formatCount } from '@/assets/ts/common'
+import useRouteFun from '@/hooks/router/useRouteFun'
 export default defineComponent({
   name: 'songList',
   props: {
@@ -24,10 +25,16 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const { handleRouterJump } = useRouteFun()
     let dataList = props.dataList
+    // 歌单详情跳转
+    const handleClickJump = (id: number) => {
+      handleRouterJump(`/songListDetail/${id}`)
+    }
     return{
       dataList,
-      formatCount
+      formatCount,
+      handleClickJump
     }
   }
 })
