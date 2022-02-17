@@ -172,7 +172,7 @@
   .detail-wrap {
     font-size: 24px;
     background: #fff;
-    // height: 500px;
+    padding-bottom: 1.5rem;
     // overflow: auto;
     .detail-header {
       position: fixed;

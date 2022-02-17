@@ -80,10 +80,10 @@ import { reactive, ref, toRefs } from "vue"
 
 <style scoped lang="scss">
 .songList-wrap{
-  font-size: 24px;
+  font-size: 12px;
   .songList-tab{
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: .3125rem;
     .tab-item{
       flex: 1;
       text-align: center;
@@ -92,8 +92,8 @@ import { reactive, ref, toRefs } from "vue"
       border-right: 1px solid #D0D0D0;
       span{
         &.active{
-          border-bottom: 10px solid #FF4E4E;
-          border-radius: 10px;
+          border-bottom: .125rem solid #FF4E4E;
+          border-radius: 2px;
         }
       }
       &:last-child {
@@ -104,35 +104,36 @@ import { reactive, ref, toRefs } from "vue"
   .songlist-create,
   .songlist-collect{
     background: #fff;
-    border-radius: 20px;
-    padding: 10px 30px 30px;
-    font-size: 24px;
-    margin-bottom: 30px;
+    border-radius: 10px;
+    padding: .3125rem;
+    font-size: 14px;
+    margin-bottom: .3125rem;
     .create-header,
     .collect-header{
       display: flex;
       color: #999;
-      padding-bottom: 20px;
+      padding-bottom: .3125rem;
       span{
         flex: 1;
-        line-height: 60px;
+        // line-height: 60px;
       }
       .iconfont{
-        font-size: 40px;
+        font-size: 20px;
       }
       .icon-plus{
-        margin-right: 20px;
+        margin-right: .3125rem;
       }
     }
     .create-song,
     .collect-song{
       display: flex;
-      margin-bottom: 20px;
+      margin-bottom: .3125rem;
+      align-items: center;
       .song-img{
         position: relative;
-        width: 90px;
-        height: 90px;
-        margin-right: 30px;
+        width: 1rem;
+        height: 1rem;
+        margin-right: .3125rem;
         img{
           border-radius: 10px;
           width: 100%;
@@ -141,24 +142,24 @@ import { reactive, ref, toRefs } from "vue"
       }
       .song-import{
         position: relative;
-        padding: 30px;
-        width: 90px;
-        height: 90px;
+        padding: .3125rem;
+        width: 1rem;
+        height: 1rem;
         border-radius: 10px;
-        margin-right: 30px;
+        margin-right: .3125rem;
         background: #F3F3F3;
         .icon-daoru{
           position: absolute;
            top: 50%;
           left: 50%;
           transform: translate(-50%,-50%);
-          font-size: 30px;
+          font-size: 15px;
         }
       }
       .song-info{
         flex: 1;
         .info-title{
-          font-size: 28px;
+          font-size: 14px;
           font-weight: 600;
         }
         .info-num{
@@ -166,9 +167,9 @@ import { reactive, ref, toRefs } from "vue"
         }
       }
       .icon-sandian{
-        font-size: 40px;
+        font-size: 20px;
         color: #999;
-        line-height: 90px;
+        line-height: 1rem;
       }
     }
   }

@@ -20,8 +20,8 @@ import useMyInfo from '@/hooks/my/useMyInfo'
 
 <style scoped lang="scss">
 .my-wrap {
-  font-size: 24px;
-  padding: 30px;
+  font-size: 12px;
+  padding: .3125rem;
   box-sizing: border-box;
 }
 </style>

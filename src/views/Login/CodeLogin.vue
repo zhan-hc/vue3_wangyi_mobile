@@ -139,21 +139,21 @@
 
 <style scoped lang="scss">
   .container {
-    padding: 0 20px;
+    padding: 0 .3125rem;
     box-sizing: border-box;
-    font-size: 24px;
+    font-size: 14px;
     .desc {
-      font-size: 28px;
+      font-size: 14px;
     }
     .text {
       color: #c0c0c0;
-      font-size: 24px;
-      margin-bottom: 60px;
+      font-size: 14px;
+      margin-bottom: .625rem;
     }
     .timer {
       float: right;
-      margin-right: 40px;
-      font-size: 24px;
+      margin-right: .3125rem;
+      font-size: 14px;
       &-text {
         color: royalblue;
       }
@@ -162,13 +162,13 @@
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-between;
-      width: 650px;
+      width: 260px;
       margin: 0 auto;
       input {
-        width: 120px;
+        width: 1.5rem;
         border: none;
         outline: none;
-        font-size: 18px;
+        font-size: 16px;
         text-align: center;
         box-sizing: border-box;
         border-bottom: 1px solid #c0c0c0;

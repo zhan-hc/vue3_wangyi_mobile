@@ -44,7 +44,7 @@ export default defineComponent({
     }
 
     // 播放音乐
-    function playMusicParams(item) {
+    function playMusicParams(item: any) {
       const songInfo = {
         id: item.id,
         imageUrl: item.artists.img1v1Url,

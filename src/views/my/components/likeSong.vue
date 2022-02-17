@@ -22,16 +22,17 @@ import { ref, reactive } from "vue"
 <style scoped lang="scss">
 .likesong-wrap{
   display: flex;
+  align-items: center;
   background: #fff;
-  border-radius: 20px;
-  padding: 30px;
-  font-size: 24px;
-  margin-bottom: 30px;
+  border-radius: 10px;
+  padding: .3125rem;
+  font-size: 14px;
+  margin-bottom: .3125rem;
   .song-img{
     position: relative;
-    width: 90px;
-    height: 90px;
-    margin-right: 30px;
+    width:1.25rem;
+    height:1.25rem;
+    margin-right: .3125rem;
     img{
       border-radius: 10px;
       width: 100%;
@@ -42,8 +43,8 @@ import { ref, reactive } from "vue"
       top: 0;
       left: 0;
       background: rgba($color: #000, $alpha: 0.4);
-      width: 90px;
-      height: 90px;
+      width:1.25rem;
+      height:1.25rem;
       border-radius: 10px;
       .icon-ziyuan1{
         position: absolute;
@@ -57,18 +58,16 @@ import { ref, reactive } from "vue"
   .song-info{
     flex: 1;
     .info-title{
-      font-size: 28px;
+      font-size: 14px;
     }
     .info-num{
       color: #ccc;
     }
   }
   .song-heart{
-    height: 45px;
     border: 1px solid #ccc;
-    padding: 3px 10px;
+    padding: 0 .125rem;
     border-radius: 20px;
-    margin-top: 22px;
   }
 }
 </style>

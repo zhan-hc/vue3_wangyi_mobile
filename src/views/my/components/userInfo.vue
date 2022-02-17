@@ -23,15 +23,15 @@ import { ref, computed} from "vue"
 
 <style scoped lang="scss">
 .userInfo-wrap{
-  height: 100px;
+  height: 2rem;
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: .3125rem;
   .ant-avatar{
-    width: 90px;
-    height: 90px;
-    margin-right: 30px;
-    border: 2px solid #fff;
-    margin: 5px 20px;
+    width: 1rem;
+    height: 1rem;
+    margin: .3125rem;
+    border: 1px solid #fff;
+    margin: .0625rem .3125rem;
   }
   .user{
     flex: 1;
@@ -41,8 +41,8 @@ import { ref, computed} from "vue"
     }
     .user-vip {
       color: #fff;
-      padding: 3px 15px;
-      margin-right: 20px;
+      padding: .0625rem .3125rem;
+      margin-right: .3125rem;
       background: #bbb;
       border-radius: 20px;
         .icon-vip{
@@ -50,14 +50,14 @@ import { ref, computed} from "vue"
         }
     }
     .user-grade{
-      padding: 3px 15px;
+      padding: .0625rem .3125rem;
       background: #fff;
       border-radius: 20px;
     }
   }
   .anticon-right {
-    font-size: 38px;
-    line-height: 100px;
+    font-size: 16px;
+    line-height: 2rem;
   }
 }
 </style>

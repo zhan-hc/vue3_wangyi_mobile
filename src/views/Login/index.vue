@@ -13,7 +13,7 @@
 
 <script setup>
 import WYHeader from 'components/WYHeader'
-import {ref} from 'vue'
+import {ref, getCurrentInstance} from 'vue'
 import {useRouter} from 'vue-router'
 
   const {proxy} = getCurrentInstance()
@@ -35,25 +35,27 @@ import {useRouter} from 'vue-router'
 
 <style scoped lang="scss">
 .Login{
-  padding: 0 20px;
+  padding: 0 .3125rem;
   box-sizing: border-box;
-  font-size: 24px;
+  font-size: 14px;
   p{
     color: #A9A9A9;
-    margin-bottom: 50px;
+    margin-bottom: .625rem;
     &:first-of-type{
-      font-size: 28px;
+      font-size: 14px;
       color: #000;
-      margin-bottom: 20px;
+      margin-bottom: .3125rem;
     }
   }
   button{
     display: block;
-    width: 500px;
-    height: 75px;
+    width: 260px;
+    height: 1rem;
+    font-size: 14px;
+    letter-spacing: .0625rem;
     margin: 0 auto;
     border-radius: 50px;
-    margin-bottom: 20px;
+    margin-bottom: .3125rem;
     background-color: #DC2C1F;
     color: #fff;
     border-style: none;
@@ -64,23 +66,23 @@ import {useRouter} from 'vue-router'
   }
   &-input{
     border-bottom: 1px solid #A9A9A9;
-    padding: 10px 0;
+    padding: .125rem 0;
     display: flex;
     margin-bottom: 100px;
-    font-size: 24px;
+    font-size: 14px;
     &-tel{
       flex: 1;
       background:none;  
       outline:none;
       border: none;
-      font-size: 24px;
+      font-size: 14px;
       &:focus{
         border: none;
       }
     }
     &-icon{
-      font-size: 28px;
-      margin-left: 20px;
+      font-size: 16px;
+      margin-left: .3125rem;
       color: #A9A9A9;
     }
   }

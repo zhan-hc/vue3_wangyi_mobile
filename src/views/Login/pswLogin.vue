@@ -50,39 +50,39 @@
 
 <style scoped lang="scss">
   .pswLogin {
-    padding: 0 20px;
+    padding: 0 .3125rem;
     box-sizing: border-box;
-    font-size: 24px;
+    font-size: 14px;
     &-input {
-      margin-top: 50px;
+      margin-top: .3125rem;
       border-bottom: 1px solid #a9a9a9;
-      padding: 10px 0;
+      padding: .125rem 0;
       display: flex;
-      margin-bottom: 100px;
-      font-size: 24px;
+      margin-bottom: .625rem;
+      font-size: 14px;
       &-password {
         flex: 1;
         background: none;
         outline: none;
         border: none;
-        font-size: 24px;
+        font-size: 14px;
         &:focus {
           border: none;
         }
       }
       &-icon {
-        font-size: 28px;
-        margin-left: 20px;
+        font-size: 16px;
+        margin-left: .3125rem;
         color: #a9a9a9;
       }
     }
     button {
       display: block;
-      width: 500px;
-      height: 75px;
+      width: 240px;
+      height: 1rem;
       margin: 0 auto;
-      border-radius: 50px;
-      margin-bottom: 20px;
+      border-radius: 20px;
+      margin-bottom: .3125rem;
       background-color: #dc2c1f;
       color: #fff;
       border-style: none;

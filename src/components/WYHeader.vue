@@ -38,11 +38,11 @@ export default {
 .header-wrap{
   position: relative;
   box-sizing: border-box;
-  height: 75px;
-  padding: 25px 0;
-  margin-bottom: 20px;
+  height: 1rem;
+  padding: .3125rem 0;
+  margin-bottom: .3125rem;
   &-icon{
-    margin-right: 20px;
+    margin-right: .3125rem;
     font-size: 18px;
     vertical-align: middle;
   }
@@ -60,7 +60,7 @@ export default {
     // font-size: 24px;
     border: 1px solid #ccc;
     border-radius: 30px;
-    padding: 5px 20px;
+    padding: .0625rem .3125rem;
   }
 }
 </style>

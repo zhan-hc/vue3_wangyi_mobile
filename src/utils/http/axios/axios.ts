@@ -5,6 +5,7 @@ import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import type { MyRequestInterceptors, MyRequestConfig } from './type'
 
 const DEFAULT_LOADING = true
+const CONTINUE_TIME = 100
 const CODE_MESSAGE: any = {
   200: '服务器成功返回请求数据',
   201: '新建或修改数据成功',
@@ -28,6 +29,8 @@ export class MyAxios {
   private axiosInstance: AxiosInstance
   private interceptors?: MyRequestInterceptors
   private showLoading?: boolean
+  private prevRequsetEndTime: number // 上一请求的结束时间
+  private requestEndTimer: number | undefined
   private loadingCount: number
   private hasCookie?: boolean
 
@@ -37,6 +40,8 @@ export class MyAxios {
     // 初始化变量
     this.interceptors = config.interceptor
     this.showLoading = config.showLoading ?? DEFAULT_LOADING
+    this.prevRequsetEndTime = 0 // 上一个请求的响应的时间
+    this.requestEndTimer = undefined
     this.hasCookie =  config.hasCookie ?? false
     this.loadingCount = 0 // 保存loading请求个数
     // 初始化信息提示
@@ -61,7 +66,6 @@ export class MyAxios {
      */
     this.axiosInstance.interceptors.request.use(
       (config) => {
-        // console.log('全局请求拦截',config)
         config.baseURL = 'https://netease-cloud-music-api-gamma-eight.vercel.app'
         // 添加token
         // const token = sessionStorage.getItem('wangyi_token')
@@ -82,11 +86,17 @@ export class MyAxios {
         }
         // 取消频繁请求，只取最后一个
         AxiosCancel.addPending(config)
-        // 当第一次请求的时候并且需要loading效果
-        if (this.loadingCount===0 && this.showLoading) {
+
+        // 当第一次请求的时候并且需要loading效果以及
+        if (this.loadingCount===0 && this.showLoading && typeof this.requestEndTimer !== 'number') {
           message.loading('Loading...')
         }
         this.loadingCount++
+        const nowTime = +new Date()
+        // 属于继发请求则不关闭loading
+        if (nowTime - this.prevRequsetEndTime < CONTINUE_TIME) {
+          clearTimeout(this.requestEndTimer)
+        }
         if (!this.showLoading) {
           message.destroy()
         }
@@ -102,12 +112,17 @@ export class MyAxios {
      */
     this.axiosInstance.interceptors.response.use(
       (res) => {
+        this.prevRequsetEndTime = +new Date()
         this.loadingCount--
-        // console.log('全局响应拦截',res)
         AxiosCancel.removePending(res.config)
         // 移除loading
         if (this.loadingCount<=0) {
-          message.destroy()
+          const _that = this
+          this.requestEndTimer = setTimeout(() => {
+            message.destroy()
+            // 重置
+            _that.requestEndTimer = undefined
+          }, CONTINUE_TIME)
         }
 
         if (res.data.code !== 200) {
@@ -119,16 +134,17 @@ export class MyAxios {
         return res.data
       },
       (err) => {
-        // console.log(err.response,'err.response')
         const code = err.response.status
         const errMsg = err.response.data.msg || err.response.data.message
-        message.destroy()
         if (errMsg) {
           message.error({content: errMsg, key: 'globalLoading'})
         }
         else if (Object.keys(CODE_MESSAGE).includes(code.toString())) {
           message.error({content: CODE_MESSAGE[code], key: 'globalLoading'})
         }
+        setTimeout(() => {
+          message.destroy()
+        },2000)
 
         return err
       }

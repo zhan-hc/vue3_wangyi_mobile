@@ -19,31 +19,31 @@ import { iconList } from "@/assets/ts/my_Data";
 <style scoped lang="scss">
 .iconList-wrap{
   background: #fff;
-  font-size: 24px;
-  padding: 20px;
+  font-size: 12px;
+  padding: .3125rem;
   display: flex;
   flex-wrap: wrap;
   border-radius: 20px;
-  margin-bottom: 20px;
+  margin-bottom: .3125rem;
   .iconList-item{
-    width: 162px;
+    width: 2.18rem;
     text-align: center;
     color: #666;
-    padding: 20px 0;
+    padding: .3125rem 0;
     .iconfont {
-      font-size: 48px;
+      font-size: 24px;
       color: #FF4E4E;
     }
     .anticon-plus {
       background: #F5F5F5;
       color: #b8b8b8;
-      padding: 10px 12px;
+      padding: .125rem .125rem;
       border-radius: 50%;
     }
   }
   &::after{
     content: '';
-    width: 150px;
+    width: 3rem;
   }
 }
 </style>
