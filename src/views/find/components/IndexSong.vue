@@ -159,7 +159,7 @@ export default defineComponent({
                 // font-size: 32px;
               }
               &.nodesc {
-                margin-top: 20px;
+                margin-top: .3125rem;
               }
             }
             .info-desc {
