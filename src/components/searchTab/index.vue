@@ -67,7 +67,6 @@ export default defineComponent({
     }
 
     const handleTabChange = (name, title) => {
-      console.log(name, title)
       !state.dataList[state.active] && getDataList()
     }
     return {

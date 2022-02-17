@@ -27,11 +27,6 @@
   const playStatus = computed(() => store.state.currentPlayStatus)
   const isShowPlayer = inject('isShowPlayer')
 
-  watch(bottomPlayer,(newVal,val) => {
-    console.log(newVal,'-bottomPlayer----',val)
-  })
-
-
   const handleOpenPlayer = () => {
     isShowPlayer.value = true
   }
