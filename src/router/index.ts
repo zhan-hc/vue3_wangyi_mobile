@@ -12,21 +12,33 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/first',
     name: 'First',
+    meta: {
+      bottomPlayer: false
+    },
     component: () => import('views/First/index.vue')
   },
   {
     path: '/login',
     name: 'Login',
+    meta: {
+      bottomPlayer: false
+    },
     component: () => import('views/Login/index.vue')
   },
   {
     path: '/CodeLogin/:tel',
     name: 'CodeLogin',
+    meta: {
+      bottomPlayer: false
+    },
     component: () => import('views/Login/CodeLogin.vue')
   },
   {
     path: '/pswLogin/:tel',
     name: 'pswLogin',
+    meta: {
+      bottomPlayer: false
+    },
     component: () => import('views/Login/pswLogin.vue')
   },
   {

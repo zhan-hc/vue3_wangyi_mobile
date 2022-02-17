@@ -4,6 +4,11 @@ import { useRouter } from 'vue-router'
 export default function useRouteFun(){
   const route = useRouter()
 
+  // 获取路由的meta参数值
+  const getRouteMeta = (key: string) => {
+    return route.currentRoute.value.meta[key]
+  }
+
   // 获取路由的路径
   const getRoutePath = () => {
     return route.currentRoute.value.path
@@ -27,6 +32,6 @@ export default function useRouteFun(){
   const handleRouterBack = () => {
     route.go(-1)
   }
-  return {getUrlParams,getRoutePath, handleRouterJump, handleRouterBack}
+  return {getUrlParams, getRouteMeta, getRoutePath, handleRouterJump, handleRouterBack}
   
 }

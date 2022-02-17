@@ -17,23 +17,23 @@ const {handleRouterJump} = useRouteFun()
 <style scoped lang="scss">
 .First{
   background-color: #DC2C1F;
-  height: 1334px;
-  width: 750px;
-  font-size: 24px;
+  height: 100vh;
+  // width: 750px;
+  font-size: 14px;
   button{
     display: block;
-    width: 500px;
-    height: 75px;
+    width: 260px;
+    height: 1rem;
     margin: 0 auto;
-    border-radius: 50px;
-    margin-bottom: 20px;
+    border-radius: 20px;
+    margin-bottom: .3125rem;
     &:focus {
       outline: none;
     }
   }
   &-button{
     position: fixed;
-    bottom: 20px;
+    bottom: .3125rem;
     left: 0;
     right: 0;
     &-default{
