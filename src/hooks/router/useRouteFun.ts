@@ -15,12 +15,12 @@ export default function useRouteFun(){
   }
 
   // 返回路由路由的params参数
-  const getUrlParams = (key: string) => {
+  const getUrlParams:any = (key: string) => {
     return route.currentRoute.value.params[key]
   }
 
   // 路由跳转或回退
-  const handleRouterJump = (path: string, type: string = 'push') => {
+  const handleRouterJump = (path: string | Object, type: string = 'push') => {
     if (type === 'replace') {
       route.replace(path)
     } else {

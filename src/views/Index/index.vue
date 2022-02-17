@@ -35,7 +35,7 @@
     watch,
   } from 'vue'
   import { useStore } from 'vuex'
-  import { user_account, user_level, user_detail } from '@/api/user/index'
+  import { user_account, user_detail } from '@/api/user/index'
 
   const data = reactive({
     navList: [find, podcast, my, sing, village],

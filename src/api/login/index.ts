@@ -25,7 +25,7 @@ export function login_verifycode (parameter: Object)  {
   })
 }
 
-// 检查验证码
+// 刷新登陆状态
 export function login_refresh ()  {
   return myRequest.request({
     url: 'login/refresh',

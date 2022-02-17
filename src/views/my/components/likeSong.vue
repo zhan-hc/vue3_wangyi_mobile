@@ -1,12 +1,12 @@
 <template>
-  <div class="likesong-wrap">
+  <div class="likesong-wrap" @click="handleJumpDetail">
     <div class="song-img">
       <img src="https://p2.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg" alt="">
       <div><i class="iconfont icon-ziyuan1"></i></div>
     </div>
     <div class="song-info">
       <div class="info-title">我喜欢的音乐</div>
-      <div class="info-num">48首</div>
+      <div class="info-num">{{likeIds.length}}首</div>
     </div>
     <div class="song-heart">
       <i class="iconfont icon-xindong"></i>
@@ -15,8 +15,38 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive } from "vue"
+<script>
+import {computed, defineComponent, reactive, toRefs, watch} from 'vue'
+import { useStore } from 'vuex'
+import useRouteFun from '@/hooks/router/useRouteFun'
+export default defineComponent({
+  name: 'likeSong',
+  props: {
+  },
+  setup(props) {
+    const store = useStore()
+    const likeIds = computed(() => store.state.likeIds)
+    const userInfo = computed(() => store.state.userInfo)
+    const { handleRouterJump } = useRouteFun()
+    const handleJumpDetail = () => {
+      handleRouterJump(
+        {
+          name: 'songListDetail', 
+          params: {
+            likeIds: JSON.stringify(likeIds.value),
+            songListName: '我喜欢的音乐',
+            authorName: userInfo.value.nickname,
+            avatarUrl: userInfo.value.avatarUrl
+          }
+        }
+      )
+    }
+    return {
+      likeIds,
+      handleJumpDetail
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">

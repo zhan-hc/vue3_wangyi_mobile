@@ -2,7 +2,7 @@
   <div class="my-wrap">
     <userInfo />
     <myIconList />
-    <likeSong />
+    <likeSong/>
     <songList />
   </div>
 </template>

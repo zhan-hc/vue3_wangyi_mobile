@@ -28,5 +28,8 @@ export default {
   },
   changePlayTime: (state: any, time: number) => {
     state.currentTime = time
-  }
+  },
+  setLikeIds:  (state: any, ids: Array<Number>) => {
+    state.likeIds = ids
+  },
 }

@@ -23,8 +23,9 @@ import { ref, computed} from "vue"
 
 <style scoped lang="scss">
 .userInfo-wrap{
-  height: 2rem;
+  height: 1.5rem;
   display: flex;
+  align-items: center;
   margin-bottom: .3125rem;
   .ant-avatar{
     width: 1rem;
@@ -46,6 +47,7 @@ import { ref, computed} from "vue"
       background: #bbb;
       border-radius: 20px;
         .icon-vip{
+          font-size: 12px;
           color: #fff;
         }
     }

@@ -25,6 +25,7 @@ export function check_music (id: string | number)  {
       data: {id}
     })
 }
+
 // 获取歌曲详情(多个id用逗号隔开)
 export function song_detail (ids: string | number)  {
     return myRequest.request({

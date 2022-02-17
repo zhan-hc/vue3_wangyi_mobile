@@ -33,7 +33,7 @@
     }
     login_phonePsw(params)
       .then((res) => {
-        if (res.code) {
+        if (res.code === 200) {
           sessionStorage.setItem('wangyi_uid', res.account.id)
           sessionStorage.setItem('wangyi_userInfo', res.profile)
           sessionStorage.setItem('wangyi_cookie', res.cookie)

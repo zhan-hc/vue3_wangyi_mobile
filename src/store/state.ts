@@ -1,7 +1,7 @@
 
 
 export const state: Object = {
-  uid: sessionStorage.getItem('wangyi_uid') ?? '',
+  uid: sessionStorage.getItem('wangyi_uid') ?? 0,
   userInfo: JSON.parse(sessionStorage.getItem('wangyi_userInfo') || '0') || {},
   level: 0,
   homeInfo: {},
@@ -13,5 +13,6 @@ export const state: Object = {
     authors: '袁潇崴'
   },
   currentPlayStatus: false, // 播放器的状态
-  currentTime: 0
+  currentTime: 0,
+  likeIds: []
 }

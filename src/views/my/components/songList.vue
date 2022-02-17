@@ -1,23 +1,23 @@
 <template>
   <div class="songList-wrap">
     <div class="songList-tab">
-      <div class="tab-item" v-for="(item, i) in songTab" :key="item.id" @click="handleClick(i)">
-        <span :class="{'active': i === activeIndex}">{{item.text}}</span>
+      <div class="tab-item" v-for="(item, i) in songTab" :key="i" @click="handleClick(i)">
+        <span :class="{'active': i === activeIndex}">{{item}}</span>
       </div>
     </div>
-    <div class="songlist-create">
+    <div class="songlist-create" v-if="mySongList.length">
       <div class="create-header">
-        <span>创建歌单(1个)</span>
+        <span>创建歌单({{mySongList.length}}个)</span>
           <i class="iconfont icon-plus"></i>
           <i class="iconfont icon-sandian"></i>
       </div>
-      <div class="create-song">
+      <div class="create-song" v-for="item in mySongList" :key="item.id" @click="handleClickJump(item.id)">
         <div class="song-img">
-          <img src="https://p2.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg" alt="">
+          <img :src="item.coverImgUrl" alt="">
         </div>
         <div class="song-info">
-          <div class="info-title">{{userInfo.nickname}}的2020年度歌单</div>
-          <div class="info-num">48首</div>
+          <div class="info-title">{{item.name}}</div>
+          <div class="info-num">{{item.trackCount}}首</div>
         </div>
         <i class="iconfont icon-sandian"></i>
       </div>
@@ -30,18 +30,18 @@
         </div>
       </div>
     </div>
-    <div class="songlist-collect">
+    <div class="songlist-collect"  v-if="collectList.length">
       <div class="collect-header">
         <span>收藏歌单(1个)</span>
           <i class="iconfont icon-sandian"></i>
       </div>
-      <div class="collect-song">
+      <div class="collect-song" v-for="item in collectList" :key="item.id"  @click="handleClickJump(item.id)">
         <div class="song-img">
-          <img src="https://p2.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg" alt="">
+          <img :src="item.coverImgUrl" alt="">
         </div>
         <div class="song-info">
-          <div class="info-title">{{userInfo.nickname}}的2020年度歌单</div>
-          <div class="info-num">48首</div>
+          <div class="info-title">{{item.name}}</div>
+          <div class="info-num">{{item.trackCount}}首</div>
         </div>
         <i class="iconfont icon-sandian"></i>
       </div>
@@ -49,36 +49,52 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import {useStore} from 'vuex';
-import { reactive, ref, toRefs } from "vue"
+import { defineComponent, onMounted, reactive, ref, toRefs } from "vue"
+import { user_playList } from '@/api/user/index'
+import useRouteFun from '@/hooks/router/useRouteFun'
+export default defineComponent({
+  name: 'songList',
+  setup() {
+    const store = useStore()
+    const { handleRouterJump } = useRouteFun()
     const state = reactive({
-      songTab: [
-        {
-          id: 101,
-          text: '创建歌单'
-        },
-        {
-          id: 102,
-          text: '收藏歌单'
-        },
-        {
-          id: 103,
-          text: '歌单助手'
-        }
-      ],
-      activeIndex: 0
+      songTab: ['创建歌单','收藏歌单','歌单助手'],
+      activeIndex: 0,
+      mySongList: [],
+      collectList: [], // 收藏歌单
+      uid: sessionStorage.getItem('wangyi_uid')
     })
 
-    const {songTab, activeIndex} = toRefs(state)
-    const store = useStore()
-    const userInfo = ref(store.state.userInfo)
+    
+    onMounted(async () => {
+      const res = await user_playList(state.uid)
+      state.mySongList = res.playlist.filter(item => item.userId === Number(state.uid))
+      state.collectList = res.playlist.filter(item => item.userId !== Number(state.uid))
+      console.log(state.mySongList)
+    })
+
+
+    // 歌单详情跳转
+    const handleClickJump = (id) => {
+      handleRouterJump(`/songListDetail/${id}`)
+    }
+
     const handleClick = (i) => {
       state.activeIndex = i
     }
+    return {
+      ...toRefs(state),
+      handleClick,
+      handleClickJump
+    }
+  }
+})
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/scss/mixin.scss';
 .songList-wrap{
   font-size: 12px;
   .songList-tab{
@@ -158,9 +174,11 @@ import { reactive, ref, toRefs } from "vue"
       }
       .song-info{
         flex: 1;
+        width: 240px;
         .info-title{
           font-size: 14px;
           font-weight: 600;
+          @include ellipsis;
         }
         .info-num{
           color: #999;

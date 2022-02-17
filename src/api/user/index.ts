@@ -35,3 +35,27 @@ export function user_detail (userId: number)  {
     }
   })
 }
+
+// 获取用户喜欢音乐的列表
+export function user_likeList (userId: number)  {
+  return myRequest.request({
+    url: '/likelist',
+    method: 'post',
+    hasCookie: true,
+    data: {
+      uid: userId
+    }
+  })
+}
+
+// 获取用户的歌单
+export function user_playList (userId: number)  {
+  return myRequest.request({
+    url: '/user/playlist',
+    method: 'post',
+    hasCookie: true,
+    data: {
+      uid: userId
+    }
+  })
+}

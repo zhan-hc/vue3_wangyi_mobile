@@ -1,5 +1,4 @@
-import { onMounted, ref, onUnmounted, Ref} from "vue"
-import { useStore } from 'vuex'
+import {Ref} from "vue"
 export default function useDetailScroll(){
 
     /**

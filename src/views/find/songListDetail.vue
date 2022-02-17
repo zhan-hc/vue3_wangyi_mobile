@@ -7,31 +7,29 @@
       <i class="iconfont icon-sandian"></i>
     </div>
     <div
-      v-if="songList.tracks"
       class="detail-info"
-      :style="{ 'background-image': `url(${songList.tracks[0].al.picUrl})` }"
+      :style="{ 'background-image': `url(${songList.tracks? songList.tracks[0].al.picUrl : DEFAULT_IMAGE})` }"
     >
       <div class="songList-img">
-        <img :src="songList.coverImgUrl" alt="推荐歌单" />
-        <div class="songList-playCount">
+        <img :src="songList.coverImgUrl || DEFAULT_IMAGE" alt="推荐歌单" />
+        <div class="songList-playCount" v-if="songList.playCount">
           <i class="iconfont icon-bofang4"></i>
           {{ formatCount(songList.playCount) }}
         </div>
       </div>
-      <div class="songList-info">
-        <div class="info-name">{{ songList.name }}</div>
-        <div class="info-creator" v-if="songList.creator">
-          <img :src="songList.creator.avatarUrl" alt="" />
-          <span>{{ songList.creator.nickname }}</span>
+      <div class="songList-info" >
+        <div class="info-name" >{{ songList.name || paramsData.songName}}</div>
+        <div class="info-creator">
+          <img :src="paramsData.avatarUrl || songList.creator.avatarUrl" alt="" />
+          <span>{{ paramsData.authorName || songList.creator.nickname }}</span>
           <i class="iconfont icon-plus"></i>
         </div>
-        <div class="info-desc">{{ songList.description }} ></div>
+        <div class="info-desc" v-if="songList.description">{{ songList.description}} ></div>
       </div>
     </div>
-    <div v-else class="detail-info"></div>
 
     <div class="detail-songList">
-      <div class="songList-count" ref="headerCount">
+      <div class="songList-count" ref="headerCount" v-if="songList.subscribedCount">
         <div class="count-item">
           <i class="iconfont icon-plus1"></i>
           <span>{{ formatCount(songList.subscribedCount) }}</span>
@@ -52,7 +50,7 @@
         :class="fixedStatus ? 'songList-header' : 'fixed-header'"
       >
         <i class="iconfont icon-bofang5"></i>
-        <div class="all">播放全部<span>({{songList.trackCount}})</span></div>
+        <div class="all">播放全部<span>({{trackIds.length}})</span></div>
         <i class="iconfont icon-xiazaipt"></i>
         <i class="iconfont icon-duoxuanpt"></i>
       </div>
@@ -64,7 +62,7 @@
       >
         <div
           class="songList-item van-clearfix"
-          v-for="(item, i) in songList.tracks"
+          v-for="(item, i) in songListData"
           :key="item.id"
           @click="playMusicParams(item)"
         >
@@ -89,55 +87,24 @@
   import { songList_detail,song_detail } from '@/api/song'
   import useDetailScroll from '@/hooks/song/useDetailScroll'
   import useRouteFun from '@/hooks/router/useRouteFun'
+  import useSongDetail from '@/hooks/song/useSongDetail'
 
-  const {handleScroll} = useDetailScroll()
   const {getUrlParams, handleRouterBack} = useRouteFun()
-  const id = getUrlParams('id')
+  // 滚动固定sticky头部
+  const {handleScroll} = useDetailScroll()
+  // 歌单列表详情
+  const {state, handleLoad, DEFAULT_IMAGE} = useSongDetail()
+  const { songList, loading, finished, songListData, status, currentPage, pageSize, trackIds, fixedStatus, paramsData } = toRefs(state)
   const detailHeader = ref(null)
-  const state = reactive({
-    songList: {},
-    loading: false,
-    finished: false,
-    status: false,
-    currentPage: 0,
-    pageSize: 10,
-    trackIds: [],
-    fixedStatus: true // 表单详情header fixed样式状态
-  })
-
-  const { songList, loading, finished, status, currentPage, pageSize, trackIds, fixedStatus } = toRefs(state)
 
   onUnmounted(() => {
     window.removeEventListener('scroll', () => handleScroll(state.fixedStatus, detailHeader, state.songList.tracks[0].al.picUrl))
   })
 
-  onMounted(async () => {
-    await songList_detail({id}).then((res) => {
-      state.songList = res.playlist
-      state.trackIds = res.playlist.trackIds.map(item => item.id)
-      state.status = true
-      state.currentPage = state.currentPage + 1
-    })
-    window.addEventListener('scroll', () => handleScroll(state.fixedStatus, detailHeader, state.songList.tracks[0].al.picUrl))
+  onMounted(() => {
+    status.status && window.addEventListener('scroll', () => handleScroll(state.fixedStatus, detailHeader, state.songList.tracks[0].al.picUrl || DEFAULT_IMAGE))
   })
 
-  // 按需加载
-  const handleLoad = async () => {
-    const start = state.pageSize * state.currentPage
-    const end = state.pageSize*(state.currentPage + 1)
-    const ids = state.trackIds.slice(start, end).join(',')
-    if (!state.finished) {
-      state.loading = true
-      await song_detail(ids).then((res) => {
-        state.loading = false
-        state.songList.tracks.push(...res.songs)
-        state.currentPage += 1
-        if (state.songList.tracks.length >= state.trackIds.length) {
-          state.finished = true
-        }
-      })
-    }
-  }
 
   // 播放音乐
   function playMusicParams(item) {
@@ -204,7 +171,7 @@
     .detail-info {
       position: relative;
       display: flex;
-      padding: 1rem .3125rem 1rem;
+      padding: 1.5rem .3125rem 1rem;
       height: 8rem;
       border-radius: 0 0 80% 80% / 0 0 10% 10%;
       background-size: cover;
