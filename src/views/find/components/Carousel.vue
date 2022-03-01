@@ -17,9 +17,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const data = reactive(props.data)
     return {
-      data
     }
   }
 })
@@ -39,7 +37,7 @@ export default defineComponent({
     img {
       width: 100%;
       height: 100%;
-      border-radius: 20px;
+      border-radius: 10px;
     }
     .tag{
       position: absolute;
@@ -48,8 +46,8 @@ export default defineComponent({
       color: #fff;
       font-size: 12px;
       padding: .125rem .4375rem;
-      border-bottom-right-radius: 20px;
-      border-top-left-radius: 20px;
+      border-bottom-right-radius: 10px;
+      border-top-left-radius: 10px;
     }
   }
 }

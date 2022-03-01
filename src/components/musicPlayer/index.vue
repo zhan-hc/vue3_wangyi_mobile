@@ -4,7 +4,7 @@
 </template>
 
 <script lang='ts'>
-import {defineComponent, ref, provide} from 'vue'
+import {defineComponent, ref, provide, watch} from 'vue'
 import BottomPlayer from './BottomPlayer.vue'
 import PlayerDetail from './PlayerDetail.vue' 
 export default defineComponent({
@@ -16,6 +16,7 @@ export default defineComponent({
   setup() {
     const isShowPlayer = ref(false)
     provide('isShowPlayer', isShowPlayer)
+    
     return {
       isShowPlayer
     }

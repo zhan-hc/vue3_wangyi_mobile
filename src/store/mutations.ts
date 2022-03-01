@@ -1,3 +1,4 @@
+import {songData, lyricData} from '@/hooks/song/type'
 export default {
   setUserLevel: (state: any, data: Object) => {
     state.level = data
@@ -31,5 +32,11 @@ export default {
   },
   setLikeIds:  (state: any, ids: Array<Number>) => {
     state.likeIds = ids
+  },
+  setCurrentPlayList:  (state: any, data: Array<songData>) => {
+    state.currentPlayList = data
+  },
+  setCurrentLyric:  (state: any, data: Array<lyricData>) => {
+    state.currentLyric = data
   },
 }

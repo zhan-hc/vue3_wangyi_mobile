@@ -11,29 +11,30 @@
       <span> - {{songInfo.authors}}</span>
     </div>
     <i @click.stop="changePlayStatus" class="iconfont" :class="playStatus ? 'icon-zanting1' : 'icon-bofang1'"></i>
-    <i class="iconfont icon-caidan"></i>
+    <i class="iconfont icon-caidan" @click.stop="show = true"></i>
   </div>
+  <playList-Popup v-model:show="show"></playList-Popup>
 </template>
 
 <script setup>
-  import { ref, reactive, inject, watch, computed } from 'vue'
+  import { ref, inject, watch, computed } from 'vue'
   import { useStore } from 'vuex'
   import useRouteFun from '@/hooks/router/useRouteFun'
+  import playListPopup from '@/components/playListPopup.vue'
+  import useAudioFun from '@/hooks/audio/useAudioFun'
   const store = useStore()
   const { getRouteMeta, getRoutePath } = useRouteFun()
+  const { songInfo, playStatus, changePlayStatus } = useAudioFun()
+
   const bottomPlayer = computed(() => getRouteMeta('bottomPlayer') !== false)
   const routerPath = computed(() => getRoutePath())
-  const songInfo = computed(() => store.state.currentSongInfo)
-  const playStatus = computed(() => store.state.currentPlayStatus)
   const isShowPlayer = inject('isShowPlayer')
+  const show = ref(false)
 
   const handleOpenPlayer = () => {
     isShowPlayer.value = true
   }
 
-  const changePlayStatus = () => {
-    store.commit('changePlayStatus', !store.state.currentPlayStatus)
-  }
 </script>
 
 <style scoped lang="scss">

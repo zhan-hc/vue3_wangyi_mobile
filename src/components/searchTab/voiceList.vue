@@ -24,9 +24,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    let dataList = props.dataList
     return{
-      dataList,
       formatCount
     }
   }

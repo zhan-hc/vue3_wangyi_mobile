@@ -2,7 +2,7 @@
   <div class="song-container">
     <div class="song-header">
       <span class="title">{{songheader.subTitle.title}}</span>
-      <span class="more"><CaretRightOutlined/>{{songheader.button.text}}</span>
+      <span class="more" @click="playAllMusic"><CaretRightOutlined/>{{songheader.button.text}}</span>
     </div>
     <div class="song-wrapper" ref="wrapper">
       <div class="song-content" ref="content">
@@ -46,7 +46,7 @@ export default defineComponent({
     const content = ref(null)
 
     onMounted(() => {
-      initScroll(700, songList.length, content, wrapper)
+      initScroll(600, songList.length, content, wrapper)
     })
 
     // 播放音乐
@@ -60,12 +60,26 @@ export default defineComponent({
       playMusic(songInfo)
     }
 
+    function playAllMusic () {
+      const songLists = songList.map(item => item.resources).flat(Infinity).map(item => {
+        return {
+          id: item.resourceId,
+          imageUrl: item.uiElement.image.imageUrl,
+          title: item.uiElement.mainTitle.title,
+          authors: getAuthor(item.resourceExtInfo.artists)
+        }
+      })
+      store.commit('setCurrentPlayList', songLists)
+      playMusic(songLists[0])
+    }
+
     return {
       songList,
       songheader,
       wrapper,
       content,
       getAuthor,
+      playAllMusic,
       playMusic: playMusicParams
     }
   }
@@ -92,7 +106,7 @@ export default defineComponent({
       right: 0;
       top: 50%;
       padding: .0625rem .125rem;
-      border-radius: 30px;
+      border-radius: 10px;
       border: 1px solid #ccc;
       background: #fff;
       transform: translateY(-50%);     

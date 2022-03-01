@@ -36,8 +36,6 @@ export default defineComponent({
     }
   },
   setup(props) {
-    let dataList = props.dataList
-    let keywords = props.keywords
 
     const lyricList = (str: string) => {
       return str.split('\n')
@@ -54,8 +52,6 @@ export default defineComponent({
       playMusic(songInfo)
     }
     return{
-      dataList,
-      keywords,
       getAuthor,
       formatCount,
       highLightStr,

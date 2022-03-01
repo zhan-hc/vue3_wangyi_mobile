@@ -26,13 +26,11 @@ export default defineComponent({
   },
   setup(props) {
     const { handleRouterJump } = useRouteFun()
-    let dataList = props.dataList
     // 歌单详情跳转
     const handleClickJump = (id: number) => {
       handleRouterJump(`/songListDetail/${id}`)
     }
     return{
-      dataList,
       formatCount,
       handleClickJump
     }

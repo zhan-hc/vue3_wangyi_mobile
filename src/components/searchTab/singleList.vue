@@ -43,8 +43,6 @@ export default defineComponent({
     }
   },
   setup(props) {
-    let dataList = props.dataList
-    let keywords = props.keywords
     const state = reactive({
       currentPage: 1,
       pageSize: 10
@@ -63,8 +61,6 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
-      dataList,
-      keywords,
       getAuthor,
       highLightStr,
       playMusicParams

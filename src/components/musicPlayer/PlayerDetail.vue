@@ -9,15 +9,27 @@
       <i class="iconfont icon-fenxiangpt"></i>
     </div>
     <div class="player-content">
-      <img class="content-needle" src="@/assets/images/needle.png" alt="" :class="playStatus ? 'play': 'paused'"/>
-      <div class="content-disc" :style="{'animation-play-state' : playStatus ? 'running' : 'paused'}">
-        <img
-          :src="songInfo.imageUrl"
-          alt=""
-        />
+      <div class="content-wrap" v-show="status" @click="status = !status">
+        <img class="content-needle" src="@/assets/images/needle.png" alt="" :class="playStatus ? 'play': 'paused'"/>
+        <div class="content-disc" :style="{'animation-play-state' : playStatus ? 'running' : 'paused'}">
+          <img
+            :src="songInfo.imageUrl"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="content-wrap"  v-show="!status" style="padding-bottom: 200px"  @click="status = !status" ref="lyricWrap">
+        <div 
+          :key="i"
+          class="content-lyric"
+          v-for="(item, i) in currentLyric" 
+          :class="{'active': (curPlayIndex === -1 ? currentLyric.length - 1 : curPlayIndex) - 1 === i}"
+          :ref="`lyric${i}`"
+        >
+          {{item.lyric}}
+        </div>
       </div>
     </div>
-
     <div class="player-operate">
       <div class="icon-list">
         <i
@@ -38,9 +50,9 @@
       </div>
       <div class="song-operate">
         <i class="iconfont icon-list-loop"></i>
-        <i class="iconfont icon-shangyiqu-wangyiicon" ></i>
+        <i class="iconfont icon-shangyiqu-wangyiicon"  @click="nextOrPrevPlay(1)"></i>
         <i class="iconfont" :class="playStatus ? 'icon-bofang3' : 'icon-zanting'"  @click="changePlayStatus()"></i>
-        <i class="iconfont icon-shangyiqu" ></i>
+        <i class="iconfont icon-shangyiqu" @click="nextOrPrevPlay(2)"></i>
         <i class="iconfont icon-caidan"></i>
       </div>
     </div>
@@ -48,31 +60,44 @@
 </template>
 
 <script setup>
-  import { inject,computed, ref, watch } from 'vue'
+  import { inject,computed, ref, watch, getCurrentInstance, nextTick } from 'vue'
   import { iconList, operateList } from '@/assets/ts/playerDetailData'
   import { useStore } from 'vuex'
   import { durationTrans } from "@/assets/ts/common";
+  import useAudioFun from '@/hooks/audio/useAudioFun'
 
   const store = useStore()
+  const { songInfo, playStatus, currentPlayList, changePlayStatus, nextOrPrevPlay } = useAudioFun()
   const isShowPlayer = inject('isShowPlayer')
-  const songInfo = computed(() => store.state.currentSongInfo)
-  const playStatus = computed(() => store.state.currentPlayStatus)
   const currentTime = computed(() => store.state.currentTime)
+  const currentLyric = computed(() => store.state.currentLyric)
   const afterTime = computed(() => durationTrans(store.state.currentTime))
+  const audioDuration = document.getElementById('musicAudio').duration
+  const curPlayIndex = computed(() => currentLyric.value.findIndex((item,i) => item.time >= currentTime.value))
+  const status = ref(true)
+  const internalInstance = getCurrentInstance()
+  const lyricWrap = ref(null)
   // const currentDuration = ref(0)
+  watch(curPlayIndex, (newVal,old) => {
+      if (!status.value) {
+        if (newVal > 7) {
+          lyricWrap.value.scrollTop =  newVal * 30 - 200
+        } else {
+          lyricWrap.value.scrollTop = 0
+        }
+        
+      }
+  })
   const handleClose = () => {
     isShowPlayer.value = false
-  }
-
-  // 改变播放状态
-  const changePlayStatus = () => {
-    store.commit('changePlayStatus', !store.state.currentPlayStatus)
   }
 
   const changeProgress = (val) => {
     const audio = document.getElementById('musicAudio')
     audio.currentTime = val
   }
+
+
 </script>
 
 <style scoped lang="scss">
@@ -89,8 +114,8 @@
   }
   @keyframes rotateLP {
     100% {
-      width: 240px;
-      height: 240px;
+      width: 206px;
+      height: 206px;
       transform: rotate(360deg);
     }
   }
@@ -104,7 +129,7 @@
     padding: .3125rem;
     color: #fff;
     font-size: .75rem;
-    background: #ccc;
+    background: #4F4F4F;
     z-index: 999;
     .player-header {
       display: flex;
@@ -128,46 +153,56 @@
           @include ellipsis;
         }
       }
-      .iconfont {
-        // font-size: 48px;
-      }
     }
     .player-content {
       text-align: center;
-      .content-needle {
-        margin-left: 2.8rem;
-        width: 120px;
-        height: 100px;
-        &.play{
-          transform: rotate(30deg);
-          transform-origin: .0625rem .0625rem;
-          animation: play 3s linear;
+      .content-wrap{
+        height: 450px;
+        overflow: auto;
+        .content-needle {
+          margin-left: 2.8rem;
+          width: 120px;
+          height: 100px;
+          &.play{
+            transform: rotate(30deg);
+            transform-origin: .0625rem .0625rem;
+            animation: play 3s linear;
+          }
+          &.paused{
+            transform: rotate(0);
+            transform-origin: .0625rem .0625rem;
+            animation: paused 3s linear;
+          }
         }
-        &.paused{
-          transform: rotate(0);
-          transform-origin: .0625rem .0625rem;
-          animation: paused 3s linear;
+        .content-disc {
+          position: relative;
+          background-image: url(../../assets/images/coverall.png);
+          background-position: -140px -580px;
+          width: 206px;
+          height: 206px;
+          margin: 0 auto;
+          z-index: -1;
+          animation:rotateLP 5s linear infinite;
+          img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 135px;
+            height: 135px;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+        .content-lyric{
+          font-size: 14px;
+          margin-bottom: 8px;
+          color: #7F7F7F;
+          &.active{
+            color: #fff;
+          }
         }
       }
-      .content-disc {
-        position: relative;
-        background-image: url(../../assets/images/disc.png);
-        width: 240px;
-        height: 240px;
-        background-size: cover;
-        margin: 0 auto;
-        z-index: -1;
-        animation:rotateLP 5s linear infinite;
-        img {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 160px;
-          height: 160px;
-          border-radius: 50%;
-          transform: translate(-50%, -50%);
-        }
-      }
+      
     }
     .player-operate {
       position: fixed;

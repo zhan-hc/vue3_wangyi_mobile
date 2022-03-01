@@ -35,3 +35,13 @@ export function song_detail (ids: string | number)  {
       showLoading: false
     })
 }
+
+// 获取歌曲详情(多个id用逗号隔开)
+export function song_lyric (id: string | number)  {
+    return myRequest.request({
+      url: '/lyric',
+      method: 'post',
+      data: {id},
+      showLoading: false
+    })
+}

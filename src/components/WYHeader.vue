@@ -18,7 +18,6 @@ export default {
   },
   setup (props) {
     const {getUrlParams, handleRouterJump, handleRouterBack} = useRouteFun()
-    const status =reactive(props.status)
     const tel = getUrlParams('tel')
 
     const pswLogin = () => {
@@ -26,7 +25,6 @@ export default {
     }
     return{
       tel,
-      status,
       pswLogin,
       handleRouterBack
     }

@@ -31,11 +31,7 @@ export default defineComponent({
     }
   },
   setup(props) {
-    let dataList = props.dataList
-    let keywords = props.keywords
     return{
-      dataList,
-      keywords,
       getAuthor,
       formatCount,
       highLightStr
