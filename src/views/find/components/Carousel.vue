@@ -1,7 +1,7 @@
 <template>
   <a-carousel autoplay>
     <div class="slide-item" v-for="(item, i) in data" :key="i">
-      <img :src="item.pic" alt="">
+      <img :src="item.pic + '?param=330y130'" alt="">
       <span class="tag" :style="{'background-color': item.titleColor}">{{item.typeTitle}}</span>
     </div>
   </a-carousel>

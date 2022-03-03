@@ -2,7 +2,7 @@
   <div class="voiceList-wrap">
     <div class="voiceList-item" v-for="item in dataList" :key="item.id">
       <div class="item-img">
-        <img v-lazy="item.coverImgUrl" alt="歌单图片">
+        <img v-lazy="item.coverImgUrl + '?param=50y50'" alt="歌单图片">
       </div>
       <div class="item-info">
         <div class="info-title">{{item.name}}</div>

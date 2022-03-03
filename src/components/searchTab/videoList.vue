@@ -2,7 +2,7 @@
   <div class="videoList-wrap">
     <div class="videoList-item" v-for="item in dataList" :key="item.id">
       <div class="item-img">
-        <img v-lazy="item.coverUrl" alt="视频图片">
+        <img v-lazy="item.coverUrl + '?param=50y50'" alt="视频图片">
       </div>
       <div class="item-info">
         <div class="info-title" v-html="highLightStr(item.title, keywords)"></div>

@@ -38,7 +38,6 @@
   import { list } from '@/assets/ts/drawerData'
   import useRouteFun from '@/hooks/router/useRouteFun'
 
-  const emit = defineEmits(['handleClose'])
   const store = useStore()
   const {handleRouterJump} = useRouteFun()
   const info = reactive({

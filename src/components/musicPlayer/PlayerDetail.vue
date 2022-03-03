@@ -153,6 +153,9 @@
           @include ellipsis;
         }
       }
+      .iconfont{
+        font-size: 24px;
+      }
     }
     .player-content {
       text-align: center;
@@ -177,7 +180,7 @@
         .content-disc {
           position: relative;
           background-image: url(../../assets/images/coverall.png);
-          background-position: -140px -580px;
+          background-size: contain;
           width: 206px;
           height: 206px;
           margin: 0 auto;

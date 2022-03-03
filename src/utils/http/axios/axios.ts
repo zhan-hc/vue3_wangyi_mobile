@@ -72,7 +72,7 @@ export class MyAxios {
         // if (token) {
         //   config.headers['Authorization'] = token
         // }
-        config.url += `?timestamp=${+new Date()}`
+        config.url += `?timestamp=${+new Date()}&realIP=192.168.11.126`
         if (config.method == 'post') {
           config.data = {
             ...config.data,
@@ -86,8 +86,7 @@ export class MyAxios {
         }
         // 取消频繁请求，只取最后一个
         AxiosCancel.addPending(config)
-
-        // 当第一次请求的时候并且需要loading效果以及
+        // 当第一次请求的时候并且需要loading效果
         if (this.loadingCount===0 && this.showLoading && typeof this.requestEndTimer !== 'number') {
           message.loading('Loading...')
         }
@@ -100,7 +99,6 @@ export class MyAxios {
         if (!this.showLoading) {
           message.destroy()
         }
-
         return config
       },
       (err) => {

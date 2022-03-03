@@ -9,7 +9,7 @@
         <div class="song-list" v-for="(list, i) in newSongList" :key="i">
           <div class="song-item" v-for="(item, i) in list.resources" :key="i" @click="playMusic(item)">
             <div class="song-img">
-              <img v-lazy="item.uiElement.image.imageUrl" alt="">
+              <img v-lazy="item.uiElement.image.imageUrl + '?param=50y50'" alt="">
               <van-icon name="play" />
             </div>
             <div class="song-info">

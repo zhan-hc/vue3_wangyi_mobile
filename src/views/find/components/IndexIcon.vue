@@ -3,7 +3,7 @@
     <div class="content" ref="content">
       <div class="icon-item" v-for="item in iconList" :key="item.id">
         <div class="icon-img">
-          <img v-lazy="item.iconUrl" alt="icon图标">
+          <img v-lazy="item.iconUrl + '?param=50y50'" alt="icon图标">
         </div>
         <div>{{item.name}}</div>
       </div>

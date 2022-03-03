@@ -13,7 +13,7 @@
           @click="handleClickJump(item.resources[0].resourceId)"
         >
           <div class="recommend-img">
-            <img v-lazy="item.uiElement.image.imageUrl" alt="推荐歌单" />
+            <img v-lazy="item.uiElement.image.imageUrl + '?param=50y50'" alt="推荐歌单" />
           </div>
           <div class="recommend-playCount">
             <i class="iconfont icon-bofang4"></i>

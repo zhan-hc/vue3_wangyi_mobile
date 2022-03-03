@@ -6,7 +6,6 @@
       :closable="false"
       :visible="visible"
       @close="onClose"
-      @handleClose="handleClose"
     >
       <DrawerInfo />
     </a-drawer>

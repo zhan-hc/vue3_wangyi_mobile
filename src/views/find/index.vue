@@ -17,7 +17,6 @@
   import IndexIcon from './components/IndexIcon'
   import Recommend from './components/Recommend'
   import IndexSong from './components/IndexSong'
-  import IndexVideo from './components/IndexVideo'
   import IndexCalendar from './components/IndexCalendar'
   import IndexNewSong from './components/IndexNewSong'
   import IndexBroadcast from './components/IndexBroadcast'

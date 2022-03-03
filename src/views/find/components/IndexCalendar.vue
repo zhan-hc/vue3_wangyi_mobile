@@ -17,7 +17,7 @@
           </span>
           <div class="item-title">{{item.resources[0].uiElement.mainTitle.title}}</div>
         </div>
-        <img :src="item.resources[0].uiElement.image.imageUrl" alt="">
+        <img  v-lazy="item.resources[0].uiElement.image.imageUrl + '?param=50y50'" alt="">
       </div>
     </div>
   </div>

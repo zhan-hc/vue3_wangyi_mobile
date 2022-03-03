@@ -1,4 +1,8 @@
 const path = require('path');//引入path模块
+const CompressionPlugin = require('compression-webpack-plugin');
+const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer') // 打包可视化
+
 function resolve(dir){
     return path.join(__dirname,dir)//path.join(__dirname)设置绝对路径
 }
@@ -39,7 +43,10 @@ module.exports = {
 		},
 	},
   configureWebpack: {
-    devtool: 'source-map'
+    devtool: 'source-map',
+    plugins: [
+      // new BundleAnalyzerPlugin()
+    ]
   },
   chainWebpack:(config)=>{
     config.resolve.alias
@@ -48,6 +55,17 @@ module.exports = {
     .set('components',resolve('./src/components'))
     .set('assets',resolve('./src/assets'))
     .set('views',resolve('./src/views'))
-    .set('network',resolve('./src/network'))　　
+    .set('network',resolve('./src/network'));
+    if (process.env.NODE_ENV === 'production') {
+      config.plugin('compressionPlugin')
+      .use(new CompressionPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: productionGzipExtensions,
+          threshold: 10240,
+          minRatio: 0.8,
+          deleteOriginalAssets: true
+      }));
+    }
   }
 }

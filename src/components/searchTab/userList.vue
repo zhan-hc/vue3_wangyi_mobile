@@ -2,7 +2,7 @@
   <div class="userList-wrap">
     <div class="userList-item" v-for="item in dataList" :key="item.id">
       <div class="item-img">
-        <img v-lazy="item.avatarUrl" alt="用户头像">
+        <img v-lazy="item.avatarUrl + '?param=50y50'" alt="用户头像">
       </div>
       <div class="item-title">
         <span v-html="highLightStr(item.nickname, keywords)"></span>

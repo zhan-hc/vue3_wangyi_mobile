@@ -2,7 +2,7 @@
   <div class="singerList-wrap">
     <div class="singerList-item" v-for="item in dataList" :key="item.id">
       <div class="item-img">
-        <img v-lazy="item.picUrl" alt="用户头像">
+        <img v-lazy="item.picUrl + '?param=50y50'" alt="用户头像">
       </div>
       <div class="item-title">
         <span v-html="highLightStr(item.name, keywords)"></span>

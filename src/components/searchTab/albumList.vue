@@ -2,7 +2,7 @@
   <div class="albumList-wrap">
     <div class="albumList-item" v-for="item in dataList" :key="item.id">
       <div class="item-img">
-        <img v-lazy="item.picUrl" alt="专辑图片">
+        <img v-lazy="item.picUrl + '?param=50y50'" alt="专辑图片">
       </div>
       <div class="item-info">
         <div class="info-title">

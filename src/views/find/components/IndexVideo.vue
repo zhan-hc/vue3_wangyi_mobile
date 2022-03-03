@@ -8,7 +8,7 @@
       <div class="video-content" ref="content">
         <div class="video-item" v-for="item in videoList" :key="item.creativeId">
           <div class="video-img">
-            <img v-lazy="item.resource.mlogBaseData.coverUrl" alt="">
+            <img v-lazy="item.resource.mlogBaseData.coverUrl + '?param=100y100'" alt="">
             <van-icon name="play" />
           </div>
           <div class="video-playCount">
