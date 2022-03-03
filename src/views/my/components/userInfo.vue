@@ -6,7 +6,7 @@
       <span class="user-vip"><i class="iconfont icon-vip"></i> 开通></span>
       <span class="user-grade">Lv.{{level}}</span>
     </div>
-    <RightOutlined/>
+    <van-icon name="arrow" />
   </div>
 </template>
 
@@ -57,7 +57,7 @@ import { ref, computed} from "vue"
       border-radius: 20px;
     }
   }
-  .anticon-right {
+  .van-icon-arrow {
     font-size: 16px;
     line-height: 2rem;
   }

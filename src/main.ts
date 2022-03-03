@@ -10,6 +10,7 @@ import Vant from 'vant';
 import {Toast} from 'vant'
 import 'vant/lib/index.css';
 import lazyPlugin from 'vue3-lazy'
+import 'default-passive-events'
 
 const app = createApp(App)
 app.use(store)

@@ -7,7 +7,7 @@
         type="password"
         class="pswLogin-input-password"
       />
-      <CloseOutlined class="pswLogin-input-icon" @click="handleDelete" />
+      <van-icon name="cross" class='pswLogin-input-icon' @click="handleDelete"/>
     </div>
     <button @click="handleLogin">登录</button>
   </div>

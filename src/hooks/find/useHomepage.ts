@@ -32,7 +32,7 @@ export default function useHomeModule(){
       'HOMEPAGE_BLOCK_STYLE_RCMD': IndexSong,
       'HOMEPAGE_BLOCK_NEW_ALBUM_NEW_SONG': IndexNewSong,
       'HOMEPAGE_MUSIC_CALENDAR': IndexCalendar,
-      'HOMEPAGE_MUSIC_MLOG': IndexSong, //
+      'HOMEPAGE_MUSIC_MLOG': IndexSong,
       'HOMEPAGE_BLOCK_MGC_PLAYLIST': Recommend,
       'HOMEPAGE_BLOCK_OFFICIAL_PLAYLIST': Recommend,
       'HOMEPAGE_VOICELIST_RCMD': IndexNewSong,

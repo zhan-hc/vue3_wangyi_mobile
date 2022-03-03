@@ -55,6 +55,7 @@ export default defineComponent({
       margin-right: .625rem;
       text-align: center;
       .icon-img{
+        display: inline-block;
         background: #FFF1F1;
         border-radius: 50%;
         width: 1rem;

@@ -2,7 +2,7 @@
   <div class="song-container">
     <div class="song-header">
       <span class="title">{{songheader.subTitle.title}}</span>
-      <span class="more" @click="playAllMusic"><CaretRightOutlined/>{{songheader.button.text}}</span>
+      <span class="more" @click="playAllMusic"><van-icon name="play" />{{songheader.button.text}}</span>
     </div>
     <div class="song-wrapper" ref="wrapper">
       <div class="song-content" ref="content">
@@ -10,7 +10,7 @@
           <div class="song-item" v-for="(item, i) in list.resources" :key="i" @click="playMusic(item)">
             <div class="song-img">
               <img v-lazy="item.uiElement.image.imageUrl" alt="">
-              <CaretRightOutlined/>
+              <van-icon name="play" />
             </div>
             <div class="song-info">
               <div class="info-base" :class="{'nodesc': !item.uiElement.subTitle}">
@@ -147,7 +147,7 @@ export default defineComponent({
               width: 100%;
               height: 100%;
             }
-            .anticon-caret-right{
+            .van-icon-play{
               font-size: 16px;
               position: absolute;
               top: 50%;

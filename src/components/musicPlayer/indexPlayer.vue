@@ -14,17 +14,16 @@ import useLyricFun from '@/hooks/song/useLyricFun'
 
   const au = ref(null)
   const store = useStore()
-  const songUrl = ref('')
-  // const songInfo = computed(() => store.state.currentSongInfo)
+  const songUrl = ref('https://music.163.com/song/media/outer/url?id=1497529315.mp3')
   const currentTime = computed(() => store.state.currentTime)
   // 监听切换音乐
   watch(()=>store.state.currentSongId,(newVal,oldVal)=>{
- 	  console.log('音乐id改变了',newVal,oldVal)
-    nextTick(() => {
+ 	  if (newVal !== oldVal) {
       songUrl.value = `https://music.163.com/song/media/outer/url?id=${newVal}.mp3`
       au.value.play()
       getLyric()
-    })
+     }
+    
   })
   // 监听播放状态
   watch(()=>store.state.currentPlayStatus,(newVal,oldVal)=>{

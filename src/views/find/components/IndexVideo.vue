@@ -9,10 +9,10 @@
         <div class="video-item" v-for="item in videoList" :key="item.creativeId">
           <div class="video-img">
             <img v-lazy="item.resource.mlogBaseData.coverUrl" alt="">
-            <CaretRightOutlined/>
+            <van-icon name="play" />
           </div>
           <div class="video-playCount">
-            <CaretRightOutlined/>
+            <van-icon name="play" />
             {{formatCount(item.resource.mlogExtVO.playCount)}}
           </div>
           <div class="video-name">{{item.resource.mlogBaseData.text}}</div>
@@ -98,7 +98,7 @@ export default defineComponent({
           width: 170px;
           height: 200px;
           margin-bottom: 10px;
-          .anticon-caret-right{
+          .van-icon-play{
             position: absolute;
             bottom: 10px;
             right: 10px;

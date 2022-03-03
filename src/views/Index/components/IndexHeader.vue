@@ -1,10 +1,10 @@
 <template>
   <div class="header-wrapper">
-    <MenuOutlined @click="onOpen" />
+    <van-icon name="wap-nav"  @click="onOpen" />
     <div class="header-content" @click="handleRouterJump('/search')">
-      <SearchOutlined />
+      <van-icon name="search" />
     </div>
-    <AudioFilled />
+    <i class="iconfont icon-yuyin" />
   </div>
 </template>
 
@@ -33,7 +33,8 @@
     box-sizing: border-box;
     padding: .3125rem .4375rem;
     z-index: 2;
-    .anticon-menu {
+    font-size: 28px;
+    .van-icon-wap-nav {
       margin-right: .3125rem;
     }
     .header-content {
@@ -46,10 +47,14 @@
       background-color: #fff;
       border-radius: 40px;
       box-sizing: border-box;
-      .anticon-search {
+      .van-icon-search {
+        font-size: 24px;
         color: #bababa;
         vertical-align: middle;
       }
+    }
+    .icon-yuyin{
+      font-size: 30px;
     }
   }
 </style>

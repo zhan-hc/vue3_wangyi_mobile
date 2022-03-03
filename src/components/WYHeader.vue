@@ -1,6 +1,6 @@
 <template>
   <div className='header-wrap'>
-    <LeftOutlined class='header-icon' @click="handleRouterBack"/>
+    <van-icon name="arrow-left"  class='header-icon' @click="handleRouterBack"/>
     <span class='header-tellogin'>手机号登录</span>
     <span v-if="status===1" className='header-pswlogin' @click='pswLogin'>密码登录</span>
   </div>
@@ -13,7 +13,8 @@ import useRouteFun from '@/hooks/router/useRouteFun'
 export default {
   props: {
     status: {
-      type: Number
+      type: Number,
+      default: () => 0
     }
   },
   setup (props) {
@@ -39,7 +40,7 @@ export default {
   height: 1rem;
   padding: .3125rem 0;
   margin-bottom: .3125rem;
-  &-icon{
+  .van-icon-arrow-left{
     margin-right: .3125rem;
     font-size: 18px;
     vertical-align: middle;
@@ -49,13 +50,10 @@ export default {
     vertical-align: middle;
     font-weight: 600;
   }
-  &-tellogin{
-    // font-size: 32px;
-  }
-  &-pswlogin{
+  .header-pswlogin{
     position: absolute;
-    right: 40px;
-    // font-size: 24px;
+    right: .3125rem;
+    font-size: 12px;
     border: 1px solid #ccc;
     border-radius: 30px;
     padding: .0625rem .3125rem;

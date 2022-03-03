@@ -7,7 +7,7 @@
           <div class="broadcast-name">{{item.uiElement.mainTitle.title}}</div>
           <div class="broadcast-desc">
             <div class="desc-type">广播</div>
-            <CaretRightOutlined/>
+            <van-icon name="play" />
           </div>
         </div>
       </div>
@@ -102,9 +102,9 @@ export default defineComponent({
             flex: 1;
           }
         }
-        .anticon-caret-right{
+        .van-icon-play{
           position: absolute;
-          right: .0625rem;
+          right: 0;
           bottom: .0625rem;
           color: red;
           background: #fff;

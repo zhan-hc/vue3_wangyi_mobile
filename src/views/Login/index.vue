@@ -5,7 +5,7 @@
     <p>未注册手机号登录后将自动创建账号</p>
     <div class="Login-input">
       <input v-model="tel" type="tel" maxLength='11' class='Login-input-tel'/>
-      <CloseOutlined class='Login-input-icon' @click="handleDelete"/>
+      <van-icon name="cross" class='Login-input-icon' @click="handleDelete"/>
     </div>
     <button @click="handleCheckTel">下一步</button>
   </div>

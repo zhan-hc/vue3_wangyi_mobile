@@ -78,6 +78,7 @@
       @include ellipsis;
       span {
         font-size: 16px;
+        vertical-align: middle;
         &:last-child {
           font-size: 14px;
           color: #9a9a9a;

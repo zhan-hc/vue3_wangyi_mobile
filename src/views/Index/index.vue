@@ -6,6 +6,7 @@
       :closable="false"
       :visible="visible"
       @close="onClose"
+      @handleClose="handleClose"
     >
       <DrawerInfo />
     </a-drawer>
@@ -50,11 +51,11 @@
 
   provide('visible', visible)
   provide('activeTab', activeTab)
-  // provide('isShowPlayer', isShowPlayer)
 
   const onClose = () => {
     visible.value = false
   }
+  
 
   const { navList } = toRefs(data)
 </script>

@@ -2,7 +2,7 @@
   <div class="info-wrap">
     <div class="person-info" v-if="userInfo">
       <a-avatar size="large" :src="userInfo.avatarUrl" />
-      <span>{{ userInfo.nickname ? userInfo.nickname + ' >' : '请登录' }}</span>
+      <span @click="handleJump">{{ userInfo.nickname ? userInfo.nickname + ' >' : '请登录' }}</span>
       <i class="iconfont icon-saoma"></i>
     </div>
     <div class="info-vip">
@@ -25,7 +25,7 @@
       >
         <span class="item-icon iconfont" :class="item.icon"></span>
         <span class="item-text">{{ item.text }}</span>
-        <RightOutlined />
+        <van-icon name="arrow" />
       </div>
     </div>
     <div class="info-close">关闭云音乐</div>
@@ -34,13 +34,23 @@
 
 <script setup>
   import { useStore } from 'vuex'
-  import { reactive, ref } from 'vue'
+  import { reactive, ref, defineEmits } from 'vue'
   import { list } from '@/assets/ts/drawerData'
+  import useRouteFun from '@/hooks/router/useRouteFun'
+
+  const emit = defineEmits(['handleClose'])
   const store = useStore()
+  const {handleRouterJump} = useRouteFun()
   const info = reactive({
     list: list,
   })
   const userInfo = ref(store.state.userInfo)
+
+  const handleJump = () => {
+    if (!userInfo.value.nickname) {
+      handleRouterJump('/login')
+    }
+  }
 </script>
 
 <style scoped lang="scss">
@@ -134,7 +144,7 @@
           // font-size: 30px;
           vertical-align: top;
         }
-        .anticon-right {
+        .van-icon-arrow {
           color: #ccc;
           position: absolute;
           right: .3125rem;

@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "445064",
+      "name": "woman",
+      "font_class": "woman",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "827647",
+      "name": "男",
+      "font_class": "nan",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "993873",
+      "name": "语音",
+      "font_class": "yuyin",
+      "unicode": "e6e1",
+      "unicode_decimal": 59105
+    },
+    {
       "icon_id": "2674483",
       "name": "暂停",
       "font_class": "zanting1",

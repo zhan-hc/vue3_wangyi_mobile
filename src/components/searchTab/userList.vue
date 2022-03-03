@@ -6,8 +6,8 @@
       </div>
       <div class="item-title">
         <span v-html="highLightStr(item.nickname, keywords)"></span>
-        <ManOutlined v-if="item.gender"/>
-        <WomanOutlined v-if="!item.gender"/>
+        <i class="iconfont icon-nan" v-if="item.gender"/>
+        <i class="iconfont icon-woman" v-if="!item.gender"/>
         <div class="item-desc" v-if="item.authStatus">网易音乐人</div>
       </div>
       <div class="follow-btn">
@@ -70,12 +70,12 @@ export default defineComponent({
           color: #999;
           font-size: 10px;
         }
-        .anticon-man{
+        .icon-nan{
           font-size: 14px;
           color: #00BFFF;
           margin-left: .0625rem;
         }
-        .anticon-woman{
+        .icon-woman{
           font-size: 14px;
           color: #FF69B4;
           margin-left: .0625rem;

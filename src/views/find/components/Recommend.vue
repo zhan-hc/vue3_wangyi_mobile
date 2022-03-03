@@ -74,6 +74,7 @@
     background: #fff;
     padding: .3125rem 0;
     margin-bottom: 20px;
+    overflow: hidden;
     .recommend-header {
       position: relative;
       margin: .3125rem .5rem;

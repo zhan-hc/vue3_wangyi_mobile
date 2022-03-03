@@ -5,7 +5,7 @@
       <span>{{item.text}}</span>
     </div>
     <div class="iconList-item">
-      <div class="item-icon iconfont"><PlusOutlined/></div>
+      <div class="item-icon iconfont"><van-icon name="plus" /></div>
       <span>添加应用</span>
     </div>
   </div>
@@ -34,7 +34,7 @@ import { iconList } from "@/assets/ts/my_Data";
       font-size: 24px;
       color: #FF4E4E;
     }
-    .anticon-plus {
+    .van-icon-plus {
       background: #F5F5F5;
       color: #b8b8b8;
       padding: .125rem .125rem;

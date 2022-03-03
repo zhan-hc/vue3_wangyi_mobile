@@ -1,7 +1,7 @@
 <template>
   <div class="search-wrap">
     <div class="search-header">
-      <LeftOutlined class="header-icon" @click="handleBack" />
+      <van-icon name="arrow-left" class="header-icon" @click="handleBack" />
       <input
         type="text"
         v-model="keyword"
