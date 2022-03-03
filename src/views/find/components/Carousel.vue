@@ -30,7 +30,7 @@ export default defineComponent({
 .ant-carousel{
   // font-size: 24px;
   background: #fff;
-  // margin-top: 120px;
+  padding-top: .3125rem;
   .slide-item{
     position: relative;
     padding: .3125rem .625rem;

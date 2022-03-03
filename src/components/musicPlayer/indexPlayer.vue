@@ -1,5 +1,5 @@
 <template>
-  <audio id="musicAudio" autoplay :src="songUrl" ref="au" @canplay="handleCanplay" @timeupdate="handleTimeupdate" @ended="overAudio"/>
+  <audio id="musicAudio" :src="songUrl" ref="au" @canplay="handleCanplay" @timeupdate="handleTimeupdate" @ended="overAudio"/>
 </template>
 
 <script setup>
@@ -20,7 +20,9 @@ import useLyricFun from '@/hooks/song/useLyricFun'
   watch(()=>store.state.currentSongId,(newVal,oldVal)=>{
  	  if (newVal !== oldVal) {
       songUrl.value = `https://music.163.com/song/media/outer/url?id=${newVal}.mp3`
-      au.value.play()
+      nextTick(() => {
+        au.value.play()
+      })
       getLyric()
      }
     

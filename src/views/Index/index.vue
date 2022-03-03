@@ -69,5 +69,6 @@
     background-color: #f5f5f5;
     padding: 1.625rem 0 3rem;
     box-sizing: border-box;
+    min-height: 100vh;
   }
 </style>
