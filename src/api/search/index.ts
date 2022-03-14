@@ -14,7 +14,8 @@ export function search_suggest (parameter:string)  {
       data: {
         'keywords': parameter,
         'type':'mobile'
-      }
+      },
+      showLoading: false
     })
 }
 

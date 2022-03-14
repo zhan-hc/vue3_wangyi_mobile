@@ -95,13 +95,12 @@
       }
     }
     .recommend-wrapper {
-      width: calc(100vh-1.875rem);
       box-sizing: border-box;
       margin: 0 .625rem;
       padding-bottom: .4375rem;
-      overflow: hidden;
       .recommend-content {
         touch-action: none;
+        overflow-x: hidden;
         .recommend-item {
           font-size: 12px;
           position: relative;

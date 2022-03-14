@@ -31,6 +31,9 @@ export default defineComponent({
   // font-size: 24px;
   background: #fff;
   padding-top: .3125rem;
+  width: 100%;
+  height: 0;
+  padding-bottom: 40%;
   .slide-item{
     position: relative;
     padding: .3125rem .625rem;

@@ -77,8 +77,9 @@ const initScroll = (visualWidth: number, sumLen: number, content: Ref, wrapper: 
   new BScroll(wrapper.value, {
     click: true,
     scrollX: true,
+    scrollY: false,
     bounce: true,
-    eventPassthrough: direction
+    eventPassthrough: direction,
   })
 }
 

@@ -31,7 +31,7 @@
     <div v-else class="hot-content">
       <p>热搜榜</p>
       <div class="search-hot" v-if="hotList.length">
-        <div class="hot-item" v-for="(item, i) in hotList" :key="i">
+        <div class="hot-item" v-for="(item, i) in hotList" :key="i" @click="handleClickWord(item.searchWord)">
           <span :class="{ hot: i <= 3 }">{{ i + 1 }}</span>
           <span>{{ item.searchWord }}</span>
         </div>
@@ -153,7 +153,7 @@
         flex-wrap: wrap;
         padding: .625rem;
         border-radius: 20px;
-        box-shadow: 0 0 5px 5px #ccc;
+        box-shadow: 0 0 2px 2px #ccc;
         .hot-item {
           width: 50%;
           padding: .0625rem;
