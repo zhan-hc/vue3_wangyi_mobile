@@ -59,7 +59,6 @@
 </script>
 
 <style scoped lang="scss">
-  @import '@/assets/scss/mixin.scss';
   .videoList-wrap {
     display: flex;
     flex-wrap: wrap;

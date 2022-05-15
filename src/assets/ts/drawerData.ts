@@ -8,7 +8,8 @@ interface setlist {
 interface listdata {
   id: String,
   icon: String,
-  text: String 
+  text: String,
+  type?: String
 }
 export const list: Array<setlist> = [
   {
@@ -66,7 +67,8 @@ export const list: Array<setlist> = [
       {
         id: '1009',
         icon: 'icon-yejian',
-        text: '夜间模式'
+        text: '夜间模式',
+        type: 'switch'
       },
       {
         id: '1010',

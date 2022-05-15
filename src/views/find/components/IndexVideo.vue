@@ -56,7 +56,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .video-container{
   // font-size: 24px;
-  background: #fff;
+  @include background_color('background_color1');
   padding: 20px 0;
   border-radius: 20px;
   margin-bottom: 20px;
@@ -74,7 +74,7 @@ export default defineComponent({
       padding: 5px 15px;
       border-radius: 30px;
       border: 1px solid #ccc;
-      background: #fff;
+      @include background_color('background_color1');
       transform: translateY(-50%);     
     }
   }

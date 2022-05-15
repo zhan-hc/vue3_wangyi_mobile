@@ -1,5 +1,4 @@
 <template>
-
   <div class="singleList-header">
     <i class="iconfont icon-bofang5"></i>
     <div class="all">播放全部</div>
@@ -14,7 +13,9 @@
     <div class="item-info">
       <div class="info-name">
         <span v-html="highLightStr(item.name, keywords)"></span>
-        <span class="item-desc"> {{item.transNames ? `（${item.transNames}）` : ''}}</span>
+        <span class="item-desc">
+          {{ item.transNames ? `（${item.transNames}）` : '' }}</span
+        >
       </div>
       <div class="info-authors">
         {{ getAuthor(item.artists) }} - {{ item.album.name }}
@@ -26,55 +27,56 @@
 </template>
 
 <script>
-import {computed, defineComponent, reactive, toRefs} from 'vue'
+  import { computed, defineComponent, reactive, toRefs } from 'vue'
   import { getAuthor, playMusic } from '@/assets/ts/common'
-import { state } from '@/store/state'
-import { highLightStr } from "@/assets/ts/common";
-export default defineComponent({
-  name: 'singleList',
-  props: {
-    dataList: {
-      type: Array,
-      default: () => []
+  import { state } from '@/store/state'
+  import { highLightStr } from '@/assets/ts/common'
+  export default defineComponent({
+    name: 'singleList',
+    props: {
+      dataList: {
+        type: Array,
+        default: () => [],
+      },
+      keywords: {
+        type: String,
+        default: () => '',
+      },
     },
-    keywords: {
-      type: String,
-      default: () => ''
-    }
-  },
-  setup(props) {
-    const state = reactive({
-      currentPage: 1,
-      pageSize: 10
-    })
+    setup(props) {
+      const state = reactive({
+        currentPage: 1,
+        pageSize: 10,
+      })
 
-    // 播放音乐
-    function playMusicParams(item) {
-      const songInfo = {
-        id: item.id,
-        imageUrl: item.artists.img1v1Url,
-        title: item.name,
-        authors: getAuthor(item.artists)
+      // 播放音乐
+      function playMusicParams(item) {
+        const songInfo = {
+          id: item.id,
+          imageUrl: item.artists.img1v1Url,
+          title: item.name,
+          authors: getAuthor(item.artists),
+        }
+        playMusic(songInfo)
       }
-      playMusic(songInfo)
-    }
 
-    return {
-      ...toRefs(state),
-      getAuthor,
-      highLightStr,
-      playMusicParams
-    }
-  }
-})
+      return {
+        ...toRefs(state),
+        getAuthor,
+        highLightStr,
+        playMusicParams,
+      }
+    },
+  })
 </script>
 
-<style scoped lang='scss'>
-  @import '@/assets/scss/mixin.scss';
+<style scoped lang="scss">
   .singleList-header {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+    @include background_color('background_color1');
+    @include font_color(('font_color1'));
     .all {
       flex: 1;
       font-size: 18px;
@@ -84,12 +86,12 @@ export default defineComponent({
       font-size: 22px;
     }
     .icon-bofang5 {
-      margin-right: .3125rem;
+      margin-right: 0.3125rem;
       color: #ff4639;
     }
     .icon-xiazaipt {
       font-size: 24px;
-      margin-right: .3125rem;
+      margin-right: 0.3125rem;
     }
   }
   .singleList-item {
@@ -97,21 +99,21 @@ export default defineComponent({
     align-items: center;
     height: 1rem;
     color: #999;
-    margin-bottom: .3125rem;
+    margin-bottom: 0.3125rem;
     .item-sort {
       color: #999;
       font-size: 18px;
-      width: .625rem;
+      width: 0.625rem;
     }
     .item-info {
       flex: 1;
       width: 260px;
-      margin-right: .3125rem;
+      margin-right: 0.3125rem;
       .info-name {
-        letter-spacing: .0625rem;
-        color: #000;
+        letter-spacing: 0.0625rem;
+        @include font_color(('font_color1'));
         @include ellipsis;
-        .item-desc{
+        .item-desc {
           color: #999;
         }
       }
@@ -124,7 +126,7 @@ export default defineComponent({
       font-size: 20px;
     }
     .icon-mv {
-      margin-right: .625rem;
+      margin-right: 0.625rem;
     }
     .icon-sandian {
       font-size: 20px;

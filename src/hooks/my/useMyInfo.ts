@@ -13,7 +13,7 @@ export default function useMyInfo(){
   // 获取等级
   const getUserLevel = async () => {
     const levelRes:any = await user_level()
-    sessionStorage.setItem('level', levelRes.data.level)
+    localStorage.setItem('level', levelRes.data.level)
     store.commit('setUserLevel', levelRes.level)
   }
 
@@ -23,7 +23,7 @@ export default function useMyInfo(){
     likeIds.value = likeRes.ids
     store.commit('setLikeIds', likeRes.ids)
   }
-  // sessionStorage.setItem('level', levelRes.data.level)
+  // localStorage.setItem('level', levelRes.data.level)
   // store.commit('setUserLevel', levelRes.level)
 
   onMounted(() => {

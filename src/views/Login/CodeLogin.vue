@@ -25,12 +25,17 @@
 
 <script setup>
   import WYHeader from 'components/WYHeader'
-  import { login_cellphone, login_verifycode, login_refresh, login_phonePsw } from '@/api/login/index'
+  import {
+    login_cellphone,
+    login_verifycode,
+    login_refresh,
+    login_phonePsw,
+  } from '@/api/login/index'
   import { ref, computed, reactive, onMounted, getCurrentInstance } from 'vue'
   import { useStore } from 'vuex'
   import useRouteFun from '@/hooks/router/useRouteFun'
-  
-  const {handleRouterJump, getUrlParams} = useRouteFun()
+
+  const { handleRouterJump, getUrlParams } = useRouteFun()
   const { proxy } = getCurrentInstance()
   const codeInput = ref(null)
 
@@ -116,10 +121,10 @@
       login_phonePsw(params)
         .then(async (res) => {
           if (res.code === 200) {
-            sessionStorage.setItem('wangyi_uid', res.account.id)
-            sessionStorage.setItem('wangyi_token', res.token)
-            sessionStorage.setItem('wangyi_cookie', res.cookie)
-            sessionStorage.setItem('wangyi_userInfo', JSON.stringify(res.profile))
+            localStorage.setItem('wangyi_uid', res.account.id)
+            localStorage.setItem('wangyi_token', res.token)
+            localStorage.setItem('wangyi_cookie', res.cookie)
+            localStorage.setItem('wangyi_userInfo', JSON.stringify(res.profile))
             // store.commit('setUserInfo', res.profile)
             handleRouterJump('/')
           }
@@ -139,7 +144,7 @@
 
 <style scoped lang="scss">
   .container {
-    padding: 0 .3125rem;
+    padding: 0 0.3125rem;
     box-sizing: border-box;
     font-size: 14px;
     .desc {
@@ -148,11 +153,11 @@
     .text {
       color: #c0c0c0;
       font-size: 14px;
-      margin-bottom: .625rem;
+      margin-bottom: 0.625rem;
     }
     .timer {
       float: right;
-      margin-right: .3125rem;
+      margin-right: 0.3125rem;
       font-size: 14px;
       &-text {
         color: royalblue;

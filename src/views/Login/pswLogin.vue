@@ -7,7 +7,11 @@
         type="password"
         class="pswLogin-input-password"
       />
-      <van-icon name="cross" class='pswLogin-input-icon' @click="handleDelete"/>
+      <van-icon
+        name="cross"
+        class="pswLogin-input-icon"
+        @click="handleDelete"
+      />
     </div>
     <button @click="handleLogin">登录</button>
   </div>
@@ -34,10 +38,10 @@
     login_phonePsw(params)
       .then((res) => {
         if (res.code === 200) {
-          sessionStorage.setItem('wangyi_uid', res.account.id)
-          sessionStorage.setItem('wangyi_userInfo', res.profile)
-          sessionStorage.setItem('wangyi_cookie', res.cookie)
-          sessionStorage.setItem('wangyi_userInfo', JSON.stringify(res.profile))
+          localStorage.setItem('wangyi_uid', res.account.id)
+          localStorage.setItem('wangyi_userInfo', res.profile)
+          localStorage.setItem('wangyi_cookie', res.cookie)
+          localStorage.setItem('wangyi_userInfo', JSON.stringify(res.profile))
           // store.commit('setUserInfo', res.profile)
           route.push('/')
         }
@@ -50,15 +54,15 @@
 
 <style scoped lang="scss">
   .pswLogin {
-    padding: 0 .3125rem;
+    padding: 0 0.3125rem;
     box-sizing: border-box;
     font-size: 14px;
     &-input {
-      margin-top: .3125rem;
+      margin-top: 0.3125rem;
       border-bottom: 1px solid #a9a9a9;
-      padding: .125rem 0;
+      padding: 0.125rem 0;
       display: flex;
-      margin-bottom: .625rem;
+      margin-bottom: 0.625rem;
       font-size: 14px;
       &-password {
         flex: 1;
@@ -72,7 +76,7 @@
       }
       &-icon {
         font-size: 16px;
-        margin-left: .3125rem;
+        margin-left: 0.3125rem;
         color: #a9a9a9;
       }
     }
@@ -82,7 +86,7 @@
       height: 1rem;
       margin: 0 auto;
       border-radius: 20px;
-      margin-bottom: .3125rem;
+      margin-bottom: 0.3125rem;
       background-color: #dc2c1f;
       color: #fff;
       border-style: none;

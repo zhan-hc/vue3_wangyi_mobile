@@ -2,7 +2,9 @@
   <div class="info-wrap">
     <div class="person-info" v-if="userInfo">
       <a-avatar size="large" :src="userInfo.avatarUrl" />
-      <span @click="handleJump">{{ userInfo.nickname ? userInfo.nickname + ' >' : '请登录' }}</span>
+      <span @click="handleJump">{{
+        userInfo.nickname ? userInfo.nickname + ' >' : '请登录'
+      }}</span>
       <i class="iconfont icon-saoma"></i>
     </div>
     <div class="info-vip">
@@ -15,7 +17,7 @@
         <div>限时特惠！黑胶首月仅0.88元！</div>
       </div>
     </div>
-    <div class="info-list" v-for="(list, i) in info.list" :key="i">
+    <div class="info-list" v-for="(list, i) in setuplist" :key="i">
       <div class="list-title" v-if="list.title">{{ list.title }}</div>
       <div
         class="list-item"
@@ -25,44 +27,73 @@
       >
         <span class="item-icon iconfont" :class="item.icon"></span>
         <span class="item-text">{{ item.text }}</span>
-        <van-icon name="arrow" />
+        <span v-if="item.type === 'switch'">
+          <a-switch
+            v-model:checked="themeChecked"
+            @change="handleChangeTheme"
+          />
+        </span>
+        <van-icon v-else name="arrow" />
       </div>
     </div>
     <div class="info-close">关闭云音乐</div>
   </div>
 </template>
 
-<script setup>
+<script lang="ts">
   import { useStore } from 'vuex'
   import { reactive, ref, defineEmits } from 'vue'
   import { list } from '@/assets/ts/drawerData'
   import useRouteFun from '@/hooks/router/useRouteFun'
+  import { toRefs } from '@vueuse/shared'
+  export default {
+    setup() {
+      const store = useStore()
+      const { handleRouterJump } = useRouteFun()
+      const state = reactive({
+        setuplist: list,
+        themeChecked: store.state.setupInfo.isThemeDrak,
+        userInfo: store.state.userInfo,
+      })
 
-  const store = useStore()
-  const {handleRouterJump} = useRouteFun()
-  const info = reactive({
-    list: list,
-  })
-  const userInfo = ref(store.state.userInfo)
-
-  const handleJump = () => {
-    if (!userInfo.value.nickname) {
-      handleRouterJump('/login')
-    }
+      const handleChangeTheme = (check: boolean) => {
+        localStorage.setItem(
+          'wangyi_setupInfo',
+          JSON.stringify({
+            isThemeDrak: check,
+          })
+        )
+        window.document.documentElement.setAttribute(
+          'data-theme',
+          check ? 'dark' : 'light'
+        )
+      }
+      const handleJump = () => {
+        if (!state.userInfo.nickname) {
+          handleRouterJump('/login')
+        }
+      }
+      return {
+        ...toRefs(state),
+        handleJump,
+        handleChangeTheme,
+      }
+    },
   }
 </script>
 
 <style scoped lang="scss">
   .info-wrap {
     // font-size: 24px;
+    @include background_color('background_color1');
     .person-info {
       position: relative;
       // font-size: 28px;
-      margin-bottom: .3125rem;
+      margin-bottom: 0.3125rem;
       .ant-avatar {
-        width: .75rem;
-        height: .75rem;
-        margin-right: .3125rem;
+        width: 0.75rem;
+        height: 0.75rem;
+        margin-right: 0.3125rem;
       }
       span {
         font-weight: bold;
@@ -70,23 +101,23 @@
       .icon-saoma {
         position: absolute;
         top: 50%;
-        right: .3125rem;
+        right: 0.3125rem;
         transform: translateY(-50%);
         font-weight: bold;
         font-size: 18px;
       }
     }
     .info-vip {
-      padding: .3125rem .3125rem;
+      padding: 0.3125rem 0.3125rem;
       border-radius: 20px;
       box-sizing: border-box;
       background-image: linear-gradient(to right, #8c8c8c, #b6b6b6);
       color: #d2d2d2;
-      margin-bottom: .3125rem;
+      margin-bottom: 0.3125rem;
       .content-top {
         font-size: 14px;
         position: relative;
-        padding-bottom: .3125rem;
+        padding-bottom: 0.3125rem;
         border-bottom: 1px solid #d2d2d2;
         .main {
           font-size: 16px;
@@ -97,66 +128,68 @@
           font-size: 10px;
           color: #fff;
           position: absolute;
-          top: .125rem;
+          top: 0.125rem;
           right: 0;
-          padding: .0625rem .125rem;
+          padding: 0.0625rem 0.125rem;
           border: 1px solid #fff;
           border-radius: 30px;
         }
       }
       .content-bottom {
-        padding-top: .3125rem;
+        padding-top: 0.3125rem;
       }
     }
     .info-list {
       font-size: 16px;
-      background: #fff;
+      @include background_color('background_color1');
       border-radius: 10px;
-      margin-bottom: .3125rem;
+      margin-bottom: 0.3125rem;
       .list-title {
         // font-size: 24px;
         color: #989898;
-        padding: .25rem 0 .25rem .25rem;
+        padding: 0.25rem 0 0.25rem 0.25rem;
         border-bottom: 1px solid #ccc;
       }
       .list-item {
         position: relative;
-        margin-left: .3125rem;
+        margin-left: 0.3125rem;
         display: flex;
         align-items: center;
         // line-height: 100px;
         box-sizing: border-box;
         height: 1rem;
         &.borderBom {
-          margin-left: .3125rem;
+          margin-left: 0.3125rem;
           padding-left: 0;
           border-bottom: 1px solid #ccc;
-          &:last-child{
+          &:last-child {
             border: none;
           }
         }
         .item-icon {
           // font-size: 48px;
-          margin-right: .3125rem;
+          margin-right: 0.3125rem;
         }
         .item-text {
           // font-size: 30px;
           vertical-align: top;
         }
-        .van-icon-arrow {
+        .van-icon-arrow,
+        .ant-switch {
           color: #ccc;
           position: absolute;
-          right: .3125rem;
+          right: 0.3125rem;
           top: 50%;
           transform: translateY(-50%);
         }
       }
     }
     .info-close {
-      padding: .3125rem 0;
-      border-radius: .3125rem;
+      padding: 0.3125rem 0;
+      border-radius: 0.3125rem;
       color: #dc2c1f;
       background: #fff;
+      @include background_color('background_color1');
       text-align: center;
       // font-size: 32px;
     }

@@ -8,12 +8,17 @@
         class="search-input"
         :placeholder="hotKeyword"
         @input="onSearch"
-        @keyup.enter="isSearch=true"
+        @keyup.enter="isSearch = true"
       />
     </div>
     <div class="search-content" v-if="keyword && !isSearch">
       <div v-if="searchList">
-        <div class="search-item" v-for="(item, i) in searchList" :key="i"  @click="handleClickWord(item.keyword)">
+        <div
+          class="search-item"
+          v-for="(item, i) in searchList"
+          :key="i"
+          @click="handleClickWord(item.keyword)"
+        >
           <van-icon name="search" />
           <span class="search-current">{{
             item.keyword.slice(0, keyword.length)
@@ -22,7 +27,7 @@
         </div>
       </div>
       <div v-else>
-        <div class="search-item"  @click="handleClickWord(item.keyword)">
+        <div class="search-item" @click="handleClickWord(item.keyword)">
           <span class="search-null">{{ `搜索 "${keyword} "` }}</span>
         </div>
       </div>
@@ -31,7 +36,12 @@
     <div v-else class="hot-content">
       <p>热搜榜</p>
       <div class="search-hot" v-if="hotList.length">
-        <div class="hot-item" v-for="(item, i) in hotList" :key="i" @click="handleClickWord(item.searchWord)">
+        <div
+          class="hot-item"
+          v-for="(item, i) in hotList"
+          :key="i"
+          @click="handleClickWord(item.searchWord)"
+        >
           <span :class="{ hot: i <= 3 }">{{ i + 1 }}</span>
           <span>{{ item.searchWord }}</span>
         </div>
@@ -43,13 +53,17 @@
 <script>
   import { defineComponent, onMounted, reactive, ref, toRefs } from 'vue'
   import { useDebounceFn } from '@vueuse/core'
-  import { search_suggest, search_hot, search_default } from '@/api/search/index'
+  import {
+    search_suggest,
+    search_hot,
+    search_default,
+  } from '@/api/search/index'
   import useRouteFun from '@/hooks/router/useRouteFun'
   import searchTab from '@/components/searchTab'
   export default defineComponent({
     name: 'search',
     components: {
-      searchTab
+      searchTab,
     },
     setup() {
       const { handleRouterBack } = useRouteFun()
@@ -58,7 +72,7 @@
         hotKeyword: '',
         searchList: [],
         hotList: [],
-        isSearch: false
+        isSearch: false,
       })
 
       onMounted(async () => {
@@ -77,7 +91,6 @@
             state.searchList = res.result.allMatch
           })
       }
-
 
       // 点击查询
       const handleClickWord = (keyword) => {
@@ -106,16 +119,18 @@
 </script>
 
 <style scoped lang="scss">
-  @import '@/assets/scss/mixin.scss';
   .search-wrap {
     padding: 20px;
     font-size: 16px;
+    min-height: 100vh;
+    @include background_color('background_color1');
+    @include font_color('font_color1');
     .search-header {
       display: flex;
       align-items: center;
-      margin-bottom: .125rem;
+      margin-bottom: 0.125rem;
       .header-icon {
-        margin-right: .3125rem;
+        margin-right: 0.3125rem;
       }
       .search-input {
         flex: 1;
@@ -151,18 +166,18 @@
       .search-hot {
         display: flex;
         flex-wrap: wrap;
-        padding: .625rem;
+        padding: 0.625rem;
         border-radius: 20px;
         box-shadow: 0 0 2px 2px #ccc;
         .hot-item {
           width: 50%;
-          padding: .0625rem;
+          padding: 0.0625rem;
           @include ellipsis;
           span {
             &:first-child {
               display: inline-block;
-              width: .625rem;
-              margin-right: .125rem;
+              width: 0.625rem;
+              margin-right: 0.125rem;
               color: #ccc;
             }
             &.hot {

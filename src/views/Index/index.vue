@@ -54,7 +54,6 @@
   const onClose = () => {
     visible.value = false
   }
-  
 
   const { navList } = toRefs(data)
 </script>
@@ -66,7 +65,8 @@
 </style>
 <style scoped lang="scss">
   .index-wrapper {
-    background-color: #f5f5f5;
+    @include background_color('background_color2');
+    @include font_color('font_color1');
     padding: 1.625rem 0 3rem;
     box-sizing: border-box;
     min-height: 100vh;

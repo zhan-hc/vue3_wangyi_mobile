@@ -18,7 +18,7 @@ import { iconList } from "@/assets/ts/my_Data";
 
 <style scoped lang="scss">
 .iconList-wrap{
-  background: #fff;
+  @include background_color('background_color1');
   font-size: 12px;
   padding: .3125rem;
   display: flex;

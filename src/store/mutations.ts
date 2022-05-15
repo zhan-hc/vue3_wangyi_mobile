@@ -39,4 +39,7 @@ export default {
   setCurrentLyric:  (state: any, data: Array<lyricData>) => {
     state.currentLyric = data
   },
+  changeSetupInfo: (state: any, data: Object) => {
+    state.setupInfo = data
+  },
 }

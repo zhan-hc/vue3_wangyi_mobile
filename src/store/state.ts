@@ -1,10 +1,11 @@
 
 
 export const state: Object = {
-  uid: sessionStorage.getItem('wangyi_uid') ?? 0,
-  userInfo: JSON.parse(sessionStorage.getItem('wangyi_userInfo') || '0') || {},
+  uid: localStorage.getItem('wangyi_uid') ?? 0,
+  userInfo: JSON.parse(localStorage.getItem('wangyi_userInfo') || '0') || {},
   level: 0,
   homeInfo: {},
+  setupInfo: JSON.parse(localStorage.getItem('wangyi_setupInfo') || '0') || {isThemeDrak: false,},
   currentSongId: null,
   currentSongInfo: { // 当前歌曲的信息
     id: '1497529315',

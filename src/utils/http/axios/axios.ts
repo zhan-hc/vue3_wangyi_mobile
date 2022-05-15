@@ -68,7 +68,7 @@ export class MyAxios {
       (config) => {
         config.baseURL = 'https://netease-cloud-music-api-gamma-eight.vercel.app'
         // 添加token
-        // const token = sessionStorage.getItem('wangyi_token')
+        // const token = localStorage.getItem('wangyi_token')
         // if (token) {
         //   config.headers['Authorization'] = token
         // }
@@ -81,7 +81,7 @@ export class MyAxios {
         if (this.hasCookie) {
           config.data = {
             ...config.data,
-            cookie: sessionStorage.getItem('wangyi_cookie')
+            cookie: localStorage.getItem('wangyi_cookie')
           }
         }
         // 取消频繁请求，只取最后一个

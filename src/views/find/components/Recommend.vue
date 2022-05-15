@@ -13,7 +13,10 @@
           @click="handleClickJump(item.resources[0].resourceId)"
         >
           <div class="recommend-img">
-            <img v-lazy="item.uiElement.image.imageUrl + '?param=50y50'" alt="推荐歌单" />
+            <img
+              v-lazy="item.uiElement.image.imageUrl + '?param=50y50'"
+              alt="推荐歌单"
+            />
           </div>
           <div class="recommend-playCount">
             <i class="iconfont icon-bofang4"></i>
@@ -71,13 +74,13 @@
 <style scoped lang="scss">
   .recommend-container {
     font-size: 14px;
-    background: #fff;
-    padding: .3125rem 0;
-    margin-bottom: 20px;
+    @include background_color('background_color1');
+    padding: 0.3125rem 0;
+    margin-bottom: 0.3125rem;
     overflow: hidden;
     .recommend-header {
       position: relative;
-      margin: .3125rem .5rem;
+      margin: 0.3125rem 0.5rem;
       .title {
         font-size: 18px;
         font-weight: bold;
@@ -87,17 +90,17 @@
         position: absolute;
         right: 0;
         top: 50%;
-        padding: .0625rem .125rem;
+        padding: 0.0625rem 0.125rem;
         border-radius: 30px;
         border: 1px solid #ccc;
-        background: #fff;
+        @include background_color('background_color1');
         transform: translateY(-50%);
       }
     }
     .recommend-wrapper {
       box-sizing: border-box;
-      margin: 0 .625rem;
-      padding-bottom: .4375rem;
+      margin: 0 0.625rem;
+      padding-bottom: 0.4375rem;
       .recommend-content {
         touch-action: none;
         overflow-x: hidden;
@@ -105,14 +108,14 @@
           font-size: 12px;
           position: relative;
           display: inline-block;
-          margin-right: .625rem;
+          margin-right: 0.625rem;
           width: 2.25rem;
           vertical-align: top;
           .recommend-img {
             border-radius: 10px;
             width: 2.25rem;
             height: 2.25rem;
-            margin-bottom: .3125rem;
+            margin-bottom: 0.3125rem;
             img {
               vertical-align: middle;
               border-radius: 10px;
@@ -123,10 +126,10 @@
           .recommend-playCount {
             font-size: 10px;
             position: absolute;
-            top: .125rem;
-            right: .125rem;
+            top: 0.125rem;
+            right: 0.125rem;
             color: #fff;
-            padding: .0625rem .125rem;
+            padding: 0.0625rem 0.125rem;
             background: rgba($color: #000, $alpha: 0.3);
             border-radius: 30px;
             .icon-bofang4 {

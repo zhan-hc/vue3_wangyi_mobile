@@ -1,16 +1,22 @@
 <template>
-  <div class="player-wrap" v-if="bottomPlayer" @click="handleOpenPlayer" :style="{'bottom': routerPath === '/' ? '1.5rem' : '0'}">
+  <div
+    class="player-wrap"
+    v-if="bottomPlayer"
+    @click="handleOpenPlayer"
+    :style="{ bottom: routerPath === '/' ? '1.5rem' : '0' }"
+  >
     <div class="player-img">
-      <img
-        :src="songInfo.imageUrl"
-        alt=""
-      />
+      <img :src="songInfo.imageUrl" alt="" />
     </div>
     <div class="song-info">
-      <span>{{songInfo.title}}</span>
-      <span> - {{songInfo.authors}}</span>
+      <span>{{ songInfo.title }}</span>
+      <span> - {{ songInfo.authors }}</span>
     </div>
-    <i @click.stop="changePlayStatus" class="iconfont" :class="playStatus ? 'icon-zanting1' : 'icon-bofang1'"></i>
+    <i
+      @click.stop="changePlayStatus"
+      class="iconfont"
+      :class="playStatus ? 'icon-zanting1' : 'icon-bofang1'"
+    ></i>
     <i class="iconfont icon-caidan" @click.stop="show = true"></i>
   </div>
   <playList-Popup v-model:show="show"></playList-Popup>
@@ -34,11 +40,9 @@
   const handleOpenPlayer = () => {
     isShowPlayer.value = true
   }
-
 </script>
 
 <style scoped lang="scss">
-  @import '@/assets/scss/mixin.scss';
   .player-wrap {
     position: fixed;
     bottom: 1.5rem;
@@ -47,9 +51,10 @@
     display: flex;
     height: 1.5rem;
     align-items: center;
-    padding: 0 .3125rem;
+    padding: 0 0.3125rem;
     border-top: 1px solid #ccc;
-    background: #fff;
+    @include background_color('background_color2');
+    @include font_color('font_color1');
     z-index: 2;
     // font-size: 24px;
     .player-img {
@@ -73,8 +78,8 @@
     }
     .song-info {
       flex: 1;
-      margin-right: .625rem;
-      margin-left: .625rem;
+      margin-right: 0.625rem;
+      margin-left: 0.625rem;
       @include ellipsis;
       span {
         font-size: 16px;
@@ -88,8 +93,9 @@
     .iconfont {
       font-size: 24px;
     }
-    .icon-bofang1,.icon-zanting1 {
-      margin-right: .625rem;
+    .icon-bofang1,
+    .icon-zanting1 {
+      margin-right: 0.625rem;
     }
   }
 </style>
