@@ -1,11 +1,11 @@
-import { onMounted, ref, computed} from "vue"
+import { onMounted, onActivated,computed} from "vue"
 import { user_level, user_likeList} from '@/api/user/index'
 import { useStore } from 'vuex'
 export default function useMyInfo(){
 
   const store = useStore()
 
-  const uid = store.state.uid
+  const uid:any = computed(() => store.state.uid)
   const likeIds = store.state.likeIds
   const level = store.state.level
 
@@ -27,9 +27,23 @@ export default function useMyInfo(){
   // store.commit('setUserLevel', levelRes.level)
 
   onMounted(() => {
-    !level && getUserLevel()
-    !likeIds.length && uid && getUserLike(uid)
+    if (uid) {
+      !level && getUserLevel()
+      !likeIds.length && getUserLike(uid)
+    }
   })
-  return {}
+
+  // 登录进来取消缓存从新获取数据
+  onActivated(() => {
+    console.log('onActivated被处罚', uid)
+    if (uid) {
+      !level && getUserLevel()
+      !likeIds.length && getUserLike(uid)
+    }
+  })
+
+  return {
+    uid
+  }
   
 }

@@ -72,7 +72,7 @@ export class MyAxios {
         // if (token) {
         //   config.headers['Authorization'] = token
         // }
-        config.url += `?timestamp=${+new Date()}&realIP=192.168.11.126`
+        config.url += `?timestamp=${+new Date()}`
         if (config.method == 'post') {
           config.data = {
             ...config.data,

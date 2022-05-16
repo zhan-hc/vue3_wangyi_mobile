@@ -59,7 +59,7 @@
     height: 1.5rem;
     display: flex;
     align-items: center;
-    @include background_color('background_color2');
+    @include background_color('player_nav_color');
     z-index: 2;
     font-size: 10px;
     border-top: 1px solid #ccc;
@@ -78,7 +78,8 @@
           margin: 0 auto;
           width: 1rem;
           border-radius: 50%;
-          background-image: linear-gradient(to top right, #fe3a3b, #ff9d9c);
+          @include background_image('bottom_nav_color');
+          // background: linear-gradient(to top right, #fe3a3b, #ff9d9c);
           color: #fff;
         }
       }

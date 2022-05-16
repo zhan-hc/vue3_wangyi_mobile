@@ -7,7 +7,7 @@ function resolve(dir) {
   return path.join(__dirname, dir) //path.join(__dirname)设置绝对路径
 }
 module.exports = {
-  publicPath: './',
+  // publicPath: './', //打包发布服务器才需配置
   devServer: {
     host: '0.0.0.0',
     port: 8080,

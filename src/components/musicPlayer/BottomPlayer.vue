@@ -53,7 +53,7 @@
     align-items: center;
     padding: 0 0.3125rem;
     border-top: 1px solid #ccc;
-    @include background_color('background_color2');
+    @include background_color('player_nav_color');
     @include font_color('font_color1');
     z-index: 2;
     // font-size: 24px;

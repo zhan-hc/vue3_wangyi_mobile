@@ -85,14 +85,16 @@
       })
 
       onMounted(async () => {
-        const res = await user_playList(state.uid)
-        state.mySongList = res.playlist.filter(
-          (item) => item.userId === Number(state.uid)
-        )
-        state.collectList = res.playlist.filter(
-          (item) => item.userId !== Number(state.uid)
-        )
-        console.log(state.mySongList)
+        if (store.state.uid) {
+          const res = await user_playList(state.uid)
+          state.mySongList = res.playlist.filter(
+            (item) => item.userId === Number(state.uid)
+          )
+          state.collectList = res.playlist.filter(
+            (item) => item.userId !== Number(state.uid)
+          )
+          console.log(state.mySongList)
+        }
       })
 
       // 歌单详情跳转

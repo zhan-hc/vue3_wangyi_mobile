@@ -1,27 +1,29 @@
 <template>
   <div class="my-wrap">
-    <userInfo />
+    <unLogin v-if="!uid" />
+    <userInfo v-else />
     <myIconList />
-    <likeSong/>
+    <likeSong />
     <songList />
   </div>
 </template>
 
 <script setup>
-import userInfo from "./components/userInfo"
-import likeSong from "./components/likeSong"
-import myIconList from "./components/myIconList"
-import songList from "./components/songList"
-import useMyInfo from '@/hooks/my/useMyInfo'
+  import userInfo from './components/userInfo'
+  import likeSong from './components/likeSong'
+  import myIconList from './components/myIconList'
+  import songList from './components/songList'
+  import unLogin from './components/unLogin'
 
-  useMyInfo()
-  
+  import useMyInfo from '@/hooks/my/useMyInfo'
+
+  const { uid } = useMyInfo()
 </script>
 
 <style scoped lang="scss">
-.my-wrap {
-  font-size: 12px;
-  padding: .3125rem;
-  box-sizing: border-box;
-}
+  .my-wrap {
+    font-size: 12px;
+    padding: 0.3125rem;
+    box-sizing: border-box;
+  }
 </style>

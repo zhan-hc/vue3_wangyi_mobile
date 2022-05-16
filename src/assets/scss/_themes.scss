@@ -22,7 +22,11 @@ $themes: (
         // 图标背景色
         icon_bg: #fff1f1,
         // 开关选中颜色
-        switch_color: #fe3a3b
+        switch_color: #fe3a3b,
+        // 播放器和底部导航栏背景色
+        player_nav_color: #fff,
+        // 底部导航栏选中颜色
+        bottom_nav_color: linear-gradient(to top right, #fe3a3b, #ff9d9c)
     
     ),
     
@@ -44,7 +48,11 @@ $themes: (
         // 图标背景色
         icon_bg: rgba(255,0,0,0.3),
         // 开关选中颜色
-        switch_color: #4F4F4F
+        switch_color: #4F4F4F,
+        // 播放器和底部导航栏背景色
+        player_nav_color: #283142,
+        // 底部导航栏选中颜色
+        bottom_nav_color: linear-gradient(to top right, #fe3a3b, #fe3a3b)
     
     )
 );

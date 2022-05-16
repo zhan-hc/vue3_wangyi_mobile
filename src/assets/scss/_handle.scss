@@ -26,6 +26,14 @@
     }
 }
 
+//获取背景图片
+@mixin background_image($img) {
+  @include themeify
+   {
+      background-image: themed($img) !important;
+  }
+}
+
 //获取字体颜色
 @mixin font_color($color) {
     @include themeify {
