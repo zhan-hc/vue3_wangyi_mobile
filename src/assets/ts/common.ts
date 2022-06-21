@@ -56,6 +56,11 @@ const playMusic = (songInfo: any) => {
   store.commit('changeSongId', songInfo.id)
   store.commit('changeSongInfo', songInfo)
   store.commit('changePlayStatus', true)
+  // 往当前播放列表添加
+  store.commit('setCurrentPlayList', [
+    songInfo,
+    ...store.state.currentPlayList,
+  ])
 }
 
 

@@ -29,7 +29,7 @@
 <script>
   import { computed, defineComponent, reactive, toRefs } from 'vue'
   import { getAuthor, playMusic } from '@/assets/ts/common'
-  import { state } from '@/store/state'
+  import { useStore } from 'vuex'
   import { highLightStr } from '@/assets/ts/common'
   export default defineComponent({
     name: 'singleList',
@@ -44,6 +44,7 @@
       },
     },
     setup(props) {
+      const store = useStore()
       const state = reactive({
         currentPage: 1,
         pageSize: 10,
@@ -53,7 +54,7 @@
       function playMusicParams(item) {
         const songInfo = {
           id: item.id,
-          imageUrl: item.artists.img1v1Url,
+          imageUrl: item.artists[0].img1v1Url,
           title: item.name,
           authors: getAuthor(item.artists),
         }

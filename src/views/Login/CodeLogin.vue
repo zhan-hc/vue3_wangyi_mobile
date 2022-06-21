@@ -125,6 +125,8 @@
             localStorage.setItem('wangyi_token', res.token)
             localStorage.setItem('wangyi_cookie', res.cookie)
             localStorage.setItem('wangyi_userInfo', JSON.stringify(res.profile))
+            // 登陆时重置跟个人界面的等级，促使重新获取
+            localStorage.removeItem('wangyi_level')
             // store.commit('setUserInfo', res.profile)
             handleRouterJump('/')
           }

@@ -1,9 +1,9 @@
 
 
-export const state: Object = {
+export const state: any = {
   uid: localStorage.getItem('wangyi_uid') ?? 0,
   userInfo: JSON.parse(localStorage.getItem('wangyi_userInfo') || '0') || {},
-  level: 0,
+  level: localStorage.getItem('wangyi_level') ?? 0,
   homeInfo: {},
   setupInfo: JSON.parse(localStorage.getItem('wangyi_setupInfo') || '0') || {isThemeDrak: false,},
   currentSongId: null,

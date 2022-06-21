@@ -5,7 +5,7 @@ export default function useMyInfo(){
 
   const store = useStore()
 
-  const uid:any = computed(() => store.state.uid)
+  const uid = store.state.uid
   const likeIds = store.state.likeIds
   const level = store.state.level
 
@@ -13,7 +13,7 @@ export default function useMyInfo(){
   // 获取等级
   const getUserLevel = async () => {
     const levelRes:any = await user_level()
-    localStorage.setItem('level', levelRes.data.level)
+    localStorage.setItem('wangyi_level', levelRes.data.level)
     store.commit('setUserLevel', levelRes.level)
   }
 
@@ -23,24 +23,15 @@ export default function useMyInfo(){
     likeIds.value = likeRes.ids
     store.commit('setLikeIds', likeRes.ids)
   }
-  // localStorage.setItem('level', levelRes.data.level)
-  // store.commit('setUserLevel', levelRes.level)
 
   onMounted(() => {
     if (uid) {
+      console.log('onMounted')
       !level && getUserLevel()
       !likeIds.length && getUserLike(uid)
     }
   })
 
-  // 登录进来取消缓存从新获取数据
-  onActivated(() => {
-    console.log('onActivated被处罚', uid)
-    if (uid) {
-      !level && getUserLevel()
-      !likeIds.length && getUserLike(uid)
-    }
-  })
 
   return {
     uid
