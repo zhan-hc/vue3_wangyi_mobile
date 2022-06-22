@@ -59,7 +59,7 @@ const playMusic = (songInfo: any) => {
   // 往当前播放列表添加
   store.commit('setCurrentPlayList', [
     songInfo,
-    ...store.state.currentPlayList,
+    ...store.state.currentPlayList.filter((item:any) => item.id !== songInfo.id),
   ])
 }
 
