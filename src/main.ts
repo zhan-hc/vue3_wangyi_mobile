@@ -11,12 +11,15 @@ import {Toast} from 'vant'
 import 'vant/lib/index.css';
 import lazyPlugin from 'vue3-lazy'
 import 'default-passive-events'
+import 'wy-music-ui/lib/packages.css'
+import wymui from 'wy-music-ui'
 
 const app = createApp(App)
 app.use(store)
 app.use(router)
 app.use(Antd)
 app.use(Vant)
+app.use(wymui)
 app.mount('#app')
 app.use(lazyPlugin, {
   loading: require('@/assets/images/loading.gif'), // 图片加载时默认图片

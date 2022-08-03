@@ -64,27 +64,33 @@
     font-size: 10px;
     border-top: 1px solid #ccc;
     .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
       flex: 1;
       text-align: center;
       color: #9a9a9a;
-      .iconfont {
-        font-size: 22px;
-      }
       &.active {
         color: #fe3a3b;
         text-align: center;
         .iconfont {
           font-size: 22px;
-          margin: 0 auto;
-          width: 1rem;
+          width: 0.875rem;
+          height: 0.875rem;
           border-radius: 50%;
           @include background_image('bottom_nav_color');
-          // background: linear-gradient(to top right, #fe3a3b, #ff9d9c);
           color: #fff;
         }
       }
       .iconfont {
-        // font-size: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        width: 0.875rem;
+        height: 0.875rem;
+        margin-bottom: 0.0625rem;
       }
     }
   }

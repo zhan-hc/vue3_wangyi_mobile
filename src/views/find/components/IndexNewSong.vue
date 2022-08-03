@@ -11,43 +11,17 @@
       >
       <span class="more"><van-icon name="play" />更多</span>
     </div>
-    <div class="song-wrapper" ref="wrapper">
-      <div class="song-content" ref="content">
-        <div class="song-list" v-for="(list, i) in newSongList" :key="i">
-          <div
-            class="song-item"
-            v-for="(item, i) in list.resources"
-            :key="i"
-            @click="playMusic(item)"
-          >
-            <div class="song-img">
-              <img
-                v-lazy="item.uiElement.image.imageUrl + '?param=50y50'"
-                alt=""
-              />
-              <van-icon name="play" />
-            </div>
-            <div class="song-info">
-              <div
-                class="info-base"
-                :class="{ nodesc: !item.uiElement.subTitle }"
-              >
-                <span class="info-name">{{
-                  item.uiElement.mainTitle.title
-                }}</span>
-                <span
-                  v-if="item.resourceExtInfo && item.resourceExtInfo.artists"
-                  >- {{ getAuthor(item.resourceExtInfo.artists) }}</span
-                >
-              </div>
-              <div class="info-desc" v-if="item.uiElement.subTitle">
-                {{ item.uiElement.subTitle.title }}
-              </div>
-            </div>
-          </div>
-        </div>
+    <wym-scroll-view v-if="newSongList.length">
+      <div class="song-list" v-for="(list, i) in newSongList" :key="i">
+        {{ item }}
+        <wym-song-item
+          v-for="(item, j) in list.resources"
+          :key="j"
+          :data="songItemData(item)"
+          @click="playMusic(item)"
+        />
       </div>
-    </div>
+    </wym-scroll-view>
   </div>
 </template>
 
@@ -60,7 +34,7 @@
     toRefs,
     defineComponent,
   } from 'vue'
-  import { getAuthor, playMusic, initScroll } from '@/assets/ts/common'
+  import { getAuthor, playMusic } from '@/assets/ts/common'
   export default defineComponent({
     name: 'IndexNewSong',
     props: {
@@ -74,15 +48,9 @@
       const songTab = Object.keys(newSongMap(songList))
       const currentTab = ref(0)
       const songheader = reactive(props.data.uiElement)
-      const wrapper = ref(null)
-      const content = ref(null)
 
       const newSongList = computed(() => {
         return newSongMap(songList)[songTab[currentTab.value]]
-      })
-
-      onMounted(() => {
-        initScroll(650, newSongList.value.length, content, wrapper)
       })
 
       // 将新歌里的数据存入map
@@ -98,12 +66,6 @@
         return songObj
       }
 
-      // 切换tab重新初始化滚动插件
-      const changeTab = (i) => {
-        currentTab.value = i
-        initScroll(600, newSongList.value.length, content, wrapper)
-      }
-
       // 播放音乐
       function playMusicParams(item) {
         const songInfo = {
@@ -115,16 +77,35 @@
         playMusic(songInfo)
       }
 
+      const changeTab = (i) => {
+        currentTab.value = i
+      }
+
+      const songItemData = (item) => {
+        return {
+          imageUrl: `${item.uiElement.image.imageUrl}?param=50y50`,
+          title: item.uiElement.mainTitle.title,
+          authors: getAuthor(item?.resourceExtInfo?.artists || []),
+          desc:
+            item.uiElement?.subTitle?.titleType !== 'songRcmdTag'
+              ? item.uiElement?.subTitle?.title
+              : '',
+          subTitle:
+            item.uiElement?.subTitle?.titleType === 'songRcmdTag'
+              ? item.uiElement?.subTitle?.title
+              : '',
+        }
+      }
+
       return {
         songList,
         songTab,
-        wrapper,
-        content,
+        changeTab,
         currentTab,
         songheader,
         newSongList,
-        changeTab,
         getAuthor,
+        songItemData,
         playMusic: playMusicParams,
       }
     },
@@ -166,74 +147,63 @@
         transform: translateY(-50%);
       }
     }
-    .song-wrapper {
-      // width: calc(100vh-.625rem);
-      // box-sizing: border-box;
-      margin: 0 0.5rem;
-      padding-bottom: 1rem;
-      overflow: hidden;
-      .song-content {
-        touch-action: none;
-        // overflow: hidden;
-        .song-list {
+    .song-list {
+      position: relative;
+      display: inline-block;
+      height: 1rem;
+      margin-bottom: 0.625rem;
+      width: 300px;
+      .song-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 1.25rem;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-bottom: 20px;
+        .song-img {
           position: relative;
-          display: inline-block;
+          border-radius: 5px;
+          width: 1rem;
           height: 1rem;
-          margin-bottom: 0.625rem;
-          width: 300px;
-          .song-item {
-            position: relative;
-            display: flex;
-            align-items: center;
-            height: 1.25rem;
-            box-sizing: border-box;
-            padding: 10px;
-            margin-bottom: 20px;
-            .song-img {
-              position: relative;
-              border-radius: 5px;
-              width: 1rem;
-              height: 1rem;
-              margin-right: 0.3125rem;
-              img {
-                vertical-align: middle;
-                border-radius: 5px;
-                width: 100%;
-                height: 100%;
-              }
-              .van-icon-play {
-                font-size: 16px;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: rgba($color: #fff, $alpha: 0.8);
-              }
+          margin-right: 0.3125rem;
+          img {
+            vertical-align: middle;
+            border-radius: 5px;
+            width: 100%;
+            height: 100%;
+          }
+          .van-icon-play {
+            font-size: 16px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba($color: #fff, $alpha: 0.8);
+          }
+        }
+        .song-info {
+          flex: 1;
+          border-bottom: 1px solid #ccc;
+          height: 1.25rem;
+          width: calc(100% - 120px);
+          .info-base {
+            // font-size: 24px;
+            @include font_color('font_color3');
+            @include ellipsis;
+            span {
+              display: inline-block;
             }
-            .song-info {
-              flex: 1;
-              border-bottom: 1px solid #ccc;
-              height: 1.25rem;
-              width: calc(100% - 120px);
-              .info-base {
-                // font-size: 24px;
-                @include font_color('font_color3');
-                @include ellipsis;
-                span {
-                  display: inline-block;
-                }
-                .info-name {
-                  @include font_color('font_color1');
-                  // font-size: 32px;
-                }
-                &.nodesc {
-                  margin-top: 0.3125rem;
-                }
-              }
-              .info-desc {
-                color: #9a9a9a;
-              }
+            .info-name {
+              @include font_color('font_color1');
+              // font-size: 32px;
             }
+            &.nodesc {
+              margin-top: 0.3125rem;
+            }
+          }
+          .info-desc {
+            color: #9a9a9a;
           }
         }
       }

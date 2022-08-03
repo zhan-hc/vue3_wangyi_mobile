@@ -1,10 +1,10 @@
 <template>
   <div class="broadcast-container">
-    <div class="broadcast-wrapper" ref="wrapper">
+    <div class="broadcast-wrapper">
       <p class="broadcast-header">
         {{ broadcastList.uiElement.mainTitle.title }}
       </p>
-      <div class="broadcast-content" ref="content">
+      <wym-scroll-view>
         <div
           class="broadcast-item"
           v-for="(item, i) in broadcastList.resources"
@@ -17,14 +17,14 @@
             <van-icon name="play" />
           </div>
         </div>
-      </div>
+      </wym-scroll-view>
     </div>
   </div>
 </template>
 
 <script>
-  import { ref, reactive, onMounted, defineComponent } from 'vue'
-  import { formatCount, initScroll } from '@/assets/ts/common'
+  import { ref, reactive, defineComponent } from 'vue'
+  import { formatCount } from '@/assets/ts/common'
 
   export default defineComponent({
     name: 'IndexBroadcast',
@@ -36,12 +36,6 @@
     },
     setup(props) {
       const broadcastList = reactive(props.data.creatives[0])
-      const wrapper = ref(null)
-      const content = ref(null)
-
-      onMounted(() => {
-        initScroll(200, broadcastList.resources.length, content, wrapper)
-      })
 
       function randomHexColor(i) {
         //随机生成十六进制颜色
@@ -57,8 +51,6 @@
         return color[i]
       }
       return {
-        wrapper,
-        content,
         broadcastList,
         formatCount,
         randomHexColor,
@@ -80,53 +72,47 @@
       @include font_color('font_color1');
     }
     .broadcast-wrapper {
-      // width: 280px;
       box-sizing: border-box;
       margin: 0 0.3125rem;
       padding-bottom: 0.3125rem;
       overflow: hidden;
       @include background_color('background_color2');
       border-radius: 10px;
-      .broadcast-content {
-        touch-action: none;
-        overflow: hidden;
-        padding: 0 0.3125rem 0.3125rem;
-        .broadcast-item {
-          position: relative;
-          display: inline-block;
-          margin-right: 0.3125rem;
-          width: 2rem;
-          height: 2rem;
-          // background: olivedrab;
-          vertical-align: top;
-          border-radius: 10px;
-          padding: 0.125rem;
-          .broadcast-name {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-            overflow: hidden;
+      .broadcast-item {
+        position: relative;
+        display: inline-block;
+        margin-right: 0.3125rem;
+        width: 2rem;
+        height: 2rem;
+        // background: olivedrab;
+        vertical-align: top;
+        border-radius: 10px;
+        padding: 0.125rem;
+        .broadcast-name {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+        }
+        .broadcast-desc {
+          font-size: 10px;
+          position: absolute;
+          bottom: 0.0625rem;
+          left: 0.3125rem;
+          right: 0.3125rem;
+          display: flex;
+          .desc-type {
+            flex: 1;
           }
-          .broadcast-desc {
-            font-size: 10px;
-            position: absolute;
-            bottom: 0.0625rem;
-            left: 0.3125rem;
-            right: 0.3125rem;
-            display: flex;
-            .desc-type {
-              flex: 1;
-            }
-          }
-          .van-icon-play {
-            position: absolute;
-            right: 0;
-            bottom: 0.0625rem;
-            color: red;
-            background: #fff;
-            padding: 0.0625rem;
-            border-radius: 50%;
-          }
+        }
+        .van-icon-play {
+          position: absolute;
+          right: 0;
+          bottom: 0.0625rem;
+          color: red;
+          background: #fff;
+          padding: 0.0625rem;
+          border-radius: 50%;
         }
       }
     }

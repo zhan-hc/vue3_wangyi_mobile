@@ -22,11 +22,11 @@
   import IndexBroadcast from './components/IndexBroadcast'
   import { home_icon, home_page } from '@/api/home/index'
   import { onMounted, ref, reactive, toRefs } from 'vue'
-  import IndexLive from './components/IndexLive'
   import useHomeModule from '@/hooks/find/useHomepage'
 
-  let {state} = useHomeModule() // 获取首页模块内容
-  const { homeList, homeComMap, iconList, bannerList, status, endText } = toRefs(state)
+  let { state } = useHomeModule() // 获取首页模块内容
+  const { homeList, homeComMap, iconList, bannerList, status, endText } =
+    toRefs(state)
 </script>
 
 <style scoped lang="scss">
