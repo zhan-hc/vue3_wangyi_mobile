@@ -12,11 +12,20 @@
       <span>{{ songInfo.title }}</span>
       <span> - {{ songInfo.authors }}</span>
     </div>
-    <i
+    <!-- <i
       @click.stop="changePlayStatus"
       class="iconfont"
       :class="playStatus ? 'icon-zanting1' : 'icon-bofang1'"
-    ></i>
+    ></i> -->
+    <wym-progress
+      class="progress"
+      type="circle"
+      :percentage="(currentTime / songInfo.sumTime) * 100"
+      size="32"
+      @click.stop="changePlayStatus"
+    >
+      <wym-icon :name="playStatus ? 'pause' : 'bofang2'" size="12px" />
+    </wym-progress>
     <i class="iconfont icon-caidan" @click.stop="show = true"></i>
   </div>
   <playList-Popup v-model:show="show"></playList-Popup>
@@ -34,6 +43,7 @@
 
   const bottomPlayer = computed(() => getRouteMeta('bottomPlayer') !== false)
   const routerPath = computed(() => getRoutePath())
+  const currentTime = computed(() => store.state.currentTime)
   const isShowPlayer = inject('isShowPlayer')
   const show = ref(false)
 
@@ -94,7 +104,8 @@
       font-size: 24px;
     }
     .icon-bofang1,
-    .icon-zanting1 {
+    .icon-zanting1,
+    .progress {
       margin-right: 0.625rem;
     }
   }

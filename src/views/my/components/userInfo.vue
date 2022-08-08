@@ -37,6 +37,7 @@
     .user {
       flex: 1;
       .user-name {
+        margin-bottom: 0.3125rem;
         font-size: 18px;
         font-weight: bold;
       }

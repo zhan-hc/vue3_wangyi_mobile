@@ -9,20 +9,6 @@ import { onMounted, reactive} from 'vue'
 import { home_icon, home_page } from '@/api/home/index'
 import {homeBlock} from './type'
 
-// interface requestType<T> {
-//   code: number
-//   data?: T
-//   message: string
-// }
-// interface homedataType {
-//   blockUUIDs: null
-//   blocks: object
-//   cursor: string
-//   guideToast: object
-//   hasMore: boolean
-//   pageConfig: object
-// }
-
 export default function useHomeModule(){
   const state = reactive({
     homeList: [],

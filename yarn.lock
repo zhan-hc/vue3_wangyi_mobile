@@ -9977,10 +9977,10 @@ ws@^7.3.1:
   resolved "https://registry.npmjs.org/ws/-/ws-7.5.7.tgz#9e0ac77ee50af70d58326ecff7e85eb3fa375e67"
   integrity sha512-KMvVuFzpKBuiIXW3E4u3mySRO2/mCHSyZDJQM5NQ9Q9KHWHWh0NHgfbRMLLrceUK5qAL4ytALJbpRMjixFZh8A==
 
-wy-music-ui@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmmirror.com/wy-music-ui/-/wy-music-ui-0.2.1.tgz#c7b9a311f69dd04bb975d685a955752d762571e2"
-  integrity sha512-zeDAxGtJtUyo7N8VSkczzQwm8MQM4lshrRtUghA0DK/iGHAA//1rqHzNa4am+hSRO/dQa2vSLzoBOyNIO2wkZw==
+wy-music-ui@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npmmirror.com/wy-music-ui/-/wy-music-ui-0.3.0.tgz#c04ffc050ef850e195fa7a4878f18e3b0f2edfe5"
+  integrity sha512-SplfAj9yQC+rrzctJNU63OJGD0Ud0WWcIURBEnGbf0wr9vv4eE9twOmhzG9gwBBiIQwTC4XT10aY3PaQv9a6Zg==
   dependencies:
     core-js "^3.6.5"
     vue "^3.0.0"

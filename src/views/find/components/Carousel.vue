@@ -48,7 +48,7 @@
         right: 0.625rem;
         color: #fff;
         font-size: 12px;
-        padding: 0.125rem 0.4375rem;
+        padding: 0.0625rem 0.125rem;
         border-bottom-right-radius: 10px;
         border-top-left-radius: 10px;
       }

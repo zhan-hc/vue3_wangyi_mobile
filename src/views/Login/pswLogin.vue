@@ -13,7 +13,9 @@
         @click="handleDelete"
       />
     </div>
-    <button @click="handleLogin">登录</button>
+    <wym-button class="btn" size="large" @click="handleLogin" round
+      >登录</wym-button
+    >
   </div>
 </template>
 
@@ -80,20 +82,10 @@
         color: #a9a9a9;
       }
     }
-    button {
+    .btn {
       display: block;
-      width: 240px;
       height: 1rem;
       margin: 0 auto;
-      border-radius: 20px;
-      margin-bottom: 0.3125rem;
-      background-color: #dc2c1f;
-      color: #fff;
-      border-style: none;
-      &:focus {
-        outline: none;
-        border: none;
-      }
     }
   }
 </style>

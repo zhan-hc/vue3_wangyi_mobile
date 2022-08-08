@@ -1,13 +1,15 @@
 <template>
-  <div class="Login">
+  <div class="login">
     <WYHeader />
     <p>登录体验更多精彩</p>
     <p>未注册手机号登录后将自动创建账号</p>
-    <div class="Login-input">
-      <input v-model="tel" type="tel" maxLength="11" class="Login-input-tel" />
-      <van-icon name="cross" class="Login-input-icon" @click="handleDelete" />
+    <div class="login-input">
+      <input v-model="tel" type="tel" maxLength="11" class="login-input-tel" />
+      <van-icon name="cross" class="login-input-icon" @click="handleDelete" />
     </div>
-    <button @click="handleCheckTel">下一步</button>
+    <wym-button class="btn" size="large" @click="handleCheckTel" round
+      >下一步</wym-button
+    >
   </div>
 </template>
 
@@ -22,10 +24,11 @@
   const route = useRouter()
   const tel = ref('')
   const handleCheckTel = () => {
+    console.log('asd')
     if (tel.value.length < 11) {
       toast('请输入11位数字的手机号')
     } else {
-      route.push(`/CodeLogin/${tel.value}`)
+      route.push(`/codeLogin/${tel.value}`)
     }
   }
   const handleDelete = () => {
@@ -34,7 +37,7 @@
 </script>
 
 <style scoped lang="scss">
-  .Login {
+  .login {
     padding: 0 0.3125rem;
     box-sizing: border-box;
     font-size: 14px;
@@ -45,23 +48,6 @@
         font-size: 14px;
         @include font_color(('font_color1'));
         margin-bottom: 0.3125rem;
-      }
-    }
-    button {
-      display: block;
-      width: 260px;
-      height: 1rem;
-      font-size: 14px;
-      letter-spacing: 0.0625rem;
-      margin: 0 auto;
-      border-radius: 50px;
-      margin-bottom: 0.3125rem;
-      background-color: #dc2c1f;
-      color: #fff;
-      border-style: none;
-      &:focus {
-        outline: none;
-        border: none;
       }
     }
     &-input {
@@ -85,6 +71,11 @@
         margin-left: 0.3125rem;
         color: #a9a9a9;
       }
+    }
+    .btn {
+      display: block;
+      height: 1rem;
+      margin: 0 auto;
     }
   }
 </style>

@@ -7,31 +7,31 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       keepAlive: true
     },
-    component: () => import('views/Index/index.vue')
+    component: () => import('views/index/index.vue')
   },
   {
     path: '/first',
-    name: 'First',
+    name: 'first',
     meta: {
       bottomPlayer: false
     },
-    component: () => import('views/First/index.vue')
+    component: () => import('views/first/index.vue')
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     meta: {
       bottomPlayer: false
     },
-    component: () => import('views/Login/index.vue')
+    component: () => import('views/login/index.vue')
   },
   {
-    path: '/CodeLogin/:tel',
-    name: 'CodeLogin',
+    path: '/codeLogin/:tel',
+    name: 'codeLogin',
     meta: {
       bottomPlayer: false
     },
-    component: () => import('views/Login/CodeLogin.vue')
+    component: () => import('views/login/CodeLogin.vue')
   },
   {
     path: '/pswLogin/:tel',
@@ -39,7 +39,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       bottomPlayer: false
     },
-    component: () => import('views/Login/pswLogin.vue')
+    component: () => import('views/login/pswLogin.vue')
   },
   {
     path: '/songListDetail/:id?',
@@ -49,7 +49,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/search',
     name: 'search',
-    component: () => import('views/Index/search/index.vue')
+    component: () => import('views/index/search/index.vue')
   }
 ]
 

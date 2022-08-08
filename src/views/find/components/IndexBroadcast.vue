@@ -93,6 +93,7 @@
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
           overflow: hidden;
+          white-space: normal;
         }
         .broadcast-desc {
           font-size: 10px;

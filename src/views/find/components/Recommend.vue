@@ -12,7 +12,7 @@
         @click="handleClickJump(item.resources[0].resourceId)"
         :data="{
           playCount: item.resources[0].resourceExtInfo.playCount,
-          imageUrl: item.uiElement.image.imageUrl + '?param=50y50',
+          imageUrl: item.uiElement.image.imageUrl + '?param=100y100',
           title: item.resources[0].uiElement.mainTitle.title,
         }"
       />
