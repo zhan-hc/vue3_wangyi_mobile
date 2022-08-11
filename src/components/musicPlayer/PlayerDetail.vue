@@ -57,19 +57,16 @@
       </div>
       <div class="song-progress">
         <span class="progress-start">{{ afterTime }}</span>
-        <van-slider
-          v-model="currentTime"
-          active-color="#fff"
-          inactive-color="#b3b3b3"
-          :min="0"
-          :max="songInfo.sumTime"
-          @change="changeProgress"
-          @drag-end="changeProgress"
-        >
-          <template #button>
-            <div class="progress-spot"></div>
-          </template>
-        </van-slider>
+        <wym-progress
+          class="progress-center"
+          v-model:percentage="percentage"
+          pivot-color="#fff"
+          color="#fff"
+          track-color="#b3b3b3"
+          click-event
+          drag-event
+          @percentChange="changeProgress"
+        />
         <span>{{ songInfo.duration || '00:00' }}</span>
       </div>
       <div class="song-operate">
@@ -117,6 +114,9 @@
   const currentLyric = computed(() => store.state.currentLyric)
   const afterTime = computed(() => durationTrans(store.state.currentTime))
   const audioDuration = document.getElementById('musicAudio').duration
+  const percentage = computed(
+    () => +((currentTime.value / songInfo.value.sumTime) * 100).toFixed(2)
+  )
   const curPlayIndex = computed(() =>
     currentLyric.value.findIndex((item, i) => item.time >= currentTime.value)
   )
@@ -138,8 +138,9 @@
   }
 
   const changeProgress = (val) => {
+    console.log(val, 'val', val * songInfo.value.sumTime)
     const audio = document.getElementById('musicAudio')
-    audio.currentTime = val
+    audio.currentTime = val * songInfo.value.sumTime * 0.01
   }
 </script>
 
@@ -263,7 +264,9 @@
         }
       }
       .song-progress {
+        position: relative;
         display: flex;
+        align-items: center;
         padding: 0 0.3125rem;
         color: #b3b3b3;
         font-size: 12px;
@@ -274,17 +277,22 @@
         .progress-start {
           margin-right: 0.3125rem;
         }
-        .progress {
-          position: relative;
-          flex: 1;
-          margin: 0 0.3125rem 0.125rem;
-          // border-bottom: 3px solid #b3b3b3;
-          &-spot {
-            width: 0.125rem;
-            height: 0.125rem;
-            background: #fff;
-            border-radius: 50%;
-          }
+        .progress-center {
+          display: flex;
+          align-items: center;
+          margin-right: 0.3125rem;
+          // margin-top: 0.25rem;
+          // margin: 0 0.3125rem 0.125rem 0;
+          // position: relative;
+          // flex: 1;
+          // margin: 0 0.3125rem 0.125rem;
+          // // border-bottom: 3px solid #b3b3b3;
+          // &-spot {
+          //   width: 0.125rem;
+          //   height: 0.125rem;
+          //   background: #fff;
+          //   border-radius: 50%;
+          // }
         }
       }
       .song-operate {

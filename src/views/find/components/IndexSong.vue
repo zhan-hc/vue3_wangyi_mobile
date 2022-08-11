@@ -97,7 +97,7 @@
     font-size: 14px;
     @include background_color('background_color1');
     border-radius: 10px;
-    padding: 0.3125rem 0 0.3125rem;
+    padding: 0.3125rem 0 0;
     margin-bottom: 0.3125rem;
     .song-header {
       position: relative;
@@ -120,9 +120,9 @@
     .song-list {
       position: relative;
       display: inline-block;
-      height: 1rem;
+      // height: 1rem;
       width: 300px;
-      margin-bottom: 0.625rem;
+      // margin-bottom: 0.625rem;
       .song-item {
         position: relative;
         display: flex;
