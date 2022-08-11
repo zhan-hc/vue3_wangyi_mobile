@@ -12,4 +12,5 @@ export interface MyRequestConfig extends AxiosRequestConfig {
   interceptor?: MyRequestInterceptors
   showLoading?: boolean
   hasCookie?: boolean
+  loadingType?: string
 }

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { AxiosCanceler } from './cancel'
-import {message} from 'ant-design-vue';
+import loading from 'wy-music-ui/packages/loading'
+import WYMToast from 'wy-music-ui/packages/toast'
 import { AxiosInstance, AxiosRequestConfig } from 'axios'
 import type { MyRequestInterceptors, MyRequestConfig } from './type'
 
@@ -23,7 +24,7 @@ const CODE_MESSAGE: any = {
   503: '服务不可用，服务器暂时过载或维护',
   504: '网关超时'
 }
-
+const WYMLoading = loading
 
 export class MyAxios {
   private axiosInstance: AxiosInstance
@@ -32,6 +33,7 @@ export class MyAxios {
   private prevRequsetEndTime: number // 上一请求的结束时间
   private requestEndTimer: number | undefined
   private loadingCount: number
+  private loadingType: string
   private hasCookie?: boolean
 
   constructor(config: MyRequestConfig) {
@@ -44,11 +46,7 @@ export class MyAxios {
     this.requestEndTimer = undefined
     this.hasCookie =  config.hasCookie ?? false
     this.loadingCount = 0 // 保存loading请求个数
-    // 初始化信息提示
-    message.config({
-      top: `200px`,
-      duration: 0
-    })
+    this.loadingType = config.loadingType ?? 'normal'
     const AxiosCancel = new AxiosCanceler()
     // config实例对应的拦截器
     this.axiosInstance.interceptors.request.use(
@@ -72,6 +70,7 @@ export class MyAxios {
         // if (token) {
         //   config.headers['Authorization'] = token
         // }
+        console.log(config.url, this.loadingType)
         config.url += `?timestamp=${+new Date()}`
         if (config.method == 'post') {
           config.data = {
@@ -88,7 +87,7 @@ export class MyAxios {
         AxiosCancel.addPending(config)
         // 当第一次请求的时候并且需要loading效果
         if (this.loadingCount===0 && this.showLoading && typeof this.requestEndTimer !== 'number') {
-          message.loading('Loading...')
+          WYMLoading({ type: this.loadingType, position: 'top' }).show()
         }
         this.loadingCount++
         const nowTime = +new Date()
@@ -97,7 +96,7 @@ export class MyAxios {
           clearTimeout(this.requestEndTimer)
         }
         if (!this.showLoading) {
-          message.destroy()
+          WYMLoading().hide()
         }
         return config
       },
@@ -117,17 +116,14 @@ export class MyAxios {
         if (this.loadingCount<=0) {
           const _that = this
           this.requestEndTimer = setTimeout(() => {
-            message.destroy()
+            WYMLoading().hide()
             // 重置
             _that.requestEndTimer = undefined
           }, CONTINUE_TIME)
         }
 
         if (res.data.code !== 200) {
-          message.error({content: res.data.message || '服务器发生错误', key: 'globalLoading'})
-          setTimeout(() => {
-            message.destroy()
-          },2000)
+          WYMToast(res.data.message || '服务器发生错误')
         }
         return res.data
       },
@@ -135,14 +131,11 @@ export class MyAxios {
         const code = err.response.status
         const errMsg = err.response.data.msg || err.response.data.message
         if (errMsg) {
-          message.error({content: errMsg, key: 'globalLoading'})
+          WYMToast(errMsg)
         }
         else if (Object.keys(CODE_MESSAGE).includes(code.toString())) {
-          message.error({content: CODE_MESSAGE[code], key: 'globalLoading'})
+          WYMToast(CODE_MESSAGE[code])
         }
-        setTimeout(() => {
-          message.destroy()
-        },2000)
 
         return err
       }
@@ -162,6 +155,10 @@ export class MyAxios {
       // 如果需要cookie
       if (config?.hasCookie) {
         this.hasCookie = config.hasCookie
+      }
+
+      if (config?.loadingType) {
+        this.loadingType = config.loadingType
       }
 
       this.axiosInstance

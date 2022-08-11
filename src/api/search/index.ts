@@ -40,6 +40,7 @@ export function search_result (data: searchData)  {
     return myRequest.request({
       url: '/search',
       method: 'post',
-      data
+      data,
+      loadingType: 'music'
     })
 }
