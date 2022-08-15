@@ -5,7 +5,8 @@ import myRequest from '@/utils/http/axios/index'
 export function home_page ()  {
     return myRequest.request({
       url: 'homepage/block/page',
-      method: 'post'
+      method: 'post',
+      loadingType: 'primary'
     })
 }
 // 首页icon

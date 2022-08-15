@@ -41,6 +41,7 @@ export function song_lyric (id: string | number)  {
     return myRequest.request({
       url: '/lyric',
       method: 'post',
-      data: {id}
+      data: {id},
+      loadingType: 'primary'
     })
 }
