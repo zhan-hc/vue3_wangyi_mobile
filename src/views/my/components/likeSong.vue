@@ -1,17 +1,17 @@
 <template>
-  <div class="likesong-wrap" @click="handleJumpDetail">
-    <div class="song-img">
+  <div class="like-song" @click="handleJumpDetail">
+    <div class="like-song__img">
       <img
         src="https://p2.music.126.net/s6zFxvXe5kOxub4_x4rZhQ==/109951163052847567.jpg"
         alt=""
       />
       <div><i class="iconfont icon-ziyuan1"></i></div>
     </div>
-    <div class="song-info">
-      <div class="info-title">我喜欢的音乐</div>
-      <div class="info-num">{{ likeIds.length }}首</div>
+    <div class="like-song__info">
+      <div class="like-song__title">我喜欢的音乐</div>
+      <div class="like-song__num">{{ likeIds.length }}首</div>
     </div>
-    <div class="song-heart">
+    <div class="like-song__heart">
       <i class="iconfont icon-xindong"></i>
       心动模式
     </div>
@@ -50,7 +50,7 @@
 </script>
 
 <style scoped lang="scss">
-  .likesong-wrap {
+  .like-song {
     display: flex;
     align-items: center;   
     @include background_color('background_color1');
@@ -58,7 +58,7 @@
     padding: 0.3125rem;
     font-size: 14px;
     margin-bottom: 0.3125rem;
-    .song-img {
+    &__img {
       position: relative;
       width: 1.25rem;
       height: 1.25rem;
@@ -85,16 +85,16 @@
         }
       }
     }
-    .song-info {
+    &__info {
       flex: 1;
-      .info-title {
+      .like-song__title {
         font-size: 14px;
       }
-      .info-num {
+      .like-song__num {
         color: #ccc;
       }
     }
-    .song-heart {
+    .like-song__heart {
       border: 1px solid #ccc;
       padding: 0 0.125rem;
       border-radius: 20px;

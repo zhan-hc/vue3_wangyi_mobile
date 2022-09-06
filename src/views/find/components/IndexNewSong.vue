@@ -1,18 +1,18 @@
 <template>
-  <div class="song-container">
-    <div class="song-header">
+  <div class="new-song">
+    <div class="new-song__header">
       <span
-        class="title"
+        class="new-song__title"
         v-for="(tab, i) in songTab"
         :key="i"
         :class="{ active: currentTab === i }"
         @click="changeTab(i)"
         >{{ tab }}</span
       >
-      <span class="more"><van-icon name="play" />更多</span>
+      <span class="new-song__more"><van-icon name="play" />更多</span>
     </div>
     <wym-scroll-view v-if="newSongList.length">
-      <div class="song-list" v-for="(list, i) in newSongList" :key="i">
+      <div class="new-song__list" v-for="(list, i) in newSongList" :key="i">
         {{ item }}
         <wym-song-item
           v-for="(item, j) in list.resources"
@@ -113,16 +113,16 @@
 </script>
 
 <style scoped lang="scss">
-  .song-container {
+  .new-song {
     font-size: 14px;
     @include background_color('background_color1');
     border-radius: 10px;
     padding: 0.3125rem 0 0;
     margin-bottom: 0.3125rem;
-    .song-header {
+    .new-song__header {
       position: relative;
       margin: 0.3125rem 0.5rem;
-      .title {
+      .new-song__title {
         font-size: 18px;
         font-weight: bold;
         margin-right: 0.3125rem;
@@ -136,7 +136,7 @@
           border-right: none;
         }
       }
-      .more {
+      .new-song__more {
         position: absolute;
         right: 0;
         top: 50%;
@@ -147,66 +147,10 @@
         transform: translateY(-50%);
       }
     }
-    .song-list {
+    .new-song__list {
       position: relative;
       display: inline-block;
-      // height: 1rem;
-      // margin-bottom: 0.625rem;
       width: 300px;
-      .song-item {
-        position: relative;
-        display: flex;
-        align-items: center;
-        height: 1.25rem;
-        box-sizing: border-box;
-        padding: 10px;
-        margin-bottom: 20px;
-        .song-img {
-          position: relative;
-          border-radius: 5px;
-          width: 1rem;
-          height: 1rem;
-          margin-right: 0.3125rem;
-          img {
-            vertical-align: middle;
-            border-radius: 5px;
-            width: 100%;
-            height: 100%;
-          }
-          .van-icon-play {
-            font-size: 16px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgba($color: #fff, $alpha: 0.8);
-          }
-        }
-        .song-info {
-          flex: 1;
-          border-bottom: 1px solid #ccc;
-          height: 1.25rem;
-          width: calc(100% - 120px);
-          .info-base {
-            // font-size: 24px;
-            @include font_color('font_color3');
-            @include ellipsis;
-            span {
-              display: inline-block;
-            }
-            .info-name {
-              @include font_color('font_color1');
-              // font-size: 32px;
-            }
-            &.nodesc {
-              margin-top: 0.3125rem;
-            }
-          }
-          .info-desc {
-            color: #9a9a9a;
-          }
-        }
-      }
     }
   }
 </style>

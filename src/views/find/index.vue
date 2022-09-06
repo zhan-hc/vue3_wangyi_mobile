@@ -1,5 +1,5 @@
 <template>
-  <div class="find-wrapper" v-if="status">
+  <div class="find" v-if="status">
     <Carousel :data="bannerList" />
     <IndexIcon :iconList="iconList" />
     <component
@@ -8,7 +8,7 @@
       :key="item.blockCode"
       :data="item"
     ></component>
-    <div class="find-end">{{ endText }}</div>
+    <div class="find__end">{{ endText }}</div>
   </div>
 </template>
 
@@ -30,8 +30,8 @@
 </script>
 
 <style scoped lang="scss">
-  .find-wrapper {
-    .find-end {
+  .find {
+    .find__end {
       font-size: 16px;
       text-align: center;
       height: 1rem;

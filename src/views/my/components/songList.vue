@@ -1,8 +1,8 @@
 <template>
-  <div class="songList-wrap">
-    <div class="songList-tab">
+  <div class="my-song">
+    <div class="my-song__tab">
       <div
-        class="tab-item"
+        class="my-song__tab-item"
         v-for="(item, i) in songTab"
         :key="i"
         @click="handleClick(i)"
@@ -10,55 +10,55 @@
         <span :class="{ active: i === activeIndex }">{{ item }}</span>
       </div>
     </div>
-    <div class="songlist-create" v-if="mySongList.length">
-      <div class="create-header">
+    <div class="my-song__create" v-if="mySongList.length">
+      <div class="my-song__create-header">
         <span>创建歌单({{ mySongList.length }}个)</span>
         <i class="iconfont icon-plus"></i>
         <i class="iconfont icon-sandian"></i>
       </div>
       <div
-        class="create-song"
+        class="my-song__create-song"
         v-for="item in mySongList"
         :key="item.id"
         @click="handleClickJump(item.id)"
       >
-        <div class="song-img">
+        <div class="my-song__create-img">
           <img :src="item.coverImgUrl" alt="" />
         </div>
-        <div class="song-info">
-          <div class="info-title">{{ item.name }}</div>
-          <div class="info-num">{{ item.trackCount }}首</div>
+        <div class="my-song__create-info">
+          <div class="my-song__create-title">{{ item.name }}</div>
+          <div class="my-song__create-num">{{ item.trackCount }}首</div>
         </div>
         <i class="iconfont icon-sandian"></i>
       </div>
-      <div class="create-song">
-        <div class="song-import">
+      <div class="my-song__create-song">
+        <div class="my-song__create-import">
           <i class="iconfont icon-daoru"></i>
         </div>
-        <div class="song-info">
-          <div class="info-title" style="line-height: 45px">
+        <div class="my-song__create-info">
+          <div class="my-song__create-title" style="line-height: 45px">
             一键导入外部音乐
           </div>
         </div>
       </div>
     </div>
-    <div class="songlist-collect" v-if="collectList.length">
-      <div class="collect-header">
+    <div class="my-song__collect" v-if="collectList.length">
+      <div class="my-song__collect-header">
         <span>收藏歌单(1个)</span>
         <i class="iconfont icon-sandian"></i>
       </div>
       <div
-        class="collect-song"
+        class="my-song__collect-song"
         v-for="item in collectList"
         :key="item.id"
         @click="handleClickJump(item.id)"
       >
-        <div class="song-img">
+        <div class="my-song__collect-img">
           <img :src="item.coverImgUrl" alt="" />
         </div>
-        <div class="song-info">
-          <div class="info-title">{{ item.name }}</div>
-          <div class="info-num">{{ item.trackCount }}首</div>
+        <div class="my-song__collect-info">
+          <div class="my-song__collect-title">{{ item.name }}</div>
+          <div class="my-song__collect-num">{{ item.trackCount }}首</div>
         </div>
         <i class="iconfont icon-sandian"></i>
       </div>
@@ -115,12 +115,12 @@
 </script>
 
 <style scoped lang="scss">
-  .songList-wrap {
+  .my-song {
     font-size: 12px;
-    .songList-tab {
+    &__tab {
       display: flex;
       margin-bottom: 0.3125rem;
-      .tab-item {
+      &-item {
         flex: 1;
         text-align: center;
         font-size: 18px;
@@ -137,15 +137,14 @@
         }
       }
     }
-    .songlist-create,
-    .songlist-collect {
+    .my-song__create,
+    .my-song__collect {
       background: #fff;
       border-radius: 10px;
       padding: 0.3125rem;
       font-size: 14px;
       margin-bottom: 0.3125rem;
-      .create-header,
-      .collect-header {
+      &-header {
         display: flex;
         color: #999;
         padding-bottom: 0.3125rem;
@@ -160,12 +159,12 @@
           margin-right: 0.3125rem;
         }
       }
-      .create-song,
-      .collect-song {
+      &-song {
         display: flex;
         margin-bottom: 0.3125rem;
         align-items: center;
-        .song-img {
+        .my-song__collect-img,
+        .my-song__create-img {
           position: relative;
           width: 1rem;
           height: 1rem;
@@ -176,7 +175,7 @@
             height: 100%;
           }
         }
-        .song-import {
+        .my-song__create-import {
           position: relative;
           padding: 0.3125rem;
           width: 1rem;
@@ -192,15 +191,18 @@
             font-size: 15px;
           }
         }
-        .song-info {
+        .my-song__create-info,
+        .my-song__collect-info {
           flex: 1;
           width: 240px;
-          .info-title {
+          .my-song__create-title,
+          .my-song__collect-title {
             font-size: 14px;
             font-weight: 600;
             @include ellipsis;
           }
-          .info-num {
+          .my-song__create-num,
+          .my-song__collect-num {
             color: #999;
           }
         }

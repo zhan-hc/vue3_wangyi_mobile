@@ -1,21 +1,21 @@
 <template>
-  <div class="videoList-wrap">
-    <div class="videoList-item" v-for="item in videoList" :key="item.id">
-      <div class="item-img">
+  <div class="video">
+    <div class="video__item" v-for="item in videoList" :key="item.id">
+      <div class="video__item__img">
         <img :src="item.data.coverUrl" alt="" />
-        <div class="item-avatar">
+        <div class="video__item__avatar">
           <img
             v-if="item.data.creator"
             :src="item.data.creator.avatarUrl"
             alt=""
           />
         </div>
-        <span class="item-time">{{
+        <span class="video__item__time">{{
           durationTrans(item.data.durationms, 1000)
         }}</span>
       </div>
-      <div class="item-title">{{ item.data.title }}</div>
-      <div class="item-desc">
+      <div class="video__item__title">{{ item.data.title }}</div>
+      <div class="video__item__desc">
         <span
           ><i class="iconfont icon-bofang4"></i
           >{{ formatCount(item.data.playTime) }}</span
@@ -59,11 +59,11 @@
 </script>
 
 <style scoped lang="scss">
-  .videoList-wrap {
+  .video {
     display: flex;
     flex-wrap: wrap;
     font-size: 24px;
-    .videoList-item {
+    .video__item {
       width: 330px;
       height: 540px;
       border-radius: 20px;
@@ -74,7 +74,7 @@
       &:nth-child(even) {
         margin-right: 0;
       }
-      .item-img {
+      &__img {
         position: relative;
         height: 380px;
         img {
@@ -83,7 +83,7 @@
           object-fit: cover;
           border-radius: 20px 20px 0 0;
         }
-        .item-avatar {
+        &__avatar {
           position: absolute;
           bottom: 20px;
           left: 20px;
@@ -97,21 +97,21 @@
             border-radius: 50%;
           }
         }
-        .item-time {
+        &__time {
           position: absolute;
           bottom: 10px;
           right: 20px;
           color: #999;
         }
       }
-      .item-title {
+      &__title {
         padding: 12px 20px;
         font-size: 28px;
         height: 110px;
         box-sizing: border-box;
         @include ellipsisBasic(2);
       }
-      .item-desc {
+      &__desc {
         color: #999;
         transform: scale(0.9);
         span {

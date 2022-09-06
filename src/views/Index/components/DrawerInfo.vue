@@ -1,32 +1,32 @@
 <template>
-  <div class="info-wrap">
-    <div class="person-info" v-if="userInfo">
+  <div class="drawer">
+    <div class="drawer__person" v-if="userInfo">
       <a-avatar size="large" :src="userInfo.avatarUrl" />
       <span @click="handleJump">{{
         userInfo.nickname ? userInfo.nickname + ' >' : '请登录'
       }}</span>
       <i class="iconfont icon-saoma"></i>
     </div>
-    <div class="info-vip">
-      <div class="content-top">
-        <div class="main">开通黑胶VIP</div>
+    <div class="drawer__vip">
+      <div class="drawer__vip--top">
+        <div class="drawer__vip--main">开通黑胶VIP</div>
         <div>立享超17项专属特权 ></div>
-        <div class="content-right">会员中心</div>
+        <div class="drawer__vip--right">会员中心</div>
       </div>
-      <div class="content-bottom">
+      <div class="drawer__vip--bottom">
         <div>限时特惠！黑胶首月仅0.88元！</div>
       </div>
     </div>
-    <div class="info-list" v-for="(list, i) in setuplist" :key="i">
-      <div class="list-title" v-if="list.title">{{ list.title }}</div>
+    <div class="drawer__set-list" v-for="(list, i) in setuplist" :key="i">
+      <div class="drawer__title" v-if="list.title">{{ list.title }}</div>
       <div
-        class="list-item"
+        class="drawer__set-item"
         v-for="item in list.data"
         :key="item.id"
-        :class="{ borderBom: i === 0 }"
+        :class="{ 'drawer__set-item--border-bom': i === 0 }"
       >
-        <span class="item-icon iconfont" :class="item.icon"></span>
-        <span class="item-text">{{ item.text }}</span>
+        <span class="drawer__set-item__icon iconfont" :class="item.icon"></span>
+        <span class="drawer__set-item__text">{{ item.text }}</span>
         <span v-if="item.type === 'switch'">
           <a-switch
             v-model:checked="themeChecked"
@@ -36,7 +36,7 @@
         <van-icon v-else name="arrow" />
       </div>
     </div>
-    <div class="info-close">关闭云音乐</div>
+    <div class="drawer__close">关闭云音乐</div>
   </div>
 </template>
 
@@ -83,10 +83,10 @@
 </script>
 
 <style scoped lang="scss">
-  .info-wrap {
+  .drawer {
     // font-size: 24px;
     @include background_color('background_color1');
-    .person-info {
+    .drawer__person {
       position: relative;
       // font-size: 28px;
       margin-bottom: 0.3125rem;
@@ -107,24 +107,24 @@
         font-size: 18px;
       }
     }
-    .info-vip {
+    .drawer__vip {
       padding: 0.3125rem 0.3125rem;
       border-radius: 20px;
       box-sizing: border-box;
       background-image: linear-gradient(to right, #8c8c8c, #b6b6b6);
       color: #d2d2d2;
       margin-bottom: 0.3125rem;
-      .content-top {
+      &--top {
         font-size: 14px;
         position: relative;
         padding-bottom: 0.3125rem;
         border-bottom: 1px solid #d2d2d2;
-        .main {
+        &--main {
           font-size: 16px;
           font-weight: bold;
           color: #fff;
         }
-        .content-right {
+        &--right {
           font-size: 10px;
           color: #fff;
           position: absolute;
@@ -135,22 +135,22 @@
           border-radius: 30px;
         }
       }
-      .content-bottom {
+      &--bottom {
         padding-top: 0.3125rem;
       }
     }
-    .info-list {
+    .drawer__set-list {
       font-size: 16px;
       @include background_color('background_color1');
       border-radius: 10px;
       margin-bottom: 0.3125rem;
-      .list-title {
+      .drawer__title {
         // font-size: 24px;
         color: #989898;
         padding: 0.25rem 0 0.25rem 0.25rem;
         border-bottom: 1px solid #ccc;
       }
-      .list-item {
+      .drawer__set-item {
         position: relative;
         margin-left: 0.3125rem;
         display: flex;
@@ -158,7 +158,7 @@
         // line-height: 100px;
         box-sizing: border-box;
         height: 1rem;
-        &.borderBom {
+        &--border-bom {
           margin-left: 0.3125rem;
           padding-left: 0;
           border-bottom: 1px solid #ccc;
@@ -166,12 +166,10 @@
             border: none;
           }
         }
-        .item-icon {
-          // font-size: 48px;
+        .drawer__set-item__icon {
           margin-right: 0.3125rem;
         }
-        .item-text {
-          // font-size: 30px;
+        .drawer__set-item__text {
           vertical-align: top;
         }
         .van-icon-arrow,
@@ -184,14 +182,13 @@
         }
       }
     }
-    .info-close {
+    .drawer__close {
       padding: 0.3125rem 0;
       border-radius: 0.3125rem;
       color: #dc2c1f;
       background: #fff;
       @include background_color('background_color1');
       text-align: center;
-      // font-size: 32px;
     }
   }
 </style>

@@ -1,21 +1,19 @@
 <template>
-  <div class="pswLogin">
+  <div class="psw-login">
     <WYHeader />
-    <div class="pswLogin-input">
+    <div class="psw-login__content">
       <input
         v-model="password"
         type="password"
-        class="pswLogin-input-password"
+        class="psw-login__input"
       />
       <van-icon
         name="cross"
-        class="pswLogin-input-icon"
+        class="psw-login__icon"
         @click="handleDelete"
       />
     </div>
-    <wym-button class="btn" size="large" @click="handleLogin" round
-      >登录</wym-button
-    >
+    <wym-button class="psw-login__btn" size="large" @click="handleLogin" round >登录</wym-button>
   </div>
 </template>
 
@@ -55,18 +53,18 @@
 </script>
 
 <style scoped lang="scss">
-  .pswLogin {
+  .psw-login {
     padding: 0 0.3125rem;
     box-sizing: border-box;
     font-size: 14px;
-    &-input {
+    &__content {
       margin-top: 0.3125rem;
       border-bottom: 1px solid #a9a9a9;
       padding: 0.125rem 0;
       display: flex;
       margin-bottom: 0.625rem;
       font-size: 14px;
-      &-password {
+      .psw-login__input {
         flex: 1;
         background: none;
         outline: none;
@@ -76,13 +74,13 @@
           border: none;
         }
       }
-      &-icon {
+      .psw-login__icon {
         font-size: 16px;
         margin-left: 0.3125rem;
         color: #a9a9a9;
       }
     }
-    .btn {
+    .psw-login__btn {
       display: block;
       height: 1rem;
       margin: 0 auto;

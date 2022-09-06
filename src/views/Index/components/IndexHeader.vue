@@ -1,7 +1,7 @@
 <template>
-  <div class="header-wrapper">
+  <div class="index-header">
     <van-icon name="wap-nav" @click="onOpen" />
-    <div class="header-content" @click="handleRouterJump('/search')">
+    <div class="index-header__content" @click="handleRouterJump('/search')">
       <van-icon name="search" />
     </div>
     <i class="iconfont icon-yuyin" />
@@ -21,7 +21,7 @@
 </script>
 
 <style scoped lang="scss">
-  .header-wrapper {
+  .index-header {
     position: fixed;
     top: 0;
     left: 0;
@@ -37,7 +37,7 @@
     .van-icon-wap-nav {
       margin-right: 0.3125rem;
     }
-    .header-content {
+    &__content {
       flex: 1;
       display: flex;
       align-items: center;

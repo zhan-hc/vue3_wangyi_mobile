@@ -1,29 +1,29 @@
 <template>
-  <div class="calendar-container">
-    <div class="calendar-header">
-      <span class="title">{{ calendarheader.subTitle.title }}</span>
-      <span class="more">{{ calendarheader.button.text }}></span>
+  <div class="calendar">
+    <div class="calendar__header">
+      <span class="calendar__title">{{ calendarheader.subTitle.title }}</span>
+      <span class="calendar__more">{{ calendarheader.button.text }}></span>
     </div>
-    <div class="calendar-content">
-      <div class="calendar-desc">
+    <div class="calendar__content">
+      <div class="calendar__desc">
         <p>领取你的今日好运</p>
         <p>查看运势解读 ></p>
       </div>
       <div
-        class="calendar-item"
+        class="calendar__item"
         v-for="item in calendarList"
         :key="item.creativeId"
       >
-        <div class="item-left">
+        <div class="calendar__item--left">
           <span>今天</span>
           <span
-            class="item-tag"
+            class="calendar__item__tag"
             v-for="(tag, i) in item.resources[0].uiElement.labelTexts"
             :key="i"
           >
             {{ tag }}
           </span>
-          <div class="item-title">
+          <div class="calendar__item__title">
             {{ item.resources[0].uiElement.mainTitle.title }}
           </div>
         </div>
@@ -60,20 +60,20 @@
 </script>
 
 <style scoped lang="scss">
-  .calendar-container {
+  .calendar {
     font-size: 14px;
     @include background_color('background_color1');
     padding: 0.3125rem 0;
     margin-bottom: 0.3125rem;
     border-radius: 10px;
-    .calendar-header {
+    .calendar__header {
       position: relative;
       margin: 0.3125rem 0.3125rem;
-      .title {
+      .calendar__title {
         font-size: 18px;
         font-weight: bold;
       }
-      .more {
+      .calendar__more {
         position: absolute;
         right: 0;
         top: 50%;
@@ -84,10 +84,10 @@
         transform: translateY(-50%);
       }
     }
-    .calendar-content {
+    .calendar__content {
       box-sizing: border-box;
       margin: 0 30px;
-      .calendar-desc {
+      .calendar__desc {
         display: flex;
         border: 1px solid #ccc;
         border-radius: 10px;
@@ -103,7 +103,7 @@
           }
         }
       }
-      .calendar-item {
+      .calendar__item {
         display: flex;
         align-items: center;
         padding: 0.125rem;
@@ -111,16 +111,16 @@
         &:last-child {
           border-bottom: none;
         }
-        .item-left {
+        .calendar__item--left {
           flex: 1;
           span {
             color: #ccc;
             margin-right: 0.3125rem;
           }
-          .item-tag {
+          .calendar__item__tag {
             color: #ffd700;
           }
-          .item-title {
+          .calendar__item__title {
             // font-size: 26px;
             margin-top: 0.125rem;
             width: 240px;

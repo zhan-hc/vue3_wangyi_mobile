@@ -1,29 +1,25 @@
 <template>
-  <div class="detail-wrap" v-if="status">
-    <div class="detail-header" ref="detailHeader">
+  <div class="song-list" v-if="status">
+    <div class="song-list__header" ref="detailHeader">
       <i class="iconfont icon-leftarrow" @click="handleRouterBack"></i>
       <span>歌单</span>
       <i class="iconfont icon-search"></i>
       <i class="iconfont icon-sandian"></i>
     </div>
     <div
-      class="detail-info"
-      :style="{
-        'background-image': `url(${
-          songList.tracks ? songList.tracks[0].al.picUrl : DEFAULT_IMAGE
-        })`,
-      }"
+      class="song-list__content--top"
+      :style="{ 'background-image': `url(${ songList.tracks ? songList.tracks[0].al.picUrl : DEFAULT_IMAGE })` }"
     >
-      <div class="songList-img">
+      <div class="song-list__img">
         <img :src="songList.coverImgUrl || DEFAULT_IMAGE" alt="推荐歌单" />
         <div class="songList-playCount" v-if="songList.playCount">
           <i class="iconfont icon-bofang4"></i>
           {{ formatCount(songList.playCount) }}
         </div>
       </div>
-      <div class="songList-info">
-        <div class="info-name">{{ songList.name || paramsData.songName }}</div>
-        <div class="info-creator">
+      <div class="song-list__info">
+        <div class="song-list__name">{{ songList.name || paramsData.songName }}</div>
+        <div class="song-list__creator">
           <img
             :src="paramsData.avatarUrl || songList.creator.avatarUrl"
             alt=""
@@ -31,36 +27,36 @@
           <span>{{ paramsData.authorName || songList.creator.nickname }}</span>
           <i class="iconfont icon-plus"></i>
         </div>
-        <div class="info-desc" v-if="songList.description">
+        <div class="song-list__desc" v-if="songList.description">
           {{ songList.description }} >
         </div>
       </div>
     </div>
 
-    <div class="detail-songList">
+    <div class="song-list__content--bottom">
       <div
-        class="songList-count"
+        class="song-list__count"
         ref="headerCount"
         v-if="songList.subscribedCount"
       >
-        <div class="count-item">
+        <div class="song-list__collect">
           <i class="iconfont icon-plus1"></i>
           <span>{{ formatCount(songList.subscribedCount) }}</span>
         </div>
-        <div class="count-item">
+        <div class="song-list__comment">
           <i class="iconfont icon-pinglunpt"></i>
           <span>{{
             songList.shareCount ? formatCount(songList.shareCount) : '评论'
           }}</span>
         </div>
-        <div class="count-item">
+        <div class="song-list__share">
           <i class="iconfont icon-fenxiangpt"></i>
           <span>{{ formatCount(songList.shareCount) }}</span>
         </div>
       </div>
       <div
         ref="songListHeader"
-        :class="fixedStatus ? 'songList-header' : 'fixed-header'"
+        :class="fixedStatus ? 'song-list__main-header' : 'song-list__main-header--fixed'"
       >
         <i class="iconfont icon-bofang5"></i>
         <div class="all">
@@ -76,15 +72,15 @@
         @load="handleLoad"
       >
         <div
-          class="songList-item van-clearfix"
+          class="song-list__item van-clearfix"
           v-for="(item, i) in songListData"
           :key="item.id"
           @click="playMusicParams(item)"
         >
-          <div class="item-sort">{{ i + 1 }}</div>
-          <div class="item-info">
-            <div class="info-name">{{ item.name }}</div>
-            <div class="info-authors">
+          <div class="song-list__item__sort">{{ i + 1 }}</div>
+          <div class="song-list__item__info">
+            <div class="song-list__item__name">{{ item.name }}</div>
+            <div class="song-list__item__authors">
               {{ getAuthor(item.ar) }} - {{ item.al.name }}
             </div>
           </div>
@@ -173,12 +169,12 @@
       opacity: 1;
     }
   }
-  .detail-wrap {
+  .song-list {
     font-size: 24px;
     @include background_color('background_color1');
     padding-bottom: 1.5rem;
     // overflow: auto;
-    .detail-header {
+    .song-list__header {
       position: fixed;
       top: 0;
       left: 0;
@@ -205,14 +201,14 @@
         margin-right: 0.3125rem;
       }
     }
-    .detail-info {
+    .song-list__content--top {
       position: relative;
       display: flex;
       padding: 1.5rem 0.3125rem 1rem;
       height: 8rem;
       border-radius: 0 0 80% 80% / 0 0 10% 10%;
       background-size: cover;
-      .songList-img {
+      .song-list__img {
         position: relative;
         border-radius: 10px;
         width: 3rem;
@@ -225,7 +221,7 @@
           width: 100%;
           height: 100%;
         }
-        .songList-playCount {
+        .song-list__playCount {
           font-size: 10px;
           position: absolute;
           top: 0.125rem;
@@ -239,19 +235,19 @@
           }
         }
       }
-      .songList-info {
+      .song-list__info {
         position: relative;
         flex: 1;
         color: #fff;
         height: 4rem;
         z-index: 1;
         font-size: 16px;
-        .info-name {
+        .song-list__name {
           font-size: 16px;
           margin-bottom: 0.3125rem;
           @include ellipsisBasic(2);
         }
-        .info-creator {
+        .song-list__creator {
           color: #828283;
           font-weight: 600;
           img {
@@ -271,7 +267,7 @@
             border-radius: 20px;
           }
         }
-        .info-desc {
+        .song-list__desc {
           position: absolute;
           // bottom: 10px;
           left: 0;
@@ -282,9 +278,9 @@
         }
       }
     }
-    .detail-songList {
+    .song-list__content--bottom {
       padding: 0 0.3125rem;
-      .songList-count {
+      .song-list__count {
         position: relative;
         width: 250px;
         height: 1.25rem;
@@ -296,7 +292,9 @@
         @include background_color('background_color1');
         box-shadow: 0 0.3125rem 0.3125rem #828283;
         margin-bottom: 0.3125rem;
-        .count-item {
+        .song-list__collect,
+        .song-list__comment,
+        .song-list__share {
           font-size: 12px;
           flex: 1;
           display: flex;
@@ -313,8 +311,8 @@
           }
         }
       }
-      .songList-header,
-      .fixed-header {
+      .song-list__main-header,
+      .song-list__main-header--fixed{
         display: flex;
         align-items: center;
         @include background_color('background_color1');
@@ -341,34 +339,34 @@
           margin-right: 0.3125rem;
         }
       }
-      .fixed-header {
+      .song-list__main-header--fixed {
         position: fixed;
         top: 1rem;
         left: 0.3125rem;
         right: 0.3125rem;
       }
-      .songList-item {
+      .song-list__item {
         display: flex;
         align-items: center;
         height: 1.5rem;
         color: #999;
-        .item-sort {
+        &__sort {
           color: #999;
           font-size: 18px;
           width: 0.875rem;
         }
-        .item-info {
+        &__info {
           flex: 1;
           width: 250px;
           margin-right: 0.3125rem;
-          .info-name {
+          .song-list__item__name {
             font-size: 14px;
             letter-spacing: 0.0625rem;
             font-weight: 600;
             @include font_color(('font_color1'));
             @include ellipsis;
           }
-          .info-authors {
+          .song-list__item__authors {
             font-size: 12px;
             @include ellipsis;
           }

@@ -1,43 +1,43 @@
 <template>
-  <div class="search-wrap">
-    <div class="search-header">
-      <van-icon name="arrow-left" class="header-icon" @click="handleBack" />
+  <div class="search">
+    <div class="search__header">
+      <van-icon name="arrow-left" class="search__header__icon" @click="handleBack" />
       <input
         type="text"
         v-model="keyword"
-        class="search-input"
+        class="search__header__input"
         :placeholder="hotKeyword"
         @input="onSearch"
         @keyup.enter="isSearch = true"
       />
     </div>
-    <div class="search-content" v-if="keyword && !isSearch">
+    <div class="search__content" v-if="keyword && !isSearch">
       <div v-if="searchList">
         <div
-          class="search-item"
+          class="search__item"
           v-for="(item, i) in searchList"
           :key="i"
           @click="handleClickWord(item.keyword)"
         >
           <van-icon name="search" />
-          <span class="search-current">{{
+          <span class="search__current">{{
             item.keyword.slice(0, keyword.length)
           }}</span>
           <span>{{ item.keyword.slice(keyword.length) }}</span>
         </div>
       </div>
       <div v-else>
-        <div class="search-item" @click="handleClickWord(item.keyword)">
+        <div class="search__item" @click="handleClickWord(item.keyword)">
           <span class="search-null">{{ `搜索 "${keyword} "` }}</span>
         </div>
       </div>
     </div>
     <search-tab v-else-if="isSearch" :keywords="keyword"></search-tab>
-    <div v-else class="hot-content">
+    <div v-else class="search__hot-search">
       <p>热搜榜</p>
-      <div class="search-hot" v-if="hotList.length">
+      <div class="search__hot-content" v-if="hotList.length">
         <div
-          class="hot-item"
+          class="search__hot-item"
           v-for="(item, i) in hotList"
           :key="i"
           @click="handleClickWord(item.searchWord)"
@@ -119,20 +119,20 @@
 </script>
 
 <style scoped lang="scss">
-  .search-wrap {
+  .search {
     padding: 20px;
     font-size: 16px;
     min-height: 100vh;
     @include background_color('background_color1');
     @include font_color('font_color1');
-    .search-header {
+    .search__header {
       display: flex;
       align-items: center;
       margin-bottom: 0.125rem;
-      .header-icon {
+      &__icon {
         margin-right: 0.3125rem;
       }
-      .search-input {
+      &__input {
         flex: 1;
         background: none;
         outline: none;
@@ -141,13 +141,13 @@
         caret-color: #cf0000;
       }
     }
-    .search-content {
-      .search-item {
+    .search__content {
+      .search__item {
         display: flex;
         align-items: center;
         padding: 10px;
         border-bottom: 1px solid #ccc;
-        .search-current {
+        .search__current {
           color: #ccc;
         }
         .van-icon-search {
@@ -158,18 +158,14 @@
         }
       }
     }
-    .hot-content {
-      // font-size: 32px;
-      p {
-        // font-size: 32px;
-      }
-      .search-hot {
+    .search__hot-search {
+      .search__hot-content {
         display: flex;
         flex-wrap: wrap;
         padding: 0.625rem;
         border-radius: 20px;
         box-shadow: 0 0 2px 2px #ccc;
-        .hot-item {
+        .search__hot-item {
           width: 50%;
           padding: 0.0625rem;
           @include ellipsis;

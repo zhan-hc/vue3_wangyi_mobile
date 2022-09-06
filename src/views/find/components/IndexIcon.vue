@@ -1,8 +1,8 @@
 <template>
-  <div class="wrapper">
+  <div class="icon">
     <wym-scroll-view>
-      <div class="icon-item" v-for="item in iconList" :key="item.id">
-        <div class="icon-img">
+      <div class="icon__item" v-for="item in iconList" :key="item.id">
+        <div class="icon__img">
           <img v-lazy="item.iconUrl + '?param=50y50'" alt="icon图标" />
         </div>
         <div>{{ item.name }}</div>
@@ -33,17 +33,17 @@
 
 <style scoped lang="scss">
   @import '@/assets/scss/_handle.scss';
-  .wrapper {
+  .icon {
     font-size: 14px;
     box-sizing: border-box;
     padding: 0.3125rem 0.3125rem;
     border-bottom: 1px solid #ccc;
     @include background_color('background_color1');
-    .icon-item {
+    .icon__item {
       display: inline-block;
       margin-right: 0.625rem;
       text-align: center;
-      .icon-img {
+      .icon__img {
         display: inline-block;
         @include background_color('icon_bg');
         border-radius: 50%;

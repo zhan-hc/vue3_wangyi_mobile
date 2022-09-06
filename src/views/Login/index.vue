@@ -3,13 +3,11 @@
     <WYHeader />
     <p>登录体验更多精彩</p>
     <p>未注册手机号登录后将自动创建账号</p>
-    <div class="login-input">
-      <input v-model="tel" type="tel" maxLength="11" class="login-input-tel" />
-      <van-icon name="cross" class="login-input-icon" @click="handleDelete" />
+    <div class="login__input">
+      <input v-model="tel" type="tel" maxLength="11" class="login__input__tel" />
+      <van-icon name="cross" class="login__input__icon" @click="handleDelete" />
     </div>
-    <wym-button class="btn" size="large" @click="handleCheckTel" round
-      >下一步</wym-button
-    >
+    <wym-button class="login__btn" size="large" @click="handleCheckTel" round >下一步</wym-button>
   </div>
 </template>
 
@@ -50,13 +48,13 @@
         margin-bottom: 0.3125rem;
       }
     }
-    &-input {
+    &__input {
       border-bottom: 1px solid #a9a9a9;
       padding: 0.125rem 0;
       display: flex;
       margin-bottom: 100px;
       font-size: 14px;
-      &-tel {
+      &__tel {
         flex: 1;
         background: none;
         outline: none;
@@ -66,13 +64,13 @@
           border: none;
         }
       }
-      &-icon {
+      &__icon {
         font-size: 16px;
         margin-left: 0.3125rem;
         color: #a9a9a9;
       }
     }
-    .btn {
+    &__btn {
       display: block;
       height: 1rem;
       margin: 0 auto;

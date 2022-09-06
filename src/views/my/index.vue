@@ -1,5 +1,5 @@
 <template>
-  <div class="my-wrap">
+  <div class="myself">
     <unLogin v-if="!uid" />
     <userInfo v-else />
     <myIconList />
@@ -21,7 +21,7 @@
 </script>
 
 <style scoped lang="scss">
-  .my-wrap {
+  .myself {
     font-size: 12px;
     padding: 0.3125rem;
     box-sizing: border-box;

@@ -1,5 +1,5 @@
 <template>
-  <div class="village-wrap">
+  <div class="village">
     <video-list />
   </div>
 </template>
@@ -9,7 +9,7 @@
 </script>
 
 <style scoped lang="scss">
-  .village-wrap {
+  .village {
     padding: 30px;
     box-sizing: border-box;
   }

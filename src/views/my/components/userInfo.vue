@@ -1,10 +1,10 @@
 <template>
-  <div class="userInfo-wrap" v-if="userInfo">
+  <div class="user-info" v-if="userInfo">
     <a-avatar size="large" :src="userInfo.avatarUrl" />
-    <div class="user">
-      <div class="user-name">{{ userInfo.nickname }}</div>
-      <span class="user-vip"><i class="iconfont icon-vip"></i> 开通></span>
-      <span class="user-grade">Lv.{{ level }}</span>
+    <div class="user-info__content">
+      <div class="user-info__name">{{ userInfo.nickname }}</div>
+      <span class="user-info__vip"><i class="iconfont icon-vip"></i> 开通></span>
+      <span class="user-info__level">Lv.{{ level }}</span>
     </div>
     <van-icon name="arrow" />
   </div>
@@ -22,7 +22,7 @@
 </script>
 
 <style scoped lang="scss">
-  .userInfo-wrap {
+  .user-info {
     height: 1.5rem;
     display: flex;
     align-items: center;
@@ -34,14 +34,14 @@
       border: 1px solid #fff;
       margin: 0.0625rem 0.3125rem;
     }
-    .user {
+    &__content {
       flex: 1;
-      .user-name {
+      .user-info__name {
         margin-bottom: 0.3125rem;
         font-size: 18px;
         font-weight: bold;
       }
-      .user-vip {
+      .user-info__vip {
         color: #fff;
         padding: 0.0625rem 0.3125rem;
         margin-right: 0.3125rem;
@@ -52,7 +52,7 @@
           color: #fff;
         }
       }
-      .user-grade {
+      .user-info__level {
         padding: 0.0625rem 0.3125rem;
         background: #fff;
         border-radius: 20px;

@@ -1,8 +1,8 @@
 <template>
-  <div class="recommend-container">
-    <div class="recommend-header">
-      <span class="title">{{ recommendheader.subTitle.title }}</span>
-      <span class="more">{{ recommendheader.button.text }}></span>
+  <div class="recommend">
+    <div class="recommend__header">
+      <span class="recommend__title">{{ recommendheader.subTitle.title }}</span>
+      <span class="recommend__more">{{ recommendheader.button.text }}></span>
     </div>
     <wym-scroll-view>
       <wym-song-sheet
@@ -55,20 +55,20 @@
 </script>
 
 <style scoped lang="scss">
-  .recommend-container {
+  .recommend {
     font-size: 14px;
     @include background_color('background_color1');
     padding: 0.3125rem 0;
     margin-bottom: 0.3125rem;
     overflow: hidden;
-    .recommend-header {
+    .recommend__header {
       position: relative;
       margin: 0.3125rem 0.5rem;
-      .title {
+      .recommend__title {
         font-size: 18px;
         font-weight: bold;
       }
-      .more {
+      .recommend__more {
         font-size: 12px;
         position: absolute;
         right: 0;

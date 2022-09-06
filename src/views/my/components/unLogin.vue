@@ -1,5 +1,5 @@
 <template>
-  <div class="unlogin-wrap">
+  <div class="unlogin">
     <img src="@/assets/images/user.png" alt="" width="70" height="70" />
     <h2 @click="handleRouterJump('/login')">立即登录 ></h2>
   </div>
@@ -24,7 +24,7 @@
 </script>
 
 <style scoped lang="scss">
-  .unlogin-wrap {
+  .unlogin {
     position: relative;
     height: 90px;
     border-radius: 10px;

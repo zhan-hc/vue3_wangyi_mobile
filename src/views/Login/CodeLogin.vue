@@ -1,20 +1,20 @@
 <template>
-  <div class="container">
+  <div class="code-login">
     <WYHeader :status="1" :tel="tel" />
-    <p class="desc">请输入验证码</p>
-    <div class="text">
+    <p class="code-login__desc">请输入验证码</p>
+    <div class="code-login__text">
       <span>已发送至+86 {{ formatTel }}</span>
-      <span class="timer">
+      <span class="code-login__timer">
         <i
           v-show="state.timer === 0"
-          class="timer-text"
+          class="code-login__timer-text"
           @click="handleSendCode"
           >{{ state.text }}</i
         >
         <i v-show="state.timer !== 0">{{ state.timer }}S</i>
       </span>
     </div>
-    <div class="codeInput" ref="codeInput">
+    <div class="code-login__input" ref="codeInput">
       <input type="tel" maxLength="1" @keyup="handleInput" />
       <input type="tel" maxLength="1" @keyup="handleInput" />
       <input type="tel" maxLength="1" @keyup="handleInput" />
@@ -145,19 +145,19 @@
 </script>
 
 <style scoped lang="scss">
-  .container {
+  .code-login {
     padding: 0 0.3125rem;
     box-sizing: border-box;
     font-size: 14px;
-    .desc {
+    .code-login__desc {
       font-size: 14px;
     }
-    .text {
+    .code-login__text {
       color: #c0c0c0;
       font-size: 14px;
       margin-bottom: 0.625rem;
     }
-    .timer {
+    .code-login__timer {
       float: right;
       margin-right: 0.3125rem;
       font-size: 14px;
@@ -165,7 +165,7 @@
         color: royalblue;
       }
     }
-    .codeInput {
+    .code-login__input {
       display: flex;
       flex-wrap: nowrap;
       justify-content: space-between;

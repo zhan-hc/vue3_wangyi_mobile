@@ -1,19 +1,19 @@
 <template>
-  <div class="broadcast-container">
-    <div class="broadcast-wrapper">
-      <p class="broadcast-header">
+  <div class="broadcast">
+    <div class="broadcast__wrapper">
+      <p class="broadcast__header">
         {{ broadcastList.uiElement.mainTitle.title }}
       </p>
       <wym-scroll-view>
         <div
-          class="broadcast-item"
+          class="broadcast__item"
           v-for="(item, i) in broadcastList.resources"
           :key="item.resourceId"
           :style="{ background: randomHexColor(i) }"
         >
-          <div class="broadcast-name">{{ item.uiElement.mainTitle.title }}</div>
-          <div class="broadcast-desc">
-            <div class="desc-type">广播</div>
+          <div class="broadcast__item__name">{{ item.uiElement.mainTitle.title }}</div>
+          <div class="broadcast__item__desc">
+            <div class="broadcast__item__type">广播</div>
             <van-icon name="play" />
           </div>
         </div>
@@ -60,25 +60,25 @@
 </script>
 
 <style scoped lang="scss">
-  .broadcast-container {
+  .broadcast {
     font-size: 14px;
     @include background_color('background_color1');
     padding: 0.4375rem 0;
     border-radius: 10px;
     margin-bottom: 0.3125rem;
-    .broadcast-header {
+    .broadcast__header {
       font-size: 18px;
       margin: 0.3125rem 0.3125rem;
       @include font_color('font_color1');
     }
-    .broadcast-wrapper {
+    .broadcast__wrapper {
       box-sizing: border-box;
       margin: 0 0.3125rem;
       padding-bottom: 0.3125rem;
       overflow: hidden;
       @include background_color('background_color2');
       border-radius: 10px;
-      .broadcast-item {
+      .broadcast__item {
         position: relative;
         display: inline-block;
         margin-right: 0.3125rem;
@@ -88,21 +88,21 @@
         vertical-align: top;
         border-radius: 10px;
         padding: 0.125rem;
-        .broadcast-name {
+        .broadcast__item__name {
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
           overflow: hidden;
           white-space: normal;
         }
-        .broadcast-desc {
+        .broadcast__item__desc {
           font-size: 10px;
           position: absolute;
           bottom: 0.0625rem;
           left: 0.3125rem;
           right: 0.3125rem;
           display: flex;
-          .desc-type {
+          .broadcast__item__type {
             flex: 1;
           }
         }

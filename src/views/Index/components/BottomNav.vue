@@ -1,14 +1,14 @@
 <template>
-  <div class="nav-wrap">
+  <div class="nav">
     <div
-      class="nav-item"
+      class="nav__item"
       v-for="(item, i) in iconList"
       :key="item.id"
       :class="{ active: i === activeTab }"
       @click="handleClick(i)"
     >
       <div class="iconfont" :class="item.icon"></div>
-      <div class="item-text">{{ item.text }}</div>
+      <div>{{ item.text }}</div>
     </div>
   </div>
 </template>
@@ -51,7 +51,7 @@
 </script>
 
 <style scoped lang="scss">
-  .nav-wrap {
+  .nav {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -63,7 +63,7 @@
     z-index: 2;
     font-size: 10px;
     border-top: 1px solid #ccc;
-    .nav-item {
+    .nav__item {
       display: flex;
       flex-direction: column;
       align-items: center;

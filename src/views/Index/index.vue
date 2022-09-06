@@ -1,5 +1,5 @@
 <template>
-  <div class="index-wrapper">
+  <div class="index">
     <index-header />
     <a-drawer
       placement="left"
@@ -64,7 +64,7 @@
   }
 </style>
 <style scoped lang="scss">
-  .index-wrapper {
+  .index {
     @include background_color('background_color2');
     @include font_color('font_color1');
     padding: 1.625rem 0 3rem;
